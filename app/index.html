@@ -1,11 +1,13 @@
 <!DOCTYPE html5>
-<html ng-app="yadaguruApp">
+<html ng-app="app">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" />
+    <meta name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1,
+      minimum-scale=1, user-scalable=no, IE=edge, chrome=1" />
     <title>YadaGuru</title>
-    <script src="../bower_components/angularjs/angular.js"></script>
-    <script src="./js/controllers.js"></script>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body ng-controller="mainCtrl">
@@ -17,4 +19,12 @@
       {{testData}}
     </main>
   </body>
+  
+  <script src="./bower_components/angularjs/angular.js"></script>
+  <script src="./app.js"></script>
+  <script src="./js/controllers.js"></script>
+
+  <script src="./common/common.js"></script>
+  <script src="./common/services/alerting.js"></script>
+  <script src="./common/directives/alerts.js"></script>
 </html>
