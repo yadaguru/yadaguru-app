@@ -3,5 +3,5 @@
  * @namespace App
  */
 (function () {
-  var module = angular.module("app", []);
+  var module = angular.module('app', ['ui.bootstrap']);
 }());
