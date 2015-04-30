@@ -1,0 +1,10 @@
+<header>
+  <h1>YadaGuru</h1>
+  <h2>College Application</h2>
+</header>
+<main ng-controller="mainController">
+  <form>
+    <input type="text" id="school-name" placeholder="Enter the name of the college/university"/>
+    <input type="text" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+  </form>
+</main>

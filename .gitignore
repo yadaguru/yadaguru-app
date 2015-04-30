@@ -1,4 +1,4 @@
 *.swp
-/bower_components/*
+/app/bower_components/*
 /app/css/*.min
 /node_modules/*
