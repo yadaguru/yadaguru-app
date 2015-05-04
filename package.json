@@ -1,18 +1,22 @@
 {
-  "name": "yadaguru-app",
-  "version": "0.1.0",
-  "description": "YadaGuru - College Applucation Reminders",
-  "main": "app/index.html",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yadaguru/yadaguru-app.git"
+  "name": "yadaguru-api",
+  "version": "1.0.0",
+  "description": "REST api for yadaguru app",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
   },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "bower": "^1.4.1",
-    "browser-sync": "^2.6.9",
-    "gulp": "^3.8.11",
-    "gulp-minify-css": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.4"
+    "mocha": "^2.2.4",
+    "sinon": "^1.14.1"
+  },
+  "dependencies": {
+    "express": "^4.12.3",
+    "underscore": "^1.8.3"
   }
 }
