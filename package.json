@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "express": "^4.12.3",
+    "moment": "^2.10.2",
+    "pg": "^4.3.0",
     "underscore": "^1.8.3"
   }
 }
