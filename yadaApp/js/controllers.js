@@ -1,8 +1,44 @@
 (function(app) {
   'use strict';
 
-  var mainCtrl = function ($scope) {
-    $scope.testData = 'Hello, World!';
+  var mainCtrl = function ($scope, TestData) {
+    $scope.data = TestData.get();
+    $scope.reminders = [];
+
+    $scope.populate = function() {
+      console.log($scope.schoolName);
+      var parseVars = function(string, school, date) {
+        var replacements = {'%SCHOOL%': school, '%DATE%': date};
+        string = string.replace(/%\w+%/g, function(all) {
+          return replacements[all] || all;
+        });
+        return string;
+      };
+
+      var calcDate = function(formula) {
+        var date = new Date();
+        date.setDate($scope.dt.getDate() - formula);
+        return date;
+      };
+
+      var formatDate = function(date) {
+        var d = date.getDate();
+        var m = date.getMonth() + 1;
+        var y = date.getFullYear();
+
+        return m + '/' + d + '/' + y;
+      };
+
+      for (var i = 0; i < $scope.data.length; i++) {
+        var reminder = {};
+        reminder.date = formatDate(calcDate($scope.data[i].formula));
+        reminder.fullName = $scope.data[i].fullName;
+        reminder.message = parseVars($scope.data[i].message, $scope.schoolName, reminder.date);
+        reminder.detail = parseVars($scope.data[i].detail, $scope.schoolName, reminder.date);
+        $scope.reminders.push(reminder);
+      }
+
+    };
 
     $scope.format = 'dd-MMMM-yyyy';
     $scope.today = function() {
@@ -28,5 +64,5 @@
     $scope.minDate = new Date();
   };
 
-  app.controller('mainCtrl', ["$scope", mainCtrl]);
-}(angular.module("app")));
+  app.controller('mainCtrl', ['$scope', 'TestData', mainCtrl]);
+}(angular.module("yadaApp")));

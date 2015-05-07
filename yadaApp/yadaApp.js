@@ -3,5 +3,5 @@
  * @namespace YadaApp
  */
 (function () {
-  var module = angular.module('yadaApp', ['ui.bootstrap']);
+  var module = angular.module('yadaApp', ['ui.bootstrap', 'yadaApp.services']);
 }());
