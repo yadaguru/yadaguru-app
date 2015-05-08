@@ -1,7 +1,7 @@
 <form name="reminderForm" novalidate>
   <div class="form-group">
     <label for="schoolName">College/University Name</label>
-    <input type="text" id="schoolName" ng-model="schoolName" required
+    <input type="text" id="schoolName" ng-model="formData.schoolName" required
       placeholder="Enter the name of the college/university"/>
   </div>
   <div class="row">
@@ -9,7 +9,7 @@
       <label for="submissionDate">Submission Date for Application</label>
       <p class="input-group">
         <input type="text" class="form-control" datepicker-popup={{format}}
-                       ng-model="dt" is-open="$parent.opened" min-date="minDate" 
+                       ng-model="formData.dt" is-open="$parent.opened" min-date="minDate" 
                        datepicker-options="dateOptions" required 
                        close-text="Close" />
        <span class="input-group-btn">
@@ -21,8 +21,7 @@
     </div>
   </div> 
   <div class="row">
-    {{schoolName}}
-    <input type="submit" ng-click="populate()" ng-disabled="reminderForm.$invalid" value="Get My Reminders!"/>
+    <input type="submit" ng-click="populate(formData)" ng-disabled="reminderForm.$invalid" value="Get My Reminders!"/>
 </form>
 
 <div class="reminder-list" ng-repeat="reminder in reminders">

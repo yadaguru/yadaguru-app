@@ -5,8 +5,9 @@
     $scope.data = TestData.get();
     $scope.reminders = [];
 
-    $scope.populate = function() {
-      console.log($scope.schoolName);
+    $scope.populate = function(formData) {
+      $scope.schoolName = formData.schoolName;
+      $scope.dt = formData.dt;
       var parseVars = function(string, school, date) {
         var replacements = {'%SCHOOL%': school, '%DATE%': date};
         string = string.replace(/%\w+%/g, function(all) {
