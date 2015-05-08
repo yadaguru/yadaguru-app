@@ -4,10 +4,9 @@
   var mainCtrl = function ($scope, TestData) {
     $scope.data = TestData.get();
     $scope.reminders = [];
+    $scope.dt = new Date();
 
     $scope.populate = function(formData) {
-      $scope.schoolName = formData.schoolName;
-      $scope.dt = formData.dt;
       var parseVars = function(string, school, date) {
         var replacements = {'%SCHOOL%': school, '%DATE%': date};
         string = string.replace(/%\w+%/g, function(all) {
@@ -17,8 +16,8 @@
       };
 
       var calcDate = function(formula) {
-        var date = new Date();
-        date.setDate($scope.dt.getDate() - formula);
+        var date = angular.copy($scope.dt);
+        date.setDate(date.getDate() - formula);
         return date;
       };
 
@@ -29,6 +28,10 @@
 
         return m + '/' + d + '/' + y;
       };
+
+      $scope.schoolName = formData.schoolName;
+      $scope.dt = formData.dt;
+      $scope.reminders = [];
 
       for (var i = 0; i < $scope.data.length; i++) {
         var reminder = {};
@@ -41,7 +44,7 @@
 
     };
 
-    $scope.format = 'dd-MMMM-yyyy';
+    $scope.format = 'M/d/yyyy';
     $scope.today = function() {
       $scope.dt = new Date();
     };
