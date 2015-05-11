@@ -1,5 +1,16 @@
 var express = require('express'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    nconf = require('nconf');
+
+// nconf arg order
+// 1. Command-line
+// 2. Env
+// 3. Conf file config.json
+nconf.argv()
+     .env()
+     .file({ file: 'config.json' });
+
+console.log('database: ' + nconf.get('database:host'));
 
 var app = express();
 var port = process.env.PORT || 3000;
