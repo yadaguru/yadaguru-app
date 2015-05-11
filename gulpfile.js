@@ -10,17 +10,17 @@ gulp.task('default', ['minifyCSS']);
 gulp.task('serve', ['minifyCSS'], function () {
   browserSync.init({
     server: { 
-      baseDir: "./app", 
+      baseDir: "./yadaApp", 
     }
   });
-  gulp.watch('./app/css/*.css', ['minifyCSS']);
-  gulp.watch('./**').on('change', reload);
+  gulp.watch('./yadaApp/css/*.css', ['minifyCSS']);
+  gulp.watch('./yadaApp/**').on('change', reload);
 });
 
 gulp.task('minifyCSS', function() {
-  return gulp.src('./app/css/main.css')
+  return gulp.src('./yadaApp/css/main.css')
     .pipe(minifyCSS())
     .pipe(rename({ extname : '.min.css'} ))
-    .pipe(gulp.dest('./css/'))
+    .pipe(gulp.dest('./yadaApp/css/'))
     .pipe(reload( {stream: true} ));
 });
