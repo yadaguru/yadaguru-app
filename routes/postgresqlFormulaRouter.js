@@ -1,10 +1,8 @@
 var express = require('express'),
     pg = require('pg');
 // TODO: Move connection string out to config file
-var connectionString = process.env.DATABASE_URL ||
-  'postgres://vagrant:vagrant@localhost:5432/yadaguru';
 
-var routes = function() {
+var routes = function(connectionString) {
   var router = express.Router();
 
   // GET all formulas sorted by ID
@@ -117,7 +115,10 @@ var routes = function() {
 
       // Return if OK
       return res.sendStatus(200);
-    
+    });
+  });
+
+
   return router;
 };
 module.exports = routes;

@@ -2,15 +2,15 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     nconf = require('nconf');
 
+var database = process.env.NODE_DB || 'postgresql';
+
 // nconf arg order
 // 1. Command-line
 // 2. Env
-// 3. Conf file config.json
+// 3. Conf files 
 nconf.argv()
-     .env()
-     .file({ file: 'config.json' });
-
-console.log('database: ' + nconf.get('database:host'));
+     .env();
+nconf.file('db', 'config/db/' + database + '.json' );
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -19,7 +19,8 @@ app.use(express.static(__dirname + '/yadaApp'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-formulaRouter = require('./routes/formulaRouter')();
+formulaRouter = require('./routes/' + database + 'FormulaRouter')(
+    nconf.get('connectionString'));
 
 app.use('/api/formulas', formulaRouter);
 

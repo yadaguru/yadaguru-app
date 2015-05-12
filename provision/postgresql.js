@@ -1,7 +1,10 @@
-var pg = require('pg');
-// TODO: Username & Password should be moved out into config file
-var connectionString = process.env.DATABASE_URL ||
-    'postgres://vagrant:vagrant@localhost:5432/yadaguru';
+var pg = require('pg'),
+    nconf = require('nconf');
+
+nconf.argv().env();
+nconf.file('db', 'config/db/postgresql.json');
+
+var connectionString = nconf.get('connectionString');
 var client = new pg.Client(connectionString);
 client.connect();
 var query = client.query('CREATE TABLE formulas(id SERIAL PRIMARY KEY,'
