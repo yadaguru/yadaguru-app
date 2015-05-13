@@ -32,16 +32,21 @@ var formulaController = function(Formula) {
     });
   };
 
-  // POST route [/api/formulas] { name: 'name', formula: 'formula' }
+  // POST route [/api/formulas] 
   var post = function(req, res) {
 
     // Get the post data from the body
     var formula = new Formula(req.body);
 
     // Return an error if there is missing data, else save data
-    if(!req.body.name || !req.body.formula) {
+    if(!req.body.field || 
+       !req.body.fullName ||
+       !req.body.message ||
+       !req.body.detail ||
+       !req.body.formula) {
       res.status(400);
-      res.send('The fields name and formula are required');
+      res.send('Not all properties are present. ' +
+          'Requires field, fullName, message, detail, and formula.');
     } else {
       formula.save();
       res.status(201);
