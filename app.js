@@ -1,26 +1,24 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
-    nconf = require('nconf');
+    mongoose = require('mongoose');
 
-var database = process.env.NODE_DB || 'postgresql';
+var db;
+if(process.env.NODE_ENV =='TEST'){
+  db = mongoose.connect('mongodb://localhost/yadaguru_test');
+} else {
+  db = mongoose.connect('mongodb://localhost/yadaguru');
+}
 
-// nconf arg order
-// 1. Command-line
-// 2. Env
-// 3. Conf files 
-nconf.argv()
-     .env();
-nconf.file('db', 'config/db/' + database + '.json' );
+var Formula = require('./models/formula');
 
-var app = express();
 var port = process.env.PORT || 3000;
 
+var app = express();
 app.use(express.static(__dirname + '/yadaApp'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-formulaRouter = require('./routes/' + database + 'FormulaRouter')(
-    nconf.get('connectionString'));
+formulaRouter = require('./routes/formulaRoutes')(Formula);
 
 app.use('/api/formulas', formulaRouter);
 
