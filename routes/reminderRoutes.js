@@ -1,30 +1,30 @@
 var express = require('express');
 
-var routes = function(Formula) {
+var routes = function(Reminder) {
   var router = express.Router();
 
-  var formulaController = require('../controllers/formulaController')(Formula);
+  var reminderController = require('../controllers/reminderController')(Reminder);
 
   // GET and POST on [/] can be found in the controller
   router.route('/')
-    .get(formulaController.get)
-    .post(formulaController.post);
+    .get(reminderController.get)
+    .post(reminderController.post);
 
-  // Before reaching the route, find the formula by ID and pass it up
+  // Before reaching the route, find the reminder by ID and pass it up
   router.use('/:_id', function(req, res, next) {
-    Formula.findById(req.params._id, function(err, formula) {
+    Reminder.findById(req.params._id, function(err, reminder) {
       
       // If there is an error send the 500 and error message
-      // If there is a formula found add it to the request and hand it up the
+      // If there is a reminder found add it to the request and hand it up the
       // pipeline
-      // Else return a 404 if no formula found
+      // Else return a 404 if no reminder found
       if(err) {
         res.status(500).send(err);
-      } else if(formula) {
-        req.formula = formula;
+      } else if(reminder) {
+        req.reminder = reminder;
         next();
       } else {
-        res.status(404).send('No formula found');
+        res.status(404).send('No reminder found');
       }
     });
   });
@@ -34,7 +34,7 @@ var routes = function(Formula) {
 
     // For get requests just return the data
     .get(function(req, res) {
-      res.json(req.formula);
+      res.json(req.reminder);
     })
 
     // For update PATCH requests process and return new data
@@ -45,25 +45,25 @@ var routes = function(Formula) {
         delete req.body._id;
       }
 
-      // Take data from body and replace data in formula object
+      // Take data from body and replace data in reminder object
       // retrieved earlier
       for(var key in req.body) {
-        req.formula[key] = req.body[key];
+        req.reminder[key] = req.body[key];
       }
 
-      // Save new formula object and return
-      req.formula.save(function(err) {
+      // Save new reminder object and return
+      req.reminder.save(function(err) {
         if(err) {
           res.status(500).send(err);
         } else {
-          res.json(req.formula);
+          res.json(req.reminder);
         }
       });
     })
 
     // Attempt to remove item from db
     .delete(function(req, res) {
-      req.formula.remove(function(err) {
+      req.reminder.remove(function(err) {
         if(err) {
           res.status(500).send(err);
         } else {

@@ -10,4 +10,4 @@ Clone this repo onto your local machine. Be sure that node and npm are installed
 Run `gulp watch` to serve the project locally at `localhost:3000`. While gulp is running, changes to css will automatically be minified, and the browser will be reloaded on every file change.
 
 ##The Excel File
-The Excel file found at the root of this folder contains all of the date formulas and messages for the generated reminders.
+The Excel file found at the root of this folder contains all of the date reminders and messages for the generated reminders.

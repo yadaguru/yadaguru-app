@@ -9,7 +9,7 @@ if(process.env.NODE_ENV =='TEST'){
   db = mongoose.connect('mongodb://localhost/yadaguru');
 }
 
-var Formula = require('./models/formula');
+var Reminder = require('./models/reminder');
 
 var port = process.env.PORT || 3000;
 
@@ -18,9 +18,9 @@ app.use(express.static(__dirname + '/yadaApp'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-formulaRouter = require('./routes/formulaRoutes')(Formula);
+reminderRouter = require('./routes/reminderRoutes')(Reminder);
 
-app.use('/api/formulas', formulaRouter);
+app.use('/api/reminders', reminderRouter);
 
 app.get('/', function (req, res) {
   res.sendFile('./yadaApp/index.html');

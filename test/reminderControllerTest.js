@@ -1,17 +1,17 @@
 var should = require('should'),
     sinon = require('sinon');
 
-describe('Formula Controller Tests', function() {
+describe('Reminder Controller Tests', function() {
   describe('Post', function() {
     it('Should not allow an empty name', function() {
-      var Formula = function(formula) {
+      var Reminder = function(reminder) {
         this.save = function(){};
       };
 
       var req = {
         body: {
           name: '',
-          formula: 'test'
+          reminder: 'test'
         }
       };
 
@@ -20,11 +20,11 @@ describe('Formula Controller Tests', function() {
         send: sinon.spy()
       };
 
-      var formulaController = require('../controllers/formulaController')(Formula);
+      var reminderController = require('../controllers/reminderController')(Reminder);
 
-      formulaController.post(req, res);
+      reminderController.post(req, res);
       res.status.calledWith(400).should.equal(true, 'Bad Status ' + res.status.args[0][0]);
-      res.send.calledWith('The fields name and formula are required').should.equal(true);
+      res.send.calledWith('The fields name and reminder are required').should.equal(true);
     });
   })
 })
