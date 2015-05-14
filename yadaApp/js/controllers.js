@@ -15,9 +15,9 @@
         return string;
       };
 
-      var calcDate = function(formula) {
+      var calcDate = function(reminder) {
         var date = angular.copy($scope.dt);
-        date.setDate(date.getDate() - formula);
+        date.setDate(date.getDate() - reminder);
         return date;
       };
 
@@ -35,7 +35,7 @@
 
       for (var i = 0; i < $scope.data.length; i++) {
         var reminder = {};
-        reminder.date = formatDate(calcDate($scope.data[i].formula));
+        reminder.date = formatDate(calcDate($scope.data[i].reminder));
         reminder.fullName = $scope.data[i].fullName;
         reminder.message = parseVars($scope.data[i].message, $scope.schoolName, reminder.date);
         reminder.detail = parseVars($scope.data[i].detail, $scope.schoolName, reminder.date);

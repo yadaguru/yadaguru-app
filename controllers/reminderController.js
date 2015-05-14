@@ -1,56 +1,56 @@
-var formulaController = function(Formula) {
+var reminderController = function(Reminder) {
 
-  // GET route [/api/formulas]
+  // GET route [/api/reminders]
   var get = function(req, res) {
 
-    Formula.find(function(err, formulas){
+    Reminder.find(function(err, reminders){
 
       // Log errors
       if(err) {
         console.log(err);
       } else {
 
-        var returnFormulas = [];
+        var returnReminders = [];
 
         // Add a link for GET by id to return JSON
-        formulas.forEach(function(element, index, array) {
+        reminders.forEach(function(element, index, array) {
 
           // Get entry as JSON object and add link
-          var newFormula = element.toJSON();
+          var newReminder = element.toJSON();
           // links{} must be added before links.self can be created
-          newFormula.links = {};
-          newFormula.links.self = 'http://' +
-            req.headers.host + '/api/formulas/' + newFormula._id;
+          newReminder.links = {};
+          newReminder.links.self = 'http://' +
+            req.headers.host + '/api/reminders/' + newReminder._id;
 
           // Add new JSON object to return array
-          returnFormulas.push(newFormula);
+          returnReminders.push(newReminder);
         });
 
         // Return array in JSON format
-        res.json(returnFormulas);
+        res.json(returnReminders);
       }
     });
   };
 
-  // POST route [/api/formulas] 
+  // POST route [/api/reminders] 
   var post = function(req, res) {
 
     // Get the post data from the body
-    var formula = new Formula(req.body);
+    var reminder = new Reminder(req.body);
 
     // Return an error if there is missing data, else save data
     if(!req.body.field || 
        !req.body.fullName ||
        !req.body.message ||
        !req.body.detail ||
-       !req.body.formula) {
+       !req.body.reminder) {
       res.status(400);
       res.send('Not all properties are present. ' +
-          'Requires field, fullName, message, detail, and formula.');
+          'Requires field, fullName, message, detail, and reminder.');
     } else {
-      formula.save();
+      reminder.save();
       res.status(201);
-      res.send(formula);
+      res.send(reminder);
     }
   };
 
@@ -62,4 +62,4 @@ var formulaController = function(Formula) {
   };
 };
 
-module.exports = formulaController;
+module.exports = reminderController;
