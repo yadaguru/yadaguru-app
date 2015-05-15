@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.7.1",
+    "gulp": "^3.8.11",
     "gulp-env": "^0.2.0",
     "gulp-minify-css": "^1.1.1",
     "gulp-mocha": "^2.0.1",

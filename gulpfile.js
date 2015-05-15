@@ -39,9 +39,6 @@ gulp.task('up', function() {
   nodemon({
     script: 'app.js',
     ext: 'js',
-    env: {
-      PORT: 3000
-    },
     ignore: ['./node_modules/**']
   })
   .on('restart', function() {

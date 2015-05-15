@@ -5,19 +5,15 @@ var should = require('should'),
     Reminder = mongoose.model('Reminder'),
     agent = request.agent(app);
 
-describe('Reminder CRUD Test', function () {
-  it('Should allow a reminder to be posted and return a _id', function(done) {
-    var reminderPost = {name: 'Test', reminder: '20x10+15'};
-    agent.post('/api/reminders')
-      .send(reminderPost)
-      .expect(201)
-      .end(function (err, results) {
-        results.body.should.have.property('_id');
-        done();
-      });
-  });
-  afterEach(function (done) {
-    Reminder.remove().exec();
-    done();
+describe('Reminder Route by ID Test', function () {
+  describe('Routes should allow:', function () {
+    it('GET by ID and return record');
+    it('GET by invalid ID and return 404');
+    it('PUT by ID and return record');
+    it('PUT by invalid ID and return 404');
+    it('PATCH by ID and return record');
+    it('PATCH by invalid ID and return 404');
+    it('DELETE by ID and return 201');
+    it('DELETE by invalid ID and return 404');
   });
 });

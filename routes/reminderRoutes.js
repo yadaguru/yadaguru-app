@@ -10,6 +10,7 @@ var routes = function(Reminder) {
     .get(reminderController.get)
     .post(reminderController.post);
 
+  // Middleware
   // Before reaching the route, find the reminder by ID and pass it up
   router.use('/:_id', function(req, res, next) {
     Reminder.findById(req.params._id, function(err, reminder) {
@@ -29,7 +30,7 @@ var routes = function(Reminder) {
     });
   });
 
-  // GET/PUT/PATCH/DELETE by id
+  // GET/PUT/DELETE by id
   router.route('/:_id')
 
     // For get requests just return the data
@@ -37,15 +38,15 @@ var routes = function(Reminder) {
       res.json(req.reminder);
     })
 
-    // For update PATCH requests process and return new data
-    .patch(function(req, res) {
+    // For update PUT requests process and return new data
+    .put(function(req, res) {
 
-      // If the data being passed up has an _id field, remove it
+       // If the data being passed up has an _id field, remove it
       if(req.body._id) {
         delete req.body._id;
       }
-
-      // Take data from body and replace data in reminder object
+      
+    // Take data from body and replace data in reminder object
       // retrieved earlier
       for(var key in req.body) {
         req.reminder[key] = req.body[key];

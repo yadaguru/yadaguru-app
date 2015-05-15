@@ -6,7 +6,7 @@ var reminder = new Schema({
   fullName: {type: String},
   message: {type: String},
   detail: {type: String},
-  reminder: {type: Number}
+  formula: {type: Number}
 });
 
 module.exports = mongoose.model('Reminder', reminder);

@@ -43,10 +43,10 @@ var reminderController = function(Reminder) {
        !req.body.fullName ||
        !req.body.message ||
        !req.body.detail ||
-       !req.body.reminder) {
+       !req.body.formula) {
       res.status(400);
       res.send('Not all properties are present. ' +
-          'Requires field, fullName, message, detail, and reminder.');
+          'Requires field, fullName, message, detail, and formula.');
     } else {
       reminder.save();
       res.status(201);

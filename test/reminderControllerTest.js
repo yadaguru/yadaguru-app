@@ -3,15 +3,14 @@ var should = require('should'),
 
 describe('Reminder Controller Tests', function() {
   describe('Post', function() {
-    it('Should not allow an empty name', function() {
+    it('Should allow post with all data present');
+    it('Should not allow an empty property', function() {
       var Reminder = function(reminder) {
         this.save = function(){};
       };
 
       var req = {
         body: {
-          name: '',
-          reminder: 'test'
         }
       };
 
@@ -24,7 +23,12 @@ describe('Reminder Controller Tests', function() {
 
       reminderController.post(req, res);
       res.status.calledWith(400).should.equal(true, 'Bad Status ' + res.status.args[0][0]);
-      res.send.calledWith('The fields name and reminder are required').should.equal(true);
+      res.send.calledWith('Not all properties are present. ' +
+          'Requires field, fullName, message, detail, and reminder.').should.equal(true);
     });
+  })
+  
+  describe('Get', function() {
+    it('Should return an array of data');
   })
 })
