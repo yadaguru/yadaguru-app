@@ -40,7 +40,7 @@
         for (var j = 0; j < $scope.groupedReminders[i].members.length; j++) {
           var reminder = {};
           var current = $scope.groupedReminders[i].members[j];
-          reminder.date = formatDate(calcDate(current.date));
+          reminder.date = formatDate(calcDate(current.formula));
           reminder.fullName = current.fullName;
           reminder.message = parseVars(current.message, $scope.schoolName, reminder.date);
           reminder.detail = parseVars(current.detail, $scope.schoolName, reminder.date);
