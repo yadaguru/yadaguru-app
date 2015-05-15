@@ -5,13 +5,13 @@
   angular.module('yadaApp.services.testData', [])
     .factory('TestData', function() {
       
-      var Reminder = function(_id, field, fullName, message, detail, reminder) {
+      var Reminder = function(_id, field, fullName, message, detail, formula) {
         this._id = _id || 0;
         this.field = field || '';
         this.fullName = fullName || '';
         this.message = message || '';
         this.detail = detail || '';
-        this.reminder = reminder || 0;
+        this.formula = formula || 0;
       };
 
       var reminders = [];

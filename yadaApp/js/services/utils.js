@@ -12,7 +12,7 @@
       
       var newGroup = function(initObj, groupProp) {
         var newGroupObj = {};
-        newGroupObj.group = initObj[groupProp];
+        newGroupObj.name = initObj[groupProp];
         newGroupObj.members = [];
         newGroupObj.members.push(initObj);
         return newGroupObj;
@@ -25,7 +25,7 @@
           } else {
             for (var j = 0; j < groupArray.length; j++) {
               match = false;
-              if (groupArray[j].group === arrayOfObjects[i][propToGroupBy]) {
+              if (groupArray[j].name === arrayOfObjects[i][propToGroupBy]) {
                 groupArray[j].members.push(arrayOfObjects[i]);
                 match = true;
                 break;

@@ -24,8 +24,10 @@
     <input type="submit" ng-click="populate(formData)" ng-disabled="reminderForm.$invalid" value="Get My Reminders!"/>
 </form>
 
-<div class="reminder-list" ng-repeat="reminder in reminders">
-  <h3>{{reminder.fullName}}</h3>
-  <h4>{{reminder.message}}</h4>
-  <p>{{reminder.detail}}</p>
+<div class="group-list" ng-repeat="group in groups">
+  <h3>To Do By {{group.name}}</h3>
+  <div class="reminder-list" ng-repeat="reminder in group.members">
+    <h4>{{reminder.message}}</h4>
+    <p>{{reminder.detail}}</p>
+  </div>
 </div>

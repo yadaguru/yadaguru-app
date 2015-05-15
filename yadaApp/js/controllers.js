@@ -6,8 +6,6 @@
     $scope.reminders = [];
     $scope.dt = new Date();
 
-    console.log(Utils.groupBy($scope.data, 'reminder'));
-
     $scope.populate = function(formData) {
       var parseVars = function(string, school, date) {
         var replacements = {'%SCHOOL%': school, '%DATE%': date};
@@ -33,15 +31,22 @@
 
       $scope.schoolName = formData.schoolName;
       $scope.dt = formData.dt;
-      $scope.reminders = [];
-
-      for (var i = 0; i < $scope.data.length; i++) {
-        var reminder = {};
-        reminder.date = formatDate(calcDate($scope.data[i].reminder));
-        reminder.fullName = $scope.data[i].fullName;
-        reminder.message = parseVars($scope.data[i].message, $scope.schoolName, reminder.date);
-        reminder.detail = parseVars($scope.data[i].detail, $scope.schoolName, reminder.date);
-        $scope.reminders.push(reminder);
+      $scope.groupedReminders = (Utils.groupBy($scope.data, 'formula'));
+      $scope.groups = [];
+      for (var i = 0; i < $scope.groupedReminders.length; i++) {
+        var group = {};
+        group.name = formatDate(calcDate($scope.groupedReminders[i].name));
+        group.members = [];
+        for (var j = 0; j < $scope.groupedReminders[i].members.length; j++) {
+          var reminder = {};
+          var current = $scope.groupedReminders[i].members[j];
+          reminder.date = formatDate(calcDate(current.date));
+          reminder.fullName = current.fullName;
+          reminder.message = parseVars(current.message, $scope.schoolName, reminder.date);
+          reminder.detail = parseVars(current.detail, $scope.schoolName, reminder.date);
+          group.members.push(reminder);
+        }
+        $scope.groups.push(group);
       }
 
     };
