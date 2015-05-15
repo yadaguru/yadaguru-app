@@ -1,46 +1,12 @@
 (function(app) {
   'use strict';
 
-  var mainCtrl = function ($scope, TestData) {
+  var mainCtrl = function ($scope, TestData, Utils) {
     $scope.data = TestData.get();
     $scope.reminders = [];
     $scope.dt = new Date();
 
-    $scope.groupBy = function(arrayOfObjects, propToGroupBy) {
-      var groupArray = [],
-          match;
-      
-      var newGroup = function(initObj, groupProp) {
-        var newGroupObj = {};
-        newGroupObj.group = initObj[groupProp];
-        newGroupObj.members = [];
-        newGroupObj.members.push(initObj);
-        return newGroupObj;
-      };
-
-      for (var i = 0; i < arrayOfObjects.length; i++) {
-        if (arrayOfObjects[i].hasOwnProperty(propToGroupBy)) {
-          if (groupArray.length === 0) {
-            groupArray.push(newGroup(arrayOfObjects[i], propToGroupBy));
-          } else {
-            for (var j = 0; j < groupArray.length; j++) {
-              match = false;
-              if (groupArray[j].group === arrayOfObjects[i][propToGroupBy]) {
-                groupArray[j].members.push(arrayOfObjects[i]);
-                match = true;
-                break;
-              }
-            }
-            if (!match) {
-              groupArray.push(newGroup(arrayOfObjects[i], propToGroupBy));
-            }
-          }
-        }
-      }
-      return groupArray;
-    };
-
-    console.log($scope.groupBy($scope.data, 'reminder'));
+    console.log(Utils.groupBy($scope.data, 'reminder'));
 
     $scope.populate = function(formData) {
       var parseVars = function(string, school, date) {
@@ -104,5 +70,5 @@
     $scope.minDate = new Date();
   };
 
-  app.controller('mainCtrl', ['$scope', 'TestData', mainCtrl]);
+  app.controller('mainCtrl', ['$scope', 'TestData', 'Utils', mainCtrl]);
 }(angular.module("yadaApp")));
