@@ -1,12 +1,16 @@
 (function(app) {
   'use strict';
 
-  var mainCtrl = function ($scope, TestData, Utils) {
-    $scope.data = TestData.get();
+  var mainCtrl = function ($scope, YadaAPI, Utils) {
     $scope.reminders = [];
     $scope.dt = new Date();
 
-    $scope.populate = function(formData) {
+    $scope.getReminders = function(formData) {
+      $scope.formData = formData;
+      YadaAPI.reminders.get().then(populate, function(err) {console.log(err);});
+    };
+
+    var populate = function(resp) {
       var parseVars = function(string, school, date) {
         var replacements = {'%SCHOOL%': school, '%DATE%': date};
         string = string.replace(/%\w+%/g, function(all) {
@@ -29,21 +33,21 @@
         return m + '/' + d + '/' + y;
       };
 
-      $scope.schoolName = formData.schoolName;
-      $scope.dt = formData.dt;
-      $scope.groupedReminders = (Utils.groupBy($scope.data, 'formula'));
+      var data = resp.data;
+      var schoolName = $scope.formData.schoolName;
+      var groupedReminders = (Utils.groupBy(data, 'formula'));
       $scope.groups = [];
-      for (var i = 0; i < $scope.groupedReminders.length; i++) {
+      for (var i = 0; i < groupedReminders.length; i++) {
         var group = {};
-        group.name = formatDate(calcDate($scope.groupedReminders[i].name));
+        group.name = formatDate(calcDate(groupedReminders[i].name));
         group.members = [];
-        for (var j = 0; j < $scope.groupedReminders[i].members.length; j++) {
+        for (var j = 0; j < groupedReminders[i].members.length; j++) {
           var reminder = {};
-          var current = $scope.groupedReminders[i].members[j];
+          var current = groupedReminders[i].members[j];
           reminder.date = formatDate(calcDate(current.formula));
           reminder.fullName = current.fullName;
-          reminder.message = parseVars(current.message, $scope.schoolName, reminder.date);
-          reminder.detail = parseVars(current.detail, $scope.schoolName, reminder.date);
+          reminder.message = parseVars(current.message, schoolName, reminder.date);
+          reminder.detail = parseVars(current.detail, schoolName, reminder.date);
           group.members.push(reminder);
         }
         $scope.groups.push(group);
@@ -75,5 +79,5 @@
     $scope.minDate = new Date();
   };
 
-  app.controller('mainCtrl', ['$scope', 'TestData', 'Utils', mainCtrl]);
+  app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
 }(angular.module("yadaApp")));

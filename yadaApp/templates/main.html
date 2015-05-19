@@ -21,7 +21,7 @@
     </div>
   </div> 
   <div class="row">
-    <input type="submit" ng-click="populate(formData)" ng-disabled="reminderForm.$invalid" value="Get My Reminders!"/>
+    <input type="submit" ng-click="getReminders(formData)" ng-disabled="reminderForm.$invalid" value="Get My Reminders!"/>
 </form>
 
 <div class="group-list" ng-repeat="group in groups">
