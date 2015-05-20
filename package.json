@@ -24,6 +24,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.4",
     "mocha": "^2.2.4",
+    "node-mongo-seeds": "^2.2.4",
     "should": "^6.0.1",
     "sinon": "^1.14.1",
     "supertest": "^1.0.1"
