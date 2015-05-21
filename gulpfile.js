@@ -35,7 +35,7 @@ gulp.task('test', function() {
       .pipe(gulpMocha({reporter: 'spec'}))
 });
 
-gulp.task('up', function() {
+gulp.task('watch', function() {
   nodemon({
     script: 'app.js',
     ext: 'js',

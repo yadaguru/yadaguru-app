@@ -1,3 +1,5 @@
+/* global __dirname */
+/* global process */
 var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose');
@@ -18,7 +20,7 @@ app.use(express.static(__dirname + '/yadaApp'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-reminderRouter = require('./routes/reminderRoutes')(Reminder);
+var reminderRouter = require('./routes/reminderRoutes')(Reminder);
 
 app.use('/api/reminders', reminderRouter);
 

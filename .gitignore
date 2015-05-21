@@ -2,3 +2,4 @@
 /yadaApp/bower_components/*
 /yadaApp/css/*.min
 /node_modules/*
+/.settings/*

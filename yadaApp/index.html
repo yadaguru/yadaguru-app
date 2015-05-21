@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="" ng-app="yadaApp">
+<html class="no-js" lang="en" ng-app="yadaApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,14 +14,12 @@
       <h1>YadaGuru</h1>
       <h2>College Application Reminders</h2>
     </div>
-    <div class="container">
+    <div>
+      <alerts></alerts>
+    </div>
+    <div class="container"> 
       <div class="row">
-        <div class="col-md-8">
-          <div ng-include="'templates/main.html'">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <alerts></alerts>
+        <div ng-include="'templates/main.html'">
         </div>
       </div>
     </div>
@@ -42,4 +40,5 @@
   <script src="./common/directives/alerts.js"></script>
   
   <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </html>
