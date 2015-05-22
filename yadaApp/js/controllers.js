@@ -19,9 +19,9 @@
         return string;
       };
 
-      var calcDate = function(reminder) {
-        var date = angular.copy($scope.dt);
-        date.setDate(date.getDate() - reminder);
+      var calcDate = function(formula) {
+        var date = angular.copy($scope.formData.dt);
+        date.setDate(date.getDate() - formula);
         return date;
       };
 
