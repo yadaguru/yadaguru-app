@@ -28,12 +28,10 @@
 
 <div class="group-list panel-group" id="accordian" ng-repeat="group in groups">
   <div class="panel panel-default" id="panel{{$index}}">
-    <div class="panel-heading">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse{{$index}}" 
+           href="#collapse{{$index}}">
       <h3 class="panel-title">
-        <a data-toggle="collapse" data-target="#collapse{{$index}}" 
-           href="#collapse{{$index}}" class="collapsed">
-          To Do By {{group.name}}
-        </a>
+        To Do By {{group.name}}
       </h3>
     </div>      
     <div id="collapse{{$index}}" class="panel-collapse collapse">
