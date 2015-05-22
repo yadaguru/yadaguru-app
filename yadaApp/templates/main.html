@@ -24,7 +24,12 @@
            class="btn pull-right" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
            ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
   </form>
+  <button type="button" onClick="window.print()" class="btn pull-left" 
+          ng-class="!groups ? 'btn-default' : 'btn-primary'"
+          ng-disabled="!groups">Print This Page</button>
 </div>
+
+
 
 <div class="group-list panel-group" id="accordian" ng-repeat="group in groups">
   <div class="panel panel-default" id="panel{{$index}}">
