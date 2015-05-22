@@ -1,4 +1,4 @@
-<div class="jumbotron clearfix">
+<div class="jumbotron clearfix" id="reminderForms">
   <form name="reminderForm" novalidate>
     <div class="form-group">
       <label for="schoolName">College/University Name</label>
@@ -20,8 +20,8 @@
         </span>
       </p>
     </div> 
-    <button type="submit" ng-click="getReminders(formData)" 
-           class="btn btn-primary pull-right"
+    <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)" 
+           class="btn pull-right" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
            ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
   </form>
 </div>
