@@ -37,7 +37,7 @@ gulp.task('test', function() {
 
 gulp.task('watch', function() {
   nodemon({
-    script: 'app.js',
+    script: 'server.js',
     ext: 'js',
     ignore: ['./node_modules/**']
   })
