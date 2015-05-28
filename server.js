@@ -8,14 +8,9 @@ var express     = require('express'),
     app         = express(), // Define app with express
     db;
 
-// Switch statement to setup MongoDB connection based on NODE_ENV
-switch(process.env.NODE_ENV) {
-  case 'TEST':
-    db = mongoose.connect('mongodb://localhost/yadaguru_test');
-    break;
-  default:
-    db = mongoose.connect('mongodb://localhost/yadaguru');
-}
+// Mongo connection string set if one not specified in MONGOCONNSTR
+var mongoConnStr = process.env.MONGOCONNSTR || 'mongodb://localhost/yadaguru';
+db = mongoose.connect(mongoConnStr);
 
 // Define Angular app folder as static content
 app.use(express.static(__dirname + '/yadaApp'));
