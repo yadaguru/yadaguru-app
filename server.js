@@ -30,14 +30,15 @@ var reminderRouter = require('./server/routes/reminderRoutes')(Reminder);
 // All of the routes in reminderRouter will be prefixed with /api/reminders
 app.use('/api/reminders', reminderRouter);
 
+// Controls the routes for exporting reminders for calendar apps
+var exportRouter = require('./server/routes/exportRoutes')();
+
+// All of the export routes are prefixed with /api/export
+app.use('/api/export', exportRouter);
+
 // Basic GET to serve static index.html
 app.get('/', function (req, res) {
   res.sendFile('./yadaApp/index.html');
-});
-
-// API Test route
-app.get('/api', function (req, res) {
-  res.send('42');
 });
 
 // Start the server and display a message to the console

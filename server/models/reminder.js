@@ -1,7 +1,7 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose  = require('mongoose'),
+    Schema    = mongoose.Schema;
 
-var reminder = new Schema({
+var reminderSchema = new Schema({
   field: {type: String},
   fullName: {type: String},
   message: {type: String},
@@ -9,4 +9,4 @@ var reminder = new Schema({
   formula: {type: Number}
 });
 
-module.exports = mongoose.model('Reminder', reminder);
+module.exports = mongoose.model('Reminder', reminderSchema);
