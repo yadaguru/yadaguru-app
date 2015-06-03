@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YadaGuru</title>
 
-    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    
+    <!-- inject:css -->
+    <link rel="stylesheet" href="yadaApp/css/main.css">
+    <!-- endinject -->
   </head>
   <body ng-controller="mainCtrl">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <div class="page-header">
       <h1 class="text-center">YadaGuru</h1>
       <h2 class="text-center">College Application Reminders</h2>
@@ -25,20 +33,23 @@
     </div>
   </body>
   
-  <script src="./bower_components/angularjs/angular.js"></script>
-  <script src="./bower_components/angular-animate/angular-animate.js"></script>
-  <script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-  <script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="./yadaApp.js"></script>
-  <script src="./js/controllers.js"></script>
-  <script src="./js/services.js"></script>
-  <script src="./js/services/utils.js"></script>
-  <script src="./js/services/api.js"></script>
-
-  <script src="./common/common.js"></script>
-  <script src="./common/services/alerting.js"></script>
-  <script src="./common/directives/alerts.js"></script>
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angularjs/angular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <!-- endbower -->
   
-  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- inject:js -->
+  <script src="yadaApp/yadaApp.js"></script>
+  <script src="yadaApp/common/common.js"></script>
+  <script src="yadaApp/js/controllers.js"></script>
+  <script src="yadaApp/js/services.js"></script>
+  <script src="yadaApp/common/directives/alerts.js"></script>
+  <script src="yadaApp/common/services/alerting.js"></script>
+  <script src="yadaApp/js/services/api.js"></script>
+  <script src="yadaApp/js/services/utils.js"></script>
+  <!-- endinject -->
 </html>

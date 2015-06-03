@@ -73,7 +73,7 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(config.clientPath));
 });
 
-gulp.task('inject', ['wiredep', 'minifyCSS'], function() {
+gulp.task('inject', ['wiredep'], function() {
   log('Wiring up the app css and js into the html');
 
   return gulp
@@ -119,6 +119,8 @@ gulp.task('serve-dev', ['inject'], function() {
     });
 });
 
+// TODO: Rewrite for output to a Build
+// Unminified is OK for dev
 gulp.task('minifyCSS', function() {
   return gulp.src('./yadaApp/css/main.css')
     .pipe($.minifyCss())

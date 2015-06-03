@@ -40,6 +40,7 @@ module.exports = function() {
     images: clientPath + 'images/**/*.*',
     clientAssets: [
       clientPath + '**/*.js', // Angular app root and sub
+      clientPath + '**/*.css',
       '!' + bowerPath + '/**'
     ],
 
