@@ -80,5 +80,10 @@
     $scope.minDate = new Date();
   };
 
+  var adminCtrl = function($scope) {
+
+  };
+
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
+  app.controller('adminCtrl', ['$scope', adminCtrl]);
 }(angular.module("yadaApp")));

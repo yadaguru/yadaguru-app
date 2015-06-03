@@ -9,20 +9,8 @@
     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
-  <body ng-controller="mainCtrl">
-    <div class="page-header">
-      <h1 class="text-center">YadaGuru</h1>
-      <h2 class="text-center">College Application Reminders</h2>
-    </div>
-    <div>
-      <alerts></alerts>
-    </div>
-    <div class="container"> 
-      <div class="row">
-        <div ng-include="'templates/main.html'">
-        </div>
-      </div>
-    </div>
+  <body>
+    <div ng-view></div>
   </body>
   
   <script src="./bower_components/angularjs/angular.js"></script>
