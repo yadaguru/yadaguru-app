@@ -129,7 +129,7 @@ gulp.task('minifyCSS', function() {
     .pipe($.reload( {stream: true} ));
 });
 
-//========== Helper Methods ==========
+//========== Helper Functions ==========
 function log(msg) {
   if (typeof (msg) === 'object') {
     for (var item in msg) {
