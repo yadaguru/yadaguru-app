@@ -1,3 +1,6 @@
 {
-	"directory": "yadaApp/bower_components"
+	"directory": "yadaApp/bower_components",
+  "scripts": {
+    "postinstall": "gulp wiredep"
+  }
 }
