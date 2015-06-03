@@ -80,7 +80,7 @@ gulp.task('inject', ['wiredep'], function() {
     .src(config.index)
     .pipe($.inject(gulp.src(config.clientAssets), {
       addRootSlash: false,
-      ignorePath:'public'
+      ignorePath: 'yadaApp'
     }))
     .pipe(gulp.dest(config.clientPath));
 });
@@ -157,9 +157,6 @@ function startBrowserSync() {
     return;
   }
   log('Starting browser-sync on port ' + port);
-
-  gulp.watch([config.less], ['styles'])
-      .on('change', function(event) { changeEvent(event); });
 
   var options = {
     proxy: 'localhost:' + port,

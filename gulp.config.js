@@ -50,7 +50,7 @@ module.exports = function() {
     bower: {
       json: require('./bower.json'),
       directory: bowerPath,
-      ignorePath: ''
+      ignorePath: 'yadaApp/'
     },
 
     /**
