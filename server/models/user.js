@@ -20,7 +20,7 @@ User.find({}).exec(function(err, collection) {
   if(collection.length === 0) {
     var salt, hash;
     salt = createSalt();
-    hash = hashPwd(salt, 'guru');
+    hash = hashPwd(salt, 'guru'); // TODO: Move admin account creation to config file NOT commited
     User.create({ username: 'yada', salt: salt, hashed_pwd: hash });
   }
 });
