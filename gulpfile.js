@@ -162,8 +162,7 @@ function startBrowserSync() {
     proxy: 'localhost:' + port,
     port: 9000,
     files: [
-      config.clienPath + '**/*.*',
-      '!' + config.less
+      config.clientPath + '**/*.*'
       ],
     ghostMode: {
       clicks: true,
