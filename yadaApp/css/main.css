@@ -17,6 +17,12 @@ div.container {
   content:"\e080";
 }
 
+.fa-square-o {
+  float: left;
+  margin-right: 5px;
+  display: none;
+}
+
 @media (min-width: 768px) {
   .page-header h1 {
     font-size: 75px;
@@ -25,7 +31,7 @@ div.container {
 
 @media print {
 
-  #reminderForms { display:none; }
+  #reminderForms { display: none; }
 
   .panel-heading.collapsed h3:after {
   font-family:'Glyphicons Halflings';
@@ -40,4 +46,9 @@ div.container {
   div {
     page-break-inside: avoid;
   }
+  
+  .fa-square-o {
+    display: block;
+  }
+  
 }

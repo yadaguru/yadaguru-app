@@ -36,7 +36,7 @@
         </form>
         <button type="button" onClick="window.print()" class="btn pull-left" 
                 ng-class="!groups ? 'btn-default' : 'btn-primary'"
-                ng-disabled="!groups">Print This Page</button>
+                ng-disabled="!groups"><i class="fa fa-print"></i>Print This Page</button>
       </div>
       <div class="group-list panel-group" id="accordian" ng-repeat="group in groups">
         <div class="panel panel-default" id="panel{{$index}}">
@@ -48,8 +48,8 @@
           </div>      
           <div id="collapse{{$index}}" class="panel-collapse collapse">
             <div class="reminder-list panel-body" ng-repeat="reminder in group.members">
-              <h4>{{reminder.message}}</h4>
-              <small>{{reminder.detail}}</small>
+              <h4><i class="fa fa-square-o fa-1"></i>{{reminder.message}}</h4>
+              <p>{{reminder.detail}}</p>
             </div>
           </div>
         </div>

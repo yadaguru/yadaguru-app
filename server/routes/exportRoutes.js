@@ -20,6 +20,6 @@ var routes = function() {
       res.end(remindersCsv, 'UTF-8');
     });
   return router;
-}
+};
 
 module.exports = routes;
