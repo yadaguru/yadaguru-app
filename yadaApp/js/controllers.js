@@ -74,7 +74,7 @@
           reminder.detail = current.detail;
           reminder.lateMessage = current.lateMessage;
           reminder.lateDetail = current.lateDetail;
-          reminder.timeframe = current.timeframe;
+          reminder.timeframe = current.timeframe + '-day';
           reminders.push(reminder);
         }
         $scope.reminders = reminders;
@@ -83,5 +83,5 @@
   };
 
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
-  app.controller('adminCtrl', ['$scope', 'YadaAPI',  adminCtrl]);
+  app.controller('adminCtrl', ['$scope', 'YadaAPI', adminCtrl]);
 }(angular.module("yadaApp")));

@@ -1,21 +1,19 @@
 <div class="container-fluid">
-  <main>
   <h2>Reminders</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Reminder</th>
-          <th>Message</th>
-          <th>Timeframe</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="reminder in reminders">
-          <td>{{reminder.name}}</td>
-          <td>{{reminder.message}}</td>
-          <td>{{reminder.timeframe}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Reminder</th>
+        <th>Message</th>
+        <th>Timeframe</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="reminder in reminders">
+        <td>{{reminder.name}}</td>
+        <td>{{reminder.message}}</td>
+        <td>{{reminder.timeframe}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
