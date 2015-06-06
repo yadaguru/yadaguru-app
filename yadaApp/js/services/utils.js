@@ -40,6 +40,27 @@
       return groupArray;
     };
 
+    utils.parseVars = function(string, school, date) {
+      var replacements = {'%SCHOOL%': school, '%DATE%': date};
+      string = string.replace(/%\w+%/g, function(all) {
+        return replacements[all] || all;
+      });
+      return string;
+    };
+
+    utils.calcDate = function(timeframe, date) {
+      var newDate = angular.copy(date);
+      newDate.setDate(newDate.getDate() - timeframe);
+      return newDate;
+    };
+
+    utils.formatDate = function(date) {
+      var d = date.getDate();
+      var m = date.getMonth() + 1;
+      var y = date.getFullYear();
+      return m + '/' + d + '/' + y;
+    };
+      
    return utils;
   
   });

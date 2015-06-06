@@ -11,44 +11,21 @@
     };
 
     var populate = function(resp) {
-      console.log(resp);
-      var parseVars = function(string, school, date) {
-        var replacements = {'%SCHOOL%': school, '%DATE%': date};
-        string = string.replace(/%\w+%/g, function(all) {
-          return replacements[all] || all;
-        });
-        return string;
-      };
-
-      var calcDate = function(timeframe) {
-        var date = angular.copy($scope.formData.dt);
-        date.setDate(date.getDate() - timeframe);
-        return date;
-      };
-
-      var formatDate = function(date) {
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-
-        return m + '/' + d + '/' + y;
-      };
-
       var data = resp.data;
       var schoolName = $scope.formData.schoolName;
       var groupedReminders = (Utils.groupBy(data, 'timeframe'));
       $scope.groups = [];
       for (var i = 0; i < groupedReminders.length; i++) {
         var group = {};
-        group.name = formatDate(calcDate(groupedReminders[i].name));
+        group.name = Utils.formatDate(Utils.calcDate(groupedReminders[i].name, $scope.formData.dt));
         group.members = [];
         for (var j = 0; j < groupedReminders[i].members.length; j++) {
           var reminder = {};
           var current = groupedReminders[i].members[j];
-          reminder.date = formatDate(calcDate(current.timeframe));
+          reminder.date = Utils.formatDate(Utils.calcDate(current.timeframe, $scope.formData.dt));
           reminder.fullName = current.fullName;
-          reminder.message = parseVars(current.message, schoolName, reminder.date);
-          reminder.detail = parseVars(current.detail, schoolName, reminder.date);
+          reminder.message = Utils.parseVars(current.message, schoolName, reminder.date);
+          reminder.detail = Utils.parseVars(current.detail, schoolName, reminder.date);
           group.members.push(reminder);
         }
         $scope.groups.push(group);
