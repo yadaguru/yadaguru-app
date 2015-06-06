@@ -80,10 +80,31 @@
     $scope.minDate = new Date();
   };
 
-  var adminCtrl = function($scope) {
+  var adminCtrl = function($scope, YadaAPI) {
+    $scope.test = 'test data';
+    
+    $scope.getReminders = function() {
+      YadaAPI.reminders.get().then(populate, function(err) {console.log(err);});
 
+      function populate(resp) {
+        var data = resp.data;
+        var reminders = [];
+        for (var i = 0; i < data.length; i++) {
+          var reminder = {};
+          var current = data[i];
+          reminder.name = current.name;
+          reminder.message = current.message;
+          reminder.detail = current.detail;
+          reminder.lateMessage = current.lateMessage;
+          reminder.lateDetail = current.lateDetail;
+          reminder.timeframe = current.timeframe;
+          reminders.push(reminder);
+        }
+        $scope.reminders = reminders;
+      }
+    }();
   };
 
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
-  app.controller('adminCtrl', ['$scope', adminCtrl]);
+  app.controller('adminCtrl', ['$scope', 'YadaAPI',  adminCtrl]);
 }(angular.module("yadaApp")));

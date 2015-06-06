@@ -3,19 +3,38 @@
  * @namespace YadaApp
  */
 (function () {
-  var module = angular.module('yadaApp', ['ui.bootstrap', 'yadaApp.services', 'ngRoute']);
-  module.config(['$routeProvider', function($routeProvier) {
-    $routeProvier
-      .when('/', {
+  var module = angular.module('yadaApp', ['ui.bootstrap', 'yadaApp.services', 'ui.router']);
+  module.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/admin','/admin/reminders');
+    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.rule(function($injector, $location) {
+      var path = $location.path();
+      var hasTrailingSlash = path[path.length-1] ==='/';
+      if (hasTrailingSlash) {
+        var newPath = path.substr(0, path.length - 1);
+        return newPath;
+      }
+    });
+    $stateProvider
+      .state('main', {
+        url: '/main',
         templateUrl: 'templates/main.html',
         controller: 'mainCtrl'
       })
-      .when('/admin', {
+      .state('admin', {
+        url:'/admin',
         templateUrl: 'templates/admin.html',
         controller: 'adminCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('admin.reminders', {
+        url: '/reminders',
+        templateUrl: 'templates/admin.reminders.html',
+        controller: 'adminCtrl'
+      })
+      .state('admin.test-dates', {
+        url: '/test-dates',
+        templateUrl: 'templates/admin.test-dates.html',
+        controller: 'adminCtrl'
       });
   }]);
 }());
