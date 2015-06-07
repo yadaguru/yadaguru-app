@@ -93,7 +93,7 @@
 
   var modalAdminReminderAdd = function($scope, $modalInstance) {
     
-    $scope.save = function() {
+    $scope.save = function(newReminder) {
       console.log('saved');
       $modalInstance.close();
     };

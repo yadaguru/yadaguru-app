@@ -8,42 +8,42 @@
   <form novalidate>
     <div class="form-group">
       <label for ="name">Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Reminder name"/>
+      <input type="text" ng-model="newReminder.name" class="form-control" id="name" placeholder="Reminder name"/>
     </div>
     <div class="form-group">
       <label for ="message">Message:</label>
-      <input type="text" class="form-control" id="message" placeholder="Reminder message"/>
+      <input type="text" ng-model="newReminder.message" class="form-control" id="message" placeholder="Reminder message"/>
     </div>
     <div class="form-group">
       <label for ="detail">Detail:</label>
-      <textarea class="form-control" id="detail" rows="3" placeholder="Details for the reminder"></textarea>
+      <textarea ng-model="newReminder.detail" class="form-control" id="detail" rows="3" placeholder="Details for the reminder"></textarea>
     </div>
     <div class="form-group">
       <label for ="late-message">Late Message:</label>
-      <input type="text" class="form-control" id="late-message" placeholder="Late reminder message"/>
+      <input type="text" ng-model="newReminder.lateMessage" class="form-control" id="late-message" placeholder="Late reminder message"/>
     </div>
     <div class="form-group">
       <label for ="late-detail">Late Detail:</label>
-      <textarea class="form-control" id="late-detail" rows="3" placeholder="Details for the late reminder"></textarea>
+      <textarea ng-model="newReminder.lateDetail" class="form-control" id="late-detail" rows="3" placeholder="Details for the late reminder"></textarea>
     </div>
     <div class="form-group">
       <label for ="timeframe">Timeframe (press <kbd>ctrl</kbd> while clicking to select multiple timeframes):</label>
-      <select multiple class="form-control">
-        <option>Summer</option>
-        <option>90 Days</option>
-        <option>60 Days</option>
-        <option>30 Days</option>
-        <option>21 Days</option>
-        <option>14 Days</option>
-        <option>7 Days</option>
-        <option>5 Days</option>
-        <option>2 Days</option>
-        <option>1 Day</option>
-        <option>None (displays at top of list)</option>
+      <select ng-model="newReminder.timeframe" multiple class="form-control">
+        <option value="summer">Summer</option>
+        <option value="90">90 Days</option>
+        <option value="60">60 Days</option>
+        <option value="30">30 Days</option>
+        <option value="21">21 Days</option>
+        <option value="14">14 Days</option>
+        <option value="7">7 Days</option>
+        <option value="5">5 Days</option>
+        <option value="2">2 Days</option>
+        <option value="1">1 Day</option>
+        <option value="none">None (displays at top of list)</option>
       </select>
     </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="save()">Save</button>
+  <button class="btn btn-primary" ng-click="save(newReminder)">Save</button>
   <button class="btn" ng-click="cancel()">Cancel</button>
 </div>
