@@ -13,6 +13,10 @@
       return $http.get('/api/reminders/');
     };
 
+    yadaAPI.reminders.post = function(data) {
+      return $http.post('/api/reminders/', data);
+    };
+
     return yadaAPI;
   
   }]);
