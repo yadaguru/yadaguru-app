@@ -3,32 +3,40 @@
 </div>
 <div class="modal-body">
   <p class="text-info">
-    Type <code>%SCHOOL%</code> and <code>%DATE%</code> to display the user-selected school name and appropriate reminder date
+    Type <code>%SCHOOL%</code> and <code>%DATE%</code> to display the
+    user-selected school name and appropriate reminder date
   </p>
-  <form novalidate>
+  <form name="addNewReminderForm" novalidate>
     <div class="form-group">
       <label for ="name">Name:</label>
-      <input type="text" ng-model="newReminder.name" class="form-control" id="name" placeholder="Reminder name"/>
+      <input type="text" ng-model="newReminder.name" 
+        class="form-control" id="name" placeholder="Reminder name" required/>
     </div>
     <div class="form-group">
       <label for ="message">Message:</label>
-      <input type="text" ng-model="newReminder.message" class="form-control" id="message" placeholder="Reminder message"/>
+      <input type="text" ng-model="newReminder.message" 
+        class="form-control" id="message" placeholder="Reminder message" required/>
     </div>
     <div class="form-group">
       <label for ="detail">Detail:</label>
-      <textarea ng-model="newReminder.detail" class="form-control" id="detail" rows="3" placeholder="Details for the reminder"></textarea>
+      <textarea ng-model="newReminder.detail" class="form-control" 
+        id="detail" rows="3" placeholder="Details for the reminder" required></textarea>
     </div>
     <div class="form-group">
       <label for ="late-message">Late Message:</label>
-      <input type="text" ng-model="newReminder.lateMessage" class="form-control" id="late-message" placeholder="Late reminder message"/>
+      <input type="text" ng-model="newReminder.lateMessage" 
+        class="form-control" id="late-message" placeholder="Late reminder message" required/>
     </div>
     <div class="form-group">
       <label for ="late-detail">Late Detail:</label>
-      <textarea ng-model="newReminder.lateDetail" class="form-control" id="late-detail" rows="3" placeholder="Details for the late reminder"></textarea>
+      <textarea ng-model="newReminder.lateDetail" class="form-control" 
+        id="late-detail" rows="3" placeholder="Details for the late reminder" required></textarea>
     </div>
     <div class="form-group">
-      <label for ="timeframe">Timeframe (press <kbd>ctrl</kbd> while clicking to select multiple timeframes):</label>
-      <select ng-model="newReminder.timeframe" multiple class="form-control">
+      <label for ="timeframe">
+        Timeframe (press <kbd>ctrl</kbd> while clicking to select multiple timeframes):
+      </label>
+      <select ng-model="newReminder.timeframe" multiple class="form-control" required>
         <option value="summer">Summer</option>
         <option value="90">90 Days</option>
         <option value="60">60 Days</option>
@@ -44,6 +52,7 @@
     </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="save(newReminder)">Save</button>
+  <button class="btn" ng-class="addNewReminderForm.$invalid ? 'btn-default' : 'btn-primary'" 
+    ng-disabled="addNewReminderForm.$invalid" ng-click="save(newReminder)">Save</button>
   <button class="btn" ng-click="cancel()">Cancel</button>
 </div>
