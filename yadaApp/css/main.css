@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
 }
-div.container {
+div.container-main {
   position: relative;
   max-width: 600px;
 }

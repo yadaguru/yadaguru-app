@@ -1,19 +1,22 @@
-<div class="container-fluid">
-  <h2>Reminders</h2>
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Reminder</th>
-        <th>Message</th>
-        <th>Timeframe</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="reminder in reminders">
-        <td>{{reminder.name}}</td>
-        <td>{{reminder.message}}</td>
-        <td>{{reminder.timeframe}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="row">
+    <h2>Reminders</h2>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Reminder</th>
+          <th>Message</th>
+          <th>Timeframe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="reminder in reminders">
+          <td>{{reminder.name}}</td>
+          <td>{{reminder.message}}</td>
+          <td>{{reminder.timeframe}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" ng-click="openAddModal()">Add Reminder</button>
+  </div>
 </div>

@@ -57,7 +57,7 @@
     $scope.minDate = new Date();
   };
 
-  var adminCtrl = function($scope, YadaAPI) {
+  var adminCtrl = function($scope, $modal, YadaAPI) {
     $scope.test = 'test data';
     
     $scope.getReminders = function() {
@@ -80,8 +80,32 @@
         $scope.reminders = reminders;
       }
     }();
+
+    $scope.openAddModal = function () {
+      
+      var modalInstance = $modal.open({
+        templateUrl: 'templates/modals/admin.reminders.add.html',
+        controller: 'modalAdminReminderAdd'
+      });
+
+    };
+  };
+
+  var modalAdminReminderAdd = function($scope, $modalInstance) {
+    
+    $scope.save = function() {
+      console.log('saved');
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      console.log('canceled');
+      $modalInstance.dismiss('cancel');
+    };
+
   };
 
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
-  app.controller('adminCtrl', ['$scope', 'YadaAPI', adminCtrl]);
+  app.controller('adminCtrl', ['$scope', '$modal', 'YadaAPI', adminCtrl]);
+  app.controller('modalAdminReminderAdd', ['$scope', '$modalInstance', modalAdminReminderAdd]);
 }(angular.module("yadaApp")));
