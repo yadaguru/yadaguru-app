@@ -69,11 +69,13 @@
         for (var i = 0; i < data.length; i++) {
           var reminder = {};
           var current = data[i];
+          reminder._id = current._id;
           reminder.name = current.name;
           reminder.message = current.message;
           reminder.detail = current.detail;
           reminder.lateMessage = current.lateMessage;
           reminder.lateDetail = current.lateDetail;
+          reminder.category = current.category;
           reminder.timeframe = current.timeframe + '-day';
           reminders.push(reminder);
         }
