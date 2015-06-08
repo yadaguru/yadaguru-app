@@ -7,6 +7,7 @@ var reminderSchema = new Schema({
   detail: {type: String},
   lateMessage: {type: String},
   lateDetail: {type: String},
+  category: {type: String},
   timeframe: {type: String}
 });
 
