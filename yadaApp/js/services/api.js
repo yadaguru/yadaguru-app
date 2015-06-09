@@ -17,6 +17,14 @@
       return $http.post('/api/reminders/', data);
     };
 
+    yadaAPI.reminders.put = function(id, data) {
+      return $http.put('/api/reminders/' + id, data);
+    };
+
+    yadaAPI.reminders.delete = function(id) {
+      return $http.delete('/api/reminders/' + id);
+    };
+
     return yadaAPI;
   
   }]);

@@ -10,13 +10,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="reminder in reminders">
+        <tr class="cursor-pointer" ng-repeat="reminder in reminders" ng-click="openEditModal('edit', reminder)">
           <td>{{reminder.name}}</td>
           <td>{{reminder.message}}</td>
-          <td>{{reminder.timeframe}}</td>
+          <td>
+            <p class="single-space" ng-repeat="timeframe in reminder.timeframes">{{addTimeframeSuffix(timeframe)}}</p>
+          </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" ng-click="openAddModal()">Add Reminder</button>
+    <button class="btn btn-primary" ng-click="openEditModal('add')">Add Reminder</button>
   </div>
 </div>
