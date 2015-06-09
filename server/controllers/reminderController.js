@@ -43,7 +43,8 @@ var reminderController = function(Reminder) {
        !req.body.lateMessage ||
        !req.body.lateDetail ||
        !req.body.category ||
-       !req.body.timeframe) {
+       !req.body.timeframes) {
+      console.log(req.body);
       res.status(400);
       res.send('Not all properties are present. ' +
           'Requires name, message, detail, lateMessage, lateDetail, and timeframe.');
