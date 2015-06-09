@@ -8,7 +8,7 @@ var reminderSchema = new Schema({
   lateMessage: {type: String},
   lateDetail: {type: String},
   category: {type: String},
-  timeframe: {type: String}
+  timeframe: {type: [String]}
 });
 
 module.exports = mongoose.model('Reminder', reminderSchema);
