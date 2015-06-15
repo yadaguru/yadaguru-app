@@ -65,14 +65,17 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// Grab a instance of the DB model
+// Grab a instances of the DB models
 var Reminder = require('./server/models/reminder');
+var TestDate = require('./server/models/testDate');
 
-// Use the DB model to get an instance of the router
+// Use the DB models to get an instance of the router
 var reminderRouter = require('./server/routes/reminderRoutes')(Reminder);
+var testDateRouter = require('./server/routes/testDateRoutes')(TestDate);
 
-// All of the routes in reminderRouter will be prefixed with /api/reminders
+// All of the routes in each model will be prefixed with /api/{model name}
 app.use('/api/reminders', reminderRouter);
+app.use('/api/test-dates', testDateRouter);
 
 // Controls the routes for exporting reminders for calendar apps
 var exportRouter = require('./server/routes/exportRoutes')();
