@@ -33,14 +33,13 @@ var testDateController = function(TestDate) {
     });
   };
 
-  // POST route [/api/testDates] 
+  // POST route [/api/test-dates] 
   var post = function(req, res) {
 
     // Return an error if there is missing data, else save data
     if(!req.body.testDate || 
        !req.body.registrationDate ||
        !req.body.testType) {
-      console.log(req.body);
       res.status(400);
       res.send('Not all properties are present. ' +
           'Requires testDate, registrationDate,  and testType.');
