@@ -1,3 +1,53 @@
-<main>
-  <h1>Test Dates</h1>
-</main>
+<div class="container">
+  <div class="row">
+    <h2>Test Dates</h2>
+    <form name="testDateForm" novalidate>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Test Date</th>
+            <th>Registration Date</th>
+            <th>Test Type</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="testDate in testDates">
+            <td class="form-group">
+              <input class="form-control" type="text" ng-model="testDate.testDate" placeholder="Enter date of test" required/>
+            </td>
+            <td class="form-group">
+              <input class="form-control" type="text" ng-model="testDate.registrationDate" placeholder="Enter registration date" required/>
+            </td>
+            <td class="form-group">
+              <select class="form-control" ng-model="testDate.testType" required>
+                <option value="SAT">SAT</option>
+                <option value="ACT">ACT</option>
+              </select>
+            </td>
+            <td>
+              <i class="glyphicon glyphicon-remove"></i>
+            </td>
+          </tr>
+          <tr>
+            <td class="form-group">
+              <input class="form-control" type="text" ng-model="testDateForm.testDate" placeholder="Enter date of test" required/>
+            </td>
+            <td class="form-group">
+              <input class="form-control" type="text" ng-model="testDateForm.registrationDate" placeholder="Enter registration date" required/>
+            </td>
+            <td class="form-group">
+              <select class="form-control" ng-model="testDateForm.testType" required>
+                <option value="SAT">SAT</option>
+                <option value="ACT">ACT</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn pull-right" ng-class="testDateForm.$invalid ? 'btn-default' : 'btn-primary'"
+              ng-disabled="testDateForm.$invalid" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+

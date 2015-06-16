@@ -57,7 +57,11 @@
     $scope.minDate = new Date();
   };
 
-  var adminCtrl = function($scope, $modal, YadaAPI) {
+  var adminCtrl = function($scope) {
+     
+  };
+
+  var adminRemindersCtrl = function($scope, $modal, YadaAPI) {
     $scope.test = 'test data';
     
     $scope.getReminders = function() {
@@ -116,6 +120,29 @@
     $scope.getReminders();
   };
 
+  var adminTestDatesCtrl = function($scope, YadaAPI, Utils) {
+    $scope.getTestDates = function() {
+      YadaAPI.testDates.get().then(populate, function(err) {console.log(err);});
+
+      function populate(resp) {
+        var data = resp.data;
+        var testDates = [];
+        for (var i = 0; i < data.length; i++) {
+          var testDate = {};
+          var current = data[i];
+          testDate._id = current._id;
+          testDate.testDate = Utils.formatDate(new Date(current.testDate));
+          testDate.registrationDate = Utils.formatDate(new Date(current.registrationDate));
+          testDate.testType = current.testType;
+          testDates.push(testDate);
+        }
+        $scope.testDates = testDates;
+      }
+    };
+
+    $scope.getTestDates();
+  };
+
   var modalAdminReminderEdit = function($scope, $modalInstance, YadaAPI, context, data) {
     $scope.context = context;
     $scope.data = angular.copy(data);
@@ -150,6 +177,8 @@
   };
 
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
-  app.controller('adminCtrl', ['$scope', '$modal', 'YadaAPI', adminCtrl]);
+  app.controller('adminCtrl', ['$scope', adminCtrl]);
+  app.controller('adminRemindersCtrl', ['$scope', '$modal', 'YadaAPI', adminRemindersCtrl]);
+  app.controller('adminTestDatesCtrl', ['$scope', 'YadaAPI', 'Utils', adminTestDatesCtrl]);
   app.controller('modalAdminReminderEdit', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', modalAdminReminderEdit]);
 }(angular.module("yadaApp")));

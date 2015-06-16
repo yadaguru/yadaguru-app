@@ -29,12 +29,12 @@
       .state('admin.reminders', {
         url: '/reminders',
         templateUrl: 'templates/admin.reminders.html',
-        controller: 'adminCtrl'
+        controller: 'adminRemindersCtrl'
       })
       .state('admin.test-dates', {
         url: '/test-dates',
         templateUrl: 'templates/admin.test-dates.html',
-        controller: 'adminCtrl'
+        controller: 'adminTestDatesCtrl'
       });
   }]);
 }());

@@ -25,6 +25,12 @@
       return $http.delete('/api/reminders/' + id);
     };
 
+    yadaAPI.testDates = {};
+
+    yadaAPI.testDates.get = function() {
+      return $http.get('/api/test-dates');
+    };
+
     return yadaAPI;
   
   }]);
