@@ -98,7 +98,6 @@
     };
 
     $scope.openEditModal = function (context, data) {
-      console.log(context) ;
       var modalInstance = $modal.open({
         templateUrl: 'templates/modals/admin.reminders.edit.html',
         controller: 'modalAdminReminderEdit',
@@ -120,7 +119,7 @@
     $scope.getReminders();
   };
 
-  var adminTestDatesCtrl = function($scope, YadaAPI, Utils) {
+  var adminTestDatesCtrl = function($scope, $modal, YadaAPI, Utils) {
     $scope.getTestDates = function() {
       YadaAPI.testDates.get().then(populate, function(err) {console.log(err);});
 
@@ -140,6 +139,26 @@
       }
     };
 
+    $scope.openEditModal = function (context, data) {
+      var modalInstance = $modal.open({
+        templateUrl: 'templates/modals/admin.test-dates.edit.html',
+        controller: 'modalAdminTestDateEdit',
+        resolve: {
+          context: function() {
+            return context;
+          },
+          data: function () {
+            return data;
+          }
+        }
+      });
+      
+      modalInstance.result.then(function () {
+        $scope.testDates = [];
+        $scope.getTestDates();
+      });
+    };
+
     $scope.getTestDates();
   };
 
@@ -148,14 +167,12 @@
     $scope.data = angular.copy(data);
 
     $scope.add = function(data) {
-      console.log('added');
       YadaAPI.reminders.post(data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error adding reminder', err);});
     };
 
     $scope.save = function(data) {
-      console.log('saved');
       YadaAPI.reminders.put(data._id, data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error saving reminder', err);});
@@ -163,22 +180,49 @@
 
     $scope.delete = function(id) {
       if (window.confirm("Do you really want to delete this reminder?")) {
-        console.log('deleted');
         YadaAPI.reminders.delete(id).then(function(res){
           $modalInstance.close();
         }, function(err){console.log('error deleting reminder', err);});
       }
     };
     $scope.cancel = function() {
-      console.log('canceled');
       $modalInstance.dismiss('cancel');
     };
 
   };
 
+  var modalAdminTestDateEdit = function($scope, $modalInstance, YadaAPI, context, data) {
+    $scope.context = context;
+    $scope.data = angular.copy(data);
+
+    $scope.add = function(data) {
+      YadaAPI.testDates.post(data).then(function(res){
+        $modalInstance.close();
+      }, function(err){console.log('error adding test date', err);});
+    };
+
+    $scope.save = function(data) {
+      YadaAPI.testDates.put(data._id, data).then(function(res){
+        $modalInstance.close();
+      }, function(err){console.log('error saving test date', err);});
+    };
+
+    $scope.delete = function(id) {
+      if (window.confirm("Do you really want to delete this test date?")) {
+        YadaAPI.testDates.delete(id).then(function(res){
+          $modalInstance.close();
+        }, function(err){console.log('error deleting test date', err);});
+      }
+    };
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+
+  };
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
   app.controller('adminCtrl', ['$scope', adminCtrl]);
   app.controller('adminRemindersCtrl', ['$scope', '$modal', 'YadaAPI', adminRemindersCtrl]);
-  app.controller('adminTestDatesCtrl', ['$scope', 'YadaAPI', 'Utils', adminTestDatesCtrl]);
+  app.controller('adminTestDatesCtrl', ['$scope', '$modal', 'YadaAPI', 'Utils', adminTestDatesCtrl]);
   app.controller('modalAdminReminderEdit', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', modalAdminReminderEdit]);
+  app.controller('modalAdminTestDateEdit', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', modalAdminTestDateEdit]);
 }(angular.module("yadaApp")));

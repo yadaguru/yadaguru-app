@@ -31,6 +31,18 @@
       return $http.get('/api/test-dates');
     };
 
+    yadaAPI.testDates.post = function(data) {
+      return $http.post('/api/test-dates/', data);
+    };
+
+    yadaAPI.testDates.put = function(id, data) {
+      return $http.put('/api/test-dates/' + id, data);
+    };
+
+    yadaAPI.testDates.delete = function(id) {
+      return $http.delete('/api/test-dates/' + id);
+    };
+    
     return yadaAPI;
   
   }]);
