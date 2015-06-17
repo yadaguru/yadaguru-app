@@ -173,7 +173,7 @@ function startBrowserSync() {
     injectChanges: true,
     logFileChanges: true,
     logLevel: 'debug',
-    logPrefix: 'obleydotnet',
+    logPrefix: 'YadaApp',
     notify: true,
     reloadDelay: 1000
   };

@@ -80,7 +80,7 @@ var exportRouter = require('./server/routes/exportRoutes')();
 // All of the export routes are prefixed with /api/export
 app.use('/api/export', exportRouter);
 
-var userRouter = require('./routes/userRoutes')();
+var userRouter = require('./server/routes/userRoutes')();
 app.use('/api/users', userRouter);
 
 // Basic GET to serve static index.html
