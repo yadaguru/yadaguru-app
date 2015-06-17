@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
   username: {type: String},
   salt: {type: String},
-  hashedPassword: {type: String}
+  hashedPassword: {type: String},
+  roles: {type: Array}
 });
 
 userSchema.methods = {

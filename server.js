@@ -34,7 +34,7 @@ var User = require('./server/models/user');
 
 var authRouter = require('./server/routes/authRoutes')();
 
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 // Configuring Passport
 passport.use(new LocalStrategy(

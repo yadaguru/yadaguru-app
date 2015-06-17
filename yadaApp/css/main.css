@@ -23,6 +23,16 @@ div.container {
   display: none;
 }
 
+.browser-upgrade {
+  text-align: center;
+}
+
+.login {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+}
+
 @media (min-width: 768px) {
   .page-header h1 {
     font-size: 75px;
