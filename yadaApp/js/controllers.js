@@ -57,8 +57,13 @@
     $scope.minDate = new Date();
   };
 
-  var adminCtrl = function($scope) {
-     
+  var adminCtrl = function($scope, $state) {
+
+    $scope.$on('$stateChangeStart', function(e, toState) {
+      $scope.currentTab = toState.url;
+    });
+
+    $scope.currentTab = '/reminders';
   };
 
   var adminRemindersCtrl = function($scope, $modal, YadaAPI) {
@@ -220,7 +225,7 @@
 
   };
   app.controller('mainCtrl', ['$scope', 'YadaAPI', 'Utils', mainCtrl]);
-  app.controller('adminCtrl', ['$scope', adminCtrl]);
+  app.controller('adminCtrl', ['$scope', '$state', adminCtrl]);
   app.controller('adminRemindersCtrl', ['$scope', '$modal', 'YadaAPI', adminRemindersCtrl]);
   app.controller('adminTestDatesCtrl', ['$scope', '$modal', 'YadaAPI', 'Utils', adminTestDatesCtrl]);
   app.controller('modalAdminReminderEdit', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', modalAdminReminderEdit]);
