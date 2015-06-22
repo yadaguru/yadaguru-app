@@ -1,15 +1,15 @@
 [
-  {"testDate":"09/12/2015","registrationDate":"08/07/2015","testType":"ACT"},
-  {"testDate":"10/24/2015","registrationDate":"09/18/2015","testType":"ACT"},
-  {"testDate":"12/12/2015","registrationDate":"11/06/2015","testType":"ACT"},
-  {"testDate":"02/06/2016","registrationDate":"01/08/2016","testType":"ACT"},
-  {"testDate":"04/09/2016","registrationDate":"03/04/2016","testType":"ACT"},
-  {"testDate":"06/11/2016","registrationDate":"05/06/2016","testType":"ACT"},
-  {"testDate":"10/03/2015","registrationDate":"09/03/2015","testType":"SAT"},
-  {"testDate":"11/07/2015","registrationDate":"10/09/2015","testType":"SAT"},
-  {"testDate":"12/05/2015","registrationDate":"11/05/2015","testType":"SAT"},
-  {"testDate":"01/23/2016","registrationDate":"12/28/2015","testType":"SAT"},
-  {"testDate":"03/05/2016","registrationDate":"02/05/2015","testType":"SAT"},
-  {"testDate":"05/07/2016","registrationDate":"04/08/2015","testType":"SAT"},
-  {"testDate":"06/04/2016","registrationDate":"05/05/2015","testType":"SAT"}
+  {"testDate":"2015-09-12","registrationDate":"2015-08-07","testType":"ACT"},
+  {"testDate":"2015-10-24","registrationDate":"2015-09-18","testType":"ACT"},
+  {"testDate":"2015-12-12","registrationDate":"2015-11-06","testType":"ACT"},
+  {"testDate":"2016-02-06","registrationDate":"2016-01-08","testType":"ACT"},
+  {"testDate":"2016-04-09","registrationDate":"2016-03-04","testType":"ACT"},
+  {"testDate":"2016-06-11","registrationDate":"2016-05-06","testType":"ACT"},
+  {"testDate":"2015-10-03","registrationDate":"2015-09-03","testType":"SAT"},
+  {"testDate":"2015-11-07","registrationDate":"2015-10-09","testType":"SAT"},
+  {"testDate":"2015-12-05","registrationDate":"2015-11-05","testType":"SAT"},
+  {"testDate":"2016-01-23","registrationDate":"2015-12-28","testType":"SAT"},
+  {"testDate":"2016-03-05","registrationDate":"2015-02-05","testType":"SAT"},
+  {"testDate":"2016-05-07","registrationDate":"2015-04-08","testType":"SAT"},
+  {"testDate":"2016-06-04","registrationDate":"2015-05-05","testType":"SAT"}
 ]
