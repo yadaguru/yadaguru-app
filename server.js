@@ -67,7 +67,7 @@ passport.deserializeUser(function(id, done) {
 
 // Grab a instances of the DB models
 var Reminder = require('./server/models/reminder');
-var TestDate = require('./server/models/testDate');
+var TestDate = require('./server/models/testdate');
 
 // Use the DB models to get an instance of the router
 var reminderRouter = require('./server/routes/reminderRoutes')(Reminder);
