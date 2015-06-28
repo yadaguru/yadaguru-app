@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
 }
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
 div.container {
   position: relative;
   max-width: 600px;
@@ -56,9 +59,9 @@ div.container {
   div {
     page-break-inside: avoid;
   }
-  
+
   .fa-square-o {
     display: block;
   }
-  
+
 }

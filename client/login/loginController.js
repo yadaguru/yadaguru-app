@@ -31,4 +31,4 @@
     ['$scope', '$http', 'notifierService', 'identityService',
       'authService', '$location', LoginController]);
 
-}(angular.module('yadaApp')));
+}(angular.module('login')));

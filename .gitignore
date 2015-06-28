@@ -3,3 +3,4 @@
 /client/css/*.min
 /node_modules/*
 /.settings/*
+npm-debug.log

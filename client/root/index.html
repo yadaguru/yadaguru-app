@@ -58,7 +58,7 @@
                   ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         </div>
 
-        <div class="group-list panel-group" id="accordian" ng-repeat="group in groups">
+        <div ng-cloak class="group-list panel-group" id="accordian" ng-repeat="group in groups">
           <div class="panel panel-default" id="panel{{$index}}">
             <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse{{$index}}"
                    href="#collapse{{$index}}">
@@ -76,6 +76,9 @@
         </div>
       </div>
     </div>
+    <script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:9000/browser-sync/browser-sync-client.2.7.5.js'><\/script>".replace("HOST", location.hostname));
+//]]></script>
   </body>
 
   <!-- bower:js -->

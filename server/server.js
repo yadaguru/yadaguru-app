@@ -28,6 +28,8 @@ app.get('/', function (req, res) {
   res.sendFile(config.clientPath + '/root/index.html');
 });
 
+
+
 app.get('/login', function(req, res) {
   res.sendFile(config.clientPath + '/login/index.html')
 });
