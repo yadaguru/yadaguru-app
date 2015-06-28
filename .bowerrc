@@ -1,6 +1,3 @@
 {
-	"directory": "client/vendor",
-  "scripts": {
-    "postinstall": "gulp wiredep"
-  }
+	"directory": "client/vendor"
 }

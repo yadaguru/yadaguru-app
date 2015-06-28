@@ -9,9 +9,9 @@ var morgan         = require('morgan'),
     app            = express();
 
 module.exports = function(clientPath) {
+  app.use('/', express.static(path.join(clientPath, 'root')));
   app.use('/vendor', express.static(path.join(clientPath, 'vendor')));
   app.use('/common', express.static(path.join(clientPath, 'common')));
-  app.use('/root', express.static(path.join(clientPath, 'root')));
   app.use('/admin', express.static(path.join(clientPath, 'admin')));
 
   app.use(morgan('dev'));
