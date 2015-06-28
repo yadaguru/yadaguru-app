@@ -172,12 +172,24 @@
     $scope.data = angular.copy(data);
 
     $scope.add = function(data) {
+
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.editReminderForm.$invalid) {
+        return;
+      }
+
       YadaAPI.reminders.post(data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error adding reminder', err);});
     };
 
     $scope.save = function(data) {
+      
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.editReminderForm.$invalid) {
+        return;
+      }
+
       YadaAPI.reminders.put(data._id, data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error saving reminder', err);});
@@ -201,12 +213,23 @@
     $scope.data = angular.copy(data);
 
     $scope.add = function(data) {
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.editTestDateForm.$invalid) {
+        return;
+      }
+
       YadaAPI.testDates.post(data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error adding test date', err);});
     };
 
     $scope.save = function(data) {
+      
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.editTestDateForm.$invalid) {
+        return;
+      }
+
       YadaAPI.testDates.put(data._id, data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error saving test date', err);});

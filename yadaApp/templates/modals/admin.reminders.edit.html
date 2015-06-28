@@ -8,14 +8,14 @@
     user-selected school name and appropriate reminder date
   </p>
   <form name="editReminderForm" novalidate>
-    <div class="form-group">
-      <label for ="name">Name:</label>
-      <input type="text" ng-model="data.name" 
+    <div class="form-group" show-errors>
+      <label class="control-label" for="name">Name:</label>
+      <input type="text" ng-model="data.name" name="name"
         class="form-control" id="name" placeholder="Reminder name" required/>
     </div>
-    <div class="form-group">
-      <label for ="category">Category:</label>
-      <select ng-model="data.category" class="form-control" required>
+    <div class="form-group" show-errors>
+      <label class="control-label" for="category">Category:</label>
+      <select ng-model="data.category" id="category" name="category" class="form-control" required>
         <option value="Absolute Deadline">Absolute Deadline</option>
         <option value="Portfolio Prep Days">Portfolio Prep Days</option>
         <option value="Essay Writing">Essay Writing</option>
@@ -26,31 +26,31 @@
         <option value="General Reminder">General Reminder</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for ="message">Message:</label>
-      <input type="text" ng-model="data.message" 
+    <div class="form-group" show-errors>
+      <label class="control-label" for="message">Message:</label>
+      <input type="text" ng-model="data.message" name="message"
         class="form-control" id="message" placeholder="Reminder message" required/>
     </div>
-    <div class="form-group">
-      <label for ="detail">Detail:</label>
-      <textarea ng-model="data.detail" class="form-control" 
+    <div class="form-group" show-errors>
+      <label class="control-label" for="detail">Detail:</label>
+      <textarea ng-model="data.detail" class="form-control" name="detail"
         id="detail" rows="3" placeholder="Details for the reminder" required></textarea>
     </div>
-    <div class="form-group">
-      <label for ="late-message">Late Message:</label>
-      <input type="text" ng-model="data.lateMessage" 
+    <div class="form-group" show-errors>
+      <label class="control-label" for="late-message">Late Message:</label>
+      <input type="text" ng-model="data.lateMessage" name="late-message"
         class="form-control" id="late-message" placeholder="Late reminder message" required/>
     </div>
-    <div class="form-group">
-      <label for ="late-detail">Late Detail:</label>
-      <textarea ng-model="data.lateDetail" class="form-control" 
+    <div class="form-group" show-errors>
+      <label class="control-label" for="late-detail">Late Detail:</label>
+      <textarea ng-model="data.lateDetail" class="form-control" name="late-detail"
         id="late-detail" rows="3" placeholder="Details for the late reminder" required></textarea>
     </div>
-    <div class="form-group">
-      <label for ="timeframe">
+    <div class="form-group" show-errors>
+      <label class="control-label" for="timeframe">
         Timeframe (press <kbd>ctrl</kbd> while clicking to select multiple timeframes):
       </label>
-      <select ng-model="data.timeframes" multiple class="form-control" required>
+      <select ng-model="data.timeframes" multiple class="form-control" id="time-frame" name="time-frame" required>
         <option value="summer">Summer</option>
         <option value="90">90 Days</option>
         <option value="60">60 Days</option>
@@ -68,9 +68,7 @@
 <div class="modal-footer">
   <button class="btn btn-danger pull-left" ng-if="context =='edit'"
     ng-click="delete(data._id)">Delete Reminder</button>
-  <button class="btn" ng-class="editReminderForm.$invalid ? 'btn-default' : 'btn-primary'" 
-    ng-disabled="editReminderForm.$invalid" ng-if="context =='add'" ng-click="add(data)">Add</button>
-  <button class="btn" ng-class="editReminderForm.$invalid ? 'btn-default' : 'btn-primary'" 
-    ng-disabled="editReminderForm.$invalid" ng-if="context == 'edit'" ng-click="save(data)">Save</button>
+  <button class="btn" ng-if="context =='add'" ng-click="add(data)">Add</button>
+  <button class="btn" ng-if="context == 'edit'" ng-click="save(data)">Save</button>
   <button class="btn" ng-click="cancel()">Cancel</button>
 </div>
