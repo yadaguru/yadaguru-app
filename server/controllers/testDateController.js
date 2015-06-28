@@ -30,7 +30,7 @@ var testDateController = function(TestDate) {
         // Return array in JSON format
         res.json(returnTestDates);
       }
-    });
+    }).sort('testDate');
   };
 
   // POST route [/api/test-dates] 
