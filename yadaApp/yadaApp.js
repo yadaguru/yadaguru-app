@@ -3,7 +3,7 @@
  * @namespace YadaApp
  */
 (function () {
-  var module = angular.module('yadaApp', ['ui.bootstrap', 'yadaApp.services', 'ui.router']);
+  var module = angular.module('yadaApp', ['ngResource', 'ui.bootstrap', 'yadaApp.services', 'commonUtil', 'ui.router']);
   module.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('/admin','/admin/reminders');
     $urlRouterProvider.otherwise('/main');

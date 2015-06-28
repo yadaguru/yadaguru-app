@@ -1,24 +1,28 @@
-var express  = require('express'),
-    passport = require('passport');
+var express = require('express'),
+    account = require('../account');
 
 var routes = function() {
   var router = express.Router();
   
-  // CSV Test Creation Route
-  router.post('/login', function (req, res) {
-      var auth = passport.authenticate('local', function(err, user) {
-        if(err) { res.send(err); }
-        if(!user) { res.send({ success:false }); }
-        req.logIn(user, function(err) {
-          if(err) { res.send(err); }
-          user = user.toObject();
-          delete user.salt;
-          delete user.hashed_pwd;
-          res.send({ success: true, user: user });
-        });
-      });
-      auth(req, res);
+  router.post('/login', account.authenticate);
+  
+  router.post('/logout', function(req, res) {
+    req.logout();
+    res.sendStatus(200);
   });
+  
+  router.get('/currentUser', function(req, res) {
+    if (req.user) {
+      var user = req.user.toObject();
+      delete user.salt;
+      delete user.hashedPassword;
+      delete user.__v;
+      res.send({ success: true, user: user });  
+    } else {
+      res.send({ success: false });
+    }        
+  });
+  
   return router;
 };
 

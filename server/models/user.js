@@ -5,12 +5,13 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
   username: {type: String},
   salt: {type: String},
-  hashed_pwd: {type: String}
+  hashedPassword: {type: String},
+  roles: {type: Array}
 });
 
 userSchema.methods = {
   authenticate: function(passwordToMatch) {
-    return hashPwd(this.salt, passwordToMatch) === this.hashed_pwd;
+    return hashPwd(this.salt, passwordToMatch) === this.hashedPassword;
   }
 }
 
@@ -21,7 +22,7 @@ User.find({}).exec(function(err, collection) {
     var salt, hash;
     salt = createSalt();
     hash = hashPwd(salt, 'guru'); // TODO: Move admin account creation to config file NOT commited
-    User.create({ username: 'yada', salt: salt, hashed_pwd: hash });
+    User.create({ username: 'yada', salt: salt, hashedPassword: hash });
   }
 });
 
