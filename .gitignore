@@ -1,5 +1,5 @@
 *.swp
-/yadaApp/bower_components/*
-/yadaApp/css/*.min
+/client/vendor/*
+/client/css/*.min
 /node_modules/*
 /.settings/*
