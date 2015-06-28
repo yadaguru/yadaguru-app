@@ -30,7 +30,7 @@ var reminderController = function(Reminder) {
         // Return array in JSON format
         res.json(returnReminders);
       }
-    });
+    }).sort('category name');
   };
 
   // POST route [/api/reminders] 

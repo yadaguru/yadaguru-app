@@ -17,7 +17,7 @@
       <label class="control-label" for="category">Category:</label>
       <select ng-model="data.category" id="category" name="category" class="form-control" required>
         <option value="Absolute Deadline">Absolute Deadline</option>
-        <option value="Portfolio Prep Days">Portfolio Prep Days</option>
+        <option value="Portfolio Prep">Portfolio Prep</option>
         <option value="Essay Writing">Essay Writing</option>
         <option value="Recommendations">Recommendations</option>
         <option value="Application">Application</option>
@@ -68,7 +68,7 @@
 <div class="modal-footer">
   <button class="btn btn-danger pull-left" ng-if="context =='edit'"
     ng-click="delete(data._id)">Delete Reminder</button>
-  <button class="btn" ng-if="context =='add'" ng-click="add(data)">Add</button>
-  <button class="btn" ng-if="context == 'edit'" ng-click="save(data)">Save</button>
+  <button class="btn btn-primary" ng-if="context =='add'" ng-click="add(data)">Add</button>
+  <button class="btn btn-primary" ng-if="context == 'edit'" ng-click="save(data)">Save</button>
   <button class="btn" ng-click="cancel()">Cancel</button>
 </div>

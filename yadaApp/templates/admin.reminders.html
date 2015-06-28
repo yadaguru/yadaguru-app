@@ -5,6 +5,7 @@
       <thead>
         <tr>
           <th>Reminder</th>
+          <th>Category</th>
           <th>Message</th>
           <th>Timeframe</th>
         </tr>
@@ -12,9 +13,10 @@
       <tbody>
         <tr class="cursor-pointer" ng-repeat="reminder in reminders" ng-click="openEditModal('edit', reminder)">
           <td>{{reminder.name}}</td>
+          <td>{{reminder.category}}</td>
           <td>{{reminder.message}}</td>
           <td>
-            <p class="single-space" ng-repeat="timeframe in reminder.timeframes">{{addTimeframeSuffix(timeframe)}}</p>
+            <p class="single-space text-nowrap" ng-repeat="timeframe in reminder.timeframes">{{addTimeframeSuffix(timeframe)}}</p>
           </td>
         </tr>
       </tbody>
