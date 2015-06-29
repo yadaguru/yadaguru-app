@@ -1,16 +1,17 @@
 {
   "name": "yadaguru",
-  "version": "0.5.0",
-  "description": "HTTP backend for yadaguru app",
+  "version": "0.6.0",
+  "description": "",
   "repository": {
     "type": "git",
     "url": "git://github.com/yadaguru/yadaguru-app.git"
   },
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
     "test": "npm run test-node && npm run test-browser",
     "test-node": "mocha -R spec ./test/node/index.js",
-    "test-browser": "mocha-phantomjs ./test/browser/index.html"
+    "test-browser": "mocha-phantomjs ./test/browser/index.html",
+    "start": "node ./server/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "mocha": "^2.2.4",
     "node-mongo-seeds": "^2.2.4",
     "prompt": "^0.2.14",
+    "require-dir": "^0.3.0",
     "should": "^6.0.1",
     "sinon": "^1.14.1",
     "supertest": "^1.0.1",

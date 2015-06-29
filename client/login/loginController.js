@@ -1,12 +1,12 @@
 (function(app) {
 
-  var LoginController = function($scope, $http, notifierService, 
+  var LoginController = function($scope, $http, notifierService,
     identityService, authService, $location) {
-      
+
     $scope.identityService = identityService;
-    
+
     identityService.getCurrentUser();
-    
+
     $scope.signin = function(username, password) {
       authService.authenticateUser(username, password).then(function(success) {
         if(success) {
@@ -16,7 +16,7 @@
         }
       });
     };
-    
+
     $scope.signout = function() {
       authService.logoutUser().then(function() {
         $scope.username = "";
@@ -27,8 +27,8 @@
     };
   };
 
-  app.controller('LoginController', 
+  app.controller('LoginController',
     ['$scope', '$http', 'notifierService', 'identityService',
       'authService', '$location', LoginController]);
 
-}(angular.module('yadaApp')));
+}(angular.module('login')));
