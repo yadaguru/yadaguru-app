@@ -1,7 +1,7 @@
 (function(app) {
 
   var LoginController = function($scope, $http, notifierService,
-    identityService, authService, $location) {
+    identityService, authService, $location, $window) {
 
     $scope.identityService = identityService;
 
@@ -29,6 +29,6 @@
 
   app.controller('LoginController',
     ['$scope', '$http', 'notifierService', 'identityService',
-      'authService', '$location', LoginController]);
+      'authService', '$location', '$window', LoginController]);
 
 }(angular.module('login')));
