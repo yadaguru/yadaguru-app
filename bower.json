@@ -21,7 +21,8 @@
     "angular-ui-router": "~0.2.15",
     "toastr": "~2.1.1",
     "angular-toastr": "~1.4.1",
-    "angular-resource": "~1.4.1"
+    "angular-resource": "~1.4.1",
+    "modernizr": "~2.8.3"
   },
   "overrides": {
     "bootstrap": {
