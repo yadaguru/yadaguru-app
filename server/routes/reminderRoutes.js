@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    account = require('../account');
 
 var routes = function(Reminder) {
   var router = express.Router();
@@ -8,13 +9,13 @@ var routes = function(Reminder) {
   // GET and POST on [/] can be found in the controller
   router.route('/')
     .get(reminderController.get)
-    .post(reminderController.post);
+    .post(account.requiresRole('admin'), reminderController.post);
 
   // Middleware to use for all requests
   // Before reaching the route, find the reminder by ID and pass it up
   router.use('/:_id', function(req, res, next) {
     Reminder.findById(req.params._id, function(err, reminder) {
-      
+
       // If there is an error send the 500 and error message
       // If there is a reminder found add it to the request and hand it up the
       // pipeline
@@ -39,13 +40,13 @@ var routes = function(Reminder) {
     })
 
     // For update PUT requests process and return new data
-    .put(function(req, res) {
+    .put(account.requiresRole('admin'), function(req, res) {
 
       // If the data being passed up has an _id field, remove it
       if(req.body._id) {
         delete req.body._id;
       }
-      
+
       // Take data from body and replace data in reminder object
       // retrieved earlier
       for(var key in req.body) {
@@ -63,7 +64,7 @@ var routes = function(Reminder) {
     })
 
     // Attempt to remove item from db
-    .delete(function(req, res) {
+    .delete(account.requiresRole('admin'), function(req, res) {
       req.reminder.remove(function(err) {
         if(err) {
           res.status(500).send(err);
@@ -72,7 +73,7 @@ var routes = function(Reminder) {
         }
       });
     });
-  
+
   return router;
 };
 

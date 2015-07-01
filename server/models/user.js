@@ -22,7 +22,7 @@ User.find({}).exec(function(err, collection) {
     var salt, hash;
     salt = createSalt();
     hash = hashPwd(salt, 'guru'); // TODO: Move admin account creation to config file NOT commited
-    User.create({ username: 'yada', salt: salt, hashedPassword: hash });
+    User.create({ username: 'yada', salt: salt, hashedPassword: hash, roles:['admin'] });
   }
 });
 
