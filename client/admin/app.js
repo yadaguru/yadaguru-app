@@ -5,7 +5,7 @@
 (function () {
   var module = angular.module('yg-admin', ['ngResource', 'ui.bootstrap', 'yg-common.services', 'yg-admin.directives', 'ui.router']);
   module.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/','/reminders');
+    $urlRouterProvider.when('','/reminders');
     $urlRouterProvider.rule(function($injector, $location) {
       var path = $location.path();
       var hasTrailingSlash = path[path.length-1] ==='/';
