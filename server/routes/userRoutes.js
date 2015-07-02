@@ -5,13 +5,13 @@ var express  = require('express'),
 
 var routes = function() {
   var router = express.Router();
-  
+
   router.get('/', account.requiresRole('admin'), function(req, res) {
     User.find({}).exec(function(err, collection) {
       res.send(collection);
     });
   });
-  
+
   return router;
 };
 
