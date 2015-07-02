@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils) {
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
     $scope.reminders = [];
     $scope.dt = new Date();
 
@@ -12,7 +12,8 @@
 
     var populate = function(resp) {
       var data = resp.data;
-      console.log(data);
+      var flattenedData = ReminderService.flattenTimeframes(data);
+      console.log(flattenedData);
       var schoolName = $scope.formData.schoolName;
       var groupedReminders = (Utils.groupBy(data, 'timeframe'));
       $scope.groups = [];
@@ -45,7 +46,6 @@
     };
 
     $scope.open = function($event) {
-      console.log('open');
       $event.preventDefault();
       $event.stopPropagation();
       $scope.opened = true;
@@ -59,6 +59,6 @@
     $scope.minDate = new Date();
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', RootController]);
+  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
 
 }(angular.module('yg.root')));
