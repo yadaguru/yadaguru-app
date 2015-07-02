@@ -23,6 +23,20 @@
       return flattenedReminders;
     };
 
+    reminderService.calcDate = function(timeframe, date) {
+      if (timeframe === 'summer') {
+        return 'summer';
+      }
+
+      if (timeframe === 'general') {
+        return 'general';
+      }
+
+      var newDate = angular.copy(date);
+      newDate.setDate(newDate.getDate() - timeframe);
+      return newDate.toISOString();
+    };
+
     return reminderService;
 
   };
