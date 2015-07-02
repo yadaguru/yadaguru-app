@@ -7,7 +7,8 @@ var express  = require('express'),
 
     config   = require('./config/config.js')(),
     app      = require('./config/express.js')(config.clientPath),
-    db       = mongoose.connect('mongodb://localhost/yadaguru');
+    db       = mongoose.connect('mongodb://localhost/yadaguru'),
+    account  = require('./account');
 
 require('./config/passport.js')();
 

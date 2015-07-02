@@ -16,19 +16,21 @@ exports.authenticate = function(req, res) {
   auth(req, res);
 };
 
-exports.requiresApiRole = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.status(403);
-    res.end();
-  } else {
-    next();
-  }
+exports.requiresRoleApi = function(req, res, next) {
+  return function(req, res, next) {
+    if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
+      res.status(403);
+      res.end();
+    } else {
+      next();
+    }
+  };
 };
 
 exports.requiresRole = function(role) {
   return function(req, res, next) {
     if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
-      res.status(403);
+      res.redirect('/login');
       res.end();
     } else {
       next();

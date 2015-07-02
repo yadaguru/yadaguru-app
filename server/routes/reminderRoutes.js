@@ -9,7 +9,7 @@ var routes = function(Reminder) {
   // GET and POST on [/] can be found in the controller
   router.route('/')
     .get(reminderController.get)
-    .post(account.requiresRole('admin'), reminderController.post);
+    .post(account.requiresRoleApi('admin'), reminderController.post);
 
   // Middleware to use for all requests
   // Before reaching the route, find the reminder by ID and pass it up
@@ -40,7 +40,7 @@ var routes = function(Reminder) {
     })
 
     // For update PUT requests process and return new data
-    .put(account.requiresRole('admin'), function(req, res) {
+    .put(account.requiresRoleApi('admin'), function(req, res) {
 
       // If the data being passed up has an _id field, remove it
       if(req.body._id) {
@@ -64,7 +64,7 @@ var routes = function(Reminder) {
     })
 
     // Attempt to remove item from db
-    .delete(account.requiresRole('admin'), function(req, res) {
+    .delete(account.requiresRoleApi('admin'), function(req, res) {
       req.reminder.remove(function(err) {
         if(err) {
           res.status(500).send(err);
