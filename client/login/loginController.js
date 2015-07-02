@@ -31,4 +31,4 @@
     ['$scope', '$http', 'notifierService', 'identityService',
       'authService', '$location', '$window', LoginController]);
 
-}(angular.module('yg-login')));
+}(angular.module('yg.login')));

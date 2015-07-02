@@ -3,5 +3,5 @@
  * @namespace Login
  */
 (function () {
-  var app = angular.module('yg-login', ['yg-common.services']);
+  var app = angular.module('yg.login', ['yg.common.services']);
 })();

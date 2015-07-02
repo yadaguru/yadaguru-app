@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('yg-admin.directives', 
-    ['yg-admin.directives.showErrors']);
+  angular.module('yg.admin.directives', 
+    ['yg.admin.directives.showErrors']);
 
 }());

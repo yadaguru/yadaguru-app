@@ -28,4 +28,4 @@
 
   app.factory('Notifier', ['toastr', notifierService]);
 
-}(angular.module('yg-common.services.notifier', [])));
+}(angular.module('yg.common.services.notifier', [])));

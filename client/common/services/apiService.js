@@ -48,4 +48,4 @@
 
   app.factory('YadaAPI', ['$http', apiService]);
   
-}(angular.module('yg-common.services.api', [])));
+}(angular.module('yg.common.services.api', [])));

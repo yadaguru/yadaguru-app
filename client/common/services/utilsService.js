@@ -67,4 +67,4 @@
   
   app.factory('Utils', [utilService]);
 
-}(angular.module('yg-common.services.utils', [])));
+}(angular.module('yg.common.services.utils', [])));

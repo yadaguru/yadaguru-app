@@ -198,4 +198,4 @@
   app.controller('AdminRemindersEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminRemindersEditController]);
   app.controller('AdminTestDatesEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminTestDatesEditController]);
 
-}(angular.module('yg-admin')));
+}(angular.module('yg.admin')));

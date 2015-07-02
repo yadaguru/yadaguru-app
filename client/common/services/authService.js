@@ -41,4 +41,4 @@
 
   app.factory('authService', ['$http', '$q', 'identityService', 'userService', authService]);
 
-}(angular.module('yg-common.services.auth', [])));
+}(angular.module('yg.common.services.auth', [])));

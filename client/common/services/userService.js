@@ -14,4 +14,4 @@
 
   app.factory('userService', ['$resource', userService]);
 
-}(angular.module('yg-common.services.user', [])));
+}(angular.module('yg.common.services.user', [])));

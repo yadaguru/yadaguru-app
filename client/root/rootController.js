@@ -12,6 +12,7 @@
 
     var populate = function(resp) {
       var data = resp.data;
+      console.log(data);
       var schoolName = $scope.formData.schoolName;
       var groupedReminders = (Utils.groupBy(data, 'timeframe'));
       $scope.groups = [];
@@ -44,6 +45,7 @@
     };
 
     $scope.open = function($event) {
+      console.log('open');
       $event.preventDefault();
       $event.stopPropagation();
       $scope.opened = true;
@@ -59,4 +61,4 @@
 
   app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', RootController]);
 
-}(angular.module('yg-root')));
+}(angular.module('yg.root')));

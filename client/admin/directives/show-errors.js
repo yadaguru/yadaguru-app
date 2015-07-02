@@ -24,4 +24,4 @@
 
   app.directive('showErrors', [showErrors]);
 
-}(angular.module('yg-admin.directives.showErrors', [])));
+}(angular.module('yg.admin.directives.showErrors', [])));
