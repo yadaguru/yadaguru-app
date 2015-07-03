@@ -58,17 +58,15 @@
                   ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         </div>
 
-        <div ng-cloak class="group-list panel-group" id="accordian" ng-repeat="group in groups">
-          <div class="panel panel-default" id="panel{{$index}}">
-            <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse{{$index}}"
-                   href="#collapse{{$index}}">
-              <h3 class="panel-title">
-                To Do By {{group.name}}
-              </h3>
-            </div>
-            <div id="collapse{{$index}}" class="panel-collapse collapse">
-              <div class="reminder-list panel-body" ng-repeat="reminder in group.members">
-                <h4><i class="fa fa-square-o fa-1"></i>{{reminder.message}}</h4>
+        <div class="group-list" ng-repeat="dateGroup in reminders">
+          <h3>
+            {{dateGroup.name}}
+          </h3>
+          <div class="reminder-list panel-body" ng-repeat="categoryGroup in dateGroup.members">
+            <h4>{{categoryGroup.name}}</h4>
+              <div ng-repeat="reminder in categoryGroup.members">
+                <h5><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h5>
+                <p>{{reminder.message}}</p>
                 <p>{{reminder.detail}}</p>
               </div>
             </div>

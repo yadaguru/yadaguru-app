@@ -56,7 +56,7 @@
           if (currentDate < registrationDate && testDate < dueDate) {
             message.category = reminder.category;
             message.date = 'By ' + Utils.formatDate(reminder.sortDate);
-            message.reminder = 'Register for the ' + reminder.testType + ' test';
+            message.name = 'Register for the ' + reminder.testType + ' test';
             message.message = 'If you are planning on taking the ' + reminder.testType + ' test on ' +
               Utils.formatDate(reminder.testDate) + ', you must register by ' + Utils.formatDate(registrationDate) + '.';
             message.detail = 'Detailed message about registering for tests to go here';
@@ -65,7 +65,7 @@
         } else {
           var messageDate = new Date(reminder.sortDate);
           message.category = reminder.category;
-          message.reminder = reminder.name;
+          message.name = reminder.name;
           if (reminder.timeframes === 'none') {
             message.date = 'General Reminders';
           } else if (reminder.timeframes === 'summer') {
