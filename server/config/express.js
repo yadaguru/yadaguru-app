@@ -6,16 +6,10 @@ var morgan         = require('morgan'),
     session        = require('express-session'),
     passport       = require('passport'),
     express        = require('express'),
+    account        = require('../account'),
     app            = express();
 
 module.exports = function(clientPath) {
-  app.use('/', express.static(path.join(clientPath, 'root')));
-  app.use('/login', express.static(path.join(clientPath, 'login')));
-  app.use('/vendor', express.static(path.join(clientPath, 'vendor')));
-  app.use('/common', express.static(path.join(clientPath, 'common')));
-  app.use('/admin', express.static(path.join(clientPath, 'admin')));
-  app.use('/css', express.static(path.join(clientPath, 'css')));
-
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({'extended':'true'}));
   app.use(bodyParser.json());
@@ -25,6 +19,14 @@ module.exports = function(clientPath) {
   app.use(session({ secret: 'Not a good secret' }));
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.use('/', express.static(path.join(clientPath, 'root')));
+  app.use('/login', express.static(path.join(clientPath, 'login')));
+  app.use('/vendor', express.static(path.join(clientPath, 'vendor')));
+  app.use('/common', express.static(path.join(clientPath, 'common')));
+  app.use('/css', express.static(path.join(clientPath, 'css')));
+  app.use('/admin', account.requiresRole('admin'),
+            express.static(path.join(clientPath, 'admin')));
 
   return app;
 };
