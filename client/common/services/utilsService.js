@@ -6,6 +6,25 @@
   
     var utils = {};
 
+    utils.addKeyValue = function(data, key, value) {
+      return data.map(function(d) {
+        d[key] = value;
+        return d;
+      });
+    };
+
+    utils.sortBy = function(data, sortKey) {
+      return data.sort(function (a, b) {
+        if (a[sortKey] > b[sortKey]) {
+          return 1;
+        }
+        if (a[sortKey] < b[sortKey]) {
+          return -1;
+        }
+        return 0;
+      });
+    };
+    
     utils.groupBy = function(arrayOfObjects, propToGroupBy) {
       var groupArray = [],
           match;
@@ -41,14 +60,15 @@
     };
 
     utils.parseVars = function(string, school, date) {
-      var replacements = {'%SCHOOL%': school, '%DATE%': date};
+      var replacements = {'%SCHOOL%': school, '%DATE%': utils.formatDate(date)};
       string = string.replace(/%\w+%/g, function(all) {
         return replacements[all] || all;
       });
       return string;
     };
 
-    utils.formatDate = function(date) {
+    utils.formatDate = function(dateString) {
+      var date = new Date(dateString); 
       var d = date.getDate();
       var m = date.getMonth() + 1;
       var y = date.getFullYear();
