@@ -58,16 +58,19 @@
                   ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         </div>
 
-        <div class="group-list" ng-cloak ng-repeat="dateGroup in reminders">
-          <h3>
-            {{dateGroup.name}}
-          </h3>
-          <div class="reminder-list panel-body" ng-repeat="categoryGroup in dateGroup.members">
-            <h4>{{categoryGroup.name}}</h4>
-              <div ng-repeat="reminder in categoryGroup.members">
-                <h5><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h5>
+        <div class="date-group panel panel-default" ng-cloak ng-repeat="dateGroup in reminders">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              {{dateGroup.name}}
+            </h2>
+          </div>
+          <div class="panel-body">
+            <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+              <h3>{{categoryGroup.name}}</h3>
+              <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+                <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
                 <p>{{reminder.message}}</p>
-                <p>{{reminder.detail}}</p>
+                <p class="text-muted">{{reminder.detail}}</p>
               </div>
             </div>
           </div>

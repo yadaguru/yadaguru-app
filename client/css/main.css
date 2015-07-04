@@ -46,6 +46,11 @@ div.container-main {
   text-align: right;
 }
 
+.reminder {
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
 @media (min-width: 768px) {
   .page-header h1 {
     font-size: 75px;

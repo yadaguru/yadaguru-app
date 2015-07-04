@@ -40,8 +40,6 @@
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt, currentDate);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
       groupedMessages.forEach(function(dateGroup) {
-        console.log(dateGroup.members);
-        console.log(Utils.groupBy(dateGroup.members, 'category'));
         dateGroup.members = Utils.groupBy(dateGroup.members, 'category');
       });
       $scope.reminders = groupedMessages;
