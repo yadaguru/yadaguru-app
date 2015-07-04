@@ -58,7 +58,7 @@
                   ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         </div>
 
-        <div class="group-list" ng-repeat="dateGroup in reminders">
+        <div class="group-list" ng-cloak ng-repeat="dateGroup in reminders">
           <h3>
             {{dateGroup.name}}
           </h3>
