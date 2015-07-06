@@ -1,1 +1,78 @@
-Test
+<!DOCTYPE html>
+<html class="no-js" lang="en" ng-app="yg.admin">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YadaGuru Admin Panel</title>
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/vendor/toastr/toastr.css" />
+    <link rel="stylesheet" href="/vendor/angular-toastr/dist/angular-toastr.css" />
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- endinject -->
+  </head>
+  <body ng-controller="AdminController">
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" 
+                  data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="admin">YadaGuru Admin Panel</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="currentTab === '/reminders' ? 'active' : ''"><a ui-sref="reminders">Reminders</a></li>
+            <li ng-class="currentTab === '/test-dates' ? 'active' : ''"><a ui-sref="test-dates">Test Dates</a></li>
+          </ul>
+          <p class="navbar-text navbar-right">
+            Signed in as <a ui-sref="admin.test-dates" class ="navbar-link">Test User</a> <a href="#/" class="navbar-link">(Sign-Out)</a>
+          </p>
+        </div>
+      </div>
+    </nav>
+    <div ui-view></div>
+    <script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:9000/browser-sync/browser-sync-client.2.7.5.js'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+  </body>
+
+  <!-- bower:js -->
+  <script src="/vendor/jquery/dist/jquery.js"></script>
+  <script src="/vendor/angular/angular.js"></script>
+  <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/vendor/angular-animate/angular-animate.js"></script>
+  <script src="/vendor/toastr/toastr.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="/vendor/angular-resource/angular-resource.js"></script>
+  <!-- endbower -->
+
+  <!-- inject:js -->
+  <script src="/common/app.js"></script>
+  <script src="/common/services.js"></script>
+  <script src="/common/services/authService.js"></script>
+  <script src="/common/services/identityService.js"></script>
+  <script src="/common/services/userService.js"></script>
+  <script src="/common/services/apiService.js"></script>
+  <script src="/common/services/utilsService.js"></script>
+  <script src="/common/services/notifierService.js"></script>
+  <script src="app.js"></script>
+  <script src="adminController.js"></script>
+  <script src="directives.js"></script>
+  <script src="directives/show-errors.js"></script>
+  <!-- endinject -->
+</html>

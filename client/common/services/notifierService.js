@@ -26,6 +26,6 @@
     return notifyFactory;
   };
 
-  app.factory('notifierService', ['toastr', notifierService]);
+  app.factory('Notifier', ['toastr', notifierService]);
 
-}(angular.module('commonUtil')));
+}(angular.module('yg.common.services.notifier', [])));

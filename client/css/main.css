@@ -3,10 +3,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
-div.container {
+
+div.container-main {
   position: relative;
   max-width: 600px;
 }
@@ -26,6 +28,14 @@ div.container {
   display: none;
 }
 
+.single-space {
+  margin-bottom: 0px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .browser-upgrade {
   text-align: center;
 }
@@ -34,6 +44,11 @@ div.container {
   margin-left: auto;
   margin-right: 0;
   text-align: right;
+}
+
+.reminder {
+  padding-left: 20px;
+  margin-bottom: 30px;
 }
 
 @media (min-width: 768px) {

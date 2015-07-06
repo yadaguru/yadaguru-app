@@ -33,4 +33,4 @@
 
   app.factory('identityService', ['$http', '$q', 'userService', identityService]);
 
-}(angular.module('commonUtil')));
+}(angular.module('yg.common.services.identity', [])));

@@ -24,8 +24,9 @@ module.exports = function(clientPath) {
   app.use('/login', express.static(path.join(clientPath, 'login')));
   app.use('/vendor', express.static(path.join(clientPath, 'vendor')));
   app.use('/common', express.static(path.join(clientPath, 'common')));
+  app.use('/css', express.static(path.join(clientPath, 'css')));
   app.use('/admin', account.requiresRole('admin'),
             express.static(path.join(clientPath, 'admin')));
 
   return app;
-}
+};

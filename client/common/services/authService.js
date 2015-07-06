@@ -33,7 +33,7 @@
       } else {
         return $q.reject('unauthorized');
       }
-    }
+    };
 
     return authFactory;
   };
@@ -41,4 +41,4 @@
 
   app.factory('authService', ['$http', '$q', 'identityService', 'userService', authService]);
 
-}(angular.module('commonUtil')));
+}(angular.module('yg.common.services.auth', [])));

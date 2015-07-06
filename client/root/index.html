@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" ng-app="yadaApp">
+<html class="no-js" lang="en" ng-app="yg.root">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/main.css">
     <!-- endinject -->
   </head>
-  <body ng-controller="mainCtrl">
+  <body ng-controller="RootController">
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -39,7 +39,7 @@
               <label for="submissionDate">Submission Date for Application</label>
               <p class="input-group">
                 <input type="text" class="form-control" datepicker-popup={{format}}
-                       ng-model="formData.dt" is-open="$parent.opened" min-date="minDate"
+                       ng-model="formData.dt" is-open="opened" min-date="minDate"
                        datepicker-options="dateOptions" required
                        close-text="Close" />
                 <span class="input-group-btn">
@@ -58,18 +58,19 @@
                   ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         </div>
 
-        <div ng-cloak class="group-list panel-group" id="accordian" ng-repeat="group in groups">
-          <div class="panel panel-default" id="panel{{$index}}">
-            <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse{{$index}}"
-                   href="#collapse{{$index}}">
-              <h3 class="panel-title">
-                To Do By {{group.name}}
-              </h3>
-            </div>
-            <div id="collapse{{$index}}" class="panel-collapse collapse">
-              <div class="reminder-list panel-body" ng-repeat="reminder in group.members">
-                <h4><i class="fa fa-square-o fa-1"></i>{{reminder.message}}</h4>
-                <p>{{reminder.detail}}</p>
+        <div class="date-group panel panel-default" ng-cloak ng-repeat="dateGroup in reminders">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              {{dateGroup.name}}
+            </h2>
+          </div>
+          <div class="panel-body">
+            <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+              <h3>{{categoryGroup.name}}</h3>
+              <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+                <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+                <p>{{reminder.message}}</p>
+                <p class="text-muted">{{reminder.detail}}</p>
               </div>
             </div>
           </div>
@@ -90,14 +91,16 @@
 
   <!-- inject:js -->
   <script src="/common/app.js"></script>
-  <script src="/common/account/authService.js"></script>
-  <script src="/common/account/identityService.js"></script>
-  <script src="/common/account/userService.js"></script>
-  <script src="/common/services/notifier.js"></script>
+  <script src="/common/services.js"></script>
+  <script src="/common/services/authService.js"></script>
+  <script src="/common/services/identityService.js"></script>
+  <script src="/common/services/userService.js"></script>
+  <script src="/common/services/apiService.js"></script>
+  <script src="/common/services/utilsService.js"></script>
+  <script src="/common/services/notifierService.js"></script>
   <script src="app.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/services/api.js"></script>
-  <script src="js/services/utils.js"></script>
+  <script src="services.js"></script>
+  <script src="services/reminderService.js"></script>
+  <script src="rootController.js"></script>
   <!-- endinject -->
 </html>

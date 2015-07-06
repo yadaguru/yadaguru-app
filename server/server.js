@@ -21,6 +21,10 @@ var Reminder = require('./models/reminder');
 var reminderRouter = require('./routes/reminderRoutes')(Reminder);
 app.use('/api/reminders', reminderRouter);
 
+var TestDate = require('./models/testdate');
+var testDateRouter = require('./routes/testDateRoutes')(TestDate);
+app.use('/api/test-dates', testDateRouter);
+
 var exportRouter = require('./routes/exportRoutes')();
 app.use('/api/export', exportRouter);
 
@@ -29,11 +33,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login', function(req, res) {
-  res.sendFile(config.clientPath + '/login/index.html')
+  res.sendFile(config.clientPath + '/login/index.html');
 });
 
 app.get('/admin', function(req, res) {
-  res.sendFile(config.clientPath + '/admin/index.html')
+  res.sendFile(config.clientPath + '/admin/index.html');
 });
 
 app.listen(config.port, function () {

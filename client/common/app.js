@@ -3,5 +3,5 @@
  * @namespace commonUtil
  */
  (function() {
-   var app = angular.module('commonUtil', ['toastr', 'ngResource']);
+   var app = angular.module('yg.common', ['toastr', 'ngResource']);
  })();

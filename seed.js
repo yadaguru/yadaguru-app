@@ -6,7 +6,15 @@ var args     = require('yargs').argv,
 
 var dbname = args.dbname || 'yadaguru';
 var collectionName = args.collection || 'reminders';
-var seedFile = args.file || './seeds/reminders.json';
+var seedFile = args._[0];
+
+if (!seedFile) {
+  console.log('Usage: Enter exactly 1 path to a json seed file');
+  return;
+}
+
+var collectionName = seedFile.split('/').pop().replace('.json','');
+var modelName = collectionName.slice(0, -1);
 
 prompt.start();
 var property = {
@@ -18,20 +26,20 @@ var property = {
 };
 prompt.get(property, function (err, result) {
   if (result.yesno === 'yes') {
-    mongoose.connect('mongodb://localhost/yadaguru');
-    var Reminder = require('./server/models/reminder');
+    mongoose.connect('mongodb://localhost/' + dbname);
+    var Collection = require('./server/models/' + modelName);
     
-    Reminder.remove({}, function (err) {
+    Collection.remove({}, function (err) {
       console.log('Collection cleared');
     });
 
     var obj = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
 
 
-    Reminder.find({}).exec(function (err, collection) {
+    Collection.find({}).exec(function (err, collection) {
       if (collection.length === 0) {
         console.log('Seeding DB');
-        Reminder.create(obj, function() {
+        Collection.create(obj, function() {
           console.log('Closing DB');
           mongoose.connection.close();
         });            

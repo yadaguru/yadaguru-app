@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app='login' class="no-js" lang="en">
+<html ng-app='yg.login' class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/vendor/angular-toastr/dist/angular-toastr.css" />
     <!-- endbower -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <!-- endinject -->
   </head>
 
@@ -54,12 +54,15 @@
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/common/app.js"></script>
-    <script src="/common/account/authService.js"></script>
-    <script src="/common/account/identityService.js"></script>
-    <script src="/common/account/userService.js"></script>
-    <script src="/common/services/notifier.js"></script>
+    <script src="/common/services.js"></script>
+    <script src="/common/services/authService.js"></script>
+    <script src="/common/services/identityService.js"></script>
+    <script src="/common/services/userService.js"></script>
+    <script src="/common/services/apiService.js"></script>
+    <script src="/common/services/utilsService.js"></script>
+    <script src="/common/services/notifierService.js"></script>
     <script src="app.js"></script>
-    <script src="/login/LoginController.js"></script>
+    <script src="/login/loginController.js"></script>
     <!-- endinject -->
   </body>
 
