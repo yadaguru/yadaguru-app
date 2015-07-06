@@ -1,82 +1,69 @@
 body {
   font-family: helvetica, sans-serif;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
-}
+[ng-cloak] {
+  display: none !important; }
 
-div.container-main {
-  position: relative;
-  max-width: 600px;
-}
+.ng-cloak {
+  display: none !important; }
+
 .panel-heading h3:after {
-  font-family:'Glyphicons Halflings';
-  content:"\e114";
+  font-family: Glyphicons Halflings;
+  content: "\e114";
   float: right;
-  color: grey;
-}
+  color: #808080; }
+
 .panel-heading.collapsed h3:after {
-  content:"\e080";
-}
+  content: "\e080"; }
 
 .fa-square-o {
   float: left;
   margin-right: 5px;
-  display: none;
-}
+  display: none; }
 
 .single-space {
-  margin-bottom: 0px;
-}
+  margin-bottom: 0; }
 
 .cursor-pointer {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .browser-upgrade {
-  text-align: center;
-}
+  text-align: center; }
 
 .login {
   margin-left: auto;
   margin-right: 0;
-  text-align: right;
-}
+  text-align: right; }
 
 .reminder {
   padding-left: 20px;
-  margin-bottom: 30px;
-}
+  margin-bottom: 30px; }
 
 @media (min-width: 768px) {
   .page-header h1 {
-    font-size: 75px;
-  }
-}
+    font-size: 75px; } }
 
 @media print {
-
-  #reminderForms { display: none; }
-
-  .panel-heading.collapsed h3:after {
-  font-family:'Glyphicons Halflings';
-  content:"\e114";
-  float: right;
-  color: grey;
-  }
+  #reminderForms {
+    display: none; }
   .collapse {
     display: block !important;
-    height: auto !important;
-  }
+    height: auto !important; }
   div {
-    page-break-inside: avoid;
-  }
-
+    page-break-inside: avoid; }
   .fa-square-o {
-    display: block;
-  }
+    display: block; }
+  .panel-heading.collapsed h3:after {
+    font-family: Glyphicons Halflings;
+    content: "\e114";
+    float: right;
+    color: #808080; } }
 
-}
+[ng\:cloak] {
+  display: none !important; }
+
+div.container-main {
+  position: relative;
+  max-width: 600px; }

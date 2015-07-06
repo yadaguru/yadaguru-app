@@ -5,9 +5,9 @@ var gulp         = require('gulp'),
     paths        = require('../paths');
 
 gulp.task('styles', function () {
-  gulp.src(paths.clientRoot + 'styles/src/**/*.scss')
+  gulp.src(paths.clientRoot + 'styles/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(gulp.dest(paths.clientRoot + 'styles/dist'));
+    .pipe(gulp.dest(paths.cssRoot));
 });
