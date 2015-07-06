@@ -1,0 +1,69 @@
+body {
+  font-family: helvetica, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+[ng-cloak] {
+  display: none !important; }
+
+.ng-cloak {
+  display: none !important; }
+
+.panel-heading h3:after {
+  font-family: Glyphicons Halflings;
+  content: "\e114";
+  float: right;
+  color: #808080; }
+
+.panel-heading.collapsed h3:after {
+  content: "\e080"; }
+
+.fa-square-o {
+  float: left;
+  margin-right: 5px;
+  display: none; }
+
+.single-space {
+  margin-bottom: 0; }
+
+.cursor-pointer {
+  cursor: pointer; }
+
+.browser-upgrade {
+  text-align: center; }
+
+.login {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right; }
+
+.reminder {
+  padding-left: 20px;
+  margin-bottom: 30px; }
+
+@media (min-width: 768px) {
+  .page-header h1 {
+    font-size: 75px; } }
+
+@media print {
+  #reminderForms {
+    display: none; }
+  .collapse {
+    display: block !important;
+    height: auto !important; }
+  div {
+    page-break-inside: avoid; }
+  .fa-square-o {
+    display: block; }
+  .panel-heading.collapsed h3:after {
+    font-family: Glyphicons Halflings;
+    content: "\e114";
+    float: right;
+    color: #808080; } }
+
+[ng\:cloak] {
+  display: none !important; }
+
+div.container-main {
+  position: relative;
+  max-width: 600px; }
