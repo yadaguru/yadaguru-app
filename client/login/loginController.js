@@ -7,8 +7,8 @@
 
     identityService.getCurrentUser();
 
-    $scope.signin = function(username, password) {
-      authService.authenticateUser(username, password).then(function(success) {
+    $scope.signin = function() {
+      authService.authenticateUser($scope.username, $scope.password).then(function(success) {
         if(success) {
           notifierService.success('You have successfully signed in!');
         } else {
