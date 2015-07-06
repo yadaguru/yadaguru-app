@@ -64,6 +64,6 @@ body {
 [ng\:cloak] {
   display: none !important; }
 
-div.container-main {
+div.container {
   position: relative;
   max-width: 600px; }
