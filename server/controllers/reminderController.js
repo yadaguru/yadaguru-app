@@ -30,21 +30,24 @@ var reminderController = function(Reminder) {
         // Return array in JSON format
         res.json(returnReminders);
       }
-    });
+    }).sort('category name');
   };
 
   // POST route [/api/reminders] 
   var post = function(req, res) {
 
     // Return an error if there is missing data, else save data
-    if(!req.body.field || 
-       !req.body.fullName ||
+    if(!req.body.name || 
        !req.body.message ||
        !req.body.detail ||
-       !req.body.formula) {
+       !req.body.lateMessage ||
+       !req.body.lateDetail ||
+       !req.body.category ||
+       !req.body.timeframes) {
+      console.log(req.body);
       res.status(400);
       res.send('Not all properties are present. ' +
-          'Requires field, fullName, message, detail, and formula.');
+          'Requires name, message, detail, lateMessage, lateDetail, and timeframe.');
     } else {
       // Get the post data from the body
       var reminder = new Reminder(req.body);

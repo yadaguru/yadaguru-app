@@ -3,7 +3,7 @@ var express = require('express'),
 
 var routes = function() {
   var router = express.Router();
-  
+
   // CSV Test Creation Route
   router.post('/csv', function (req, res) {
       var filename = 'reminders.csv';
@@ -20,6 +20,6 @@ var routes = function() {
       res.end(remindersCsv, 'UTF-8');
     });
   return router;
-}
+};
 
 module.exports = routes;

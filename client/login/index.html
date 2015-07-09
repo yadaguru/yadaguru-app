@@ -1,0 +1,79 @@
+<!doctype html>
+<html ng-app='yg.login' class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Yadaguru Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/vendor/toastr/toastr.css" />
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/vendor/angular-toastr/dist/angular-toastr.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- endinject -->
+  </head>
+
+  <body ng-controller="LoginController">
+    <!--[if lt IE 10]>
+          <p class="browser-upgrade">You are using an
+            <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/"> upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+    <div class="container">
+      <div class="jumbotron">
+        <form ng-hide="identityService.isAuthenticated()">
+          <div class="form-group">
+            <input type="text" placeholder="Username" ng-model="username" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" ng-model="password" class="form-control" ng-keyup="$event.keyCode == 13 ? signin() : null">
+          </div>
+          <button type="button" class="btn btn-primary" ng-click="signin()">
+            Sign In
+          </button>
+        </form>
+        <div ng-cloak ng-show="identityService.isAuthenticated()">
+          <div class="row">
+            Hello, {{identityService.currentUser.username}}!
+          </div>
+          <br />
+          <div class="row">
+            <a class="btn btn-default" href="/admin/">Admin</a>
+          </div>
+          <br />
+          <div class="row">
+            <a class="btn btn-danger" href="" ng-click="signout()">Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- bower:js -->
+    <script src="/vendor/modernizr/modernizr.js"></script>
+    <script src="/vendor/jquery/dist/jquery.js"></script>
+    <script src="/vendor/angular/angular.js"></script>
+    <script src="/vendor/angular-animate/angular-animate.js"></script>
+    <script src="/vendor/toastr/toastr.js"></script>
+    <script src="/vendor/angular-resource/angular-resource.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="/common/app.js"></script>
+    <script src="/common/services.js"></script>
+    <script src="/common/services/authService.js"></script>
+    <script src="/common/services/identityService.js"></script>
+    <script src="/common/services/userService.js"></script>
+    <script src="/common/services/apiService.js"></script>
+    <script src="/common/services/utilsService.js"></script>
+    <script src="/common/services/notifierService.js"></script>
+    <script src="app.js"></script>
+    <script src="/login/loginController.js"></script>
+    <!-- endinject -->
+  </body>
+
+</html>
