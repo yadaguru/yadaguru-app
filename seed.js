@@ -1,80 +1,72 @@
 var args     = require('yargs').argv,
     fs       = require('fs'),
     mongoose = require('mongoose'),
-    prompt   = require('prompt'),
-    util     = require('util');
+    util     = require('util'),
+    path     = require('path');
 
 //TODO: Add helpful help messages
 var dbname = args.dbname || 'yadaguru';
-var collectionName = args.collection || 'reminders';
-var adminuser = args.adminuser;
-var adminpass = args.adminpass;
-var seedFile = args._[0];
+var adminuser = args.adminuser || 'yada';
+var adminpass = args.adminpass || 'guru';
+var seedFolder = args._[0] || 'seeds';
 
-
-// TODO: Use connection pools to allow each call to have its own connection
-// This will allow each connection to close its own line and not clash
-mongoose.connect('mongodb://localhost/' + dbname);
-
-if (args.clearusers) {
+var userconn = mongoose.createConnection('mongodb://localhost/' + dbname);
+userconn.on('connected', function() {
   var User = require('./server/models/user');
-
-  User.remove({}, function (err) {
+  userconn.model('User', User).remove({}, function(err) {
+    if (err) {
+      console.log(err);
+      userconn.close();
+      return;
+    }
     console.log('User collection cleared');
-  });
-}
-
-if (adminuser && adminpass) {
-  var User = require('./server/models/user');
-  var salt, hash;
-  salt = User.createSalt();
-  hash = User.hashPwd(salt, adminpass);
-  User.create({ username: adminuser, salt: salt, hashedPassword: hash,
-                roles:['admin'] });
-}
-
-// TODO: Clean up logic
-if (!seedFile) {
-  console.log('Usage: Enter exactly 1 path to a json seed file');
-  return;
-}
-
-var collectionName = seedFile.split('/').pop().replace('.json','');
-var modelName = collectionName.slice(0, -1);
-
-prompt.start();
-var property = {
-  name: 'yesno',
-  message: util.format('Are you sure you want to clean the collection on database %s named %s?', dbname, collectionName),
-  validator: /y[es]*|n[o]?/,
-  warning: 'Must respond yes or no',
-  default: 'no'
-};
-prompt.get(property, function (err, result) {
-  if (result.yesno === 'yes') {
-    var Collection = require('./server/models/' + modelName);
-
-    // Should this be sync to prevent possible conflict with create?
-    Collection.remove({}, function (err) {
-      console.log('Collection cleared');
-    });
-
-    var obj = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
-
-    Collection.find({}).exec(function (err, collection) {
-      if (collection.length === 0) {
-        console.log('Seeding DB');
-        Collection.create(obj, function() {
-          console.log('Closing DB');
-          mongoose.connection.close();
-        });
+    var User = require('./server/models/user');
+    var salt, hash;
+    salt = User.createSalt();
+    hash = User.hashPwd(salt, adminpass);
+    userconn.model('User', User).create({ username: adminuser, salt: salt,
+      hashedPassword: hash, roles:['admin'] }, function(err) {
+      if (err) {
+        console.log(err);
       } else {
-        console.log('Collection not empty');
-        mongoose.connection.close();
+        console.log('Admin user seeded');
       }
+      userconn.close();
     });
+  });
+});
 
-  } else {
-    console.log('Goodbye');
+fs.readdir(seedFolder, function(err, files) {
+  if (err) {
+    console.log(err);
+    return;
   }
+  files.forEach(function(file) {
+    var dirconn = mongoose.createConnection('mongodb://localhost/' + dbname);
+
+    dirconn.on('connected', function() {
+      var fileNoExt = file.replace(/\.[^/.]+$/, "");
+      var connmodel = dirconn.model(fileNoExt,
+        require('./server/models/' + fileNoExt));
+
+      connmodel.remove({}, function (err) {
+        if (err) {
+          console.log(err);
+          dirconn.close();
+          return;
+        }
+        console.log(fileNoExt + ' cleared');
+        var obj = JSON.parse(fs.readFileSync(path.join(seedFolder, file), 'utf8'));
+
+        connmodel.create(obj, function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(fileNoExt + ' seeded');
+          }
+          dirconn.close();
+        });
+      });
+    });
+  });
 });
