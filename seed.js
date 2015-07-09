@@ -4,10 +4,36 @@ var args     = require('yargs').argv,
     prompt   = require('prompt'),
     util     = require('util');
 
+//TODO: Add helpful help messages
 var dbname = args.dbname || 'yadaguru';
 var collectionName = args.collection || 'reminders';
+var adminuser = args.adminuser;
+var adminpass = args.adminpass;
 var seedFile = args._[0];
 
+
+// TODO: Use connection pools to allow each call to have its own connection
+// This will allow each connection to close its own line and not clash
+mongoose.connect('mongodb://localhost/' + dbname);
+
+if (args.clearusers) {
+  var User = require('./server/models/user');
+
+  User.remove({}, function (err) {
+    console.log('User collection cleared');
+  });
+}
+
+if (adminuser && adminpass) {
+  var User = require('./server/models/user');
+  var salt, hash;
+  salt = User.createSalt();
+  hash = User.hashPwd(salt, adminpass);
+  User.create({ username: adminuser, salt: salt, hashedPassword: hash,
+                roles:['admin'] });
+}
+
+// TODO: Clean up logic
 if (!seedFile) {
   console.log('Usage: Enter exactly 1 path to a json seed file');
   return;
@@ -26,15 +52,14 @@ var property = {
 };
 prompt.get(property, function (err, result) {
   if (result.yesno === 'yes') {
-    mongoose.connect('mongodb://localhost/' + dbname);
     var Collection = require('./server/models/' + modelName);
-    
+
+    // Should this be sync to prevent possible conflict with create?
     Collection.remove({}, function (err) {
       console.log('Collection cleared');
     });
 
     var obj = JSON.parse(fs.readFileSync(seedFile, 'utf8'));
-
 
     Collection.find({}).exec(function (err, collection) {
       if (collection.length === 0) {
@@ -42,7 +67,7 @@ prompt.get(property, function (err, result) {
         Collection.create(obj, function() {
           console.log('Closing DB');
           mongoose.connection.close();
-        });            
+        });
       } else {
         console.log('Collection not empty');
         mongoose.connection.close();
