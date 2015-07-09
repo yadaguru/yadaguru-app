@@ -1,0 +1,96 @@
+body {
+	 padding: 0px 0 50px 0;
+	 font-size: 16px;
+	 min-height: 100%;
+	 font-family: Georgia;
+	 font-weight: 400;
+	 font-style: normal;
+	 line-height: 25px;
+}
+
+h1 {
+	 font-size: 52px;
+	 line-height: 60px;
+	 margin: 0px 0px 15px 0px;
+	 font-family: mf-joe-college-nf-189269;
+	 color: rgba(249, 155, 32, 1);
+}
+
+h2 {
+	 font-size: 36px;
+	 line-height: 46px;
+	 margin: 0px 0px 25px 0px;
+	 font-family: Graduate;
+	 font-weight: 400;
+	 font-style: normal;
+	 color: rgba(39, 42, 135, 1);
+}
+
+h3 {
+	 font-size: 20px;
+	 line-height: 36px;
+	 margin: 0px 0px 19px 0px;
+	 font-family: "octin-college";
+	 font-weight: 900;
+	 font-style: normal;
+}
+
+h4 {
+	 margin-bottom: 25px;
+	 font-family: "Aachen W01 Medium";
+	 font-size: 20px;
+}
+
+p {
+	 margin: 0px 0px 25px 0px;
+	 text-transform: inherit;
+	 font-size: 16px;
+	 font-family: "Linear Regular";
+	 font-weight: 400;
+	 font-style: normal;
+}
+
+p.intro {
+	 font-size: 20px;
+	 line-height: 29px;
+	 margin: 0px 0px 13px 0px;
+	 font-family: Graduate;
+	 font-weight: 400;
+	 font-style: normal;
+	 color: rgba(39, 42, 135, 1);
+}
+
+blockquote.pull-quote {
+	 margin: 0em 1em 1em 0em;
+	 border-left: 3px solid #ccc;
+	 padding: 0em 0em 0em 0.7em;
+}
+
+div.content {
+	 margin: 0 auto;
+	 text-align: left;
+	 width: 40%;
+	 padding: 50px 0px 0px 0px;
+}
+
+h5 {
+	 margin: 0px 0px 25px 0px;
+	 font-family: "Century Schoolbook";
+	 font-weight: 400;
+	 font-style: normal;
+}
+
+p.quote {
+	 font-size: 23px;
+	 line-height: 28px;
+	 font-style: italic;
+	 color: #666666;
+	 margin: 0px;
+}
+
+blockquote {
+	 font-size: 26px;
+	 line-height: 37px;
+	 margin-bottom: 25px;
+}
+

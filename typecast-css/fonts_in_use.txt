@@ -1,0 +1,44 @@
+Fonts actively used in this project
+-----------------------------------
+
+
+Font name       :   Georgia
+Font provider   :   system
+
+******************************************************************************
+
+Font name       :   mf-joe-college-nf-189269
+Font provider   :   myfonts
+
+******************************************************************************
+
+Font name       :   Graduate
+Font provider   :   google
+
+******************************************************************************
+
+Font name       :   octin-college
+Font provider   :   typekit
+
+******************************************************************************
+
+Font name       :   Aachen W01 Medium
+Font provider   :   fonts.com
+
+******************************************************************************
+
+Font name       :   Linear Regular
+Font provider   :   fontdeck
+
+******************************************************************************
+
+Font name       :   Century Schoolbook
+Font provider   :   webtype
+
+******************************************************************************
+
+
+
+
+
+Created by Typecast on 2015/06/28.
