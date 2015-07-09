@@ -47,7 +47,7 @@ fs.readdir(seedFolder, function(err, files) {
     dirconn.on('connected', function() {
       var fileNoExt = file.replace(/\.[^/.]+$/, "");
       var connmodel = dirconn.model(fileNoExt,
-        require('./server/models/' + fileNoExt));
+        require('./server/models/' + fileNoExt.toLowerCase()));
 
       connmodel.remove({}, function (err) {
         if (err) {
