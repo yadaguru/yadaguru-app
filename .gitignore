@@ -5,3 +5,4 @@
 /.settings/*
 npm-debug.log
 /.sass-cache/*
+/.idea/*
