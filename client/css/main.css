@@ -71,12 +71,3 @@ body {
 div.container {
   position: relative;
   max-width: 600px; }
-
-h1 {
-  font-family: "Rock Salt", cursive;
-  @include fadeIn;
-}
-
-h2 {
-  font-family: 'Graduate';
-}
