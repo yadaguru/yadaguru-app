@@ -10,7 +10,7 @@ body {
 	font-family: $font_1, $font_2;
 	margin: 0;
 	padding: 0;
-    background-image: url("assets/paper.jpg");
+    background-image: url(yadaguru-app/assets/paper.jpg);
     backround-repeat: no-repeat;
     background-size: cover;
 }
@@ -90,7 +90,6 @@ div.container {
 
 h1 {
   font-family: "Rock Salt", cursive;
-  @include fadeIn;
 }
 
 h2 {
