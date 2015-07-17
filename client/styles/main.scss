@@ -70,12 +70,12 @@ body {
 .root {
 
   background-image: url(../assets/paper.jpg);
-  backround-repeat: no-repeat;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-size: cover;
 
   div.container {
     position: relative;
-    max-width: 600px;
   }
 
   h1 {
@@ -89,7 +89,7 @@ body {
 }
 
 .reminder-box {
-  background-color: $green
+  background-color: $green;
 }
 
 .no-bottom-border {
@@ -98,6 +98,10 @@ body {
 
 .text-editor {
   margin-top: 15px;
+}
+
+.space-before {
+  margin-top: 1em;
 }
 
 

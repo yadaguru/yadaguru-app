@@ -43,11 +43,11 @@ body {
 
 .root {
   background-image: url(../assets/paper.jpg);
-  backround-repeat: no-repeat;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-size: cover; }
   .root div.container {
-    position: relative;
-    max-width: 600px; }
+    position: relative; }
   .root h1 {
     font-family: "Rock Salt", cursive; }
   .root h2 {
@@ -61,6 +61,9 @@ body {
 
 .text-editor {
   margin-top: 15px; }
+
+.space-before {
+  margin-top: 1em; }
 
 @media (min-width: 768px) {
   .page-header h1 {

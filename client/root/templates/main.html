@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="panel panel-default clearfix reminder-box" id="reminderForms">
+    <div class="panel panel-default clearfix reminder-box col-sm-6 col-sm-offset-3" id="reminderForms">
       <div class="panel-body">
         <form name="reminderForm" novalidate>
           <div class="form-group">
@@ -31,11 +31,11 @@
                 ng-class="!groups ? 'btn-default' : 'btn-primary'"
                 ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
         <div class="clearfix"></div>
-        <p class="text-center">Before submitting, please read our <strong><a ui-sref="faqs">Frequently Asked Questions</a></strong></p>
+        <p class="text-center space-before">Before submitting, please read our <strong><a ui-sref="faqs">Frequently Asked Questions</a></strong></p>
       </div>
     </div>
 
-    <div class="date-group panel panel-default" ng-cloak ng-repeat="dateGroup in reminders">
+    <div class="date-group panel panel-default col-sm-8 col-sm-offset-2" ng-cloak ng-repeat="dateGroup in reminders">
       <div class="panel-heading">
         <h2 class="panel-title">
           {{dateGroup.name}}
