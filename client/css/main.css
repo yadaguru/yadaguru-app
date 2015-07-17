@@ -59,6 +59,9 @@ body {
 .no-bottom-border {
   border-bottom: none; }
 
+.text-editor {
+  margin-top: 15px; }
+
 @media (min-width: 768px) {
   .page-header h1 {
     font-size: 75px; } }
