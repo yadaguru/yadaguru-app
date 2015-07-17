@@ -19,7 +19,7 @@ Run `gulp serve` to serve the project with browsersync on `localhost:9000`. Whil
 The Excel file found at the root of this folder contains all of the date reminders and messages for the generated reminders.
 
 ##Seed.js
-The seed.js file can be used to see a local mongodb instance. The process will remove any entries in the collections before seeding them with data. To run the file use `node seed.js`. There are optional arguments:
+The seed.js file can be used to seed a local mongodb instance. The process will remove any entries in the collections before seeding them with data. To run the file use `node seed.js`. There are optional arguments:
  * `<seedFolder>` Defaults to `seeds`. Allows the selection of a folder that holds the seed .json files.
  * `--dbname <name>` Defaults to `yadaguru`. Allows the choice of local db to utilize, recommended to leave as default.
  * `--adminuser <user>` Defaults to `yada`. Allows you to define admin username for login.
