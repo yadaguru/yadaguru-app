@@ -1,5 +1,6 @@
 //colors
 $gray: #808080;
+$green: #66C285;
 
 //fonts
 $font_0: Glyphicons Halflings;
@@ -10,79 +11,66 @@ body {
 	font-family: $font_1, $font_2;
 	margin: 0;
 	padding: 0;
-    background-image: url(../assets/paper.jpg);
-    backround-repeat: no-repeat;
-    background-size: cover;
 }
+
+.root-body {
+  background-image: url(../assets/paper.jpg);
+  backround-repeat: no-repeat;
+  background-size: cover;
+}
+
 [ng-cloak] {
 	display: none !important;
 }
+
 .ng-cloak {
 	display: none !important;
 }
+
 .panel-heading {
+
 	h3:after {
 		font-family: $font_0;
 		content: "\e114";
 		float: right;
 		color: $gray;
 	}
+
 	&.collapsed h3:after {
 		content: "\e080";
 	}
+
 }
+
 .fa-square-o {
 	float: left;
 	margin-right: 5px;
 	display: none;
 }
+
 .single-space {
 	margin-bottom: 0;
 }
+
 .cursor-pointer {
 	cursor: pointer;
 }
+
 .browser-upgrade {
 	text-align: center;
 }
+
 .login {
 	margin-left: auto;
 	margin-right: 0;
 	text-align: right;
 }
+
 .reminder {
 	padding-left: 20px;
 	margin-bottom: 30px;
 }
-@media(min-width: 768px) {
-	.page-header h1 {
-		font-size: 75px;
-	}
-}
-@media print {
-	#reminderForms {
-		display: none;
-	}
-	.collapse {
-		display: block !important;
-		height: auto !important;
-	}
-	div {
-		page-break-inside: avoid;
-	}
-	.fa-square-o {
-		display: block;
-	}
-	.panel-heading.collapsed h3:after {
-		font-family: $font_0;
-		content: "\e114";
-		float: right;
-		color: $gray;
-	}
-}
-[ng\:cloak] {
-	display: none !important;
-}
+
 div.container {
 	position: relative;
 	max-width: 600px;
@@ -95,12 +83,52 @@ h1 {
 h2 {
   font-family: 'Graduate';
 }
-.reminder-box
-{
-  background-color: #66C285
+
+.reminder-box {
+  background-color: $green
 }
 
-.no-bottom-border
-{
+.no-bottom-border {
 	border-bottom: none;
 }
+
+@media(min-width: 768px) {
+
+	.page-header h1 {
+		font-size: 75px;
+	}
+
+}
+
+@media print {
+
+	#reminderForms {
+		display: none;
+	}
+
+	.collapse {
+		display: block !important;
+		height: auto !important;
+	}
+
+	div {
+		page-break-inside: avoid;
+	}
+
+	.fa-square-o {
+		display: block;
+	}
+
+	.panel-heading.collapsed h3:after {
+		font-family: $font_0;
+		content: "\e114";
+		float: right;
+		color: $gray;
+	}
+
+}
+
+[ng\:cloak] {
+	display: none !important;
+}
+
