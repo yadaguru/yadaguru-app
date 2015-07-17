@@ -70,6 +70,11 @@
     $scope.minDate = new Date();
   };
 
+  var FaqController = function($scope, YadaAPI) {
+     
+  };
+
   app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
+  app.controller('FaqController', ['$scope', 'YadaAPI', FaqController]);
 
 }(angular.module('yg.root')));
