@@ -33,7 +33,7 @@
       .state('faqs', {
         url: '/faqs',
         templateUrl: 'templates/faqs.html',
-        controller: 'FaqsController'
+        controller: 'AdminFaqsController'
       });
   }]);
 }());
