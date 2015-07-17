@@ -3,7 +3,8 @@
  * @namespace YadaApp
  */
 (function () {
-  var module = angular.module('yg.admin', ['ngResource', 'ui.bootstrap', 'yg.common.services', 'yg.admin.controllers', 'yg.admin.directives', 'ui.router']);
+  var module = angular.module('yg.admin', ['ngResource', 'ui.bootstrap', 'yg.common.services', 'yg.admin.controllers', 
+                                           'yg.admin.directives', 'ui.router', 'textAngular']);
   module.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('','/reminders');
     $urlRouterProvider.rule(function($injector, $location) {

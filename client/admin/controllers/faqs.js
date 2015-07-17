@@ -4,6 +4,8 @@
 
   var AdminFaqsController = function($scope, YadaAPI) {
 
+    $scope.htmlVariable = '';
+
   };
 
   app.controller('AdminFaqsController', ['$scope', 'YadaAPI', AdminFaqsController]);
