@@ -41,7 +41,7 @@ var routes = function(Faq) {
 
     // For update PUT requests process and return new data
     .put(account.requiresRoleApi('admin'), function(req, res) {
-
+      
       // If the data being passed up has an _id field, remove it
       if(req.body._id) {
         delete req.body._id;
