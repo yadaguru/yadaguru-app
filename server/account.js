@@ -16,7 +16,7 @@ exports.authenticate = function(req, res) {
   auth(req, res);
 };
 
-exports.requiresRoleApi = function(req, res, next) {
+exports.requiresRoleApi = function(role) {
   return function(req, res, next) {
     if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
       res.status(403);
