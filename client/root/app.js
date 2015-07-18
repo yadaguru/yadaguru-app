@@ -7,6 +7,7 @@
   'use strict';
 
   var config = function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
     $urlRouterProvider.rule(function($injector, $location) {
       var path = $location.path();
       var hasTrailingSlash = path[path.length-1] ==='/';
