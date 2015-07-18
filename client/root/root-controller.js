@@ -70,6 +70,21 @@
     $scope.minDate = new Date();
   };
 
+  var FaqController = function($scope, YadaAPI, $sce) {
+    
+    $scope.faqContent = '';
+
+    $scope.getFaqs = function() {
+      YadaAPI.faqs.get().then(function(resp) {
+        $scope.faqContent = $sce.trustAsHtml(resp.data[0].content);
+      }, function(err) {console.log(err);});
+    };
+
+    $scope.getFaqs();
+
+  };
+
   app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
+  app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));

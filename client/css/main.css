@@ -3,11 +3,6 @@ body {
   margin: 0;
   padding: 0; }
 
-.root-body {
-  background-image: url(../assets/paper.jpg);
-  backround-repeat: no-repeat;
-  background-size: cover; }
-
 [ng-cloak] {
   display: none !important; }
 
@@ -46,21 +41,29 @@ body {
   padding-left: 20px;
   margin-bottom: 30px; }
 
-div.container {
-  position: relative;
-  max-width: 600px; }
-
-h1 {
-  font-family: "Rock Salt", cursive; }
-
-h2 {
-  font-family: 'Graduate'; }
+.root {
+  background-image: url(../assets/paper.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .root div.container {
+    position: relative; }
+  .root h1 {
+    font-family: "Rock Salt", cursive; }
+  .root h2 {
+    font-family: 'Graduate'; }
 
 .reminder-box {
   background-color: #66C285; }
 
 .no-bottom-border {
   border-bottom: none; }
+
+.text-editor {
+  margin-top: 15px; }
+
+.space-before {
+  margin-top: 1em; }
 
 @media (min-width: 768px) {
   .page-header h1 {

@@ -42,8 +42,17 @@
       return $http.delete('/api/test-dates/' + id);
     };
     
+    yadaAPI.faqs = {};
+
+    yadaAPI.faqs.get = function() {
+      return $http.get('/api/faqs');
+    };
+
+    yadaAPI.faqs.put = function(id, data) {
+      return $http.put('/api/faqs/' + id, data);
+    };
+
     return yadaAPI;
-  
   };
 
   app.factory('YadaAPI', ['$http', apiService]);

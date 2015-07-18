@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default clearfix reminder-box col-sm-6 col-sm-offset-3" id="reminderForms">
+      <div class="panel-body">
+        <form name="reminderForm" novalidate>
+          <div class="form-group">
+            <label for="schoolName">College/University Name</label>
+            <input type="text" id="schoolName" class="form-control"
+                   ng-model="formData.schoolName" required
+                   placeholder="Enter the name of the college/university"/>
+          </div>
+          <div class="form-group">
+            <label for="submissionDate">Submission Date for Application</label>
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup={{format}}
+                     ng-model="formData.dt" is-open="opened" min-date="minDate"
+                     datepicker-options="dateOptions" required
+                     close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </p>
+          </div>
+          <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
+                 class="btn pull-right" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
+                 ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
+        </form>
+        <button type="button" onClick="window.print()" class="btn pull-left"
+                ng-class="!groups ? 'btn-default' : 'btn-primary'"
+                ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
+        <div class="clearfix"></div>
+        <p class="text-center space-before">Before submitting, please read our <strong><a ui-sref="faqs">Frequently Asked Questions</a></strong></p>
+      </div>
+    </div>
+
+    <div class="date-group panel panel-default col-sm-8 col-sm-offset-2" ng-cloak ng-repeat="dateGroup in reminders">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          {{dateGroup.name}}
+        </h2>
+      </div>
+      <div class="panel-body">
+        <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+          <h3>{{categoryGroup.name}}</h3>
+          <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+            <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+            <p>{{reminder.message}}</p>
+            <p class="text-muted">{{reminder.detail}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

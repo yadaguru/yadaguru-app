@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/main.css">
     <!-- endinject -->
   </head>
-  <body class="root-body" ng-controller="RootController">
+  <body class="root" ng-controller="RootController">
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -28,58 +28,7 @@
       <h1 class="text-center">YadaGuru</h1>
       <h2 class="text-center">College Application Reminders</h2>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="jumbotron clearfix reminder-box" id="reminderForms">
-          <form name="reminderForm" novalidate>
-            <div class="form-group">
-              <label for="schoolName">College/University Name</label>
-              <input type="text" id="schoolName" class="form-control"
-                     ng-model="formData.schoolName" required
-                     placeholder="Enter the name of the college/university"/>
-            </div>
-            <div class="form-group">
-              <label for="submissionDate">Submission Date for Application</label>
-              <p class="input-group">
-                <input type="text" class="form-control" datepicker-popup={{format}}
-                       ng-model="formData.dt" is-open="opened" min-date="minDate"
-                       datepicker-options="dateOptions" required
-                       close-text="Close" />
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="open($event)">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                  </button>
-                </span>
-              </p>
-            </div>
-            <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
-                   class="btn pull-right" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
-                   ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
-          </form>
-          <button type="button" onClick="window.print()" class="btn pull-left"
-                  ng-class="!groups ? 'btn-default' : 'btn-primary'"
-                  ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
-        </div>
-
-        <div class="date-group panel panel-default" ng-cloak ng-repeat="dateGroup in reminders">
-          <div class="panel-heading">
-            <h2 class="panel-title">
-              {{dateGroup.name}}
-            </h2>
-          </div>
-          <div class="panel-body">
-            <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
-              <h3>{{categoryGroup.name}}</h3>
-              <div class="reminder" ng-repeat="reminder in categoryGroup.members">
-                <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
-                <p>{{reminder.message}}</p>
-                <p class="text-muted">{{reminder.detail}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div ui-view></div>
   </body>
 
   <!-- bower:js -->
@@ -88,6 +37,7 @@
   <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="/vendor/angular-animate/angular-animate.js"></script>
   <script src="/vendor/toastr/toastr.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <script src="/vendor/angular-resource/angular-resource.js"></script>
   <!-- endbower -->
@@ -104,6 +54,6 @@
   <script src="app.js"></script>
   <script src="services.js"></script>
   <script src="services/reminderService.js"></script>
-  <script src="rootController.js"></script>
+  <script src="root-controller.js"></script>
   <!-- endinject -->
 </html>
