@@ -19,7 +19,26 @@
       $scope.data.actDetail = respData.actDetail;
     };
 
+    $scope.save = function(data) {
+      
+      $scope.$broadcast('show-errors-check-validity');
+      if ($scope.testMessageForm.$invalid) {
+        toastr.error('Please make sure all fields are complete.');
+        return;
+      }
+
+      YadaAPI.testMessages.put(data._id, data).then(function(resp) {
+        toastr.success('Test Messages Saved Successfully');
+      }, function(err) {
+        toastr.error('Save failed');
+        console.log(err);
+      });
+
+    };
+
     $scope.getTestMessages();
+
+      
 
   };
 
