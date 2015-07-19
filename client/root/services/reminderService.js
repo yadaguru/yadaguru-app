@@ -49,6 +49,7 @@
       var messages = [];
       reminderData.forEach(function(reminder) {
         var message = {};
+        console.log(reminder);
         if (reminder.category === 'Testing') {
           var registrationDate = new Date (reminder.registrationDate);
           var testDate = new Date (reminder.testDate);
@@ -57,9 +58,10 @@
             message.category = reminder.category;
             message.date = 'By ' + Utils.formatDate(reminder.sortDate);
             message.name = 'Register for the ' + reminder.testType + ' test';
-            message.message = 'If you are planning on taking the ' + reminder.testType + ' test on ' +
-              Utils.formatDate(reminder.testDate) + ', you must register by ' + Utils.formatDate(registrationDate) + '.';
-            message.detail = 'Detailed message about registering for tests to go here';
+            var parseTestDateVar = {variable:'%TESTDATE%', value: Utils.formatDate(testDate)};
+            var parseRegDateVar = {variable: '%REGDATE%', value: Utils.formatDate(registrationDate)};
+            message.message = Utils.parseVars(reminder.message, parseTestDateVar, parseRegDateVar);
+            message.detail = Utils.parseVars(reminder.detail, parseTestDateVar, parseRegDateVar);
             messages.push(message);
           }
         } else {
@@ -73,12 +75,14 @@
           } else {
             message.date = 'By ' + Utils.formatDate(reminder.sortDate);
           }
+          var parseSchoolVar = {variable: '%SCHOOL%', value: school};
+          var parseDateVar = {variable: '%DATE%', value: Utils.formatDate(reminder.sortDate)};
           if (currentDate < messageDate) {
-            message.message = Utils.parseVars(reminder.message, school, reminder.sortDate);
-            message.detail = Utils.parseVars(reminder.detail, school, reminder.sortDate);
+            message.message = Utils.parseVars(reminder.message, parseSchoolVar, parseDateVar);
+            message.detail = Utils.parseVars(reminder.detail, parseSchoolVar, parseDateVar);
           } else {
-            message.message = Utils.parseVars(reminder.lateMessage, school, reminder.sortDate);
-            message.detail = Utils.parseVars(reminder.lateDetail, school, reminder.sortDate);
+            message.message = Utils.parseVars(reminder.lateMessage, parseSchoolVar, parseDateVar);
+            message.detail = Utils.parseVars(reminder.lateDetail, parseSchoolVar, parseDateVar);
           }
           messages.push(message);
         }

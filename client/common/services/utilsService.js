@@ -6,11 +6,18 @@
   
     var utils = {};
 
-    utils.addKeyValue = function(data, key, value) {
-      return data.map(function(d) {
-        d[key] = value;
+    utils.addKeyValue = function(data, key, value, filter) {
+      data = data.map(function(d) {
+        if (typeof filter === 'function') {
+          if (filter(d)) {
+            d[key] = value;
+          }
+        } else {
+          d[key] = value;
+        }
         return d;
       });
+      return data;
     };
 
     utils.sortBy = function(data, sortKey) {
@@ -59,8 +66,15 @@
       return groupArray;
     };
 
-    utils.parseVars = function(string, school, date) {
-      var replacements = {'%SCHOOL%': school, '%DATE%': utils.formatDate(date)};
+    utils.parseVars = function(string, replacementObj) {
+      var replacementObjs = [];
+      for (var i = 1; i < arguments.length; i++) {
+        replacementObjs.push(arguments[i]);
+      }
+      var replacements = {};
+      replacementObjs.forEach(function(replacementObj) {
+        replacements[replacementObj.variable] = replacementObj.value;
+      });
       string = string.replace(/%\w+%/g, function(all) {
         return replacements[all] || all;
       });

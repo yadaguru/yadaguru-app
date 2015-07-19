@@ -6,14 +6,22 @@
     $scope.dt = new Date();
     var reminderData, 
         testDateData,
+        testMessageData,
         allData,
         reminderMessages,
         groupedMessages;
 
+    var getTestMessageData = function() {
+      YadaAPI.testMessages.get().then(function(resp) {
+        testMessageData = resp.data[0];
+        $scope.buildReminderList();
+      });
+    };
+
     var getTestDateData = function() {
       YadaAPI.testDates.get().then(function(resp) {
         testDateData = resp.data;
-        $scope.buildReminderList();
+        getTestMessageData();
       }, function(err) {console.log(err);});
     };
 
@@ -35,6 +43,18 @@
       reminderData = ReminderService.generateSortDates(reminderData, 'timeframes', $scope.formData.dt);
       testDateData = ReminderService.generateSortDates(testDateData, 'registrationDate');
       testDateData = Utils.addKeyValue(testDateData, 'category', 'Testing');
+      testDateData = Utils.addKeyValue(testDateData, 'message', testMessageData.satMessage, function(msg) {
+        return msg.testType === 'SAT';
+      });
+      testDateData = Utils.addKeyValue(testDateData, 'detail', testMessageData.satDetail, function(msg) {
+        return msg.testType === 'SAT';
+      });
+      testDateData = Utils.addKeyValue(testDateData, 'message', testMessageData.actMessage, function(msg) {
+        return msg.testType === 'ACT';
+      });
+      testDateData = Utils.addKeyValue(testDateData, 'detail', testMessageData.actDetail, function(msg) {
+        return msg.testType === 'ACT';
+      });
       allData = reminderData.concat(testDateData);
       allData = Utils.sortBy(allData, 'sortDate');
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt, currentDate);
