@@ -31,6 +31,11 @@
         templateUrl: 'templates/test-dates.html',
         controller: 'AdminTestDatesController'
       })
+      .state('test-messages', {
+        url: '/test-messages',
+        templateUrl: 'templates/test-messages.html',
+        controller: 'AdminTestMessagesController'
+      })
       .state('faqs', {
         url: '/faqs',
         templateUrl: 'templates/faqs.html',

@@ -6,13 +6,36 @@
   
     var utils = {};
 
-    utils.addKeyValue = function(data, key, value) {
-      return data.map(function(d) {
-        d[key] = value;
+    /**
+     * Adds key/value pairs to an array of objects, with an optional filter
+     * Returns an array of objects
+     * @param {object[]} data - an array of data objects to be modified
+     * @param {string} key - the name of the key to be added
+     * @param {string} value - the value of the key to be added
+     * @param {function} filter - a function to use for filtering. Function must take
+     *                            one parameter to represent the data object being filtered.
+     *                            Function must evaluate to true or false.
+     */
+    utils.addKeyValue = function(data, key, value, filter) {
+      data = data.map(function(d) {
+        if (typeof filter === 'function') {
+          if (filter(d)) {
+            d[key] = value;
+          }
+        } else {
+          d[key] = value;
+        }
         return d;
       });
+      return data;
     };
 
+    /**
+     * Sorts an array of objects
+     * Returns an array of objects
+     * @param {object[]} data = an array of objects
+     * @param {string} sortKey - the key on which to sort
+     */
     utils.sortBy = function(data, sortKey) {
       return data.sort(function (a, b) {
         if (a[sortKey] > b[sortKey]) {
@@ -25,6 +48,12 @@
       });
     };
     
+    /**
+     * Groups an array of objects into into a two-dimensional grouped array
+     * Returns a two-dimension array of objects.
+     * @param {object[]} - an array of objects
+     * @param {string} propToGroupBy - the property to group the object by
+     */
     utils.groupBy = function(arrayOfObjects, propToGroupBy) {
       var groupArray = [],
           match;
@@ -59,14 +88,34 @@
       return groupArray;
     };
 
-    utils.parseVars = function(string, school, date) {
-      var replacements = {'%SCHOOL%': school, '%DATE%': utils.formatDate(date)};
+    /**
+     * Parses text, replacing  %VARIABLE% placeholders with values.
+     * Returns a string.
+     * @param {string} - Text to be parsed
+     * @param {object...} - One or more objects containing the variable and the value
+     *   @property {variable} - The variable to be replaced
+     *   @property {value} - The value of the variable
+     */
+    utils.parseVars = function(string, replacementObj) {
+      var replacementObjs = [];
+      for (var i = 1; i < arguments.length; i++) {
+        replacementObjs.push(arguments[i]);
+      }
+      var replacements = {};
+      replacementObjs.forEach(function(replacementObj) {
+        replacements[replacementObj.variable] = replacementObj.value;
+      });
       string = string.replace(/%\w+%/g, function(all) {
         return replacements[all] || all;
       });
       return string;
     };
 
+    /**
+     * Formats a date in M/D/YYYY format.
+     * Returns a string.
+     * @param {string} dateString - a string representing a valid date
+     */
     utils.formatDate = function(dateString) {
       var date = new Date(dateString); 
       var d = date.getDate();
@@ -75,10 +124,35 @@
       return m + '/' + d + '/' + y;
     };
       
+    /**
+     * Gets data from multiple models
+     * @param {object} apiService - the api service object to use
+     * @param {string[]} models - an array of strings of the names of the models to get
+     * @param {function} callback - a function to run after all models have been retrieved, must take a data argument.
+     * @param {object} data - an object to hold the data collected.
+     */
+    utils.getModels = function(apiService, models, callback, data) {
+      //debugger;
+
+      data = data || {};
+
+      if (models.length === 0) {
+        callback(data);
+      } else {
+        var model = models.pop();
+        apiService[model].get().then(function(resp) {
+          data[model] = resp.data;
+          utils.getModels(apiService, models, callback, data);
+        });
+      }
+
+    };
+
    return utils;
   
   };
   
+                                                                                                 
   app.factory('Utils', [utilService]);
 
 }(angular.module('yg.common.services.utils', [])));

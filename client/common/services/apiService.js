@@ -42,6 +42,16 @@
       return $http.delete('/api/test-dates/' + id);
     };
     
+    yadaAPI.testMessages = {};
+
+    yadaAPI.testMessages.get = function() {
+      return $http.get('/api/test-messages');
+    };
+
+    yadaAPI.testMessages.put = function(id, data) {
+      return $http.put('/api/test-messages/' + id, data);
+    };
+
     yadaAPI.faqs = {};
 
     yadaAPI.faqs.get = function() {

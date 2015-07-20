@@ -25,6 +25,10 @@ var TestDate = require('./models/testdate');
 var testDateRouter = require('./routes/testDateRoutes')(TestDate);
 app.use('/api/test-dates', testDateRouter);
 
+var TestMessage = require('./models/testmessage');
+var testMessageRouter = require('./routes/testMessageRoutes')(TestMessage);
+app.use('/api/test-messages', testMessageRouter);
+
 var Faq = require('./models/faq');
 var faqRouter = require('./routes/faqRoutes')(Faq);
 app.use('/api/faqs', faqRouter);
