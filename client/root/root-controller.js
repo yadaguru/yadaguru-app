@@ -4,41 +4,15 @@
   var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
     $scope.reminders = [];
     $scope.dt = new Date();
-    var reminderData, 
-        testDateData,
-        testMessageData,
-        allData,
-        reminderMessages,
-        groupedMessages;
 
-    var getTestMessageData = function() {
-      YadaAPI.testMessages.get().then(function(resp) {
-        testMessageData = resp.data[0];
-        $scope.buildReminderList();
-      });
-    };
-
-    var getTestDateData = function() {
-      YadaAPI.testDates.get().then(function(resp) {
-        testDateData = resp.data;
-        getTestMessageData();
-      }, function(err) {console.log(err);});
-    };
-
-    var getReminderData = function() {
-      YadaAPI.reminders.get().then(function(resp) {
-        reminderData = resp.data;
-        getTestDateData();
-      }, function(err) {console.log(err);});
-    };
-
-    $scope.getReminders = function(formData) {
-      $scope.formData = formData;
-      getReminderData();
-    };
-
-    $scope.buildReminderList = function() {
+    $scope.buildReminderList = function(data) {
       var currentDate = new Date();
+      var reminderData = data.reminders,
+          testDateData = data.testDates,
+          testMessageData = data.testMessages[0],
+          allData,
+          reminderMessages,
+          groupedMessages;
       reminderData = ReminderService.flattenTimeframes(reminderData);
       reminderData = ReminderService.generateSortDates(reminderData, 'timeframes', $scope.formData.dt);
       testDateData = ReminderService.generateSortDates(testDateData, 'registrationDate');
@@ -63,7 +37,11 @@
         dateGroup.members = Utils.groupBy(dateGroup.members, 'category');
       });
       $scope.reminders = groupedMessages;
+    };
 
+    $scope.getReminders = function(formData) {
+      $scope.formData = formData;
+      Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages'], $scope.buildReminderList);
     };
 
     $scope.format = 'M/d/yyyy';

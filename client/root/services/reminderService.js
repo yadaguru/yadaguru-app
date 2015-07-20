@@ -49,7 +49,6 @@
       var messages = [];
       reminderData.forEach(function(reminder) {
         var message = {};
-        console.log(reminder);
         if (reminder.category === 'Testing') {
           var registrationDate = new Date (reminder.registrationDate);
           var testDate = new Date (reminder.testDate);

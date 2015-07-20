@@ -89,10 +89,35 @@
       return m + '/' + d + '/' + y;
     };
       
+    /**
+     * Gets data from multiple models
+     * @param {object} apiService - the api service object to use
+     * @param {string[]} models - an array of strings of the names of the models to get
+     * @param {function} callback - a function to run after all models have been retrieved, must take a data argument.
+     * @param {object} data - an object to hold the data collected.
+     */
+    utils.getModels = function(apiService, models, callback, data) {
+      //debugger;
+
+      data = data || {};
+
+      if (models.length === 0) {
+        callback(data);
+      } else {
+        var model = models.pop();
+        apiService[model].get().then(function(resp) {
+          data[model] = resp.data;
+          utils.getModels(apiService, models, callback, data);
+        });
+      }
+
+    };
+
    return utils;
   
   };
   
+                                                                                                 
   app.factory('Utils', [utilService]);
 
 }(angular.module('yg.common.services.utils', [])));
