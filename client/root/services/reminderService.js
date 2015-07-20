@@ -6,6 +6,11 @@
     
     var reminderService = {};
 
+    /**
+     * Splits reminders with multiple timeframes up into separate reminders with one timeframe
+     * Returns an array of objects.
+     * @param {object[]} reminders - an array of reminder objects
+     */
     reminderService.flattenTimeframes = function (reminders) {
       var flattenedReminders = [];
       reminders.forEach(function (reminder) {
@@ -23,6 +28,13 @@
       return flattenedReminders;
     };
 
+    /**
+     * Generates a sortDate key on a reminder object
+     * Returns an array of objects
+     * @param {object[]} data - an array of reminder objects
+     * @param {string} originKey - the timeframe key used to generate the sortdates
+     * @param {date} date - a JavaScript date object representing the student-selected date
+     */
     reminderService.generateSortDates = function(data, originKey, date) {
       return data.map(function(d) {
         if (d[originKey].match(/^\d+$/)) {
@@ -45,6 +57,14 @@
       });
     };
 
+    /**
+     * Generates reminder message objects
+     * Returns an array of objects
+     * @param {object[]} reminderData - an array of reminder objects
+     * @param {string} school - the name of the school passed in by the user
+     * @param {date} dueDate - a JavaScript date object representing the student-select due date
+     * @param {date} currentDate - a JavaScript date object representing the current date
+     */
     reminderService.generateMessages = function(reminderData, school, dueDate, currentDate) {
       var messages = [];
       reminderData.forEach(function(reminder) {
@@ -89,6 +109,12 @@
       return messages;
     };
 
+    /**
+     * Calculates the date X amount of days before the due due
+     * Returns a string representation of the calculated date
+     * @param {number} timeframe - the number of dates before the due date
+     * @param {date} date - a JavaScript date object representing the due date
+     */
     reminderService.calcDate = function(timeframe, date) {
       var newDate = angular.copy(date);
       newDate.setDate(newDate.getDate() - timeframe);

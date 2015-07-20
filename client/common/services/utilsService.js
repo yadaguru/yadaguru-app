@@ -6,6 +6,16 @@
   
     var utils = {};
 
+    /**
+     * Adds key/value pairs to an array of objects, with an optional filter
+     * Returns an array of objects
+     * @param {object[]} data - an array of data objects to be modified
+     * @param {string} key - the name of the key to be added
+     * @param {string} value - the value of the key to be added
+     * @param {function} filter - a function to use for filtering. Function must take
+     *                            one parameter to represent the data object being filtered.
+     *                            Function must evaluate to true or false.
+     */
     utils.addKeyValue = function(data, key, value, filter) {
       data = data.map(function(d) {
         if (typeof filter === 'function') {
@@ -20,6 +30,12 @@
       return data;
     };
 
+    /**
+     * Sorts an array of objects
+     * Returns an array of objects
+     * @param {object[]} data = an array of objects
+     * @param {string} sortKey - the key on which to sort
+     */
     utils.sortBy = function(data, sortKey) {
       return data.sort(function (a, b) {
         if (a[sortKey] > b[sortKey]) {
@@ -32,6 +48,12 @@
       });
     };
     
+    /**
+     * Groups an array of objects into into a two-dimensional grouped array
+     * Returns a two-dimension array of objects.
+     * @param {object[]} - an array of objects
+     * @param {string} propToGroupBy - the property to group the object by
+     */
     utils.groupBy = function(arrayOfObjects, propToGroupBy) {
       var groupArray = [],
           match;
@@ -66,6 +88,14 @@
       return groupArray;
     };
 
+    /**
+     * Parses text, replacing  %VARIABLE% placeholders with values.
+     * Returns a string.
+     * @param {string} - Text to be parsed
+     * @param {object...} - One or more objects containing the variable and the value
+     *   @property {variable} - The variable to be replaced
+     *   @property {value} - The value of the variable
+     */
     utils.parseVars = function(string, replacementObj) {
       var replacementObjs = [];
       for (var i = 1; i < arguments.length; i++) {
@@ -81,6 +111,11 @@
       return string;
     };
 
+    /**
+     * Formats a date in M/D/YYYY format.
+     * Returns a string.
+     * @param {string} dateString - a string representing a valid date
+     */
     utils.formatDate = function(dateString) {
       var date = new Date(dateString); 
       var d = date.getDate();
