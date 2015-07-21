@@ -24,6 +24,24 @@
       return $http.delete('/api/reminders/' + id);
     };
 
+    yadaAPI.categories = {};
+
+    yadaAPI.categories.get = function() {
+      return $http.get('/api/categories/');
+    };
+
+    yadaAPI.categories.post = function(data) {
+      return $http.post('/api/categories/', data);
+    };
+
+    yadaAPI.categories.put = function(id, data) {
+      return $http.put('/api/categories/' + id, data);
+    };
+
+    yadaAPI.categories.delete = function(id) {
+      return $http.delete('/api/categories/' + id);
+    };
+
     yadaAPI.testDates = {};
 
     yadaAPI.testDates.get = function() {

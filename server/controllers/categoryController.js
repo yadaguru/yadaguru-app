@@ -30,7 +30,7 @@ var categoryController = function(Category) {
         // Return array in JSON format
         res.json(returnCategories);
       }
-    }).sort('category');
+    }).sort('categoryName');
   };
 
   // POST route [/api/categories] 
