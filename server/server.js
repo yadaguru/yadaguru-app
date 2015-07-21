@@ -30,7 +30,7 @@ var testMessageRouter = require('./routes/testMessageRoutes')(TestMessage);
 app.use('/api/test-messages', testMessageRouter);
 
 var Category = require('./models/category');
-var CategoryRouter = require('./routes/CategoryRoutes')(Category);
+var CategoryRouter = require('./routes/categoryRoutes')(Category);
 app.use('/api/categories', CategoryRouter);
 
 var Faq = require('./models/faq');
