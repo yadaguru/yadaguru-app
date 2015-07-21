@@ -1,0 +1,10 @@
+[
+  {"_id": "1", "categoryName": "Testing Registration"},
+  {"_id": "2", "categoryName": "Absolute Deadline"},
+  {"_id": "3", "categoryName": "Portfolio Prep"},
+  {"_id": "4", "categoryName": "Essay Writing"},
+  {"_id": "5", "categoryName": "Recommendations"},
+  {"_id": "6", "categoryName": "Application"},
+  {"_id": "7", "categoryName": "Financial Aid"},
+  {"_id": "8", "categoryName": "General Reminder"}
+]
