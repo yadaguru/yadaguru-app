@@ -148,6 +148,23 @@
 
     };
 
+    /**
+     * Looks up the value of one key based on the value of another
+     * @param {object[]} data - an array of data objects
+     * @param {string} lookupKey - the key to lookup on
+     * @param {string|number} lookupValue - the value to find on lookupKey
+     * @param {string} returnKey - the key to return the value of
+     */
+    utils.lookup = function(data, lookupKey, lookupValue, returnKey) {
+      var returnValue;
+      data.forEach(function(d) {
+        if (d[lookupKey] === lookupValue) {
+          returnValue = d[returnKey];
+        }
+      });
+      return returnValue;
+    };
+
    return utils;
   
   };

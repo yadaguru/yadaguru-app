@@ -2,30 +2,28 @@
   
   'use strict';
 
-  var AdminRemindersController = function($scope, $modal, YadaAPI) {
+  var AdminRemindersController = function($scope, $modal, YadaAPI, Utils) {
     $scope.test = 'test data';
     
-    $scope.getReminders = function() {
-      YadaAPI.reminders.get().then(populate, function(err) {console.log(err);});
+    $scope.populateRemindersTable = function(data) {
+      var reminders = [];
+      data.reminders.forEach(function(_reminder) {
+        var reminder = {};
+        reminder._id = _reminder._id;
+        reminder.name = _reminder.name;
+        reminder.message = _reminder.message;
+        reminder.detail = _reminder.detail;
+        reminder.lateMessage = _reminder.lateMessage;
+        reminder.lateDetail = _reminder.lateDetail;
+        reminder.category = Utils.lookup(data.categories, '_id', _reminder.category, 'categoryName');
+        reminder.timeframes = _reminder.timeframes;
+        reminders.push(reminder);
+      });
+      $scope.reminders = Utils.sortBy(reminders, 'category');
+    };
 
-      function populate(resp) {
-        var data = resp.data;
-        var reminders = [];
-        for (var i = 0; i < data.length; i++) {
-          var reminder = {};
-          var current = data[i];
-          reminder._id = current._id;
-          reminder.name = current.name;
-          reminder.message = current.message;
-          reminder.detail = current.detail;
-          reminder.lateMessage = current.lateMessage;
-          reminder.lateDetail = current.lateDetail;
-          reminder.category = current.category;
-          reminder.timeframes = current.timeframes;
-          reminders.push(reminder);
-        }
-        $scope.reminders = reminders;
-      }
+    $scope.getReminders = function() {
+      Utils.getModels(YadaAPI, ['reminders', 'categories'], $scope.populateRemindersTable);
     };
 
     $scope.addTimeframeSuffix = function(timeframe) {
@@ -101,7 +99,7 @@
 
   };
 
-  app.controller('AdminRemindersController', ['$scope', '$modal', 'YadaAPI', AdminRemindersController]);
+  app.controller('AdminRemindersController', ['$scope', '$modal', 'YadaAPI', 'Utils', AdminRemindersController]);
   app.controller('AdminRemindersEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminRemindersEditController]);
 
 }(angular.module('yg.admin.controllers.reminders', [])));
