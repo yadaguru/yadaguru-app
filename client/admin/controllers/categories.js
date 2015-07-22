@@ -84,13 +84,25 @@
 
     $scope.delete = function(id) {
       if (window.confirm("Do you really want to delete this category?")) {
-        YadaAPI.categories.delete(id).then(function(res) {
-        $modalInstance.close();
-        toastr.success('Category ' + data.categoryName + ' successfully deleted!');
-      }, function(err) {
-        toastr.error('Error deleting category');
-        console.log(err);
-      });
+        YadaAPI.reminders.get().then(function(resp) {
+          var categoryInUse = false;
+          resp.data.forEach(function(reminder) {
+            if (reminder.category === id) {
+              categoryInUse = true;
+            }
+          });
+          if (categoryInUse) {
+            toastr.error('Category is assigned to one or more reminders, and cannot be deleted', 'Cannot Delete Category');
+          } else {
+            YadaAPI.categories.delete(id).then(function(res) {
+              $modalInstance.close();
+              toastr.success('Category ' + data.categoryName + ' successfully deleted!');
+            }, function(err) {
+              toastr.error('Error deleting category');
+              console.log(err);
+            });
+          }
+        });
       }
     };
     $scope.cancel = function() {
