@@ -15,15 +15,8 @@
     </div>
     <div class="form-group" show-errors>
       <label class="control-label" for="category">Category:</label>
-      <select ng-model="data.category" id="category" name="category" class="form-control" required>
-        <option value="Absolute Deadline">Absolute Deadline</option>
-        <option value="Portfolio Prep">Portfolio Prep</option>
-        <option value="Essay Writing">Essay Writing</option>
-        <option value="Recommendations">Recommendations</option>
-        <option value="Application">Application</option>
-        <option value="Testing">Testing</option>
-        <option value="Financial Aid">Financial Aid</option>
-        <option value="General Reminder">General Reminder</option>
+      <select ng-options="category._id as category.categoryName for category in categories" ng-model="data.categoryId" 
+              id="category" name="category" class="form-control" required>
       </select>
     </div>
     <div class="form-group" show-errors>

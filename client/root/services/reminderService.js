@@ -64,12 +64,13 @@
      * @param {string} school - the name of the school passed in by the user
      * @param {date} dueDate - a JavaScript date object representing the student-select due date
      * @param {date} currentDate - a JavaScript date object representing the current date
+     * @param {string} testCategory - category used by test date reminders
      */
-    reminderService.generateMessages = function(reminderData, school, dueDate, currentDate) {
+    reminderService.generateMessages = function(reminderData, school, dueDate, currentDate, testCategory) {
       var messages = [];
       reminderData.forEach(function(reminder) {
         var message = {};
-        if (reminder.category === 'Testing') {
+        if (reminder.category === testCategory) {
           var registrationDate = new Date (reminder.registrationDate);
           var testDate = new Date (reminder.testDate);
           dueDate = new Date(dueDate);

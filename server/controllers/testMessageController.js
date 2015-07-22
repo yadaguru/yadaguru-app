@@ -40,7 +40,8 @@ var testMessageController = function(TestMessage) {
     if(!req.body.satMessage || 
        !req.body.satDetail ||
        !req.body.actMessage ||
-       !req.body.actDetail) {
+       !req.body.actDetail ||
+       !req.body.testCategory) {
       res.status(400);
       res.send('Not all properties are present. ' +
           'Requires satMessage, satDetail, actMessage,  and actDetail.');

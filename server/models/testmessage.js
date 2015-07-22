@@ -6,6 +6,7 @@ var testMessageSchema = new Schema({
   satDetail: {type: String},
   actMessage: {type: String},
   actDetail: {type: String},
+  testCategory: {type: String}
 });
 
 module.exports = mongoose.model('TestMessage', testMessageSchema);
