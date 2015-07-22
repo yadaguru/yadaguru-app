@@ -15,11 +15,13 @@
         reminder.detail = _reminder.detail;
         reminder.lateMessage = _reminder.lateMessage;
         reminder.lateDetail = _reminder.lateDetail;
-        reminder.category = Utils.lookup(data.categories, '_id', _reminder.category, 'categoryName');
+        reminder.category = {};
+        reminder.categoryName = Utils.lookup(data.categories, '_id', _reminder.category, 'categoryName');
+        reminder.categoryId = _reminder.category;
         reminder.timeframes = _reminder.timeframes;
         reminders.push(reminder);
       });
-      $scope.reminders = Utils.sortBy(reminders, 'category');
+      $scope.reminders = Utils.sortBy(reminders, 'categoryName');
     };
 
     $scope.getReminders = function() {
@@ -62,13 +64,17 @@
     $scope.context = context;
     $scope.data = angular.copy(data);
 
+    YadaAPI.categories.get().then(function(resp) {
+      $scope.categories = resp.data;
+    }, function(err) { console.log(err); });
+
     $scope.add = function(data) {
 
       $scope.$broadcast('show-errors-check-validity');
       if ($scope.editReminderForm.$invalid) {
         return;
       }
-
+      data.category = data.categoryId;
       YadaAPI.reminders.post(data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error adding reminder', err);});
@@ -80,7 +86,7 @@
       if ($scope.editReminderForm.$invalid) {
         return;
       }
-
+      data.category = data.categoryId;
       YadaAPI.reminders.put(data._id, data).then(function(res){
         $modalInstance.close();
       }, function(err){console.log('error saving reminder', err);});
