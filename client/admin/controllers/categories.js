@@ -84,9 +84,10 @@
 
     $scope.delete = function(id) {
       if (window.confirm("Do you really want to delete this category?")) {
-        YadaAPI.reminders.get().then(function(resp) {
-          if (Utils.lookup(resp.data, 'category', id, '_id')) {
-            toastr.error('Category is assigned to one or more reminders, and cannot be deleted', 'Cannot Delete Category');
+        Utils.getModels(YadaAPI, ['reminders', 'testMessages'], function(data) {
+          if (Utils.lookup(data.reminders, 'category', id, '_id') || Utils.lookup(data.testMessages, 'testCategory', id, '_id')) {
+            toastr.error('Category is assigned to one or more reminders or to test messages. Please reassign ' + 
+                         'the category and try again.', 'Cannot Delete Category');
           } else {
             YadaAPI.categories.delete(id).then(function(res) {
               $modalInstance.close();

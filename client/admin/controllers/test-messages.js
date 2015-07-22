@@ -12,7 +12,6 @@
 
     var populate = function(resp) {
       var respData = resp.testMessages[0];
-      console.log(respData);
       $scope.categories = resp.categories;
       $scope.data._id = respData._id;
       $scope.data.satMessage = respData.satMessage;
