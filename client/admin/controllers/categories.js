@@ -46,7 +46,7 @@
 
   };
 
-  var AdminCategoriesEditController = function($scope, $modalInstance, YadaAPI, context, data) {
+  var AdminCategoriesEditController = function($scope, $modalInstance, YadaAPI, context, data, Utils) {
     $scope.context = context;
     $scope.data = angular.copy(data);
 
@@ -85,13 +85,7 @@
     $scope.delete = function(id) {
       if (window.confirm("Do you really want to delete this category?")) {
         YadaAPI.reminders.get().then(function(resp) {
-          var categoryInUse = false;
-          resp.data.forEach(function(reminder) {
-            if (reminder.category === id) {
-              categoryInUse = true;
-            }
-          });
-          if (categoryInUse) {
+          if (Utils.lookup(resp.data, 'category', id, '_id')) {
             toastr.error('Category is assigned to one or more reminders, and cannot be deleted', 'Cannot Delete Category');
           } else {
             YadaAPI.categories.delete(id).then(function(res) {
@@ -112,6 +106,7 @@
   };
 
   app.controller('AdminCategoriesController', ['$scope', '$modal', 'YadaAPI', AdminCategoriesController]);
-  app.controller('AdminCategoriesEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminCategoriesEditController]);
+  app.controller('AdminCategoriesEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', 'Utils', 
+                  AdminCategoriesEditController]);
 
 }(angular.module('yg.admin.controllers.categories', [])));
