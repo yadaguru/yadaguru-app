@@ -2,21 +2,24 @@
   
   'use strict';
 
-  var AdminTestMessagesController = function($scope, YadaAPI) {
+  var AdminTestMessagesController = function($scope, YadaAPI, Utils) {
 
     $scope.data = {};
 
     $scope.getTestMessages = function() {
-      YadaAPI.testMessages.get().then(populate, function(err) {console.log(err);});
+      Utils.getModels(YadaAPI, ['testMessages', 'categories'], populate);
     };
 
     var populate = function(resp) {
-      var respData = resp.data[0];
+      var respData = resp.testMessages[0];
+      console.log(respData);
+      $scope.categories = resp.categories;
       $scope.data._id = respData._id;
       $scope.data.satMessage = respData.satMessage;
       $scope.data.satDetail = respData.satDetail;
       $scope.data.actMessage = respData.actMessage;
       $scope.data.actDetail = respData.actDetail;
+      $scope.data.testCategory = respData.testCategory;
     };
 
     $scope.save = function(data) {
@@ -42,6 +45,6 @@
 
   };
 
-  app.controller('AdminTestMessagesController', ['$scope', 'YadaAPI', AdminTestMessagesController]);
+  app.controller('AdminTestMessagesController', ['$scope', 'YadaAPI', 'Utils', AdminTestMessagesController]);
 
 }(angular.module('yg.admin.controllers.test-messages', [])));
