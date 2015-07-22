@@ -20,7 +20,6 @@
       $scope.data.actMessage = respData.actMessage;
       $scope.data.actDetail = respData.actDetail;
       $scope.data.testCategory = respData.testCategory;
-      console.log($scope.data.testCategory);
     };
 
     $scope.save = function(data) {
