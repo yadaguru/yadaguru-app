@@ -33,7 +33,7 @@ var categoryController = function(Category) {
     }).sort('categoryName');
   };
 
-  // POST route [/api/categories] 
+  // POST route [/api/categories]
   var post = function(req, res) {
 
     // Return an error if there is missing data, else save data
