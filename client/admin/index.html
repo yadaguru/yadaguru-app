@@ -37,7 +37,9 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li ng-class="currentTab === '/reminders' ? 'active' : ''"><a ui-sref="reminders">Reminders</a></li>
+            <li ng-class="currentTab === '/categories' ? 'active' : ''"><a ui-sref="categories">Categories</a></li>
             <li ng-class="currentTab === '/test-dates' ? 'active' : ''"><a ui-sref="test-dates">Test Dates</a></li>
+            <li ng-class="currentTab === '/test-messages' ? 'active' : ''"><a ui-sref="test-messages">Test Messages</a></li>
             <li ng-class="currentTab === '/faqs' ? 'active' : ''"><a ui-sref="faqs">FAQs</a></li>
           </ul>
           <!-- uncomment below when functionality is ready -->
@@ -80,7 +82,9 @@
   <script src="admin-controller.js"></script>
   <script src="controllers/reminders.js"></script>
   <script src="controllers/test-dates.js"></script>
+  <script src="controllers/test-messages.js"></script>
   <script src="controllers/faqs.js"></script>
+  <script src="controllers/categories.js"></script>
   <script src="directives.js"></script>
   <script src="directives/show-errors.js"></script>
   <!-- endinject -->
