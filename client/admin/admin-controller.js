@@ -15,4 +15,6 @@
 
 }(angular.module('yg.admin.controllers', ['yg.admin.controllers.reminders',
                                           'yg.admin.controllers.test-dates',
+                                          'yg.admin.controllers.test-messages',
+                                          'yg.admin.controllers.categories',
                                           'yg.admin.controllers.faqs'])));

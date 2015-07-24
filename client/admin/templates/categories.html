@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <h2>Categories</h2>
+    <div class="col-md-4">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Category Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cursor-pointer" ng-repeat="category in categories" ng-click="openEditModal('edit', category)">
+            <td>{{category.categoryName}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" ng-click="openEditModal('add')">Add Category</button>
+    </div>
+  </div>
+</div>
