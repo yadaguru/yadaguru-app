@@ -16,7 +16,10 @@ module.exports = function(clientPath) {
   app.use(bodyParser.json({ type: 'application/vnd.api+json '}));
   app.use(methodOverride());
   app.use(cookieParser());
-  app.use(session({ secret: 'Not a good secret' }));
+  app.use(session({
+    secret: 'Not a good secret',
+    resave: true,
+    saveUninitialized: false}));
   app.use(passport.initialize());
   app.use(passport.session());
 
