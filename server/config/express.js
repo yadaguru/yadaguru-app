@@ -7,10 +7,13 @@ var morgan         = require('morgan'),
     passport       = require('passport'),
     express        = require('express'),
     account        = require('../account'),
-    app            = express();
+    app            = express(),
+    env            = process.env.NODE_ENV;
 
 module.exports = function(clientPath) {
-  app.use(morgan('dev'));
+  app.use(morgan('dev', {
+    skip: function() { return process.env.NODE_ENV == 'TEST' }
+  }));
   app.use(bodyParser.urlencoded({'extended':'true'}));
   app.use(bodyParser.json());
   app.use(bodyParser.json({ type: 'application/vnd.api+json '}));

@@ -6,7 +6,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
 ##Local Development Installation
  * Be sure you have installed `node`, `npm`, and `mongodb`
  * Be sure that the `mongodb` service is running
- * Run `npm install -g gulp bower`
+ * Run `npm install -g gulp bower mocha`
  * `cd` into the project root folder (if you are not already there)
  * Run `npm install` to install dependences
  * Run `bower install` to install client-side libraries
@@ -14,6 +14,9 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
 
 ##Serving Locally
 Run `gulp serve` to serve the project with browsersync on `localhost:9000`. While gulp is running the browser and server will be reloaded on every file change related to their domain.
+
+##Testing
+Tests are run with mocha. It is recommended that on windows you use `set NODE_ENV=TEST&& mocha` or on linux/mac `export NODE_ENV=TEST&& mocha` to run the tests. You can also use a local version of mocha with `node node_modules/mocha/bin/mocha` if you would prefer to omit mocha from a global install. Setting the NODE_ENV prevents potential corruption of the local database.
 
 ##The Excel File
 The Excel file found at the root of this folder contains all of the date reminders and messages for the generated reminders.

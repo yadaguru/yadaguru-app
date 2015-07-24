@@ -1,13 +1,7 @@
-// Global declarations for linters
-/* global __dirname */
-/* global process */
-
 var express  = require('express'),
     mongoose = require('mongoose'),
-
     config   = require('./config/config.js')(),
-    app      = require('./config/express.js')(config.clientPath),
-    db       = mongoose.connect('mongodb://localhost/yadaguru');
+    app      = require('./config/express.js')(config.clientPath);
 
 require('./config/passport.js')();
 
