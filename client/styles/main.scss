@@ -86,6 +86,11 @@ body {
     font-family: 'Graduate';
   }
 
+  h3 {
+	font-family: "Rock Salt", cursive;
+	font-size: small;
+  }
+
 }
 
 .reminder-box {
@@ -147,19 +152,7 @@ body {
 
 .logo {
   float: left;
-  height: 180px;
-  width: 111px;
+  height: 75%;
+  width: 75%;
   margin-left: 20px;
-
-}
-.image-wrapper {
-  float: left;
-  height: 170px;
-  width: 250px;
-  margin-left: 20px;
-}
-.image-wrapper p {
-  position: absolute;
-  margin: 5px;
-
 }

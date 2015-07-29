@@ -52,6 +52,9 @@ body {
     font-family: "Rock Salt", cursive; }
   .root h2 {
     font-family: 'Graduate'; }
+  .root h3 {
+    font-family: "Rock Salt", cursive;
+    font-size: small; }
 
 .reminder-box {
   background-color: #66C285; }
@@ -90,16 +93,6 @@ body {
 
 .logo {
   float: left;
-  height: 180px;
-  width: 111px;
+  height: 75%;
+  width: 75%;
   margin-left: 20px; }
-
-.image-wrapper {
-  float: left;
-  height: 170px;
-  width: 250px;
-  margin-left: 20px; }
-
-.image-wrapper p {
-  position: absolute;
-  margin: 5px; }
