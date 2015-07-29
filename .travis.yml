@@ -9,8 +9,7 @@ services:
   - mongodb
 before_install:
   - npm i -g bower
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq
+  - npm i -g istanbul
 install:
   - npm install
 script: "npm run-script test-travis"
