@@ -10,6 +10,7 @@
   "scripts": {
     "test": "npm run test-node",
     "test-node": "node node_modules/mocha/bin/mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
     "test-browser": "mocha-phantomjs ./test/browser/index.html",
     "start": "node ./server/server.js"
   },
