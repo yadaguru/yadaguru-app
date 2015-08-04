@@ -43,6 +43,7 @@
     "jshint-stylish": "^2.0.0",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2",
+    "mongoose-migration": "^0.1.0",
     "node-mongo-seeds": "^2.2.4",
     "prompt": "^0.2.14",
     "require-dir": "^0.3.0",
