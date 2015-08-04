@@ -80,6 +80,16 @@
       return $http.put('/api/faqs/' + id, data);
     };
 
+    yadaAPI.settings = {};
+
+    yadaAPI.settings.get = function() {
+      return $http.get('/api/settings');
+    };
+
+    yadaAPI.settings.put = function(id, data) {
+      return $http.put('/api/settings/' + id, data);
+    };
+
     return yadaAPI;
   };
 

@@ -45,6 +45,11 @@
         url: '/faqs',
         templateUrl: 'templates/faqs.html',
         controller: 'AdminFaqsController'
+      })
+      .state('settings', {
+        url: '/settings',
+        templateUrl: 'templates/settings.html',
+        controller: 'AdminSettingsController'
       });
   }]);
 }());
