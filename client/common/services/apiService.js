@@ -83,6 +83,20 @@
     return yadaAPI;
   };
 
+    yadaAPI.settings = {};
+
+    yadaAPI.settings.get = function() {
+      return $http.get('/api/settings');
+    };
+
+    yadaAPI.settings.post = function(data) {
+      return $http.post('/api/settings/', data);
+    };
+
+    yadaAPI.settings.put = function(id, data) {
+      return $http.put('/api/settings/' + id, data);
+    };
+
   app.factory('YadaAPI', ['$http', apiService]);
   
 }(angular.module('yg.common.services.api', [])));
