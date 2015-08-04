@@ -47,7 +47,7 @@
           <div class="reminder" ng-repeat="reminder in categoryGroup.members">
             <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
             <p>{{reminder.message}}</p>
-            <p class="text-muted">{{reminder.detail}}</p>
+            <p class="text-muted" ng-bind-html="reminder.detail | linebreaks"></p>
           </div>
         </div>
       </div>
