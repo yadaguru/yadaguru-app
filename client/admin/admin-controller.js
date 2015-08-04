@@ -17,4 +17,5 @@
                                           'yg.admin.controllers.test-dates',
                                           'yg.admin.controllers.test-messages',
                                           'yg.admin.controllers.categories',
-                                          'yg.admin.controllers.faqs'])));
+                                          'yg.admin.controllers.faqs',
+                                          'yg.admin.controllers.settings'])));

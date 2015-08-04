@@ -80,9 +80,6 @@
       return $http.put('/api/faqs/' + id, data);
     };
 
-    return yadaAPI;
-  };
-
     yadaAPI.settings = {};
 
     yadaAPI.settings.get = function() {
@@ -96,6 +93,9 @@
     yadaAPI.settings.put = function(id, data) {
       return $http.put('/api/settings/' + id, data);
     };
+
+    return yadaAPI;
+  };
 
   app.factory('YadaAPI', ['$http', apiService]);
   
