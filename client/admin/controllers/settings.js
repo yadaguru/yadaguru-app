@@ -4,28 +4,59 @@
 
   var AdminSettingsController = function($scope, YadaAPI) {
 
-    $scope.faqContent = '';
-    $scope.faqId = '';
+    $scope.settings = {};
 
-    $scope.getSettingsContent = function() {
+    $scope.getSettings = function() {
       YadaAPI.settings.get().then(function(resp) {
-        $scope.faqContent = resp.data[0].content;
-        $scope.faqId = resp.data[0]._id;
+        $scope.data = resp.data[0];
+        $scope.generateDays();
       }, function(err) {console.log(err);});
     };
 
-    $scope.getSettingsContent();
 
-    $scope.saveSettingsContent = function() {
-      var contentJson = {'content': $scope.faqContent};
-      YadaAPI.settings.put($scope.faqId, contentJson).then(function() {
-        toastr.success('FAQs Saved Successfully');
+    $scope.save = function(data) {
+      YadaAPI.settings.put(data._id, data).then(function() {
+        toastr.success('Settings Saved Successfully');
       }, function(err) {
         toastr.error('Save failed');
         console.log(err);
       });
     };
 
+    $scope.months = [
+      {id: 1, label: 'January'},
+      {id: 2, label: 'February'},
+      {id: 3, label: 'March'},
+      {id: 4, label: 'April'},
+      {id: 5, label: 'May'},
+      {id: 6, label: 'June'},
+      {id: 7, label: 'July'},
+      {id: 8, label: 'August'},
+      {id: 9, label: 'September'},
+      {id: 10, label: 'October'},
+      {id: 11, label: 'November'},
+      {id: 12, label: 'December'},
+    ];
+
+    $scope.generateDays = function() {
+      var month = $scope.data.summerCutoffMonth;
+      var count;
+      var days30 = [4, 6, 9, 11];
+      if (month === 2) {
+        count = 28 ;
+      } else if (days30.indexOf(month) !== -1) {
+        count = 30;
+      } else {
+        count = 31;
+      }
+      var days = [];
+      for (var i = 1; i <= count; i++) {
+        days.push({'id': i, 'label': i});
+      }
+      $scope.days = days;
+    };
+
+    $scope.getSettings();
   };
 
   app.controller('AdminSettingsController', ['$scope', 'YadaAPI', AdminSettingsController]);

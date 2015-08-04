@@ -86,10 +86,6 @@
       return $http.get('/api/settings');
     };
 
-    yadaAPI.settings.post = function(data) {
-      return $http.post('/api/settings/', data);
-    };
-
     yadaAPI.settings.put = function(id, data) {
       return $http.put('/api/settings/' + id, data);
     };

@@ -1,11 +1,17 @@
 <div class="container">
   <div class="row">
     <h2>Settings</h2>
-    <form name="settingsForm" novalidate>
+    <form name="settingsForm" class="col-md-6" novalidate>
       <div class="form-group" show-errors>
-        <label class="control-label" for="summerCutoffDate">Summer Cutoff Date:</label>
-        <input type="text" ng-model="data.summerCutoffDate" ng-pattern=/^([1-9]|0[1-9]|1[012])[-\/.]([1-9]|0[1-9]|[12][0-9]|3[01])[-\/.](\d\d)|((19|20)\d\d)$/
-        name="summerCutoffDate" class="form-control" id="summerCutoffDate" placeholder="mm/dd/yyyy" required/>
+        <label class="control-label" for="summerCutoffMonth">Summer Cutoff Date:</label>
+        <div class="form-inline row">
+          <select ng-options="month.id as month.label for month in months" ng-change="generateDays()" 
+                  ng-model="data.summerCutoffMonth" id="summerCutoffMonth" name="summerCutoffMonth" 
+                  class="form-control col-md-8" required></select>
+          <select ng-options="day.id as day.label for day in days" 
+                  ng-model="data.summerCutoffDay" id="summerCutoffDay" name="summerCutoffDay" 
+                  class="form-control col-md-4" required></select>
+        </div>
       </div>
       <button class="btn btn-primary" ng-click="save(data)">Save</button>
   </div>
