@@ -41,6 +41,7 @@
     "gulp-task-listing": "^1.0.0",
     "gulp-util": "^3.0.5",
     "jshint-stylish": "^2.0.0",
+    "migrate": "^0.2.2",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2",
     "mongoose-migration": "^0.1.0",
