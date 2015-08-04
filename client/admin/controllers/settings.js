@@ -24,25 +24,25 @@
     };
 
     $scope.months = [
-      {id: 1, label: 'January'},
-      {id: 2, label: 'February'},
-      {id: 3, label: 'March'},
-      {id: 4, label: 'April'},
-      {id: 5, label: 'May'},
-      {id: 6, label: 'June'},
-      {id: 7, label: 'July'},
-      {id: 8, label: 'August'},
-      {id: 9, label: 'September'},
-      {id: 10, label: 'October'},
-      {id: 11, label: 'November'},
-      {id: 12, label: 'December'},
+      {id: 0, label: 'January'},
+      {id: 1, label: 'February'},
+      {id: 2, label: 'March'},
+      {id: 3, label: 'April'},
+      {id: 4, label: 'May'},
+      {id: 5, label: 'June'},
+      {id: 6, label: 'July'},
+      {id: 7, label: 'August'},
+      {id: 8, label: 'September'},
+      {id: 9, label: 'October'},
+      {id: 10, label: 'November'},
+      {id: 11, label: 'December'},
     ];
 
     $scope.generateDays = function() {
       var month = $scope.data.summerCutoffMonth;
       var count;
-      var days30 = [4, 6, 9, 11];
-      if (month === 2) {
+      var days30 = [3, 5, 8, 10];
+      if (month === 1) {
         count = 28 ;
       } else if (days30.indexOf(month) !== -1) {
         count = 30;

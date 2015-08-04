@@ -10,13 +10,15 @@
       var reminderData = data.reminders,
           testDateData = data.testDates,
           categoryData = data.categories,
+          settings = data.settings[0],
+          summerDate = {'month': settings.summerCutoffMonth, 'day': settings.summerCutoffDay},
           testMessageData = data.testMessages[0],
           testMessageCategory = Utils.lookup(categoryData, '_id', testMessageData.testCategory, 'categoryName'),
           allData,
           reminderMessages,
           groupedMessages;
       reminderData = ReminderService.flattenTimeframes(reminderData);
-      reminderData = ReminderService.generateSortDates(reminderData, 'timeframes', $scope.formData.dt);
+      reminderData = ReminderService.generateSortDates(reminderData, 'timeframes', $scope.formData.dt, summerDate);
       var reminderDataWithCategory = [];
       reminderData = reminderData.forEach(function(reminder) {
         reminder.category = Utils.lookup(categoryData, '_id', reminder.category, 'categoryName');
@@ -49,7 +51,7 @@
 
     $scope.getReminders = function(formData) {
       $scope.formData = formData;
-      Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories'], $scope.buildReminderList);
+      Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories', 'settings'], $scope.buildReminderList);
     };
 
     $scope.format = 'M/d/yyyy';
