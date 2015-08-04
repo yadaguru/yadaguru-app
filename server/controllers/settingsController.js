@@ -37,10 +37,11 @@ var settingsController = function(Settings) {
   var post = function(req, res) {
 
     // Return an error if there is missing data, else save data
-    if(!req.body.content) {
+    if(!req.body.summerCutoffMonth ||
+       !req.body.summerCutoffDay) {
       res.status(400);
       res.send('Not all properties are present. ' +
-          'Requires summerCutoffDate.');
+          'Requires summerCutoffMonth and summerCutoffDay.');
     } else {
       // Get the post data from the body
       var settings = new Settings(req.body);

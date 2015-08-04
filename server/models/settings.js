@@ -2,7 +2,8 @@ var mongoose  = require('mongoose'),
     Schema    = mongoose.Schema;
 
 var settingsSchema = new Schema({
-  summerCutoffDate: {type: Date},
+  summerCutoffMonth: {type: Number},
+  summerCutoffDay: {type: Number}
 });
 
 module.exports = mongoose.model('Settings', settingsSchema);
