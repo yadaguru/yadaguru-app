@@ -25,6 +25,10 @@ module.exports = function(app) {
   var faqRouter = require('../routes/faqRoutes')(Faq);
   app.use('/api/faqs', faqRouter);
 
+  var Settings = require('../models/settings');
+  var settingsRouter = require('../routes/settingsRoutes')(Settings);
+  app.use('/api/settings', settingsRouter);
+
   var exportRouter = require('../routes/exportRoutes')();
   app.use('/api/export', exportRouter);
-}
+};
