@@ -2,46 +2,26 @@
   <h3 ng-if="context=='add'" class="modal-title">Add a reminder</h3>
   <h3 ng-if="context=='edit'" class="modal-title">Edit a reminder</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body reminder-edit-modal">
   <p class="text-info">
     Type <code>%SCHOOL%</code> and <code>%DATE%</code> to display the
     user-selected school name and appropriate reminder date
   </p>
   <form name="editReminderForm" novalidate>
-    <div class="form-group" show-errors>
+    <div class="form-group col-md-4" show-errors>
       <label class="control-label" for="name">Name:</label>
       <input type="text" ng-model="data.name" name="name"
         class="form-control" id="name" placeholder="Reminder name" required/>
     </div>
-    <div class="form-group" show-errors>
+    <div class="form-group col-md-4" show-errors>
       <label class="control-label" for="category">Category:</label>
       <select ng-options="category._id as category.categoryName for category in categories" ng-model="data.categoryId" 
               id="category" name="category" class="form-control" required>
       </select>
     </div>
-    <div class="form-group" show-errors>
-      <label class="control-label" for="message">Message:</label>
-      <input type="text" ng-model="data.message" name="message"
-        class="form-control" id="message" placeholder="Reminder message" required/>
-    </div>
-    <div class="form-group" show-errors>
-      <label class="control-label" for="detail">Detail:</label>
-      <textarea ng-model="data.detail" class="form-control" name="detail"
-        id="detail" rows="3" placeholder="Details for the reminder" required></textarea>
-    </div>
-    <div class="form-group" show-errors>
-      <label class="control-label" for="late-message">Late Message:</label>
-      <input type="text" ng-model="data.lateMessage" name="late-message"
-        class="form-control" id="late-message" placeholder="Late reminder message" required/>
-    </div>
-    <div class="form-group" show-errors>
-      <label class="control-label" for="late-detail">Late Detail:</label>
-      <textarea ng-model="data.lateDetail" class="form-control" name="late-detail"
-        id="late-detail" rows="3" placeholder="Details for the late reminder" required></textarea>
-    </div>
-    <div class="form-group" show-errors>
+    <div class="form-group col-md-4" show-errors>
       <label class="control-label" for="timeframe">
-        Timeframe (press <kbd>ctrl</kbd> while clicking to select multiple timeframes):
+        Timeframes:
       </label>
       <select ng-model="data.timeframes" multiple class="form-control" id="time-frame" name="time-frame" required>
         <option value="summer">Summer</option>
@@ -56,7 +36,44 @@
         <option value="1">1 Day</option>
         <option value="none">None (displays at top of list)</option>
       </select>
+      <p class="text-info">Press CTRL while clicking to select multiple timeframes</p>
     </div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#normal" aria-controls="normal messages" role="tab" data-toggle="tab">
+          Normal Messages
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#late" aria-controls="late messages" role="tab" data-toggle="tab">
+          Late Messages
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="normal">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="message">Message:</label>
+          <input type="text" ng-model="data.message" name="message"
+            class="form-control" id="message" placeholder="Reminder message" required/>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="detail">Detail:</label>
+          <div class="text-editor" name="detail" text-angular ng-model="data.detail" required></div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="late">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="late-message">Late Message:</label>
+          <input type="text" ng-model="data.lateMessage" name="late-message"
+            class="form-control" id="late-message" placeholder="Late reminder message" required/>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="detail">Late Detail:</label>
+          <div class=text-editor" name="late-detail" text-angular ng-model="data.lateDetail" required></div>
+        </div>
+      </div>
+  </form>
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger pull-left" ng-if="context =='edit'"
