@@ -56,6 +56,9 @@ body {
     font-family: "Rock Salt", cursive;
     font-size: x-small; }
 
+.modal .modal-dialog {
+  width: 80%; }
+
 .reminder-box {
   background-color: #66C285; }
 
