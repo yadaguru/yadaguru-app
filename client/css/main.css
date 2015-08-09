@@ -18,6 +18,10 @@ body {
 .panel-heading.collapsed h3:after {
   content: "\e080"; }
 
+.center {
+  text-align: center;
+}
+
 .fa-square-o {
   float: left;
   margin-right: 5px;
