@@ -23,14 +23,19 @@
               </span>
             </p>
           </div>
-          <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
-                 class="btn pull-right" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
-                 ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
+          <div class="row">
+            <div class="col-md-6 col-md-push-6 center">
+              <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
+                     class="btn" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
+                     ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
+            </div>
+            <div class="col-md-6 col-md-pull-6 center">
+              <button type="button" onClick="window.print()" class="btn"
+                    ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
+                    ng-disabled="!reminders.length > 0"><i class="fa fa-print"></i> Print This Page </button>
+            </div>
+          </div>
         </form>
-        <button type="button" onClick="window.print()" class="btn pull-left"
-                ng-class="!groups ? 'btn-default' : 'btn-primary'"
-                ng-disabled="!groups"><i class="fa fa-print"></i> Print This Page </button>
-        <div class="clearfix"></div>
         <p class="text-center space-before">Before submitting, please read our <strong><a ui-sref="faqs">Frequently Asked Questions</a></strong></p>
       </div>
     </div>
