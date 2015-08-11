@@ -9,5 +9,5 @@ gulp.task('styles', function () {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(gulp.dest(paths.cssRoot));
+    .pipe(gulp.dest(paths.publicCssRoot));
 });

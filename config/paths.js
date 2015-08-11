@@ -1,12 +1,12 @@
 var clientRoot = 'client/',
     serverRoot = 'server/',
-    cssRoot = clientRoot + 'css/';
+    publicCssRoot = clientRoot + 'public/css/';
     bowerPath  = clientRoot + 'vendor/';
 
 module.exports = {
   clientRoot: clientRoot,
   serverRoot: serverRoot,
-  cssRoot: cssRoot,
+  publicCssRoot: publicCssRoot,
   allClient: [
     clientRoot + '**/*.js',
     clientRoot + '**/*.css',

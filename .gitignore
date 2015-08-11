@@ -6,4 +6,4 @@
 npm-debug.log
 /.sass-cache/*
 /.idea/*
-/client/css/*
+/client/public/css/*

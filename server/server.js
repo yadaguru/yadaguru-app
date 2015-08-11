@@ -7,10 +7,6 @@ require('./config/passport.js')();
 
 require('./config/expressRoutes.js')(app);
 
-app.get('/', function (req, res) {
-  res.sendFile(config.clientPath + '/root/index.html');
-});
-
 app.get('/login', function(req, res) {
   res.sendFile(config.clientPath + '/login/index.html');
 });
