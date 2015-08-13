@@ -60,6 +60,7 @@
       groupedMessages.forEach(function(dateGroup) {
         dateGroup.members = Utils.groupBy(dateGroup.members, 'category');
       });
+      $scope.setTab(groupedMessages[0].name);
       $scope.reminders = groupedMessages;
     };
 
