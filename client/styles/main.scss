@@ -8,13 +8,57 @@ $font_0: Glyphicons Halflings;
 $font_1: helvetica;
 $font_2: sans-serif;
 
+// Pixel variables
+$footerHeight: 140px;
+$insideFooterHeight: $footerHeight - 20px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 	font-family: $font_1, $font_2;
-	margin: 0;
+	margin: 0 0 $footerHeight 0; // Margin bottom is footer height
 	padding: 0;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+	padding: 10px;
+  width: 100%;
+  height: $footerHeight; // Footer fixed height
+  background-color: #f5f5f5;
+	.row div {
+		height: $insideFooterHeight;
+	}
+}
+
+.logo {
+	height: $insideFooterHeight;
+  width: auto;
+}
+
+.absolute-center {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.fa-9 {
+  font-size: 9em;
+	color: black;
+}
+
 [ng-cloak] {
+	display: none !important;
+}
+
+[ng\:cloak] {
 	display: none !important;
 }
 
@@ -91,7 +135,6 @@ body {
 
   h3 {
 	font-family: "Rock Salt", cursive;
-	font-size: x-small;
   }
 
 }
@@ -116,6 +159,31 @@ body {
   margin-top: 1em;
 }
 
+.ng-enter,
+.ng-leave
+{
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.ng-enter.ng-enter-active,
+.ng-leave {
+    opacity: 1;
+    top: 0;
+    height: 30px;
+}
+
+.ng-leave.ng-leave-active,
+.ng-enter {
+    opacity: 0;
+    top: -50px;
+    height: 0px;
+}
 
 @media(min-width: 768px) {
 
@@ -151,14 +219,4 @@ body {
 		color: $gray;
 	}
 
-}
-
-[ng\:cloak] {
-	display: none !important;
-}
-
-.logo {
-  height: 75%;
-  width: 75%;
-  bottom: 0;
 }

@@ -42,28 +42,24 @@
   </div>
 </div>
 <div ng-show="reminders.length > 0" class="container">
-  <div class="row">
-    <div class="panel col-sm-6 col-sm-offset-3">
-      <div class="row">
-        <ul class="nav nav-pills nav-centered">
-          <li ng-class="{'active':isActiveTab(dateGroup.name)}"
-              ng-click="setTab(dateGroup.name)"
-              ng-cloak
-              ng-repeat="dateGroup in reminders"
-              class="date-group" >
-            <a href="#">{{dateGroup.name}}</a>
-          </li>
-        </ul>
-      </div>
-      <div ng-show="isActiveTab(dateGroup.name)" class="row" ng-repeat="dateGroup in reminders">
-        <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
-          <div class="reminder" ng-repeat="reminder in categoryGroup.members">
-            <h2>{{categoryGroup.name}}</h2>
-            <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
-            <p>{{reminder.message}}</p>
-            <p ng-bind-html="reminder.detail | linebreaks"></p>
-          </div>
-        </div>
+  <div class="row panel col-sm-6 col-sm-offset-3">
+    <ul class="nav nav-pills nav-centered">
+      <li ng-class="{'active':isActiveTab(dateGroup.name)}"
+          ng-click="setTab(dateGroup.name)"
+          ng-cloak
+          ng-repeat="dateGroup in reminders"
+          class="date-group" >
+        <a href="#">{{dateGroup.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row panel col-sm-6 col-sm-offset-3" ng-animate="'animate'" ng-repeat="dateGroup in reminders | filter:selectedTab">
+    <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+      <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+        <h2>{{categoryGroup.name}}</h2>
+        <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+        <p>{{reminder.message}}</p>
+        <p ng-bind-html="reminder.detail | linebreaks"></p>
       </div>
     </div>
   </div>
