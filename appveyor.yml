@@ -12,8 +12,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm i -g bower
-  - npm i -g istanbul
-  - npm install
+  - npm install /m
 
 # Post-install test scripts.
 test_script:

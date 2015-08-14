@@ -9,5 +9,5 @@ before_install:
   - npm i -g bower
   - npm i -g istanbul
 install:
-  - npm install
+  - npm install /m
 script: "npm run-script test-travis"
