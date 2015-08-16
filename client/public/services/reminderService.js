@@ -36,22 +36,32 @@
      * @param {date} date - a JavaScript date object representing the student-selected date
      */
     reminderService.generateSortDates = function(data, originKey, date, summerCutoffDate) {
+      var getYear = function (currentDate, cutoff, offset) {
+        offset = offset || 0;
+        if (currentDate.getMonth() < cutoff) {
+          return currentDate.getFullYear() - 1 + offset;
+        }
+        return currentDate.getFullYear() + offset; 
+      };
+
       return data.map(function(d) {
+        var currentDate = new Date();
+        var year, month, day;
         if (d[originKey].match(/^\d+$/)) {
           d.sortDate = reminderService.calcDate(d[originKey], date);
         } else if (d[originKey] === 'summer') {
-          var currentDate = new Date();
-          var year;
-          var month = summerCutoffDate.month;
-          var day = summerCutoffDate.day;
-          if (currentDate.getMonth() >= 2) {
-            year = currentDate.getFullYear();
-          } else {
-            year = currentDate.getFullYear - 1;
-          }
+          year = getYear(currentDate, 2);
+          month = summerCutoffDate.month;
+          day = summerCutoffDate.day;
           d.sortDate = new Date(year, month, day).toISOString();
         } else if (d[originKey] === 'none') {
           d.sortDate = '0';
+        } else if (d[originKey] === 'may1') {
+          year = getYear(currentDate, 2);
+          d.sortDate = new Date(year, 4, 1).toISOString();
+        } else if (d[originKey] === 'jan1') {
+          year = getYear(currentDate, 2, 1);
+          d.sortDate = new Date(year, 0, 1).toISOString();
         } else {
           d.sortDate = d[originKey];
         }
