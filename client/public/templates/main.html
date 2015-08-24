@@ -53,7 +53,8 @@
       </li>
     </ul>
   </div>
-  <div class="row panel col-sm-6 col-sm-offset-3" ng-animate="'animate'" ng-repeat="dateGroup in reminders | filter:selectedTab">
+  <div class="row panel col-sm-6 col-sm-offset-3 reminders" ng-repeat="dateGroup in reminders | filter:selectedTab">
+    <h2>{{dateGroup.name}}</h2>
     <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
       <div class="reminder" ng-repeat="reminder in categoryGroup.members">
         <h2>{{categoryGroup.name}}</h2>
