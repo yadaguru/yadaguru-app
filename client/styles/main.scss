@@ -114,13 +114,20 @@ body {
     text-align:center;
 }
 
+.panel {
+  background-color: #f5f5f5;
+}
+
 .root {
-
-  background-image: url(../assets/paper.jpg);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+  background: #fff;
+  background-image:
+    linear-gradient(to right, rgba(255,85,91, .2), rgba(255,85,91, .2)),
+    linear-gradient(to right, rgba(255,85,91, .8), rgba(255,85,91, .8)),
+    linear-gradient(to bottom, white 0px, white 69px, rgba(255,255,255,0) 70px),
+    repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+  background-size: 1px, 1px, auto, auto 20px;
+  background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+  background-position: 90% 0px, 10% 0px, 0px 0px, 0px 0px;
   div.container {
     position: relative;
   }
