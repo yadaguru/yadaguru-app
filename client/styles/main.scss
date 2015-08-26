@@ -167,30 +167,32 @@ body {
 }
 
 // Animations for reminders
+.reminders {
+  transition: 1s linear all;
+  line-height:40px;
+  overflow: hidden;
+}
+
 .reminders.ng-enter,
 .reminders.ng-leave
 {
-    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    position: relative;
-    display: block;
+  //transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative;
+  display: block;
 }
 
 .reminders.ng-enter.ng-enter-active,
 .reminders.ng-leave {
-    opacity: 1;
-    top: 0;
-    height: 30px;
+  opacity: 1;
+  top: 0;
+  max-height: 1000px;
 }
 
 .reminders.ng-leave.ng-leave-active,
 .reminders.ng-enter {
-    opacity: 0;
-    top: -50px;
-    height: 0px;
+  opacity: 0;
+  top: -50px;
+  max-height: 0px;
 }
 
 @media(min-width: 768px) {
