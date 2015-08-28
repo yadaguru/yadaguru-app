@@ -6,19 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YadaGuru</title>
 
-    <!-- bower:css -->
     <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/vendor/toastr/toastr.css" />
     <link rel="stylesheet" href="/vendor/angular-toastr/dist/angular-toastr.css" />
-    <!-- endbower -->
 
     <!-- Google Font Link -->
     <link href='http://fonts.googleapis.com/css?family=Graduate|Rock+Salt' rel='stylesheet' type='text/css'>
 
-    <!-- inject:css -->
     <link rel="stylesheet" href="css/main.css">
-    <!-- endinject -->
   </head>
   <body class="root" ng-controller="RootController">
     <!--[if lt IE 8]>
@@ -32,11 +28,29 @@
     </div>
     <div ui-view></div>
 
-    <div class="col-xs-3 col-sm-2 col-lg-2">
-      <h3 align="left"> Made with love by</h3>
-      <img src="/assets/CFPLogo.png" class="logo" alt="Brought to you by Code for Philly" />
-    </div>
     <!-- Code for Philly Logo -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-sm-3 col-md-3">
+            <h3 class="text-muted absolute-center">Made with love by </h3>
+          </div>
+          <div class="col-xs-6 col-sm-3 col-md-2">
+            <a href="https://codeforphilly.org/" class="absolute-center">
+              <img src="/assets/CFPLogo.png" class="logo" alt="Brought to you by Code for Philly" />
+            </a>
+          </div>
+          <div class="hidden-xs col-sm-3 col-md-3 col-md-offset-2">
+            <h3 class="text-muted absolute-center">Contribute on Github!</h3>
+          </div>
+          <div class="hidden-xs col-sm-3 col-md-2">
+            <a class="absolute-center" href="https://github.com/yadaguru/yadaguru-app">
+              <i class="fa fa-github fa-9"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <!-- Google Analytics -->
@@ -52,19 +66,16 @@
   </script>
   <!-- End Google Analytics -->
 
-  <!-- bower:js -->
   <script src="/vendor/jquery/dist/jquery.js"></script>
   <script src="/vendor/angular/angular.js"></script>
   <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="/vendor/angular-animate/angular-animate.js"></script>
   <script src="/vendor/toastr/toastr.js"></script>
   <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <script src="/vendor/angular-resource/angular-resource.js"></script>
   <script src="/vendor/textAngular/dist/textAngular-sanitize.min.js"></script>
-  <!-- endbower -->
+  <script src="/vendor/angular-animate/angular-animate.js"></script>
 
-  <!-- inject:js -->
   <script src="/common/app.js"></script>
   <script src="/common/services.js"></script>
   <script src="/common/services/authService.js"></script>
@@ -78,5 +89,4 @@
   <script src="filters.js"></script>
   <script src="services/reminderService.js"></script>
   <script src="root-controller.js"></script>
-  <!-- endinject -->
 </html>

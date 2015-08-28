@@ -39,22 +39,28 @@
         <p class="text-center space-before">Before submitting, please read our <strong><a ui-sref="faqs">Frequently Asked Questions</a></strong></p>
       </div>
     </div>
-
-    <div class="date-group panel panel-default col-sm-8 col-sm-offset-2" ng-cloak ng-repeat="dateGroup in reminders">
-      <div class="panel-heading">
-        <h2 class="panel-title">
-          {{dateGroup.name}}
-        </h2>
-      </div>
-      <div class="panel-body">
-        <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
-          <h3>{{categoryGroup.name}}</h3>
-          <div class="reminder" ng-repeat="reminder in categoryGroup.members">
-            <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
-            <p>{{reminder.message}}</p>
-            <p class="text-muted" ng-bind-html="reminder.detail | linebreaks"></p>
-          </div>
-        </div>
+  </div>
+</div>
+<div ng-show="reminders.length > 0" class="container">
+  <div class="row panel col-sm-6 col-sm-offset-3">
+    <ul class="nav nav-pills nav-centered">
+      <li ng-class="{'active':isActiveTab(dateGroup.name)}"
+          ng-click="setTab(dateGroup.name)"
+          ng-cloak
+          ng-repeat="dateGroup in reminders"
+          class="date-group" >
+        <a href="#">{{dateGroup.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row panel col-sm-6 col-sm-offset-3 reminders" ng-repeat="dateGroup in reminders | filter:selectedTab">
+    <h2>{{dateGroup.name}}</h2>
+    <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+      <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+        <h2>{{categoryGroup.name}}</h2>
+        <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+        <p>{{reminder.message}}</p>
+        <p ng-bind-html="reminder.detail | linebreaks"></p>
       </div>
     </div>
   </div>

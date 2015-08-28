@@ -30,6 +30,6 @@
   };
 
   app.config(['$stateProvider', '$urlRouterProvider', config]);
-    
-}(angular.module('yg.root', ['ngResource', 'ui.bootstrap', 'yg.common.services', 'yg.root.services', 'ui.router', 
-                 'yg.root.filters.reminder', 'ngSanitize'])));
+
+}(angular.module('yg.root', ['ngResource', 'ui.bootstrap', 'yg.common.services', 'yg.root.services', 'ui.router',
+                 'yg.root.filters.reminder', 'ngSanitize', 'ngAnimate'])));

@@ -5,6 +5,20 @@
     $scope.reminders = [];
     $scope.dt = new Date();
 
+    $scope.selectedTab;
+
+    $scope.setTab = function(tabName) {
+      $scope.selectedTab = tabName;
+    }
+
+    $scope.isActiveTab = function(tabName) {
+      if ($scope.selectedTab === tabName) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     $scope.buildReminderList = function(data) {
       var currentDate = new Date();
       var reminderData = data.reminders,
@@ -40,12 +54,13 @@
       });
       allData = reminderDataWithCategory.concat(testDateData);
       allData = Utils.sortBy(allData, 'sortDate');
-      reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt, 
+      reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
       groupedMessages.forEach(function(dateGroup) {
         dateGroup.members = Utils.groupBy(dateGroup.members, 'category');
       });
+      $scope.setTab(groupedMessages[0].name);
       $scope.reminders = groupedMessages;
     };
 
@@ -79,7 +94,7 @@
   };
 
   var FaqController = function($scope, YadaAPI, $sce) {
-    
+
     $scope.faqContent = '';
 
     $scope.getFaqs = function() {

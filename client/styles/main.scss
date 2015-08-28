@@ -1,20 +1,64 @@
 //colors
 $gray: #808080;
 $green: #66C285;
+$rust: hsla(18, 60%, 35%, 1);
 
 //fonts
 $font_0: Glyphicons Halflings;
 $font_1: helvetica;
 $font_2: sans-serif;
 
+// Pixel variables
+$footerHeight: 140px;
+$insideFooterHeight: $footerHeight - 20px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 	font-family: $font_1, $font_2;
-	margin: 0;
+	margin: 0 0 $footerHeight 0; // Margin bottom is footer height
 	padding: 0;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+	padding: 10px;
+  width: 100%;
+  height: $footerHeight; // Footer fixed height
+  background-color: #f5f5f5;
+	.row div {
+		height: $insideFooterHeight;
+	}
+}
+
+.logo {
+	height: $insideFooterHeight;
+  width: auto;
+}
+
+.absolute-center {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.fa-9 {
+  font-size: 9em;
+	color: black;
+}
 
 [ng-cloak] {
+	display: none !important;
+}
+
+[ng\:cloak] {
 	display: none !important;
 }
 
@@ -22,19 +66,8 @@ body {
 	display: none !important;
 }
 
-.panel-heading {
-
-	h3:after {
-		font-family: $font_0;
-		content: "\e114";
-		float: right;
-		color: $gray;
-	}
-
-	&.collapsed h3:after {
-		content: "\e080";
-	}
-
+.text-alt {
+	color: $rust;
 }
 
 .fa-square-o {
@@ -70,14 +103,31 @@ body {
 	margin-bottom: 30px;
 }
 
+.nav-tabs.nav-centered > li, .nav-pills.nav-centered > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs.nav-centered, .nav-pills.nav-centered {
+    text-align:center;
+}
+
+.panel {
+  background-color: #f5f5f5;
+}
 
 .root {
-
-  background-image: url(../assets/paper.jpg);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+  background: #fff;
+  background-image:
+    linear-gradient(to right, rgba(255,85,91, .2), rgba(255,85,91, .2)),
+    linear-gradient(to right, rgba(255,85,91, .8), rgba(255,85,91, .8)),
+    linear-gradient(to bottom, white 0px, white 69px, rgba(255,255,255,0) 70px),
+    repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+  background-size: 1px, 1px, auto, auto 20px;
+  background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+  background-position: 90% 0px, 10% 0px, 0px 0px, 0px 0px;
   div.container {
     position: relative;
   }
@@ -92,7 +142,6 @@ body {
 
   h3 {
 	font-family: "Rock Salt", cursive;
-	font-size: x-small;
   }
 
 }
@@ -117,6 +166,34 @@ body {
   margin-top: 1em;
 }
 
+// Animations for reminders
+.reminders {
+  transition: 1s linear all;
+  line-height:40px;
+  overflow: hidden;
+}
+
+.reminders.ng-enter,
+.reminders.ng-leave
+{
+  //transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative;
+  display: block;
+}
+
+.reminders.ng-enter.ng-enter-active,
+.reminders.ng-leave {
+  opacity: 1;
+  top: 0;
+  max-height: 1000px;
+}
+
+.reminders.ng-leave.ng-leave-active,
+.reminders.ng-enter {
+  opacity: 0;
+  top: -50px;
+  max-height: 0px;
+}
 
 @media(min-width: 768px) {
 
@@ -152,14 +229,4 @@ body {
 		color: $gray;
 	}
 
-}
-
-[ng\:cloak] {
-	display: none !important;
-}
-
-.logo {
-  height: 75%;
-  width: 75%;
-  bottom: 0;
 }
