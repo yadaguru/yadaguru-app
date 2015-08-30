@@ -29,5 +29,8 @@
     "bootstrap": {
       "main": "dist/css/bootstrap.css"
     }
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.5"
   }
 }

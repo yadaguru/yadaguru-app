@@ -62,6 +62,7 @@
       });
       $scope.setTab(groupedMessages[0].name);
       $scope.reminders = groupedMessages;
+      console.log($scope.reminders);
     };
 
     $scope.getReminders = function(formData) {

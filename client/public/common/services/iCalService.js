@@ -1,0 +1,41 @@
+(function(app) {
+
+  'use strict';
+
+  var iCalService = function() {
+    var iCalFactory = function() {
+      // Ideally if the browser is MSIE < 10 the iCal save button shouldn't be shown
+      if (navigator.userAgent.indexOf('MSIE') > -1 &&
+          navigator.userAgent.indexOf('MSIE 10') === -1) {
+        console.log('Unsupported Browser');
+        return;
+      }
+      this.SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
+      this.BEGIN = ['BEGIN:VCALENDAR', 'VERSION:2.0'].join(this.SEPARATOR);
+      this.END = this.SEPARATOR + 'END:VCALENDAR';
+      this.events = [];
+    };
+
+
+    iCalFactory.prototype.addEvent = function(calEvent) {
+      if (calEvent.startDate && calEvent.endDate && calEvent.summary &&
+          calEvent.description && calEvent.comment) {
+        this.events.push([
+          'BEGIN:VEVENT',
+          'CLASS:PUBLIC',
+          'DESCRIPTION' + calEvent.description,
+          'DTSTART;VALUE=DATE:' + calEvent.startDate,
+          'DTEND;VALUE=DATE:' + calEvent.endDate,
+          'SUMMARY;LANGUAGE=en-us:' + calEvent.summary,
+          'COMMENT:' + calEvent.comment,
+          'END:VEVENT'
+        ].join(this.SEPARATOR));
+      }
+    };
+
+    return iCalFactory;
+  };
+
+  app.factory('iCalService', [iCalService]);
+
+}(angular.module('yg.common.services.iCal', [])));

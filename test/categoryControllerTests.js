@@ -3,23 +3,23 @@ var should = require('should'),
 
 var postMock = function(categoryName) {
   // Mock category object
-  var Category = function(category){ this.save = function(){} };
+  var Category = function(category){ this.save = function(){}; };
 
   var req = {
     body: {
       categoryName: categoryName
     }
-  }
+  };
 
   var res = {
     status: sinon.spy(),
     send: sinon.spy()
-  }
+  };
 
   var categoryController = require('../server/controllers/categoryController')(Category);
   categoryController.post(req, res);
   return res;
-}
+};
 
 describe('Category Controller Tests:', function() {
   describe('POST', function () {
