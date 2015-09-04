@@ -12,7 +12,7 @@
       }
       this.SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
       this.BEGIN = ['BEGIN:VCALENDAR', 'VERSION:2.0'].join(this.SEPARATOR);
-      this.END = this.SEPARATOR + 'END:VCALENDAR';
+      this.END = 'END:VCALENDAR';
       this.events = [];
     };
 
@@ -31,6 +31,12 @@
           'END:VEVENT'
         ].join(this.SEPARATOR));
       }
+    };
+
+    iCalFactory.prototype.getCal = function() {
+      return [this.BEGIN,
+              this.events.join(this.SEPARATOR),
+              this.END].join(this.SEPARATOR);
     };
 
     return iCalFactory;

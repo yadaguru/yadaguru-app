@@ -3,13 +3,14 @@
 
   var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
     $scope.reminders = [];
+    var ungroupedReminders = [];
     $scope.dt = new Date();
 
-    $scope.selectedTab;
+    $scope.selectedTab = '';
 
     $scope.setTab = function(tabName) {
       $scope.selectedTab = tabName;
-    }
+    };
 
     $scope.isActiveTab = function(tabName) {
       if ($scope.selectedTab === tabName) {
@@ -17,7 +18,7 @@
       } else {
         return false;
       }
-    }
+    };
 
     $scope.buildReminderList = function(data) {
       var currentDate = new Date();
@@ -54,6 +55,7 @@
       });
       allData = reminderDataWithCategory.concat(testDateData);
       allData = Utils.sortBy(allData, 'sortDate');
+      ungroupedReminders = allData;
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
