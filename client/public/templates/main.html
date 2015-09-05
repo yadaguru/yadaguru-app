@@ -41,6 +41,21 @@
     </div>
   </div>
 </div>
+<div ng-show="reminders.length === 0" class="container">
+  <div class="row panel col-sm-6 col-sm-offset-3 instructions">
+    <h2 class="text-center">How to use YadaGuru</h2>
+    <p>YadaGuru is a tool that helps you remember all the things you have to do for your college applications.</p>
+    <p>You come to YadaGuru with the Regular Decision Application Submission Date of the school you’re applying to.</p>
+    <p>Then do the following:</p>
+    <ol>
+      <li>Give YadaGuru the <em>name of the school</em> you’re applying to.</li>
+      <li>Give YadaGuru the <em>application submission date</em> for the school.</li>
+      <li>Click <em>‘Get My Reminders’</em> to see your plan.</li>
+    </ol>
+    <p><strong>Yadaguru will then give you a plan.</strong></p>
+    <p>Following the plan will help you submit <strong>complete</strong> applications on time.</p>
+  </div>
+</div>
 <div ng-show="reminders.length > 0" class="container">
   <div class="row panel col-sm-6 col-sm-offset-3">
     <ul class="nav nav-pills nav-centered">
