@@ -27,7 +27,7 @@ describe('iCal Service', function() {
       var expected = [
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
-        'DESCRIPTION' + validEvent.description,
+        'DESCRIPTION:' + validEvent.description,
         'DTSTART;VALUE=DATE:' + validEvent.startDate,
         'DTEND;VALUE=DATE:' + validEvent.endDate,
         'SUMMARY;LANGUAGE=en-us:' + validEvent.summary,

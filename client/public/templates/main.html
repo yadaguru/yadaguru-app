@@ -23,16 +23,25 @@
               </span>
             </p>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-md-push-6 center">
-              <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
-                     class="btn" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
-                     ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
+          <div class="reminder-btn-group">
+            <div class="row">
+              <div class="col-md-6 col-md-push-6 center">
+                <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
+                       class="btn" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
+                       ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
+              </div>
+              <div class="col-md-6 col-md-pull-6 center">
+                <button type="button" onClick="window.print()" class="btn"
+                      ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
+                      ng-disabled="!reminders.length > 0"><i class="fa fa-print"></i> Print This Page </button>
+              </div>
             </div>
-            <div class="col-md-6 col-md-pull-6 center">
-              <button type="button" onClick="window.print()" class="btn"
-                    ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
-                    ng-disabled="!reminders.length > 0"><i class="fa fa-print"></i> Print This Page </button>
+            <div class="row">
+              <div class="col-md-6 center">
+                <button type="button" ng-click="downloadReminders()" class="btn"
+                      ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
+                      ng-disabled="!reminders.length > 0"><i class="fa fa-save"></i> Download iCal </button>
+              </div>
             </div>
           </div>
         </form>

@@ -1,9 +1,10 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
-    $scope.reminders = [];
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService, iCalService) {
     var ungroupedReminders = [];
+    var iCal = new iCalService();
+    $scope.reminders = [];
     $scope.dt = new Date();
 
     $scope.selectedTab = '';
@@ -18,6 +19,25 @@
       } else {
         return false;
       }
+    };
+
+    $scope.downloadReminders = function() {
+      ungroupedReminders.forEach(function(ur) {
+        var date = new Date(ur.sortDate);
+        var dateFormatted = date.getFullYear() +
+                            ('0' + (date.getMonth()+1)).slice(-2) +
+                            ('0' + date.getDate()).slice(-2);
+        var calEvent = {
+          description: ur.name || ur.testType,
+          startDate: dateFormatted,
+          endDate: dateFormatted,
+          summary: ur.detail,
+          comment: ur.message
+        };
+        iCal.addEvent(calEvent);
+      });
+      iCal.download('test.ics');
+      iCal.events = [];
     };
 
     $scope.buildReminderList = function(data) {
@@ -55,7 +75,8 @@
       });
       allData = reminderDataWithCategory.concat(testDateData);
       allData = Utils.sortBy(allData, 'sortDate');
-      ungroupedReminders = allData;
+      ungroupedReminders = allData; // Set ungroupedReminders for the iCal download
+      console.log(ungroupedReminders);
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
@@ -64,7 +85,6 @@
       });
       $scope.setTab(groupedMessages[0].name);
       $scope.reminders = groupedMessages;
-      console.log($scope.reminders);
     };
 
     $scope.getReminders = function(formData) {
@@ -110,7 +130,7 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
+  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'iCalService', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));

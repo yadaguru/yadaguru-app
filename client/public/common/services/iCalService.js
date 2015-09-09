@@ -2,7 +2,7 @@
 
   'use strict';
 
-  var iCalService = function() {
+  var iCalService = function(SaveAs) {
     var iCalFactory = function() {
       // Ideally if the browser is MSIE < 10 the iCal save button shouldn't be shown
       if (navigator.userAgent.indexOf('MSIE') > -1 &&
@@ -23,13 +23,16 @@
         this.events.push([
           'BEGIN:VEVENT',
           'CLASS:PUBLIC',
-          'DESCRIPTION' + calEvent.description,
+          'DESCRIPTION:' + calEvent.description,
           'DTSTART;VALUE=DATE:' + calEvent.startDate,
           'DTEND;VALUE=DATE:' + calEvent.endDate,
           'SUMMARY;LANGUAGE=en-us:' + calEvent.summary,
           'COMMENT:' + calEvent.comment,
           'END:VEVENT'
         ].join(this.SEPARATOR));
+      } else {
+        console.log('Error: bad event data');
+        console.log(calEvent);
       }
     };
 
@@ -39,9 +42,14 @@
               this.END].join(this.SEPARATOR);
     };
 
+    iCalFactory.prototype.download = function (filename) {
+      var blob = new Blob([this.getCal()]);
+      SaveAs.download(blob, filename);
+    };
+
     return iCalFactory;
   };
 
-  app.factory('iCalService', [iCalService]);
+  app.factory('iCalService', ['SaveAs', iCalService]);
 
 }(angular.module('yg.common.services.iCal', [])));
