@@ -9,8 +9,16 @@ $font_1: helvetica;
 $font_2: sans-serif;
 
 // Pixel variables
-$footerHeight: 250px;
+$large-logo-width: 750px;
+$small-logo-width: 208px;
+$large-footer-height: 250px;
+$small-footer-height: 360px;
 $footer-logo: 120px;
+
+// Bootstrap Breakpoints
+$bootstrap-sm: 768px;
+$bootstrap-md: 992px;
+$bootstrap-lg: 1200px;
 
 html {
   position: relative;
@@ -19,8 +27,36 @@ html {
 
 body {
 	font-family: $font_1, $font_2;
-	margin: 0 0 $footerHeight + 10px 0; 
+	margin: 0 0 $small-footer-height + 10px 0;
 	padding: 0;
+
+  @media (min-width: $bootstrap-md) {
+    margin: 0 0 $large-footer-height + 10px 0;
+  }
+}
+
+.page-header {
+
+  .small-logo {
+    width: $small-logo-width;
+  }
+
+  .large-logo {
+    display: none;
+  }
+
+  @media (min-width: $bootstrap-md) {
+
+    .large-logo {
+      width: $large-logo-width;
+      display: inline;
+    }
+
+    .small-logo {
+      display: none;
+    }
+
+  }
 }
 
 .footer {
@@ -30,7 +66,15 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  max-height: $footerHeight;
+  max-height: $small-footer-height;
+
+  @media (min-width: $bootstrap-sm) {
+    max-height: $large-footer-height;
+
+    .small {
+      font-size: 85%;
+    }
+  }
 }
 
 .logo {
