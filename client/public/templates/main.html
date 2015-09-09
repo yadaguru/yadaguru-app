@@ -27,24 +27,24 @@
             <div class="row">
               <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
                 <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
-                       class="btn" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
-                       ng-disabled="reminderForm.$invalid"
+                       class="btn" ng-disabled="reminderForm.$invalid"
+                       ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
                        ng-hide="reminders.length > 0">Get My Reminders!</button>
               </div>
               <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
-                <button type="button" onClick="window.print()" class="btn"
-                      ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
-                      ng-hide="!reminders.length > 0"><i class="fa fa-print"></i> Print This Page </button>
+                <button type="button" onClick="window.print()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-print"></i> Print This Page </button>
               </div>
               <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
-                <button type="button" ng-click="downloadReminders()" class="btn"
-                      ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
-                      ng-hide="!reminders.length > 0"><i class="fa fa-save"></i> Download iCal </button>
+                <button type="button" ng-click="downloadReminders()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-save"></i> Download iCal </button>
               </div>
               <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
-                <button type="button" ng-click="clearReminders()" class="btn"
-                      ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-info'"
-                      ng-hide="!reminders.length > 0"><i class="fa fa-refresh"></i> Restart </button>
+                <button type="button" ng-click="clearReminders()"
+                        class="btn btn-info" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-refresh"></i> Restart </button>
               </div>
             </div>
           </div>
