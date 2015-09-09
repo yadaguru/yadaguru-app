@@ -48,6 +48,7 @@ body {
   @media (min-width: $bootstrap-md) {
 
     .large-logo {
+      max-width: 100%;
       width: $large-logo-width;
       display: inline;
     }
