@@ -21,6 +21,13 @@
       }
     };
 
+    $scope.clearReminders = function() {
+      $scope.reminders = [];
+      $scope.ungroupedReminders = [];
+      $scope.formData.dt = null;
+      $scope.formData.schoolName = null;
+    };
+
     $scope.downloadReminders = function() {
       ungroupedReminders.forEach(function(ur) {
         var date = new Date(ur.sortDate);
@@ -76,7 +83,6 @@
       allData = reminderDataWithCategory.concat(testDateData);
       allData = Utils.sortBy(allData, 'sortDate');
       ungroupedReminders = allData; // Set ungroupedReminders for the iCal download
-      console.log(ungroupedReminders);
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
