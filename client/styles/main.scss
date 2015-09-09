@@ -194,6 +194,11 @@ body {
   max-height: 0px;
 }
 
+.reminder-btn-group .btn {
+  width: 100%;
+  margin: 5px 0;
+}
+
 @media(min-width: 768px) {
 
 	.page-header h1 {
