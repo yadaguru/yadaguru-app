@@ -5,11 +5,11 @@
     $scope.reminders = [];
     $scope.dt = new Date();
 
-    $scope.selectedTab;
+    $scope.selectedTab = '';
 
     $scope.setTab = function(tabName) {
       $scope.selectedTab = tabName;
-    }
+    };
 
     $scope.isActiveTab = function(tabName) {
       if ($scope.selectedTab === tabName) {
@@ -17,7 +17,7 @@
       } else {
         return false;
       }
-    }
+    };
 
     $scope.buildReminderList = function(data) {
       var currentDate = new Date();
