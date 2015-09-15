@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService, iCalService) {
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService, iCalService, $timeout) {
     var ungroupedReminders = [];
     var iCal = new iCalService();
     $scope.reminders = [];
@@ -10,7 +10,10 @@
     $scope.selectedTab = '';
 
     $scope.setTab = function(tabName) {
-      $scope.selectedTab = tabName;
+      $scope.selectedTab = '';
+      $timeout(function() {
+        $scope.selectedTab = tabName;
+      }, 1000);
     };
 
     $scope.isActiveTab = function(tabName) {
@@ -43,8 +46,16 @@
         };
         iCal.addEvent(calEvent);
       });
-      iCal.download('test.ics');
+      iCal.download('YadaguruReminders.ics');
       iCal.events = [];
+    };
+
+    $scope.saveAsPdf = function() {
+      var pdf = new jsPDF();
+      pdf.fromHTML($('.reminder-container').get(0), 15, 15, {
+      	'width': 170
+      });
+      pdf.save('Test.pdf');
     };
 
     $scope.buildReminderList = function(data) {
@@ -136,7 +147,7 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'iCalService', RootController]);
+  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'iCalService', '$timeout', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));

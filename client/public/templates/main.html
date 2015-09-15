@@ -42,6 +42,11 @@
                         <i class="fa fa-save"></i> Download iCal </button>
               </div>
               <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+                <button type="button" ng-click="saveAsPdf()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-save"></i> Save PDF </button>
+              </div>
+              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
                 <button type="button" ng-click="clearReminders()"
                         class="btn btn-info" ng-hide="!reminders.length > 0">
                         <i class="fa fa-refresh"></i> Restart </button>
@@ -66,14 +71,16 @@
       </li>
     </ul>
   </div>
-  <div class="row panel col-sm-6 col-sm-offset-3 reminders" ng-repeat="dateGroup in reminders | filter:selectedTab">
-    <h2>{{dateGroup.name}}</h2>
-    <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
-      <div class="reminder" ng-repeat="reminder in categoryGroup.members">
-        <h2>{{categoryGroup.name}}</h2>
-        <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
-        <p>{{reminder.message}}</p>
-        <p ng-bind-html="reminder.detail | linebreaks"></p>
+  <div class="reminder-container">
+    <div class="row panel col-sm-6 col-sm-offset-3 reminders" ng-repeat="dateGroup in reminders" ng-show="isActiveTab(dateGroup.name)">
+      <h2>{{dateGroup.name}}</h2>
+      <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+        <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+          <h2>{{categoryGroup.name}}</h2>
+          <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+          <p>{{reminder.message}}</p>
+          <p ng-bind-html="reminder.detail | linebreaks"></p>
+        </div>
       </div>
     </div>
   </div>
