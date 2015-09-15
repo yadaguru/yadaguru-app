@@ -52,7 +52,7 @@
 
     $scope.saveAsPdf = function() {
       var pdf = new jsPDF();
-      pdf.fromHTML($('.reminder-container').get(0), 15, 15, {
+      pdf.fromHTML(angular.element('.reminder-container').html(), 15, 15, {
       	'width': 170
       });
       pdf.save('Test.pdf');
