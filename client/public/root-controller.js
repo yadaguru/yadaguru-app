@@ -53,8 +53,25 @@
 
     $scope.saveAsPdf = function() {
       var pdf = new pdfService();
-      pdf.fromHTML(angular.element('.reminder-container').html(), 15, 15, {
-      	'width': 170
+      var width = 170;
+      var xStart = 15;
+      var yStart = 0;
+      var headerHeight = 30;
+      pdf.fromHTML(angular.element('#header').html(), xStart, yStart, {
+        'width': width,
+        'pagesplit': true,
+        'dim': {
+          'h': 10,
+          'w': 10
+        }
+      });
+      pdf.fromHTML(angular.element('.reminder-container').html(), xStart, yStart + headerHeight, {
+        'width': width,
+        'pagesplit': true,
+        'dim': {
+          'h': 10,
+          'w': 10
+        }
       });
       pdf.save('Test.pdf');
     };

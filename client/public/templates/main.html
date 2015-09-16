@@ -3,13 +3,13 @@
     <div class="panel panel-default clearfix reminder-box col-sm-6 col-sm-offset-3" id="reminderForms">
       <div class="panel-body">
         <form name="reminderForm" novalidate>
-          <div class="form-group">
+          <div class="form-group" ng-hide="reminders.length > 0">
             <label for="schoolName">College/University Name</label>
             <input type="text" id="schoolName" class="form-control"
                    ng-model="formData.schoolName" required
                    placeholder="Enter the name of the college/university"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-hide="reminders.length > 0">
             <label for="submissionDate">Submission Date for Application</label>
             <p class="input-group">
               <input type="text" class="form-control" datepicker-popup={{format}}
