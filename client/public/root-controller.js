@@ -1,7 +1,8 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService, iCalService, $timeout) {
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService,
+                                 iCalService, $timeout, pdfService) {
     var ungroupedReminders = [];
     var iCal = new iCalService();
     $scope.reminders = [];
@@ -51,7 +52,7 @@
     };
 
     $scope.saveAsPdf = function() {
-      var pdf = new jsPDF();
+      var pdf = new pdfService();
       pdf.fromHTML(angular.element('.reminder-container').html(), 15, 15, {
       	'width': 170
       });
@@ -147,7 +148,8 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'iCalService', '$timeout', RootController]);
+  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService',
+    'iCalService', '$timeout', 'pdfService', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));

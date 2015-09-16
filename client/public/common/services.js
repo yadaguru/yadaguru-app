@@ -11,6 +11,7 @@
      'yg.common.services.auth',
      'yg.common.services.identity',
      'yg.common.services.notifier',
-     'yg.common.services.iCal']);
+     'yg.common.services.iCal',
+     'yg.common.services.pdf']);
 
 }());
