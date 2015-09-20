@@ -9,8 +9,8 @@ $font_1: helvetica;
 $font_2: sans-serif;
 
 // Pixel variables
-$footerHeight: 140px;
-$insideFooterHeight: $footerHeight - 20px;
+$footerHeight: 250px;
+$footer-logo: 120px;
 
 html {
   position: relative;
@@ -19,39 +19,32 @@ html {
 
 body {
 	font-family: $font_1, $font_2;
-	margin: 0 0 $footerHeight 0; // Margin bottom is footer height
+	margin: 0 0 $footerHeight + 10px 0; 
 	padding: 0;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-	padding: 10px;
-  width: 100%;
-  height: $footerHeight; // Footer fixed height
   background-color: #f5f5f5;
-	.row div {
-		height: $insideFooterHeight;
-	}
+  padding: 20px 0 10px 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-height: $footerHeight;
 }
 
 .logo {
-	height: $insideFooterHeight;
-  width: auto;
-}
-
-.absolute-center {
-    position: absolute;
-    margin: 0;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+  height: $footer-logo;
+  vertical-align: middle;
 }
 
 .fa-9 {
   font-size: 9em;
 	color: black;
+}
+
+.disclaimer {
+  margin-top: 10px;
 }
 
 [ng-cloak] {
