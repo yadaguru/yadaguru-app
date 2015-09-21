@@ -1,9 +1,10 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService, GoogleCalendar) {
     $scope.reminders = [];
     $scope.dt = new Date();
+    var calendarData;
 
     $scope.selectedTab = '';
 
@@ -53,6 +54,7 @@
         return msg.testType === 'ACT';
       });
       allData = reminderDataWithCategory.concat(testDateData);
+      calendarData = allData;
       allData = Utils.sortBy(allData, 'sortDate');
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
@@ -67,6 +69,10 @@
     $scope.getReminders = function(formData) {
       $scope.formData = formData;
       Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories', 'settings'], $scope.buildReminderList);
+    };
+
+    $scope.exportToGoogleCalendar = function() {
+      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt);
     };
 
     $scope.format = 'M/d/yyyy';
@@ -107,7 +113,7 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
+  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'GoogleCalendar', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));
