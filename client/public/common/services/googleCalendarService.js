@@ -2,7 +2,7 @@
 
   'use strict';
 
-  var googleCalendarService = function(Utils) {
+  var googleCalendarService = function(Utils, $rootScope) {
 
     var CLIENT_ID = '240339457257-tqhtiqq9irs42ite1tmp1gjii23hg3uo.apps.googleusercontent.com';
     var SCOPES = ['https://www.googleapis.com/auth/calendar'];
@@ -36,7 +36,7 @@
       return year + '-' + month + '-' + day;
     }
 
-    function addCalendarEvents(events, school, dueDate) {
+    function addCalendarEvents(events, school, dueDate, callback) {
       // authorizes YadaGuru with user's Google account
       gapi.auth.authorize({
         'client_id': CLIENT_ID,
@@ -75,7 +75,10 @@
               }));
             }
             batch.execute(function(resp) {
-              window.open('https://www.google.com/calendar', '_blank');
+              console.log('complete');
+              $rootScope.$apply(function() {
+                callback(resp);
+              })
             });
           });
         });
@@ -83,10 +86,10 @@
     }
 
     return {
-      addCalendarEvents: addCalendarEvents
+      addCalendarEvents: addCalendarEvents,
     };
   };
 
-  app.factory('GoogleCalendar', ['Utils', googleCalendarService]);
+  app.factory('GoogleCalendar', ['Utils', '$rootScope', googleCalendarService]);
 
 }(angular.module('yg.common.services.google-calendar', [])));

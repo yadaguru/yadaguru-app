@@ -31,27 +31,36 @@
                        ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
                        ng-hide="reminders.length > 0">Get My Reminders!</button>
               </div>
-              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
                 <button type="button" onClick="window.print()"
                         class="btn btn-primary" ng-hide="!reminders.length > 0">
                         <i class="fa fa-print"></i> Print This Page </button>
               </div>
-              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
                 <button type="button" ng-click="downloadReminders()"
                         class="btn btn-primary" ng-hide="!reminders.length > 0">
                         <i class="fa fa-save"></i> Download iCal </button>
               </div>
-              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
                 <button type="button" ng-click="exportToGoogleCalendar()"
-                        class="btn btn-primary" ng-hide="!reminders.length > 0">
-                        <i class="fa fa-calendar"></i> Export to Google Calendar </button>
+                        ng-hide="exportStatus === 'complete' || !reminders.length > 0"
+                        class="btn btn-primary">
+                  <span ng-show="exportStatus === 'ready'">
+                    <i class="fa fa-calendar"></i> Send to Google Calendar
+                  </span>
+                  <span ng-show="exportStatus === 'exporting'">
+                    Sending...
+                  </span>
+                </button>
+                <a href="https://www.google.com/calendar/" target="_blank" class="btn btn-primary"
+                   ng-show="exportStatus === 'complete'"> Sent! Click to Open </a>
               </div>
-              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
                 <button type="button" ng-click="saveAsPdf()"
                         class="btn btn-primary" ng-hide="!reminders.length > 0">
                         <i class="fa fa-save"></i> Save PDF </button>
               </div>
-              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
                 <button type="button" ng-click="clearReminders()"
                         class="btn btn-info" ng-hide="!reminders.length > 0">
                         <i class="fa fa-refresh"></i> Restart </button>

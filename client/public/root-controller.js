@@ -1,7 +1,7 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService, GoogleCalendar,
+  var RootController = function ($scope, $rootScope, YadaAPI, Utils, ReminderService, GoogleCalendar,
                                  iCalService, $timeout, pdfService) {
     var ungroupedReminders = [];
     var iCal = new iCalService();
@@ -129,8 +129,13 @@
       Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories', 'settings'], $scope.buildReminderList);
     };
 
+    $rootScope.exportStatus = 'ready';
+
     $scope.exportToGoogleCalendar = function() {
-      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt);
+      $rootScope.exportStatus = 'exporting';
+      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt, function(resp) {
+        $rootScope.exportStatus = 'complete';
+      });
     };
 
     $scope.format = 'M/d/yyyy';
@@ -171,7 +176,7 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'GoogleCalendar',
+  app.controller('RootController', ['$scope', '$rootScope', 'YadaAPI', 'Utils', 'ReminderService', 'GoogleCalendar',
     'iCalService', '$timeout', 'pdfService', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
