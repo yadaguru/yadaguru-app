@@ -1,8 +1,8 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService,
-                                 iCalService, $timeout, pdfService, GoogleCalendar) {
+  var RootController = function ($scope, YadaAPI, Utils, ReminderService, GoogleCalendar,
+                                 iCalService, $timeout, pdfService) {
     var ungroupedReminders = [];
     var iCal = new iCalService();
     $scope.reminders = [];
