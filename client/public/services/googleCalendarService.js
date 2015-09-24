@@ -11,7 +11,8 @@
     function _parseAllVars(message, event, school, dueDate) {
 
       var replaceVar = function(string, variable, value) {
-        return string.replace(variable, value);
+        var re = new RegExp(variable, 'g');
+        return string.replace(re, value);
       };
 
       message = event.registrationDate ? replaceVar(message, '%REGDATE%', Utils.formatDate(event.registrationDate)) : message;
