@@ -23,11 +23,17 @@
     "textAngular": "~1.4.2",
     "angular-route": "1.4.3",
     "angular": "1.4.3",
-    "angular-animate": "1.4.3"
+    "angular-animate": "1.4.3",
+    "angular-file-saver": "~0.2.0",
+    "file-saver": "*",
+    "jspdf": "~1.1.135"
   },
   "overrides": {
     "bootstrap": {
       "main": "dist/css/bootstrap.css"
     }
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.5"
   }
 }

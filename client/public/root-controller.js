@@ -1,14 +1,21 @@
 (function(app) {
   'use strict';
 
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService) {
+  var RootController = function ($scope, $rootScope, YadaAPI, Utils, ReminderService, GoogleCalendar,
+                                 iCalService, $timeout, pdfService) {
+    var ungroupedReminders = [];
+    var iCal = new iCalService();
     $scope.reminders = [];
     $scope.dt = new Date();
+    var calendarData;
 
     $scope.selectedTab = '';
 
     $scope.setTab = function(tabName) {
-      $scope.selectedTab = tabName;
+      $scope.selectedTab = '';
+      $timeout(function() {
+        $scope.selectedTab = tabName;
+      }, 1000);
     };
 
     $scope.isActiveTab = function(tabName) {
@@ -17,6 +24,57 @@
       } else {
         return false;
       }
+    };
+
+    $scope.clearReminders = function() {
+      $scope.reminders = [];
+      $scope.ungroupedReminders = [];
+      $scope.formData.dt = null;
+      $scope.formData.schoolName = null;
+    };
+
+    $scope.downloadReminders = function() {
+      ungroupedReminders.forEach(function(ur) {
+        var date = new Date(ur.sortDate);
+        var dateFormatted = date.getFullYear() +
+                            ('0' + (date.getMonth()+1)).slice(-2) +
+                            ('0' + date.getDate()).slice(-2);
+        var calEvent = {
+          description: ur.name || ur.testType,
+          startDate: dateFormatted,
+          endDate: dateFormatted,
+          summary: ur.detail,
+          comment: ur.message
+        };
+        iCal.addEvent(calEvent);
+      });
+      iCal.download('YadaguruReminders.ics');
+      iCal.events = [];
+    };
+
+    $scope.saveAsPdf = function() {
+      var pdf = new pdfService();
+      var width = 170;
+      var xStart = 15;
+      var yStart = 0;
+      var headerHeight = 30;
+      pdf.fromHTML(angular.element('#header').html(), xStart, yStart, {
+        'width': width,
+        'pagesplit': true,
+        'dim': {
+          'h': 10,
+          'w': 10
+        }
+      });
+      pdf.fromHTML(angular.element('.reminder-container').html(), xStart, yStart + headerHeight, {
+        'width': width,
+        'pagesplit': true,
+        'dim': {
+          'h': 10,
+          'w': 10
+        }
+      });
+      pdf.save('Test.pdf');
     };
 
     $scope.buildReminderList = function(data) {
@@ -53,7 +111,9 @@
         return msg.testType === 'ACT';
       });
       allData = reminderDataWithCategory.concat(testDateData);
+      calendarData = allData;
       allData = Utils.sortBy(allData, 'sortDate');
+      ungroupedReminders = allData; // Set ungroupedReminders for the iCal download
       reminderMessages = ReminderService.generateMessages(allData, $scope.formData.schoolName, $scope.formData.dt,
                                                           currentDate, testMessageCategory);
       groupedMessages = Utils.groupBy(reminderMessages, 'date');
@@ -67,6 +127,15 @@
     $scope.getReminders = function(formData) {
       $scope.formData = formData;
       Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories', 'settings'], $scope.buildReminderList);
+    };
+
+    $rootScope.exportStatus = 'ready';
+
+    $scope.exportToGoogleCalendar = function() {
+      $rootScope.exportStatus = 'exporting';
+      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt, function(resp) {
+        $rootScope.exportStatus = 'complete';
+      });
     };
 
     $scope.format = 'M/d/yyyy';
@@ -107,7 +176,8 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', RootController]);
+  app.controller('RootController', ['$scope', '$rootScope', 'YadaAPI', 'Utils', 'ReminderService', 'GoogleCalendar',
+    'iCalService', '$timeout', 'pdfService', RootController]);
   app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
 
 }(angular.module('yg.root')));
