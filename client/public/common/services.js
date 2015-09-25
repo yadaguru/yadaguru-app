@@ -11,5 +11,4 @@
      'yg.common.services.auth',
      'yg.common.services.identity',
      'yg.common.services.notifier']);
-
 }());

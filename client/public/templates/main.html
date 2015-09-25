@@ -3,13 +3,13 @@
     <div class="panel panel-default clearfix reminder-box col-sm-6 col-sm-offset-3" id="reminderForms">
       <div class="panel-body">
         <form name="reminderForm" novalidate>
-          <div class="form-group">
+          <div class="form-group" ng-hide="reminders.length > 0">
             <label for="schoolName">College/University Name</label>
             <input type="text" id="schoolName" class="form-control"
                    ng-model="formData.schoolName" required
                    placeholder="Enter the name of the college/university"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" ng-hide="reminders.length > 0">
             <label for="submissionDate">Submission Date for Application</label>
             <p class="input-group">
               <input type="text" class="form-control" datepicker-popup={{format}}
@@ -23,16 +23,48 @@
               </span>
             </p>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-md-push-6 center">
-              <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
-                     class="btn" ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
-                     ng-disabled="reminderForm.$invalid">Get My Reminders!</button>
-            </div>
-            <div class="col-md-6 col-md-pull-6 center">
-              <button type="button" onClick="window.print()" class="btn"
-                    ng-class="!reminders.length > 0 ? 'btn-default' : 'btn-primary'"
-                    ng-disabled="!reminders.length > 0"><i class="fa fa-print"></i> Print This Page </button>
+          <div class="reminder-btn-group">
+            <div class="row">
+              <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 center">
+                <button id="reminderSubmit" type="submit" ng-click="getReminders(formData)"
+                       class="btn" ng-disabled="reminderForm.$invalid"
+                       ng-class="reminderForm.$invalid ? 'btn-default' : 'btn-primary'"
+                       ng-hide="reminders.length > 0">Get My Reminders!</button>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
+                <button type="button" onClick="window.print()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-print"></i> Print This Page </button>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
+                <button type="button" ng-click="downloadReminders()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-save"></i> Download iCal </button>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
+                <button type="button" ng-click="exportToGoogleCalendar()"
+                        ng-hide="exportStatus === 'complete' || !reminders.length > 0"
+                        class="btn btn-primary">
+                  <span ng-show="exportStatus === 'ready'">
+                    <i class="fa fa-calendar"></i> Send to Google Calendar
+                  </span>
+                  <span ng-show="exportStatus === 'exporting'">
+                    Sending...
+                  </span>
+                </button>
+                <a href="https://www.google.com/calendar/" target="_blank" class="btn btn-primary"
+                   ng-show="exportStatus === 'complete'"> Sent! Click to Open </a>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
+                <button type="button" ng-click="saveAsPdf()"
+                        class="btn btn-primary" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-save"></i> Save PDF </button>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 center">
+                <button type="button" ng-click="clearReminders()"
+                        class="btn btn-info" ng-hide="!reminders.length > 0">
+                        <i class="fa fa-refresh"></i> Restart </button>
+              </div>
             </div>
           </div>
         </form>
@@ -41,28 +73,42 @@
     </div>
   </div>
 </div>
+<div ng-show="reminders.length === 0" class="container">
+  <div class="row panel col-sm-6 col-sm-offset-3 instructions">
+    <h2 class="text-center">How to use YadaGuru</h2>
+    <p>YadaGuru is a tool that helps you remember all the things you have to do for your college applications.</p>
+    <p>You come to YadaGuru with the Regular Decision Application Submission Date of the school you’re applying to.</p>
+    <p>Then do the following:</p>
+    <ol>
+      <li>Give YadaGuru the <em>name of the school</em> you’re applying to.</li>
+      <li>Give YadaGuru the <em>application submission date</em> for the school.</li>
+      <li>Click <em>‘Get My Reminders’</em> to see your plan.</li>
+    </ol>
+    <p><strong>Yadaguru will then give you a plan.</strong></p>
+    <p>Following the plan will help you submit <strong>complete</strong> applications on time.</p>
+  </div>
+</div>
 <div ng-show="reminders.length > 0" class="container">
-  <div class="row">
-    <div class="panel col-sm-6 col-sm-offset-3">
-      <div class="row">
-        <ul class="nav nav-pills nav-centered">
-          <li ng-class="{'active':isActiveTab(dateGroup.name)}"
-              ng-click="setTab(dateGroup.name)"
-              ng-cloak
-              ng-repeat="dateGroup in reminders"
-              class="date-group" >
-            <a href="#">{{dateGroup.name}}</a>
-          </li>
-        </ul>
-      </div>
-      <div ng-show="isActiveTab(dateGroup.name)" class="row" ng-repeat="dateGroup in reminders">
-        <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
-          <div class="reminder" ng-repeat="reminder in categoryGroup.members">
-            <h2>{{categoryGroup.name}}</h2>
-            <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
-            <p>{{reminder.message}}</p>
-            <p ng-bind-html="reminder.detail | linebreaks"></p>
-          </div>
+  <div class="row panel col-sm-6 col-sm-offset-3">
+    <ul class="nav nav-pills nav-centered">
+      <li ng-class="{'active':isActiveTab(dateGroup.name)}"
+          ng-click="setTab(dateGroup.name)"
+          ng-cloak
+          ng-repeat="dateGroup in reminders"
+          class="date-group" >
+        <a href="#">{{dateGroup.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="reminder-container">
+    <div class="row panel col-sm-6 col-sm-offset-3 reminders" ng-repeat="dateGroup in reminders" ng-show="isActiveTab(dateGroup.name)">
+      <h2>{{dateGroup.name}}</h2>
+      <div class="category-group" ng-repeat="categoryGroup in dateGroup.members">
+        <div class="reminder" ng-repeat="reminder in categoryGroup.members">
+          <h2>{{categoryGroup.name}}</h2>
+          <h4><i class="fa fa-square-o fa-1"></i>{{reminder.name}}</h4>
+          <p>{{reminder.message}}</p>
+          <p ng-bind-html="reminder.detail | linebreaks"></p>
         </div>
       </div>
     </div>

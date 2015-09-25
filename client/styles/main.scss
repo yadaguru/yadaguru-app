@@ -8,13 +8,95 @@ $font_0: Glyphicons Halflings;
 $font_1: helvetica;
 $font_2: sans-serif;
 
+// Pixel variables
+$large-logo-width: 750px;
+$small-logo-width: 208px;
+$large-footer-height: 250px;
+$small-footer-height: 360px;
+$footer-logo: 120px;
+
+// Bootstrap Breakpoints
+$bootstrap-sm: 768px;
+$bootstrap-md: 992px;
+$bootstrap-lg: 1200px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 	font-family: $font_1, $font_2;
-	margin: 0;
+	margin: 0 0 $small-footer-height + 10px 0;
 	padding: 0;
+
+  @media (min-width: $bootstrap-md) {
+    margin: 0 0 $large-footer-height + 10px 0;
+  }
+}
+
+.page-header {
+
+  .small-logo {
+    width: $small-logo-width;
+  }
+
+  .large-logo {
+    display: none;
+  }
+
+  @media (min-width: $bootstrap-md) {
+
+    .large-logo {
+      max-width: 100%;
+      width: $large-logo-width;
+      display: inline;
+    }
+
+    .small-logo {
+      display: none;
+    }
+
+  }
+}
+
+.footer {
+  background-color: #f5f5f5;
+  padding: 20px 0 10px 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-height: $small-footer-height;
+
+  @media (min-width: $bootstrap-sm) {
+    max-height: $large-footer-height;
+
+    .small {
+      font-size: 85%;
+    }
+  }
+}
+
+.logo {
+  height: $footer-logo;
+  vertical-align: middle;
+}
+
+.fa-9 {
+  font-size: 9em;
+	color: black;
+}
+
+.disclaimer {
+  margin-top: 10px;
 }
 
 [ng-cloak] {
+	display: none !important;
+}
+
+[ng\:cloak] {
 	display: none !important;
 }
 
@@ -70,13 +152,20 @@ body {
     text-align:center;
 }
 
+.panel {
+  background-color: #f5f5f5;
+}
+
 .root {
-
-  background-image: url(../assets/paper.jpg);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+  background: #fff;
+  background-image:
+    linear-gradient(to right, rgba(255,85,91, .2), rgba(255,85,91, .2)),
+    linear-gradient(to right, rgba(255,85,91, .8), rgba(255,85,91, .8)),
+    linear-gradient(to bottom, white 0px, white 69px, rgba(255,255,255,0) 70px),
+    repeating-linear-gradient(white 0px, white 18px, #A6FFED 19px, white 20px);
+  background-size: 1px, 1px, auto, auto 20px;
+  background-repeat: repeat-y, repeat-y, no-repeat, repeat;
+  background-position: 90% 0px, 10% 0px, 0px 0px, 0px 0px;
   div.container {
     position: relative;
   }
@@ -91,7 +180,6 @@ body {
 
   h3 {
 	font-family: "Rock Salt", cursive;
-	font-size: x-small;
   }
 
 }
@@ -116,6 +204,90 @@ body {
   margin-top: 1em;
 }
 
+// Animations for reminders
+.reminder-container {
+  min-height: 500px;
+}
+.reminders {
+  -webkit-transition: max-height 1s ease-in-out;
+          transition: max-height 1s ease-in-out;
+  overflow: hidden;
+  max-height: 1000px; }
+
+.reminders.ng-hide {
+  max-height: 478px;
+}
+
+.reminders.ng-hide-add {
+  animation:1s slideOutRight ease;
+}
+
+.reminders.ng-hide-remove {
+  animation:1s slideInLeft ease;
+}
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-200%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(200%, 0, 0);
+  }
+}
+
+.slideOutRight {
+  animation-name: slideOutRight;
+}
+
+// .reminders {
+//   transition: 1s linear all;
+//   overflow: hidden;
+// }
+//
+// .reminders.ng-enter,
+// .reminders.ng-leave
+// {
+//   //transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//   position: relative;
+//   display: block;
+// }
+//
+// .reminders.ng-enter.ng-enter-active,
+// .reminders.ng-leave {
+//   opacity: 1;
+//   top: 0;
+//   max-height: 1000px;
+// }
+//
+// .reminders.ng-leave.ng-leave-active,
+// .reminders.ng-enter {
+//   opacity: 0;
+//   top: -50px;
+//   max-height: 0px;
+// }
+
+.reminder-btn-group .btn {
+  width: 100%;
+  margin: 5px 0;
+}
 
 @media(min-width: 768px) {
 
@@ -131,10 +303,13 @@ body {
 		display: none;
 	}
 
-	.collapse {
-		display: block !important;
-		height: auto !important;
-	}
+  #github-text {
+    display: none;
+  }
+
+  #github-logo {
+    display: none;
+  }
 
 	div {
 		page-break-inside: avoid;
@@ -143,22 +318,4 @@ body {
 	.fa-square-o {
 		display: block;
 	}
-
-	.panel-heading.collapsed h3:after {
-		font-family: $font_0;
-		content: "\e114";
-		float: right;
-		color: $gray;
-	}
-
-}
-
-[ng\:cloak] {
-	display: none !important;
-}
-
-.logo {
-  height: 75%;
-  width: 75%;
-  bottom: 0;
 }
