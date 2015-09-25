@@ -10,6 +10,7 @@
     var calendarData;
 
     $scope.selectedTab = '';
+    $scope.exportStatus = 'ready';
 
     $scope.setTab = function(tabName) {
       $scope.selectedTab = '';
@@ -31,6 +32,7 @@
       $scope.ungroupedReminders = [];
       $scope.formData.dt = null;
       $scope.formData.schoolName = null;
+      $scope.exportStatus = 'ready';
     };
 
     $scope.downloadReminders = function() {
@@ -129,12 +131,11 @@
       Utils.getModels(YadaAPI, ['reminders', 'testDates', 'testMessages', 'categories', 'settings'], $scope.buildReminderList);
     };
 
-    $rootScope.exportStatus = 'ready';
 
     $scope.exportToGoogleCalendar = function() {
-      $rootScope.exportStatus = 'exporting';
-      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt, function(resp) {
-        $rootScope.exportStatus = 'complete';
+      $scope.exportStatus = 'exporting';
+      GoogleCalendar.addCalendarEvents(calendarData, $scope.formData.schoolName, $scope.formData.dt, function() {
+        $scope.exportStatus = 'complete';
       });
     };
 
