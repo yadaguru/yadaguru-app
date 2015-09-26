@@ -54,28 +54,140 @@
       iCal.events = [];
     };
 
+    var removeTags = function(html) {
+      var div = document.createElement("div");
+      div.innerHTML = html;
+      return div.textContent || div.innerText || "";
+    };
+
     $scope.saveAsPdf = function() {
-      var pdf = new pdfService();
-      var width = 170;
-      var xStart = 15;
-      var yStart = 0;
-      var headerHeight = 30;
-      pdf.fromHTML(angular.element('#header').html(), xStart, yStart, {
-        'width': width,
-        'pagesplit': true,
-        'dim': {
-          'h': 10,
-          'w': 10
+      var pdf = new pdfService('p', 'in', 'letter');
+      var config = {
+        'dateGroup': {
+          'fontSize': 30,
+          'fontName': 'Times',
+          'indent': 0.5
+        },
+        'category': {
+          'fontSize': 30,
+          'fontName': 'Times',
+          'indent': 0.75
+        },
+        'reminderName': {
+          'fontSize': 18,
+          'fontName': 'Times',
+          'indent': 1
+        },
+        'reminderMessage': {
+          'fontSize': 14,
+          'fontName': 'Times',
+          'indent': 1.25
+        },
+        'reminderDetail': {
+          'fontSize': 14,
+          'fontName': 'Times',
+          'indent': 1.25
         }
-      });
-      pdf.fromHTML(angular.element('.reminder-container').html(), xStart, yStart + headerHeight, {
-        'width': width,
-        'pagesplit': true,
-        'dim': {
-          'h': 10,
-          'w': 10
+      };
+      var verticalOffset = 0.5;
+      var pageHeight = 10.5;
+      var yPos;
+      var groupedMessages = $scope.reminders;
+      for (var i = 0, gmLength = groupedMessages.length; i < gmLength; i++) {
+        var dateGroup = groupedMessages[i];
+    		var dateGroupName = pdf.setFont(config.dateGroup.fontName)
+    					                 .setFontSize(config.dateGroup.fontSize)
+		                           .splitTextToSize(removeTags(dateGroup.name), 8 - config.dateGroup.indent);
+
+        yPos = verticalOffset + config.dateGroup.fontSize / 72;
+
+    		verticalOffset += (dateGroupName.length + 1) * config.dateGroup.fontSize / 72;
+
+        if (verticalOffset > pageHeight) {
+          pdf.addPage();
+          verticalOffset = 0.5;
+          yPos = verticalOffset + config.dateGroup.fontSize / 72;
+          verticalOffset += (dateGroupName.length + 1) * config.dateGroup.fontSize / 72;
         }
-      });
+
+    		pdf.text(config.dateGroup.indent, yPos, dateGroupName);
+
+        var categories = dateGroup.members;
+        for (var x = 0, cLength = categories.length; x < cLength; x++) {
+          var category = categories[x];
+      		var categoryName = pdf.setFont(config.category.fontName)
+      					                .setFontSize(config.category.fontSize)
+		                            .splitTextToSize(removeTags(category.name), 8 - config.category.indent);
+
+          yPos = verticalOffset + config.category.fontSize / 72;
+
+      		verticalOffset += (categoryName.length + 1) * config.category.fontSize / 72;
+
+          if (verticalOffset > pageHeight) {
+            pdf.addPage();
+            verticalOffset = 0.5;
+            yPos = verticalOffset + config.category.fontSize / 72;
+            verticalOffset += (categoryName.length + 1) * config.category.fontSize / 72;
+          }
+
+      		pdf.text(config.category.indent, yPos, categoryName);
+
+          var reminders = category.members;
+          for (var y = 0, rLength = reminders.length; y < rLength; y++) {
+            var reminder = reminders[y];
+        		var reminderName = pdf.setFont(config.reminderName.fontName)
+        					                .setFontSize(config.reminderName.fontSize)
+				                          .splitTextToSize(removeTags(reminder.name), 8 - config.reminderName.indent);
+
+            yPos = verticalOffset + config.reminderName.fontSize / 72;
+
+            verticalOffset += (reminderName.length + 1) * config.reminderName.fontSize / 72;
+
+            if (verticalOffset > pageHeight) {
+              pdf.addPage();
+              verticalOffset = 0.5;
+              yPos = verticalOffset + config.reminderName.fontSize / 72;
+              verticalOffset += (reminderName.length + 1) * config.reminderName.fontSize / 72;
+            }
+
+        		pdf.text(config.reminderName.indent, yPos, reminderName);
+
+        		var reminderMessage = pdf.setFont(config.reminderMessage.fontName)
+      					                     .setFontSize(config.reminderMessage.fontSize)
+				                             .splitTextToSize(removeTags(reminder.message), 8 - config.reminderMessage.indent);
+
+            yPos = verticalOffset + config.reminderMessage.fontSize / 72;
+
+            verticalOffset += (reminderMessage.length + 1) * config.reminderMessage.fontSize / 72;
+
+            if (verticalOffset > pageHeight) {
+              pdf.addPage();
+              verticalOffset = 0.5;
+              yPos = verticalOffset + config.reminderMessage.fontSize / 72;
+              verticalOffset += (reminderMessage.length + 1) * config.reminderMessage.fontSize / 72;
+            }
+
+        		pdf.text(config.reminderMessage.indent, yPos, reminderMessage);
+
+        		var reminderDetail = pdf.setFont(config.reminderDetail.fontName)
+        					                  .setFontSize(config.reminderDetail.fontSize)
+				                            .splitTextToSize(removeTags(reminder.detail), 8 - config.reminderDetail.indent);
+
+            yPos = verticalOffset + config.reminderDetail.fontSize / 72;
+
+        		verticalOffset += (reminderDetail.length + 2) * config.reminderDetail.fontSize / 72;
+
+            if (verticalOffset > pageHeight) {
+              pdf.addPage();
+              verticalOffset = 0.5;
+              yPos = verticalOffset + config.reminderDetail.fontSize / 72;
+              verticalOffset += (reminderDetail.length + 2) * config.reminderDetail.fontSize / 72;
+            }
+
+            pdf.text(config.reminderDetail.indent, yPos, reminderDetail);
+          }
+        }
+      }
       pdf.save('Test.pdf');
     };
 
@@ -124,6 +236,7 @@
       });
       $scope.setTab(groupedMessages[0].name);
       $scope.reminders = groupedMessages;
+      console.log($scope.reminders);
     };
 
     $scope.getReminders = function(formData) {
