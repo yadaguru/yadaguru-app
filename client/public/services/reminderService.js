@@ -102,6 +102,8 @@
           message.name = reminder.name;
           if (reminder.timeframes === 'none') {
             message.date = 'General Reminders';
+          } else if (currentDate > messageDate) {
+            message.date = 'Things to Do Immediately';
           } else if (reminder.timeframes === 'summer') {
             message.date = 'Before the School Year Starts';
           } else {
