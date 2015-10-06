@@ -299,9 +299,21 @@ body {
 
 @media print {
 
-	#reminderForms {
-		display: none;
-	}
+  .small-logo {
+    display: none;
+  }
+
+  .large-logo {
+    display: block !important;
+  }
+
+  #reminderForms {
+    display: none;
+  }
+ 
+  .nav {
+    display: none;
+  }
 
   #github-text {
     display: none;
@@ -311,11 +323,11 @@ body {
     display: none;
   }
 
-	div {
-		page-break-inside: avoid;
-	}
+  .fa-square-o {
+    display: block;
+  }
 
-	.fa-square-o {
-		display: block;
-	}
+  .reminders {
+    display: block !important;
+  }
 }
