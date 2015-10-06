@@ -227,7 +227,8 @@
               cnt.push(st);
               break;
           }
-          case "div":case "p": {
+          case "div":
+          case "p": {
               p = CreateParagraph();
               var st = {stack: []};
               st.stack.push(p);
@@ -236,6 +237,11 @@
 
               cnt.push(st);
               break;
+          }
+          case "a": {
+            ParseContainer(cnt, e, p, styles);
+            p.text.push("[ " + e.getAttribute("href") + " ]");
+            break;
           }
           default: {
               console.log("Parsing for node " + e.nodeName + " not found");
