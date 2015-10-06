@@ -265,20 +265,25 @@
         styles: {
           dateGroup: {
             fontSize: 30,
+            margin: 10,
             bold: true
           },
           category: {
-            fontSize: 30
+            fontSize: 30,
+            margin: 10
           },
           reminderName: {
             fontSize: 18,
+            margin: 10,
             bold: true
           },
           reminderMessage: {
-            fontSize: 14
+            fontSize: 14,
+            margin: 10
           },
           reminderDetail: {
-            fontSize: 14
+            fontSize: 14,
+            margin: 10
           }
         }
       };
@@ -290,46 +295,33 @@
       var groupedMessages = $scope.reminders;
       for (var x = 0, gmLength = groupedMessages.length; x < gmLength; x++) {
         var dateGroup = groupedMessages[x];
+
         ParseHtml(docDefinition.content, dateGroup.name);
         docDefinition.content[docDefinition.content.length - 1].style = 'dateGroup';
-        // docDefinition.content.push({
-        //   text: ParseHtml(docDefinition.content, dateGroup.name),
-        //   style: 'dateGroup'
-        // });
+
         var categories = dateGroup.members;
         for (var y = 0, cLength = categories.length; y < cLength; y++) {
           var category = categories[y];
+
           ParseHtml(docDefinition.content, category.name);
           docDefinition.content[docDefinition.content.length - 1].style = 'category';
-          // docDefinition.content.push({
-          //   text: ParseHtml(docDefinition.content, category.name),
-          //   style: 'category'
-          // });
+
           var reminders = category.members;
           for (var z = 0, rLength = reminders.length; z < rLength; z++) {
             var reminder = reminders[z];
+            
             ParseHtml(docDefinition.content, reminder.name);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderName';
-            // docDefinition.content.push({
-            //   text: ParseHtml(docDefinition.content, reminder.name),
-            //   style: 'reminderName'
-            // });
+            
             ParseHtml(docDefinition.content, reminder.message);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderMessage';
-            // docDefinition.content.push({
-            //   text: ParseHtml(docDefinition.content, reminder.message),
-            //   style: 'reminderMessage'
-            // });
+            
             ParseHtml(docDefinition.content, reminder.detail);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderDetail';
-            // docDefinition.content.push({
-            //   text: ParseHtml(docDefinition.content, reminder.detail),
-            //   style: 'reminderDetail'
-            // });
           }
         }
       }
-      pdfMake.createPdf(docDefinition).download();
+      pdfMake.createPdf(docDefinition).download('Yadaguru Reminders');
     };
 
     $scope.buildReminderList = function(data) {
