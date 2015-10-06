@@ -10,7 +10,6 @@
      'yg.common.services.user',
      'yg.common.services.auth',
      'yg.common.services.identity',
-     'yg.common.services.notifier',
-     'yg.common.services.iCal']);
+     'yg.common.services.notifier']);
 
 }());

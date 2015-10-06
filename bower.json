@@ -12,21 +12,22 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap": "~0.13.0",
-    "bootstrap": "~3.3.4",
-    "font-awesome": "~4.3.0",
-    "angular-ui-router": "~0.2.15",
-    "toastr": "~2.1.1",
-    "angular-toastr": "~1.4.1",
-    "angular-resource": "~1.4.1",
-    "modernizr": "~2.8.3",
-    "textAngular": "~1.4.2",
-    "angular-route": "1.4.3",
     "angular": "1.4.3",
     "angular-animate": "1.4.3",
+    "angular-bootstrap": "~0.13.0",
     "angular-file-saver": "~0.2.0",
+    "angular-resource": "~1.4.1",
+    "angular-route": "1.4.3",
+    "angular-toastr": "~1.4.1",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.4",
     "file-saver": "*",
-    "jspdf": "~1.1.135"
+    "font-awesome": "~4.3.0",
+    "jspdf": "~1.1.135",
+    "modernizr": "~2.8.3",
+    "pdfmake": "~0.1.18",
+    "textAngular": "~1.4.2",
+    "toastr": "~2.1.1"
   },
   "overrides": {
     "bootstrap": {
