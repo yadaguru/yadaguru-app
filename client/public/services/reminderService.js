@@ -3,7 +3,7 @@
   'use strict';
 
   var reminderService = function(Utils) {
-    
+
     var reminderService = {};
 
     /**
@@ -41,7 +41,7 @@
         if (currentDate.getMonth() < cutoff) {
           return currentDate.getFullYear() - 1 + offset;
         }
-        return currentDate.getFullYear() + offset; 
+        return currentDate.getFullYear() + offset;
       };
 
       return data.map(function(d) {
@@ -57,10 +57,10 @@
         } else if (d[originKey] === 'none') {
           d.sortDate = '0';
         } else if (d[originKey] === 'may1') {
-          year = getYear(currentDate, 2);
+          year = getYear(currentDate, 6, 1);
           d.sortDate = new Date(year, 4, 1).toISOString();
         } else if (d[originKey] === 'jan1') {
-          year = getYear(currentDate, 2, 1);
+          year = getYear(currentDate, 6, 1);
           d.sortDate = new Date(year, 0, 1).toISOString();
         } else {
           d.sortDate = d[originKey];
