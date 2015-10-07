@@ -39,6 +39,10 @@
     $scope.downloadReminders = function() {
       ungroupedReminders.forEach(function(ur) {
         var date = new Date(ur.sortDate);
+        var today = new Date();
+        if (date < today) {
+          date = today;
+        }
         var dateFormatted = date.getFullYear() +
                             ('0' + (date.getMonth()+1)).slice(-2) +
                             ('0' + date.getDate()).slice(-2);
@@ -315,13 +319,13 @@
           var reminders = category.members;
           for (var z = 0, rLength = reminders.length; z < rLength; z++) {
             var reminder = reminders[z];
-            
+
             ParseHtml(docDefinition.content, reminder.name);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderName';
-            
+
             ParseHtml(docDefinition.content, reminder.message);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderMessage';
-            
+
             ParseHtml(docDefinition.content, reminder.detail);
             docDefinition.content[docDefinition.content.length - 1].style = 'reminderDetail';
           }
