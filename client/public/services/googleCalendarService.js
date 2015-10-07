@@ -31,6 +31,10 @@
 
     function _formatDate(dateTime) {
       var date = new Date(dateTime);
+      var today = new Date();
+      if (date < today) {
+        date = today;
+      }
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();
