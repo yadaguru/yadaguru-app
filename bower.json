@@ -25,7 +25,7 @@
     "font-awesome": "~4.3.0",
     "jspdf": "~1.1.135",
     "modernizr": "~2.8.3",
-    "pdfmake": "~0.1.18",
+    "pdfmake": "~0.1.20",
     "textAngular": "~1.4.2",
     "toastr": "~2.1.1"
   },

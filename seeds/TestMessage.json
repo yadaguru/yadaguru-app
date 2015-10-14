@@ -1,7 +1,0 @@
-[
-  {"satMessage": "If you're planning on taking the SAT Test on %TESTDATE%, you must register by %REGDATE%.", 
-   "satDetail": "Detailed message about registering for the SAT test goes here.",
-   "actMessage": "If you're planning on taking the ACT Test on %TESTDATE%, you must register by %REGDATE%.",
-   "actDetail": "Detailed message about registering for the SAT test goes here.",
-   "testCategory": "a5c2b57ff89f6090f378da17"}
-]
