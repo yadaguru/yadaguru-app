@@ -16,6 +16,11 @@
       this.events = [];
     };
 
+    function _stripHTML(html) {
+      var tmp = document.createElement('DIV');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
 
     iCalFactory.prototype.addEvent = function(calEvent) {
       if (calEvent.startDate && calEvent.endDate && calEvent.summary &&
@@ -23,11 +28,11 @@
         this.events.push([
           'BEGIN:VEVENT',
           'CLASS:PUBLIC',
-          'DESCRIPTION:' + calEvent.description,
+          'DESCRIPTION:' + _stripHTML(calEvent.description),
           'DTSTART;VALUE=DATE:' + calEvent.startDate,
           'DTEND;VALUE=DATE:' + calEvent.endDate,
-          'SUMMARY;LANGUAGE=en-us:' + calEvent.summary,
-          'COMMENT:' + calEvent.comment,
+          'SUMMARY;LANGUAGE=en-us:' + _stripHTML(calEvent.summary),
+          'COMMENT:' + _stripHTML(calEvent.comment),
           'END:VEVENT'
         ].join(this.SEPARATOR));
       } else {

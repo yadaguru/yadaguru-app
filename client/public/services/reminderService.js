@@ -88,7 +88,7 @@
           dueDate = new Date(dueDate);
           if (currentDate < registrationDate && testDate < dueDate) {
             message.category = reminder.category;
-            message.date = 'By ' + Utils.formatDate(reminder.sortDate);
+            message.date = 'To Do By ' + Utils.formatDate(reminder.sortDate);
             message.name = 'Register for the ' + reminder.testType + ' test';
             var parseTestDateVar = {variable:'%TESTDATE%', value: Utils.formatDate(testDate)};
             var parseRegDateVar = {variable: '%REGDATE%', value: Utils.formatDate(registrationDate)};
@@ -103,11 +103,11 @@
           if (reminder.timeframes === 'none') {
             message.date = 'General Reminders';
           } else if (currentDate > messageDate) {
-            message.date = 'Things to Do Immediately';
+            message.date = 'To Do Immediately';
           } else if (reminder.timeframes === 'summer') {
             message.date = 'Before the School Year Starts';
           } else {
-            message.date = 'By ' + Utils.formatDate(reminder.sortDate);
+            message.date = 'To Do By ' + Utils.formatDate(reminder.sortDate);
           }
           var parseSchoolVar = {variable: '%SCHOOL%', value: school};
           var parseDateVar = {variable: '%DATE%', value: Utils.formatDate(reminder.sortDate)};
