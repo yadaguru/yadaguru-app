@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
@@ -55,6 +55,6 @@
     return iCalFactory;
   };
 
-  app.factory('iCalService', ['SaveAs', iCalService]);
+  app.factory('yg.services.iCal', ['SaveAs', iCalService]);
 
-}(angular.module('yg.common.services.iCal', [])));
+});

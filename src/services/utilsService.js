@@ -1,9 +1,9 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
-  var utilService = function() {  
-  
+  var utilService = function() {
+
     var utils = {};
 
     /**
@@ -47,7 +47,7 @@
         return 0;
       });
     };
-    
+
     /**
      * Groups an array of objects into into a two-dimensional grouped array
      * Returns a two-dimension array of objects.
@@ -57,7 +57,7 @@
     utils.groupBy = function(arrayOfObjects, propToGroupBy) {
       var groupArray = [],
           match;
-      
+
       var newGroup = function(initObj, groupProp) {
         var newGroupObj = {};
         newGroupObj.name = initObj[groupProp];
@@ -117,13 +117,13 @@
      * @param {string} dateString - a string representing a valid date
      */
     utils.formatDate = function(dateString) {
-      var date = new Date(dateString); 
+      var date = new Date(dateString);
       var d = date.getDate();
       var m = date.getMonth() + 1;
       var y = date.getFullYear();
       return m + '/' + d + '/' + y;
     };
-      
+
     /**
      * Gets data from multiple models
      * @param {object} apiService - the api service object to use
@@ -166,10 +166,10 @@
     };
 
    return utils;
-  
-  };
-  
-                                                                                                 
-  app.factory('Utils', [utilService]);
 
-}(angular.module('yg.common.services.utils', [])));
+  };
+
+
+  app.factory('yg.services.utils', [utilService]);
+
+});

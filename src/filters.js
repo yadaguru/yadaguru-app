@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
@@ -13,4 +13,4 @@
 
   app.filter('linebreaks', linebreaks);
 
-}(angular.module('yg.root.filters.reminder', [])));
+});

@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   var identityService = function($http, $q, userService) {
     var identityFactory = {};
@@ -31,6 +31,6 @@
     return identityFactory;
   };
 
-  app.factory('identityService', ['$http', '$q', 'userService', identityService]);
+  app.factory('yg.services.identity', ['$http', '$q', 'userService', identityService]);
 
-}(angular.module('yg.common.services.identity', [])));
+});

@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
   'use strict';
 
 
@@ -432,8 +432,9 @@
 
   };
 
-  app.controller('RootController', ['$scope', 'YadaAPI', 'Utils', 'ReminderService', 'GoogleCalendar',
-    'iCalService', '$timeout', RootController]);
-  app.controller('FaqController', ['$scope', 'YadaAPI', '$sce', FaqController]);
+  app.controller('RootController', ['$scope', 'yg.services.api', 'yg.services.utils',
+    'yg.services.reminder', 'yg.services.googleCalendar',
+    'yg.services.iCal', '$timeout', RootController]);
+  app.controller('FaqController', ['$scope', 'yg.services.api', '$sce', FaqController]);
 
-}(angular.module('yg.root')));
+});

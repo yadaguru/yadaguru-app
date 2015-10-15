@@ -2,9 +2,12 @@
  * Main application module
  * @namespace YadaApp
  */
-(function(app) {
+define(['app'], function() {
 
   'use strict';
+
+  var app = angular.module('yadaguru', ['ngResource', 'ngSanitize', 'ngAnimate',
+    'ui.router', 'ui.bootstrap', 'fileSaver']);
 
   var config = function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -31,5 +34,5 @@
 
   app.config(['$stateProvider', '$urlRouterProvider', config]);
 
-}(angular.module('yg.root', ['ngResource', 'ui.bootstrap', 'yg.common.services', 'yg.root.services', 'ui.router',
-                 'yg.root.filters.reminder', 'ngSanitize', 'ngAnimate', 'fileSaver'])));
+  return app;
+});

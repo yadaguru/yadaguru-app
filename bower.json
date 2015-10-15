@@ -27,7 +27,8 @@
     "modernizr": "~2.8.3",
     "pdfmake": "~0.1.20",
     "textAngular": "~1.4.2",
-    "toastr": "~2.1.1"
+    "toastr": "~2.1.1",
+    "requirejs": "~2.1.20"
   },
   "overrides": {
     "bootstrap": {

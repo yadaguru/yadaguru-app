@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
@@ -95,6 +95,6 @@
     return yadaAPI;
   };
 
-  app.factory('YadaAPI', ['$http', apiService]);
+  app.factory('yg.services.api', ['$http', apiService]);
 
-}(angular.module('yg.common.services.api', [])));
+});

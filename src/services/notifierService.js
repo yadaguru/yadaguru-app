@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   var notifierService = function(toastr) {
     var notifyFactory = {};
@@ -26,6 +26,6 @@
     return notifyFactory;
   };
 
-  app.factory('notifierService', ['toastr', notifierService]);
+  app.factory('yg.services.notifier', ['toastr', notifierService]);
 
-}(angular.module('yg.common.services.notifier', [])));
+});

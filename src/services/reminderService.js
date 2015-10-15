@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
@@ -140,6 +140,6 @@
 
   };
 
-  app.factory('ReminderService', ['Utils', reminderService]);
+  app.factory('yg.services.reminder', ['yg.services.utils', reminderService]);
 
-}(angular.module('yg.root.services.reminder', [])));
+});

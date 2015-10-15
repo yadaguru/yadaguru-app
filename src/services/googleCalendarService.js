@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
@@ -95,6 +95,6 @@
     };
   };
 
-  app.factory('GoogleCalendar', ['Utils', '$rootScope', googleCalendarService]);
+  app.factory('yg.services.googleCalendar', ['yg.services.utils', '$rootScope', googleCalendarService]);
 
-}(angular.module('yg.common.services.google-calendar', [])));
+});

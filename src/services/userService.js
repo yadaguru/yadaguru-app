@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   var userService = function($resource) {
     var userFactory = {};
@@ -12,6 +12,6 @@
     return userFactory;
   };
 
-  app.factory('userService', ['$resource', userService]);
+  app.factory('yg.services.user', ['$resource', userService]);
 
-}(angular.module('yg.common.services.user', [])));
+});
