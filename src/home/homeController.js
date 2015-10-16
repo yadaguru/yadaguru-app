@@ -1,8 +1,7 @@
 define(['app'], function(app) {
   'use strict';
-
-
-  var RootController = function ($scope, YadaAPI, Utils, ReminderService, GoogleCalendar,
+  
+  var HomeController = function ($scope, YadaAPI, Utils, ReminderService, GoogleCalendar,
                                  iCalService, $timeout) {
     var ungroupedReminders = [];
     var iCal = new iCalService();
@@ -418,23 +417,7 @@ define(['app'], function(app) {
     $scope.minDate = new Date();
   };
 
-  var FaqController = function($scope, YadaAPI, $sce) {
-
-    $scope.faqContent = '';
-
-    $scope.getFaqs = function() {
-      YadaAPI.faqs.get().then(function(resp) {
-        $scope.faqContent = $sce.trustAsHtml(resp.data[0].content);
-      }, function(err) {console.log(err);});
-    };
-
-    $scope.getFaqs();
-
-  };
-
-  app.controller('RootController', ['$scope', 'yg.services.api', 'yg.services.utils',
+  app.register.controller('HomeController', ['$scope', 'yg.services.api', 'yg.services.utils',
     'yg.services.reminder', 'yg.services.googleCalendar',
-    'yg.services.iCal', '$timeout', RootController]);
-  app.controller('FaqController', ['$scope', 'yg.services.api', '$sce', FaqController]);
-
+    'yg.services.iCal', '$timeout', HomeController]);
 });

@@ -6,6 +6,7 @@ require.config({
 require(
   [
     'app',
+    'filters',
     'services/authService',
     'services/identityService',
     'services/userService',
@@ -15,8 +16,8 @@ require(
     'services/reminderService',
     'services/googleCalendarService',
     'services/iCalService',
-    'filters',
-    'root-controller'
+    'services/routeResolverProvider',
+    'rootController'
   ],
   function () {
     angular.bootstrap(document, ['yadaguru']);
