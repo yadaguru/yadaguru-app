@@ -31,6 +31,7 @@ define(['app'], function() {
         $routeProvider // route.resolve(baseName, path, controllerAs, securitygroup)
           .when('/', route.resolve('Home', 'home/', 'vm'))
           .when('/faqs', route.resolve('Faqs', 'faqs/', 'vm'))
+          .when('/login', route.resolve('Login', 'login/', 'vm'))
           .otherwise({redirectTo:'/'});
     }]);
 

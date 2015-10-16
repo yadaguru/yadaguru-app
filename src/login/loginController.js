@@ -1,4 +1,4 @@
-(function(app) {
+define(['app'], function(app) {
 
   var LoginController = function($scope, $http, notifierService,
     identityService, authService, $location, $window) {
@@ -27,8 +27,8 @@
     };
   };
 
-  app.controller('LoginController',
-    ['$scope', '$http', 'notifierService', 'identityService',
-      'authService', '$location', '$window', LoginController]);
+  app.register.controller('LoginController',
+    ['$scope', '$http', 'yg.services.notifier', 'yg.services.identity',
+      'yg.services.auth', '$location', '$window', LoginController]);
 
-}(angular.module('yg.login')));
+});

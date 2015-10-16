@@ -39,6 +39,6 @@ define(['app'], function(app) {
   };
 
 
-  app.factory('yg.services.auth', ['$http', '$q', 'identityService', 'userService', authService]);
+  app.factory('yg.services.auth', ['$http', '$q', 'yg.services.identity', 'yg.services.user', authService]);
 
 });
