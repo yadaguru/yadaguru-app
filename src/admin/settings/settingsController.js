@@ -1,8 +1,8 @@
-(function(app) {
-  
+define(['app'], function(app) {
+
   'use strict';
 
-  var AdminSettingsController = function($scope, YadaAPI) {
+  var SettingsController = function($scope, YadaAPI) {
 
     $scope.settings = {};
 
@@ -59,6 +59,6 @@
     $scope.getSettings();
   };
 
-  app.controller('AdminSettingsController', ['$scope', 'YadaAPI', AdminSettingsController]);
+  app.register.controller('SettingsController', ['$scope', 'yg.services.api', SettingsController]);
 
-}(angular.module('yg.admin.controllers.settings', [])));
+});

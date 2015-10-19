@@ -1,10 +1,10 @@
-(function(app) {
-  
+define(['app'], function(app) {
+
   'use strict';
 
-  var AdminRemindersController = function($scope, $modal, YadaAPI, Utils) {
+  var RemindersController = function($scope, $modal, YadaAPI, Utils) {
     $scope.test = 'test data';
-    
+
     $scope.populateRemindersTable = function(data) {
       var reminders = [];
       data.reminders.forEach(function(_reminder) {
@@ -40,8 +40,8 @@
 
     $scope.openEditModal = function (context, data) {
       var modalInstance = $modal.open({
-        templateUrl: 'templates/reminders-edit.html',
-        controller: 'AdminRemindersEditController',
+        templateUrl: 'dist/admin/reminders/reminders-edit.html',
+        controller: 'RemindersEditController',
         resolve: {
           context: function() {
             return context;
@@ -51,7 +51,7 @@
           }
         }
       });
-      
+
       modalInstance.result.then(function () {
         $scope.reminders = [];
         $scope.getReminders();
@@ -60,7 +60,7 @@
     $scope.getReminders();
   };
 
-  var AdminRemindersEditController = function($scope, $modalInstance, YadaAPI, context, data) {
+  var RemindersEditController = function($scope, $modalInstance, YadaAPI, context, data) {
     $scope.context = context;
     $scope.data = angular.copy(data);
 
@@ -81,7 +81,7 @@
     };
 
     $scope.save = function(data) {
-      
+
       $scope.$broadcast('show-errors-check-validity');
       if ($scope.editReminderForm.$invalid) {
         return;
@@ -105,7 +105,7 @@
 
   };
 
-  app.controller('AdminRemindersController', ['$scope', '$modal', 'YadaAPI', 'Utils', AdminRemindersController]);
-  app.controller('AdminRemindersEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminRemindersEditController]);
+  app.register.controller('RemindersController', ['$scope', '$modal', 'yg.services.api', 'yg.services.utils', RemindersController]);
+  app.register.controller('RemindersEditController', ['$scope', '$modalInstance', 'yg.services.api', 'context', 'data', RemindersEditController]);
 
-}(angular.module('yg.admin.controllers.reminders', [])));
+});

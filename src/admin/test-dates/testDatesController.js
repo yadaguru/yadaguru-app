@@ -1,8 +1,8 @@
-(function(app) {
+define(['app'], function(app) {
 
   'use strict';
 
-  var AdminTestDatesController = function($scope, $modal, YadaAPI, Utils) {
+  var TestDatesController = function($scope, $modal, YadaAPI, Utils) {
     $scope.getTestDates = function() {
       YadaAPI.testDates.get().then(populate, function(err) {console.log(err);});
 
@@ -24,8 +24,8 @@
 
     $scope.openEditModal = function (context, data) {
       var modalInstance = $modal.open({
-        templateUrl: 'templates/test-dates-edit.html',
-        controller: 'AdminTestDatesEditController',
+        templateUrl: 'dist/admin/test-dates/testDates-edit.html',
+        controller: 'TestDatesEditController',
         resolve: {
           context: function() {
             return context;
@@ -35,7 +35,7 @@
           }
         }
       });
-      
+
       modalInstance.result.then(function () {
         $scope.testDates = [];
         $scope.getTestDates();
@@ -46,7 +46,7 @@
   };
 
 
-  var AdminTestDatesEditController = function($scope, $modalInstance, YadaAPI, context, data) {
+  var TestDatesEditController = function($scope, $modalInstance, YadaAPI, context, data) {
     $scope.context = context;
     $scope.data = angular.copy(data);
 
@@ -62,7 +62,7 @@
     };
 
     $scope.save = function(data) {
-      
+
       $scope.$broadcast('show-errors-check-validity');
       if ($scope.editTestDateForm.$invalid) {
         return;
@@ -86,7 +86,7 @@
 
   };
 
-  app.controller('AdminTestDatesController', ['$scope', '$modal', 'YadaAPI', 'Utils', AdminTestDatesController]);
-  app.controller('AdminTestDatesEditController', ['$scope', '$modalInstance', 'YadaAPI', 'context', 'data', AdminTestDatesEditController]);
+  app.register.controller('TestDatesController', ['$scope', '$modal', 'yg.services.api', 'yg.services.utils', TestDatesController]);
+  app.register.controller('TestDatesEditController', ['$scope', '$modalInstance', 'yg.services.api', 'context', 'data', TestDatesEditController]);
 
-}(angular.module('yg.admin.controllers.test-dates', [])));
+});

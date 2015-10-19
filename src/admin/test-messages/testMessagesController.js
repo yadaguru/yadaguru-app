@@ -1,8 +1,8 @@
-(function(app) {
-  
+define(['app'], function(app) {
+
   'use strict';
 
-  var AdminTestMessagesController = function($scope, YadaAPI, Utils) {
+  var TestMessagesController = function($scope, YadaAPI, Utils) {
 
     $scope.data = {};
 
@@ -22,7 +22,7 @@
     };
 
     $scope.save = function(data) {
-      
+
       $scope.$broadcast('show-errors-check-validity');
       if ($scope.testMessageForm.$invalid) {
         toastr.error('Please make sure all fields are complete.');
@@ -40,10 +40,10 @@
 
     $scope.getTestMessages();
 
-      
+
 
   };
 
-  app.controller('AdminTestMessagesController', ['$scope', 'YadaAPI', 'Utils', AdminTestMessagesController]);
+  app.register.controller('TestMessagesController', ['$scope', 'yg.services.api', 'yg.services.utils', TestMessagesController]);
 
-}(angular.module('yg.admin.controllers.test-messages', [])));
+});

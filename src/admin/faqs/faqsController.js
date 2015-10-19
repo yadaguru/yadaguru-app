@@ -1,5 +1,4 @@
-(function(app) {
-  
+define(['app'], function(app) {
   'use strict';
 
   var AdminFaqsController = function($scope, YadaAPI) {
@@ -29,6 +28,6 @@
   };
 
 
-  app.controller('AdminFaqsController', ['$scope', 'YadaAPI', AdminFaqsController]);
+  app.register.controller('FaqsController', ['$scope', 'yg.services.api', AdminFaqsController]);
 
-}(angular.module('yg.admin.controllers.faqs', [])));
+});

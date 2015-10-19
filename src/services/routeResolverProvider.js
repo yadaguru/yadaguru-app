@@ -34,13 +34,14 @@ define([], function() {
 
     this.route = (function(routeConfig) {
 
-      var resolve = function(baseName, path, controllerAs, secure) {
+      var resolve = function(url, baseName, path, controllerAs, secure) {
           if (!path) {
             path = '';
           }
 
           var routeDef = {};
           var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
+          routeDef.url = url;
           routeDef.templateUrl = routeConfig.getViewsDirectory() + path + baseFileName + '.html';
           routeDef.controller = baseName + 'Controller';
           if (controllerAs) {
