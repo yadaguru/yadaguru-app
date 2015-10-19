@@ -1,7 +1,7 @@
 define(['app'], function(app) {
 
   var LoginController = function($scope, $http, notifierService,
-    identityService, authService, $location, $window) {
+    identityService, authService, $location, $state) {
 
     $scope.identityService = identityService;
 
@@ -11,6 +11,7 @@ define(['app'], function(app) {
       authService.authenticateUser($scope.username, $scope.password).then(function(success) {
         if(success) {
           notifierService.success('You have successfully signed in!');
+          $state.go('admin.reminders');
         } else {
           notifierService.error('You have failed to sign in.');
         }
@@ -29,6 +30,6 @@ define(['app'], function(app) {
 
   app.register.controller('LoginController',
     ['$scope', '$http', 'yg.services.notifier', 'yg.services.identity',
-      'yg.services.auth', '$location', '$window', LoginController]);
+      'yg.services.auth', '$location', '$state', LoginController]);
 
 });

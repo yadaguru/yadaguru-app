@@ -8,7 +8,7 @@ define(['app'], function(app) {
       $scope.currentTab = toState.url;
     });
 
-    $scope.currentTab = '/reminders';
+    $scope.currentTab = '/';
   };
 
   app.register.controller('AdminController', ['$scope', AdminController]);

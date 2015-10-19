@@ -11,6 +11,7 @@ define(['app'], function() {
         routeResolverProvider, $controllerProvider, $filterProvider, $provide,
         $compileProvider, $urlRouterProvider, $stateProvider) {
 
+        $urlRouterProvider.when('', '/');
         $urlRouterProvider.rule(function($injector, $location) {
           var path = $location.path();
           var hasTrailingSlash = path[path.length-1] ==='/';
@@ -37,36 +38,39 @@ define(['app'], function() {
           .state('home', route.resolve('/', 'Home', 'home/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
-          .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm'))
-          .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm'))
-          .state('admin.categories', route.resolve('/categories', 'Categories', 'admin/categories/', 'vm'))
-          .state('admin.test-dates', route.resolve('/test-dates', 'TestDates', 'admin/test-dates/', 'vm'))
-          .state('admin.test-messages', route.resolve('/test-messages', 'TestMessages', 'admin/test-messages/', 'vm'))
-          .state('admin.faqs', route.resolve('/faqs', 'Faqs', 'admin/faqs/', 'vm'))
-          .state('admin.settings', route.resolve('/settings', 'Settings', 'admin/settings/', 'vm'));
+          .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm', 'admin'))
+          .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm', 'admin'))
+          .state('admin.categories', route.resolve('/categories', 'Categories', 'admin/categories/', 'vm', 'admin'))
+          .state('admin.test-dates', route.resolve('/test-dates', 'TestDates', 'admin/test-dates/', 'vm', 'admin'))
+          .state('admin.test-messages', route.resolve('/test-messages', 'TestMessages', 'admin/test-messages/', 'vm', 'admin'))
+          .state('admin.faqs', route.resolve('/faqs', 'Faqs', 'admin/faqs/', 'vm', 'admin'))
+          .state('admin.settings', route.resolve('/settings', 'Settings', 'admin/settings/', 'vm', 'admin'));
     }]);
 
-    // app.run(['$rootScope', '$location', 'yg.services.identity', 'yg.services.notifier',
-    //   function($rootScope, $location, identityService, notifierService) {
-    //     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    //       if (next && next.$$route && next.$$route.secure) {
-    //         identityService.getCurrentUser().then(function() {
-    //           if (!identityService.isAuthorized(next.$$route.secure)) {
-    //             $location.path('/');
-    //             if (identityService.currentUser) {
-    //               notifierService.error('Not authorized to access route');
-    //             }
-    //           }
-    //         });
-    //       }
-    //     });
-    //     $rootScope.$on('$routeChangeError', function(evt, current, previous, rejection) {
-    //       if(rejection === 'unauthorized') {
-    //         $location.path('/');
-    //         notifierService.error('Not authorized to access route');
-    //       }
-    //     });
-    // }]);
+    app.run(['$rootScope', '$state', 'yg.services.identity', 'yg.services.notifier',
+      function($rootScope, $state, identityService, notifierService) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+          if (toState.data && toState.data.access) {
+            identityService.getCurrentUser().then(function() {
+              if (!identityService.isAuthorized(toState.data.access)) {
+                if (identityService.currentUser) {
+                  $state.go(fromState);
+                  notifierService.error('Not authorized to access route');
+                } else {
+                  $state.go('login');
+                }
+              }
+            });
+          }
+        });
+        $rootScope.$on('$stateChangeError', function(evt, current, previous, rejection) {
+          console.log(evt);
+          if(rejection === 'unauthorized') {
+            $location.path('/login');
+            notifierService.error('Not authorized to access route');
+          }
+        });
+    }]);
 
 
   return app;

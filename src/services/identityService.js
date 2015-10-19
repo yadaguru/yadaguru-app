@@ -2,12 +2,12 @@ define(['app'], function(app) {
 
   var identityService = function($http, $q, userService) {
     var identityFactory = {};
-
+    var apiRoute = window.location.protocol + '//' + location.hostname + ':8080/api/';
     identityFactory.currentUser = undefined;
 
     identityFactory.getCurrentUser = function() {
       var deferred = $q.defer();
-      $http.get('/api/auth/currentUser').then(function(response) {
+      $http.get(apiRoute + 'auth/currentUser').then(function(response) {
         if(response.data.success) {
           var user = new userService.UserResource();
           angular.extend(user, response.data.user);

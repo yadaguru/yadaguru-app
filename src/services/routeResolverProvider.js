@@ -47,7 +47,11 @@ define([], function() {
           if (controllerAs) {
             routeDef.controllerAs = controllerAs;
           }
-          routeDef.secure = secure || false;
+          if (secure) {
+            routeDef.data = {
+              access: secure
+            };
+          }
           routeDef.resolve = {
             load: ['$q', '$rootScope', function($q, $rootScope) {
               var dependencies = [routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js'];

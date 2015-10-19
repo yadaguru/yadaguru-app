@@ -3,9 +3,11 @@ define(['app'], function(app) {
   var authService = function($http, $q, identityService, userService) {
     var authFactory = {};
 
+    var apiRoute = window.location.protocol + '//' + location.hostname + ':8080/api/';
+
     authFactory.authenticateUser = function(username, password) {
       var deferred = $q.defer();
-      $http.post('/api/auth/login', {username:username, password:password}).then(function(response) {
+      $http.post(apiRoute + 'auth/login', {username:username, password:password}).then(function(response) {
         if(response.data.success) {
           var user = new userService.UserResource();
           angular.extend(user, response.data.user);
@@ -20,7 +22,7 @@ define(['app'], function(app) {
 
     authFactory.logoutUser = function() {
       var deferred = $q.defer();
-      $http.post('/api/auth/logout', { logout: true }).then(function() {
+      $http.post(apiRoute + 'auth/logout', { logout: true }).then(function() {
         identityService.currentUser = undefined;
         deferred.resolve();
       });
