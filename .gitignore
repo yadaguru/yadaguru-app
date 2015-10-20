@@ -1,9 +1,10 @@
 *.swp
-/client/vendor/*
-/client/css/*.min
+/vendor/*
+/css/*.min
 /node_modules/*
 /.settings/*
 npm-debug.log
 /.sass-cache/*
 /.idea/*
-/client/public/css/*
+/public/css/*
+/dist/*

@@ -74,7 +74,7 @@
     "dojo"          : false,    // Dojo Toolkit
     "jasmine"       : true,    // Jasmine
     "jquery"        : false,    // jQuery
-    "mocha"         : true,     // Mocha
+    "mocha"         : false,     // Mocha
     "mootools"      : false,    // MooTools
     "node"          : true,    // Node.js
     "nonstandard"   : false,    // Widely adopted globals (escape, unescape, etc)
@@ -90,6 +90,7 @@
 
     // Custom Globals
     "globals"       : {
-      "angular": true
+      "angular": true,
+      "define": true
     }        // additional predefined global variables
 }
