@@ -1,23 +1,22 @@
 {
+  "name": "config",
+  "wrap": "amd",
   "development": {
-    "name": "yg.config",
-    "wrap": "requirejs",
     "constants" : {
-      "API_ROUTE" : ""
+      "API_ROUTE" : "data/",
+      "API_ROUTE_TERMINATOR" : ".json"
     }
   },
   "staging": {
-    "name": "yg.config",
-    "wrap": "requirejs",
     "constants" : {
-      "API_ROUTE" : ""
+      "API_ROUTE" : "http://staging.yadaguru.com/api/",
+      "API_ROUTE_TERMINATOR" : "/"
     }
   },
   "production": {
-    "name": "yg.config",
-    "wrap": "requirejs",
     "constants" : {
-      "API_ROUTE" : ""
+      "API_ROUTE" : "http://yadaguru.com/api/",
+      "API_ROUTE_TERMINATOR" : "/"
     }
   }
 }

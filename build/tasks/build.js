@@ -11,7 +11,7 @@ var gulp         = require('gulp'),
 // Copies js files to dist
 // Will eventually uglify/minify/ect
 // Could build in transpiling if we decide we want new ES features
-gulp.task('build-system', function() {
+gulp.task('build-system', ['constants'], function() {
   return gulp.src(paths.source)
     .pipe(plumber())
     .pipe(changed(paths.output, {extension: '.js'}))

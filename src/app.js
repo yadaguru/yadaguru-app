@@ -3,7 +3,7 @@ define(['app'], function() {
   'use strict';
 
   var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngSanitize', 'ngAnimate',
-    'ui.router', 'ui.bootstrap', 'fileSaver', 'routeResolverServices', 'toastr']);
+    'ui.router', 'ui.bootstrap', 'fileSaver', 'routeResolverServices', 'toastr', 'config']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
       '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',
@@ -66,7 +66,7 @@ define(['app'], function() {
         $rootScope.$on('$stateChangeError', function(evt, current, previous, rejection) {
           console.log(evt);
           if(rejection === 'unauthorized') {
-            $location.path('/login');
+            $state.go('login');
             notifierService.error('Not authorized to access route');
           }
         });

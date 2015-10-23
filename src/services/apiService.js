@@ -2,16 +2,16 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var apiService = function($http) {
+  var apiService = function($http, constants) {
 
     var yadaAPI = {};
 
     yadaAPI.reminders = {};
-
-    var apiRoute = window.location.protocol + '//' + location.hostname + ':8080/api/';
+    var apiRoute = constants.API_ROUTE;
+    var apiRouteTerminator = constants.API_ROUTE_TERMINATOR;
 
     yadaAPI.reminders.get = function() {
-      return $http.get(apiRoute + 'reminders/');
+      return $http.get(apiRoute + 'reminders' + apiRouteTerminator);
     };
 
     yadaAPI.reminders.post = function(data) {
@@ -29,7 +29,7 @@ define(['app'], function(app) {
     yadaAPI.categories = {};
 
     yadaAPI.categories.get = function() {
-      return $http.get(apiRoute + 'categories/');
+      return $http.get(apiRoute + 'categories' + apiRouteTerminator);
     };
 
     yadaAPI.categories.post = function(data) {
@@ -47,7 +47,7 @@ define(['app'], function(app) {
     yadaAPI.testDates = {};
 
     yadaAPI.testDates.get = function() {
-      return $http.get(apiRoute + 'test-dates');
+      return $http.get(apiRoute + 'test-dates' + apiRouteTerminator);
     };
 
     yadaAPI.testDates.post = function(data) {
@@ -65,7 +65,7 @@ define(['app'], function(app) {
     yadaAPI.testMessages = {};
 
     yadaAPI.testMessages.get = function() {
-      return $http.get(apiRoute + 'test-messages');
+      return $http.get(apiRoute + 'test-messages' + apiRouteTerminator);
     };
 
     yadaAPI.testMessages.put = function(id, data) {
@@ -75,7 +75,7 @@ define(['app'], function(app) {
     yadaAPI.faqs = {};
 
     yadaAPI.faqs.get = function() {
-      return $http.get(apiRoute + 'faqs');
+      return $http.get(apiRoute + 'faqs' + apiRouteTerminator);
     };
 
     yadaAPI.faqs.put = function(id, data) {
@@ -85,7 +85,7 @@ define(['app'], function(app) {
     yadaAPI.settings = {};
 
     yadaAPI.settings.get = function() {
-      return $http.get(apiRoute + 'settings');
+      return $http.get(apiRoute + 'settings' + apiRouteTerminator);
     };
 
     yadaAPI.settings.put = function(id, data) {
@@ -95,6 +95,6 @@ define(['app'], function(app) {
     return yadaAPI;
   };
 
-  app.factory('yg.services.api', ['$http', apiService]);
+  app.factory('yg.services.api', ['$http', 'constants', apiService]);
 
 });
