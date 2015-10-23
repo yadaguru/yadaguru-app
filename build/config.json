@@ -1,0 +1,23 @@
+{
+  "development": {
+    "name": "yg.config",
+    "wrap": "requirejs",
+    "constants" : {
+      "API_ROUTE" : ""
+    }
+  },
+  "staging": {
+    "name": "yg.config",
+    "wrap": "requirejs",
+    "constants" : {
+      "API_ROUTE" : ""
+    }
+  },
+  "production": {
+    "name": "yg.config",
+    "wrap": "requirejs",
+    "constants" : {
+      "API_ROUTE" : ""
+    }
+  }
+}
