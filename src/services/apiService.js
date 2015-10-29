@@ -7,8 +7,20 @@ define(['app'], function(app) {
     var yadaAPI = {};
 
     yadaAPI.reminders = {};
-    var apiRoute = constants.API_ROUTE;
+    var apiRoute = constants.HOSTNAME + constants.API_ROUTE;
     var apiRouteTerminator = constants.API_ROUTE_TERMINATOR;
+
+    yadaAPI.login = function(data) {
+      return $http.post(apiRoute + 'users/login/', data);
+    };
+
+    yadaAPI.logout = function(data) {
+      return $http.post(apiRoute + 'users/logout/', data);
+    };
+
+    yadaAPI.currentUser = function() {
+      return $http.get(apiRoute + 'users/currentUser');
+    };
 
     yadaAPI.reminders.get = function() {
       return $http.get(apiRoute + 'reminders' + apiRouteTerminator);
