@@ -31,5 +31,6 @@
     "yargs": "^3.10.0"
   },
   "dependencies": {
+    "require-dir": "^0.3.0"
   }
 }
