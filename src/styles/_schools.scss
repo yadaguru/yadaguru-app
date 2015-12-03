@@ -1,0 +1,55 @@
+main.schools {
+  color: $bg-gray;
+
+  a, .nav-links {
+    color: white;
+  }
+
+  .nav-links {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .school {
+    margin: 10px -5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &.active {
+      h2, h3, i.fa {
+        color: $active-blue;
+      }
+    }
+
+    h2, h3 {
+      font-family: 'Marvel', sans-serif;
+      margin: 0;
+    }
+
+    h2 {
+      font-weight: bold;
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    .action-container, .switch-container {
+      text-align: center;
+    }
+
+    .action-container {
+      i.fa {
+        font-size: 25px;
+        margin: 0 5px;
+      }
+    }
+
+    .switch-container {
+      margin-top: 10px;
+    }
+
+  }
+
+}

@@ -17,12 +17,11 @@ footer {
     margin: 5px;
   }
 
-  a {
+  a, .footer-links {
     color: white;
-    text-decoration: underline;
   }
 
-  .footer-links {
-    color: white;
+  a {
+    text-decoration: underline;
   }
 }
