@@ -17,6 +17,7 @@ require(
     'services/googleCalendarService',
     'services/iCalService',
     'services/routeResolverProvider',
+    'directives/navLinks',
     'rootController'
   ],
   function () {

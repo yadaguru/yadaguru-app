@@ -36,7 +36,8 @@ define(['app'], function() {
         var route = routeResolverProvider.route;
 
         $stateProvider // route.resolve(url, baseName, path, controllerAs, secure)
-          .state('schools', route.resolve('/', 'Schools', 'schools/', 'vm'))
+          .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
+          .state('reminder', route.resolve('/reminder', 'Reminder', 'reminder/', 'vm'))
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))

@@ -1,14 +1,5 @@
-main.schools {
+main.school-view {
   color: $bg-gray;
-
-  a, .nav-links {
-    color: white;
-  }
-
-  .nav-links {
-    text-align: center;
-    font-size: 16px;
-  }
 
   .school {
     margin: 10px -5px;
@@ -48,6 +39,11 @@ main.schools {
 
     .switch-container {
       margin-top: 10px;
+    }
+
+    .bootstrap-switch-handle-on {
+      background-color: $active-blue;
+      background-image: linear-gradient(to bottom, $active-blue, $active-blue-dark);
     }
 
   }

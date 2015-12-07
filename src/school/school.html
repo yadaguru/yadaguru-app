@@ -1,11 +1,6 @@
-<main class="row schools">
+<main class="row school-view">
   <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 nav-links">
-        <a href="#">View by Date</a> |
-        <a href="#">View by School</a>
-      </div>
-    </div>
+    <nav-links></nav-links>
     <div ng-repeat="school in schools">
       <div class="row panel school" ng-class="{active: school.isActive}">
         <div class="col-xs-7">

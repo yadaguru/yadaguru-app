@@ -2,7 +2,7 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var SchoolsController = function ($scope) {
+  var SchoolController = function ($scope) {
     $scope.schools = [
       {
         name: 'Temple',
@@ -27,5 +27,5 @@ define(['app'], function(app) {
     ];
   };
 
-  app.register.controller('SchoolsController', ['$scope', SchoolsController]);
+  app.register.controller('SchoolController', ['$scope', SchoolController]);
 });
