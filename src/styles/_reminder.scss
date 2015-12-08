@@ -1,0 +1,13 @@
+main.reminder-view {
+  .date-group {
+    h2 {
+      border: 1px solid $heading-border-blue;
+      border-radius: 5px;
+      background-color: $heading-bg-blue;
+      color: white;
+      font-family: $marvel;
+      padding: 5px 10px;
+      font-weight: bold;
+    }
+  }
+}

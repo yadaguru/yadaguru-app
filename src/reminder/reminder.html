@@ -1,5 +1,25 @@
 <main class="row reminder-view">
   <div class="col-xs-12">
-  <nav-links></nav-links>  
+    <nav-links></nav-links>
+    <div class="row">
+      <div class="col-xs-12">
+        <div ng-repeat="date in reminders" class="date-group">
+          <h2 role="button" ng-click="date.isCollapsed = !date.isCollapsed">{{ date.date }}</h2>
+          <div collapse="date.isCollapsed">
+            <div ng-repeat="school in date.schools" class="school-group">
+              <h3>{{ school.school }}</h3>
+              <div ng-repeat="category in school.categories" class="category-group">
+                <h4>{{ category.category }}</h4>
+                <div ng-repeat="reminder in category.reminders" class="reminder-group">
+                  <h5>{{ reminder.name }}</h5>
+                  <p class="reminder-message">{{ reminder.message }}</p>
+                  <p class="reminder-detail" ng-bind-html="reminder.detail"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
