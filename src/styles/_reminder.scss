@@ -1,13 +1,45 @@
 main.reminder-view {
+  .date-group h2, .reminder-group h3 {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin: 5px 0;
+  }
+
   .date-group {
     h2 {
-      border: 1px solid $heading-border-blue;
-      border-radius: 5px;
+      border-color: $heading-border-blue;
       background-color: $heading-bg-blue;
       color: white;
       font-family: $marvel;
-      padding: 5px 10px;
       font-weight: bold;
+      margin-top: 10px;
     }
+  }
+
+  .reminder-group {
+    h3 {
+      border-color: white;
+      background-color: white;
+      color: $heading-bg-blue;
+      font-family: $pt-sans;
+      font-size: 22px;
+      padding: 8px 10px;
+    }
+  }
+
+  .reminder-info {
+    border: 1px solid white;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: $pt-sans;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-top: -8px;
+  }
+
+  .reminder-message {
+    font-weight: bold;
   }
 }
