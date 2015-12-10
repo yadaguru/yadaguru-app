@@ -19,6 +19,7 @@ require(
     'services/routeResolverProvider',
     'directives/navLinks',
     'directives/onboarding',
+    'directives/progressDots',
     'rootController'
   ],
   function () {

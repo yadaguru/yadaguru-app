@@ -1,8 +1,21 @@
-  .nav-links {
-    text-align: center;
-    font-size: 16px;
+.nav-links {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  a {
     color: white;
-    a {
+  }
+}
+
+.progress-dots {
+  i.fa {
+    font-size: 10px;
+    color: grey;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &.active {
       color: white;
     }
   }
+}
