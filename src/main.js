@@ -18,6 +18,7 @@ require(
     'services/iCalService',
     'services/routeResolverProvider',
     'directives/navLinks',
+    'directives/onboarding',
     'rootController'
   ],
   function () {

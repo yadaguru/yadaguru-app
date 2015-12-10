@@ -2,8 +2,8 @@ define(['app'], function() {
 
   'use strict';
 
-  var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngSanitize', 'ngAnimate',
-    'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
+  var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngTouch', 'ngSanitize', 'ngAnimate',
+    'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'ui.bootstrap.progressbar', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
     'frapontillo.bootstrap-switch']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',

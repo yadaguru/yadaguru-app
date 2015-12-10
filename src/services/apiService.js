@@ -38,6 +38,17 @@ define(['app'], function(app) {
       return $http.delete(apiRoute + 'reminders/' + id);
     };
 
+    yadaAPI.schools = {};
+
+    yadaAPI.schools.get = function() {
+      return $http.get(apiRoute + 'schools' + apiRouteTerminator);
+    };
+
+    // Temporary for building - remove this when we have a real connection to API
+    yadaAPI.schools.getEmpty = function() {
+      return $http.get(apiRoute + 'schools-empty' + apiRouteTerminator);
+    };
+
     yadaAPI.categories = {};
 
     yadaAPI.categories.get = function() {

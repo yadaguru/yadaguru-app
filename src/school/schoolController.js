@@ -2,30 +2,12 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var SchoolController = function ($scope) {
-    $scope.schools = [
-      {
-        name: 'Temple',
-        dueDate: '2/1/2016',
-        isActive: true
-      },
-      {
-        name: 'Drexel',
-        dueDate: '1/1/2016',
-        isActive: false
-      },
-      {
-        name: 'CCP',
-        dueDate: '4/1/2016',
-        isActive: false
-      },
-      {
-        name: 'Lincoln',
-        dueDate: '2/1/2016',
-        isActive: false
-      }
-    ];
+  var SchoolController = function ($scope, $YadaAPI) {
+    $YadaAPI.schools.getEmpty().success(function(resp) {
+      $scope.isOnboarding = resp.length === 0;
+      $scope.schools = resp;
+    });
   };
 
-  app.register.controller('SchoolController', ['$scope', SchoolController]);
+  app.register.controller('SchoolController', ['$scope', 'yg.services.api', SchoolController]);
 });
