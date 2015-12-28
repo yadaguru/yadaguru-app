@@ -11,7 +11,7 @@
   color: white;
 
   .ob-main {
-    height: 70vh;
+    height: 75vh;
   }
 
   i.fa {
@@ -53,10 +53,64 @@
   .progress-bar {
     background: $progress-green;
   }
+
+  .input-group {
+    i.fa {
+      font-size: 25px;
+    }
+  }
+
+  .datepicker-position {
+    .dropdown-menu {
+      top:-285px !important;
+    }
+  }
 }
 
-.ob3 {
+.ob3, .ob4 {
   p {
     margin-top: 0;
+  }
+}
+
+.ob4 {
+  .info-text {
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+}
+
+.tour-tip {
+  border-radius: 5px;
+  background-color: $onboarding-bg-blue;
+  width: 270px;
+
+  p {
+    font-size: 32px;
+    color: white;
+  }
+
+  .tour-close-tip {
+    display: none;
+  }
+
+  .fa.fa-arrow-down, .fa.fa-arrow-up {
+    color: white;
+    font-size: 36px;
+  }
+
+  .top-controls {
+    margin-bottom: 10px;
+  }
+
+  .col-xs-4 {
+    padding: 0;
+    text-align: center;
+  }
+
+  .tour-content-wrapper .button {
+    border-radius: 5px;
+    background-color: $onboarding-btn-blue;
+    font-size: 18px;
   }
 }

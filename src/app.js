@@ -4,7 +4,7 @@ define(['app'], function() {
 
   var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngTouch', 'ngSanitize', 'ngAnimate',
     'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
-    'frapontillo.bootstrap-switch']);
+    'frapontillo.bootstrap-switch', 'angular-momentjs', 'angular-tour', 'ui.bootstrap.modal']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
       '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',

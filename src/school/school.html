@@ -3,7 +3,7 @@
   <div class="col-xs-12">
     <nav-links></nav-links>
     <div ng-repeat="school in schools">
-      <div class="row panel school" ng-class="{active: school.isActive}">
+      <div class="row panel school" ng-class="{active: school.isActive, first: $first}">
         <div class="col-xs-7">
           <h2>{{ school.name }}</h2>
           <h3>{{ school.dueDate }}</h3>
@@ -22,3 +22,19 @@
     </div>
   </div>
 </main>
+<tour step="currentStep">
+  <virtual-step tourtip="Click here to set up your text messages"
+                tourtip-element="#sms-setup"
+                tourtip-placement="center"
+                tourtip-step="0"
+                tourtip-margin="100"
+                tourtip-offset-horizontal="0"
+                tourtip-offset-vertical="-230"
+                tourtip-next-label="Got It" />
+  <virtual-step tourtip="Click here to see your reminders"
+                tourtip-element=".first"
+                tourtip-placement="bottom"
+                tourtip-step="1"
+                tourtip-offset-vertical="-25"
+                tourtip-next-label="Got It" />
+</tour>

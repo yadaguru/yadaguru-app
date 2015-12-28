@@ -19,6 +19,33 @@
       </div>
       <p class="info-text" ng-click="endOnboarding()" role="button">I don't want to do setup.  Just take me to the app.</p>
     </div>
+    <div ng-if="obStep === 4" class="ob4 col-xs-12">
+      <p>Cool. Now, what is the Regular Admissions application submission date of tha school? </p>
+      <div class="form-group">
+        <label class="sr-only" for="school-name">Submission Date</label>
+        <div class="input-group">
+          <div class="input-group-addon" role="button" ng-click="datepickerOpen = !datepickerOpen"><i class="fa fa-calendar"></i></div>
+          <div class="datepicker-position">
+            <input
+              type="text"
+              class="form-control"
+              id="submission-date"
+              ng-model="$parent.submissionDate"
+              datepicker-popup="M/d/yyyy"
+              is-open="datepickerOpen"
+              min-date="minDate"
+              init-date="initDate"
+              placeholder="2/1/2016" />
+          </div>
+          <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="advanceOb()">OK NEXT</div>
+        </div>
+      </div>
+      <p class="info-text" ng-click="faqModal('application-submission-date')" role="button">What's an Application Submission Date?</p>
+      <p class="info-text" ng-click="faqModal('application-find')" role="button">Where do I find it?</p>
+      <p class="info-text" ng-click="faqModal('regular-admissions')" role="button">What's 'Regular Admissions?'</p>
+      <p class="info-text" ng-click="faqModal('rolling-admissions')" role="button">What About Rolling Admission?</p>
+      <p class="info-text" ng-click="faqModal('early-action')" role="button">Do you do Early Action/Decision?</p>
+    </div>
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">

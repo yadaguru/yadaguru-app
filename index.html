@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/vendor/toastr/toastr.css" />
     <link rel="stylesheet" href="/vendor/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="/vendor/bootstrap-switch/dist/css/bootstrap2/bootstrap-switch.min.css" />
+    <link rel="stylesheet" href="vendor/angular-tour/dist/angular-tour.css" />
     <link rel="stylesheet" href="/dist/styles/main.css">
 
   </head>
@@ -47,7 +48,7 @@
             <div class="row panel">
               <div class="col-xs-6 col-xs-offset-3">
                 <i class="fa fa-clock-o"></i>
-                <i class="fa fa-comment-o"></i>
+                <i id="sms-setup" class="fa fa-comment-o"></i>
               </div>
               <div class="col-xs-3">
                 <i class="fa fa-plus"></i>
@@ -80,7 +81,7 @@
   </script>
   <!-- End Google Analytics -->
 
-  <script src="/vendor/jquery/dist/jquery.js"></script>
+  <script src="/vendor/jquery/dist/jquery.min.js"></script>
   <script src="/vendor/file-saver.js/FileSaver.js"></script>
   <script src="/vendor/pdfmake/build/pdfmake.js"></script>
   <script src="/vendor/pdfmake/build/vfs_fonts.js"></script>
@@ -95,6 +96,9 @@
   <script src="/vendor/angular-file-saver/dist/angular-file-saver.min.js"></script>
   <script src="/vendor/angular-animate/angular-animate.js"></script>
   <script src="/vendor/angular-touch/angular-touch.min.js"></script>
+  <script src="/vendor/moment/min/moment-with-locales.min.js"></script>
+  <script src="/vendor/angular-momentjs/angular-momentjs.min.js"></script>
+  <script src="/vendor/angular-tour/dist/angular-tour.min.js"></script>
   <script src="/vendor/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
   <script src="/vendor/angular-bootstrap-switch/dist/angular-bootstrap-switch.min.js"></script>
   <script src="https://apis.google.com/js/client.js"></script>
@@ -102,4 +106,35 @@
   <script src="/dist/ngConstants.js"></script>
 
   <script src="/vendor/requirejs/require.js" data-main="/dist/main.js"></script>
+
+  <script id="tour/tour.tpl.html" type="text/ng-template">
+    <div class="tour-tip">
+      <div class="tour-content-wrapper">
+        <div ng-if="ttPlacement === 'bottom'" class="row top-controls">
+          <div class="col-xs-6">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+          <div class="col-xs-6">
+            <a ng-click="proceed()" ng-bind="ttNextLabel" class="small button tour-next-tip"></a>
+            <a ng-click="closeTour()" class="tour-close-tip">×</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p ng-bind="ttContent"></p>
+          </div>
+        </div>
+        <div ng-if="ttPlacement === 'center'" class="row bottom-controls">
+          <div class="col-xs-4 col-xs-offset-4">
+            <i class="fa fa-arrow-down"></i>
+          </div>
+          <div class="col-xs-4">
+            <a ng-click="proceed()" ng-bind="ttNextLabel" class="small button tour-next-tip"></a>
+            <a ng-click="closeTour()" class="tour-close-tip">×</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
 </html>
