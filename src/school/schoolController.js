@@ -2,17 +2,25 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var SchoolController = function ($scope, $moment, $YadaAPI) {
+  var SchoolController = function ($scope, $moment, $YadaAPI, $cookies, $localStorage) {
 
-    // TODO replace getEmpty with get once persistence logic is worked out
-    $YadaAPI.schools.getEmpty().success(function(resp) {
-      $scope.isOnboarding = resp.length === 0;
-      $scope.schools = resp;
-    });
+    // For local data persistence, get a reference to local storage.
+    $scope.$storage = $localStorage.$default({'schools': []});
+
+    // TODO replace localStorage function with API call
+    // $YadaAPI.schools.get().success(function(resp) {
+    //   $scope.schools = resp;
+    // });
+    $scope.schools = $scope.$storage.schools;
+
+    if (!$cookies.get('onboardingComplete')) {
+      $scope.isOnboarding = true;
+    }
 
     $scope.endOnboarding = function() {
       $scope.isOnboarding = false;
       $scope.currentStep = 0;
+      $cookies.put('onboardingComplete', true);
     };
   };
 
@@ -51,5 +59,5 @@ define(['app'], function(app) {
   };
 
   app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question', FaqModalController]);
-  app.register.controller('SchoolController', ['$scope', '$moment', 'yg.services.api', SchoolController]);
+  app.register.controller('SchoolController', ['$scope', '$moment', 'yg.services.api', '$cookies', '$localStorage', SchoolController]);
 });

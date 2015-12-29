@@ -33,7 +33,9 @@
     "angular-touch": "~1.4.8",
     "angular-momentjs": "~0.2.2",
     "angular-tour": "~0.2.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "angular-cookies": "~1.4.8",
+    "ngstorage": "~0.3.10"
   },
   "overrides": {
     "bootstrap": {

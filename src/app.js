@@ -4,7 +4,8 @@ define(['app'], function() {
 
   var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngTouch', 'ngSanitize', 'ngAnimate',
     'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
-    'frapontillo.bootstrap-switch', 'angular-momentjs', 'angular-tour', 'ui.bootstrap.modal']);
+    'frapontillo.bootstrap-switch', 'angular-momentjs', 'angular-tour', 'ui.bootstrap.modal',
+    'ngCookies', 'ngStorage']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
       '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',
@@ -38,6 +39,7 @@ define(['app'], function() {
         $stateProvider // route.resolve(url, baseName, path, controllerAs, secure)
           .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
           .state('reminder', route.resolve('/reminder', 'Reminder', 'reminder/', 'vm'))
+          .state('sms', route.resolve('/sms', 'SMS', 'sms/', 'vm'))
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))

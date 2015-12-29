@@ -57,12 +57,15 @@ define(['app'], function(app) {
         };
 
         $scope.addNewSchool = function(school, date) {
-          //TODO code to POST to API, for now just adding to parent scope
-          $scope.$parent.schools.push({
+          //TODO code to POST to API, for now just adding to parent scope & local storage
+          var newSchool = {
             'name': school,
             'dueDate': $moment(date).format('M/D/YYYY'),
-            'isActive': true
-          });
+            'isActive': true,
+          };
+
+          $scope.$parent.schools.push(newSchool);
+          $scope.$parent.$storage.schools.push(newSchool);
         };
 
       }]
