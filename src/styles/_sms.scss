@@ -1,0 +1,55 @@
+main.sms-view {
+  label, p, .disclaimer {
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  .disclaimer {
+    border: 1px solid white;
+    padding: 10px;
+  }
+
+  .form-group {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .send-code-modal, .sms-completion-modal {
+    position: fixed;
+    background-color: $onboarding-bg-blue;
+    width: 75%;
+    left: 12%;
+    border-radius: 5px;
+    padding: 25px;
+    margin: 100px auto;
+    color: white;
+
+    p {
+      font-size: 32px;
+      text-align: center;
+    }
+  }
+
+  .btn-primary, button {
+    background-color: $onboarding-btn-blue;
+    border-color: $onboarding-btn-blue;
+    margin: 0 auto;
+    font-size: 22px;
+    display: block;
+
+    &.disabled {
+      background-color: #ddd;
+      border-color: #ddd;
+    }
+  }
+
+  .sms-edit-menu {
+    h2 {
+      font-size: 32px;
+      color: white;
+      font-weight: normal;
+      margin: 25px 40px 40px 25px;
+    }
+  }
+}

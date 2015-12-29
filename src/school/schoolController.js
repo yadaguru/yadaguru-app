@@ -4,6 +4,9 @@ define(['app'], function(app) {
 
   var SchoolController = function ($scope, $moment, $YadaAPI, $cookies, $localStorage) {
 
+    $scope.$parent.showAdd = true;
+
+
     // For local data persistence, get a reference to local storage.
     $scope.$storage = $localStorage.$default({'schools': []});
 

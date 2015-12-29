@@ -8,8 +8,12 @@ footer {
   left: 0;
   z-index: 10;
 
-  .panel {
+  .footer-toolbar {
     margin: 0 3px 5px 3px;
+
+    a {
+      color: black;
+    }
   }
 
   i.fa {

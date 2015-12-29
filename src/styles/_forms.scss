@@ -1,0 +1,14 @@
+.input-group, .form-control, input, .input-group-addon {
+  height: 50px;
+  font-family: $pt-sans;
+  font-size: 20px;
+}
+
+.input-group-addon {
+  background-color: $active-blue;
+  color: white;
+
+  &.disabled {
+    background-color: #ddd;
+  }
+}
