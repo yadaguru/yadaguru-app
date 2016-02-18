@@ -64,7 +64,6 @@ define(['app'], function(app) {
             'isActive': true,
           };
 
-          $scope.$parent.schools.push(newSchool);
           $scope.$parent.$storage.schools.push(newSchool);
         };
 
