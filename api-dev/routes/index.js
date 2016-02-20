@@ -35,9 +35,13 @@ router.get('/', function(req, res, next) {
 router.post('/api/schools', function(req, res) {
 
   var results = [];
+<<<<<<< HEAD
   
   var user_uuid = req.query.user_uuid;
   
+=======
+
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
   var data = {
     name: req.body.name,
     due_date: req.body.due_date,
@@ -55,10 +59,16 @@ router.post('/api/schools', function(req, res) {
       });
     }
 
+<<<<<<< HEAD
     client.query("INSERT INTO schools (name, due_date, is_active, user_uuid) VALUES ($1, $2, $3, $4)", [data.name, data.due_date, true, user_uuid]);
     client.query("UPDATE reminders SET user_uuid = $1", user_uuid);
 
     var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", user_uuid);
+=======
+    client.query("INSERT INTO schools (name, due_date, is_active) VALUES ($1, $2, $3)", [data.name, data.due_date, true]);
+
+    var query = client.query("SELECT * FROM schools ORDER BY id ASC");
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
     query.on('row', function(row) {
       results.push(row);
@@ -76,8 +86,11 @@ router.get('/api/schools', function(req, res) {
 
   var results = [];
 
+<<<<<<< HEAD
   var user_uuid = req.query.user_uuid;
 
+=======
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
   pg.connect(connectionString, function(err, client, done) {
 
     if (err) {
@@ -89,7 +102,11 @@ router.get('/api/schools', function(req, res) {
       });
     }
 
+<<<<<<< HEAD
     var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", user_uuid);
+=======
+    var query = client.query("SELECT * FROM schools ORDER BY id ASC");
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
     query.on('row', function(row) {
       results.push(row);
@@ -108,7 +125,10 @@ router.put('/api/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
+<<<<<<< HEAD
   var user_uuid = req.query.user_uuid;
+=======
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
   var data = {
     name: req.body.name,
@@ -131,8 +151,13 @@ router.put('/api/schools/:school_id', function(req, res) {
   }
 
   updateString = updateString.slice(0, -1);
+<<<<<<< HEAD
   updateString += ' WHERE id=($' + i + ') AND user_uuid = ($' + (i + 1) + ')';
   updateValues.push(id, user_uuid);
+=======
+  updateString += ' WHERE id=($' + i + ')';
+  updateValues.push(id);
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -147,7 +172,11 @@ router.put('/api/schools/:school_id', function(req, res) {
 
     client.query(updateString, updateValues);
 
+<<<<<<< HEAD
     var query = client.query("SELECT * FROM schools WHERE id = $1 AND user_uuid = $2 ORDER BY id ASC", [id, user_uuid]);
+=======
+    var query = client.query("SELECT * FROM schools WHERE id = $1 ORDER BY id ASC", [id]);
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
     query.on('row', function(row) {
       results.push(row);
@@ -166,7 +195,10 @@ router.delete('/api/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
+<<<<<<< HEAD
   var user_uuid = req.query.user_uuid;
+=======
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -179,9 +211,15 @@ router.delete('/api/schools/:school_id', function(req, res) {
       });
     }
 
+<<<<<<< HEAD
     client.query("DELETE FROM schools WHERE id=($1) AND user_uuid = ($2)", [id, user_uuid]);
 
     var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", [user_uuid]);
+=======
+    client.query("DELETE FROM schools WHERE id=($1)", [id]);
+
+    var query = client.query("SELECT * FROM schools ORDER BY id ASC");
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
     query.on('row', function(row) {
       results.push(row);
@@ -198,7 +236,10 @@ router.delete('/api/schools/:school_id', function(req, res) {
 router.get('/api/reminders', function(req, res) {
 
   var results = [];
+<<<<<<< HEAD
   var user_uuid = req.query.user_uuid
+=======
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -211,7 +252,11 @@ router.get('/api/reminders', function(req, res) {
       });
     }
 
+<<<<<<< HEAD
     var query = client.query("SELECT * FROM reminders WHERE user_uuid = $1 ORDER BY timeframe ASC", [user_uuid]);
+=======
+    var query = client.query("SELECT * FROM reminders ORDER BY timeframe ASC");
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 
     query.on('row', function(row) {
       results.push(row);
@@ -267,6 +312,7 @@ router.get('/api/reminders', function(req, res) {
 
 });
 
+<<<<<<< HEAD
 router.post('/api/users', function(req, res) {
 
   var results = [];
@@ -392,4 +438,6 @@ router.delete('/api/users/:uuid', function(req, res) {
 
   });
 });
+=======
+>>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
 module.exports = router;
