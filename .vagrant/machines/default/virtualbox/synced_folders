@@ -1,0 +1,1 @@
+{"virtualbox":{"/srv/api-dev":{"guestpath":"/srv/api-dev","hostpath":"/home/bob/yadaguru/yadaguru-app/api-dev","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/bob/yadaguru/yadaguru-app","disabled":false}}}
