@@ -3,7 +3,7 @@ var gulp       = require('gulp'),
     argv       = require('yargs').argv,
     paths      = require('../paths');
 
-var environment = argv.db || 'json';
+var environment = argv.db || 'local';
 
 gulp.task('constants', function() {
   var configFile = require('../config.json');

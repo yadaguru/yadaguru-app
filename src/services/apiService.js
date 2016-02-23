@@ -22,31 +22,56 @@ define(['app'], function(app) {
       return $http.get(apiRoute + 'users/currentUser');
     };
 
-    yadaAPI.reminders.get = function() {
-      return $http.get(apiRoute + 'reminders' + apiRouteTerminator);
+    yadaAPI.reminders.get = function(user_uuid) {
+      return $http.get(apiRoute + 'reminders/?user_uuid=' + user_uuid);
     };
 
-    yadaAPI.reminders.post = function(data) {
-      return $http.post(apiRoute + 'reminders/', data);
+    yadaAPI.reminders.post = function(data, user_uuid) {
+      return $http.post(apiRoute + 'reminders/?user_uuid=' + user_uuid, data);
     };
 
-    yadaAPI.reminders.put = function(id, data) {
-      return $http.put(apiRoute + 'reminders/' + id, data);
+    yadaAPI.reminders.put = function(id, data, user_uuid) {
+      return $http.put(apiRoute + 'reminders/' + id + '/?user_uuid=' + user_uuid, data);
     };
 
-    yadaAPI.reminders.delete = function(id) {
-      return $http.delete(apiRoute + 'reminders/' + id);
+    yadaAPI.reminders.delete = function(id, user_uuid) {
+      return $http.delete(apiRoute + 'reminders/' + id + '/?user_uuid=' + user_uuid);
+    };
+    
+    yadaAPI.users = {};
+
+    yadaAPI.users.get = function() {
+      return $http.get(apiRoute + 'users/');
+    };
+
+    yadaAPI.users.post = function(data) {
+      return $http.post(apiRoute + 'users/', data);
+    };
+
+    yadaAPI.users.put = function(uuid, data) {
+      return $http.put(apiRoute + 'users/' + uuid, data);
+    };
+
+    yadaAPI.users.delete = function(uuid) {
+      return $http.delete(apiRoute + 'users/' + uuid);
     };
 
     yadaAPI.schools = {};
 
-    yadaAPI.schools.get = function() {
-      return $http.get(apiRoute + 'schools' + apiRouteTerminator);
+    yadaAPI.schools.get = function(user_uuid) {
+      return $http.get(apiRoute + 'schools/?=user_uuid' + user_uuid);
     };
 
-    // Temporary for building - remove this when we have a real connection to API
-    yadaAPI.schools.getEmpty = function() {
-      return $http.get(apiRoute + 'schools-empty' + apiRouteTerminator);
+    yadaAPI.schools.post = function(data, user_uuid) {
+      return $http.post(apiRoute + 'schools/?=user_uuid' + user_uuid, data);
+    };
+
+    yadaAPI.schools.put = function(id, data, user_uuid) {
+      return $http.put(apiRoute + 'schools/' + id + '/?user_uuid=' + user_uuid, data);
+    };
+
+    yadaAPI.schools.delete = function(id, user_uuid) {
+      return $http.delete(apiRoute + 'schools/' + id + '/?user_uuid=' + user_uuid);
     };
 
     yadaAPI.categories = {};
