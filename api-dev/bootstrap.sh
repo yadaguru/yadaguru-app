@@ -45,6 +45,8 @@ then
   echo "VM was already provisioned at: $(cat $PROVISIONED_ON)"
   echo "To run system updates manually login via 'vagrant ssh' and run 'apt-get update && apt-get upgrade'"
   echo ""
+  echo "Re-provisioning database..."
+  cat /srv/api-dev/provision.sql | PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost $APP_DB_NAME
   print_db_usage
   exit
 fi
