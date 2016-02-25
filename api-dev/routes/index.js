@@ -35,8 +35,8 @@ router.get('/', function(req, res, next) {
 router.post('/api/schools', function(req, res) {
 
   var results = [];
-  
-  var user_uuid = req.query.user_uuid;
+
+  var user_id = req.query.u;
   
   var data = {
     name: req.body.name,
@@ -55,10 +55,10 @@ router.post('/api/schools', function(req, res) {
       });
     }
 
-    client.query("INSERT INTO schools (name, due_date, is_active, user_uuid) VALUES ($1, $2, $3, $4)", [data.name, data.due_date, true, user_uuid]);
-    client.query("UPDATE reminders SET user_uuid = $1", user_uuid);
+    client.query("INSERT INTO schools (name, due_date, is_active, user_id) VALUES ($1, $2, $3, $4)", [data.name, data.due_date, true, user_id]);
+    client.query("UPDATE reminders SET user_id = $1", user_id);
 
-    var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", user_uuid);
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", user_id);
 
     query.on('row', function(row) {
       results.push(row);
@@ -76,7 +76,7 @@ router.get('/api/schools', function(req, res) {
 
   var results = [];
 
-  var user_uuid = req.query.user_uuid;
+  var user_id = req.query.u;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -89,7 +89,7 @@ router.get('/api/schools', function(req, res) {
       });
     }
 
-    var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", user_uuid);
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", user_id);
 
     query.on('row', function(row) {
       results.push(row);
@@ -108,7 +108,7 @@ router.put('/api/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
-  var user_uuid = req.query.user_uuid;
+  var user_id = req.query.u;
 
   var data = {
     name: req.body.name,
@@ -131,8 +131,8 @@ router.put('/api/schools/:school_id', function(req, res) {
   }
 
   updateString = updateString.slice(0, -1);
-  updateString += ' WHERE id=($' + i + ') AND user_uuid = ($' + (i + 1) + ')';
-  updateValues.push(id, user_uuid);
+  updateString += ' WHERE id=($' + i + ') AND user_id = ($' + (i + 1) + ')';
+  updateValues.push(id, user_id);
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -147,7 +147,7 @@ router.put('/api/schools/:school_id', function(req, res) {
 
     client.query(updateString, updateValues);
 
-    var query = client.query("SELECT * FROM schools WHERE id = $1 AND user_uuid = $2 ORDER BY id ASC", [id, user_uuid]);
+    var query = client.query("SELECT * FROM schools WHERE id = $1 AND user_id = $2 ORDER BY id ASC", [id, user_id]);
 
     query.on('row', function(row) {
       results.push(row);
@@ -166,7 +166,7 @@ router.delete('/api/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
-  var user_uuid = req.query.user_uuid;
+  var user_id = req.query.u;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -179,9 +179,9 @@ router.delete('/api/schools/:school_id', function(req, res) {
       });
     }
 
-    client.query("DELETE FROM schools WHERE id=($1) AND user_uuid = ($2)", [id, user_uuid]);
+    client.query("DELETE FROM schools WHERE id=($1) AND user_id = ($2)", [id, user_id]);
 
-    var query = client.query("SELECT * FROM schools WHERE user_uuid = $1 ORDER BY id ASC", [user_uuid]);
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
 
     query.on('row', function(row) {
       results.push(row);
@@ -198,7 +198,7 @@ router.delete('/api/schools/:school_id', function(req, res) {
 router.get('/api/reminders', function(req, res) {
 
   var results = [];
-  var user_uuid = req.query.user_uuid
+  var user_id = req.query.u
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -211,7 +211,7 @@ router.get('/api/reminders', function(req, res) {
       });
     }
 
-    var query = client.query("SELECT * FROM reminders WHERE user_uuid = $1 ORDER BY timeframe ASC", [user_uuid]);
+    var query = client.query("SELECT * FROM reminders WHERE user_id = $1 ORDER BY due_date ASC", [user_id]);
 
     query.on('row', function(row) {
       results.push(row);
@@ -271,11 +271,6 @@ router.post('/api/users', function(req, res) {
 
   var results = [];
 
-  var data = {
-    uuid: req.body.uuid,
-    phone_number: req.body.phone_number
-  };
-
   pg.connect(connectionString, function(err, client, done) {
 
     if (err) {
@@ -287,9 +282,7 @@ router.post('/api/users', function(req, res) {
       });
     }
 
-    client.query("INSERT INTO users (uuid, phone_number) VALUES ($1, $2)", [data.uuid, data.phone_number]);
-
-    var query = client.query("SELECT * FROM users WHERE uuid = $1 ORDER BY id ASC", uuid);
+    var query = client.query("INSERT INTO users DEFAULT VALUES RETURNING id");
 
     query.on('row', function(row) {
       results.push(row);
@@ -303,10 +296,10 @@ router.post('/api/users', function(req, res) {
 
 });
 
-router.put('/api/users/:uuid', function(req, res) {
+router.put('/api/users/:id', function(req, res) {
 
   var results = [];
-  var uuid = req.params.uuid;
+  var uuid = req.params.id;
 
   var data = {
     phone_number: req.body.phone_number,
@@ -329,8 +322,8 @@ router.put('/api/users/:uuid', function(req, res) {
   }
 
   updateString = updateString.slice(0, -1);
-  updateString += ' WHERE uuid=($' + i + ')';
-  updateValues.push(uuid);
+  updateString += ' WHERE id=($' + i + ')';
+  updateValues.push(id);
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -345,7 +338,7 @@ router.put('/api/users/:uuid', function(req, res) {
 
     client.query(updateString, updateValues);
 
-    var query = client.query("SELECT * FROM users WHERE uuid = $1 ORDER BY id ASC", [uuid]);
+    var query = client.query("SELECT * FROM users WHERE id = $1 ORDER BY id ASC", [id]);
 
     query.on('row', function(row) {
       results.push(row);
@@ -360,10 +353,10 @@ router.put('/api/users/:uuid', function(req, res) {
 
 });
 
-router.delete('/api/users/:uuid', function(req, res) {
+router.delete('/api/users/:id', function(req, res) {
 
   var results = [];
-  var uuid = req.params.uuid;
+  var id = req.params.id;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -376,10 +369,10 @@ router.delete('/api/users/:uuid', function(req, res) {
       });
     }
 
-    client.query("DELETE FROM users WHERE uuid=($1)", [uuid]);
-    client.query("UPDATE reminders SET user_uuid = 'temp'");
+    client.query("DELETE FROM users WHERE id=($1)", [id]);
+    client.query("UPDATE reminders SET user_id = 0");
 
-    var query = client.query("SELECT * FROM schools WHERE uuid = $1 ORDER BY id ASC", [uuid]);
+    var query = client.query("SELECT * FROM schools WHERE id = $1 ORDER BY id ASC", [id]);
 
     query.on('row', function(row) {
       results.push(row);

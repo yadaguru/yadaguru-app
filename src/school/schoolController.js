@@ -1,30 +1,43 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
 
   'use strict';
 
-  var SchoolController = function ($scope, $moment, $YadaAPI, $cookies, $localStorage) {
+  var SchoolController = function ($scope, $rootScope, $moment, $YadaAPI, $cookies) {
 
     $scope.$parent.showAdd = true;
+    $rootScope.user_id = $cookies.get('yg-uid');
 
+    $scope.getSchools = function() {
+      $YadaAPI.schools.get($rootScope.user_id).then(function (resp) {
+        $scope.schools = [];
+        resp.data.forEach(function(school) {
+          $scope.schools.push({
+            id: school.id,
+            name: school.name,
+            dueDate: moment.utc(school.due_date).format('M/D/YYYY'),
+            isActive: school.is_active
+          });
+        })
+      });
+    };
 
-    // For local data persistence, get a reference to local storage.
-    $scope.$storage = $localStorage.$default({'schools': []});
+    $scope.updateActive = function(id, is_active) {
+      $YadaAPI.schools.put(id, {
+        is_active: is_active
+      }, $rootScope.user_id);
+    };
 
-    // TODO replace localStorage function with API call
-    // $YadaAPI.schools.get().success(function(resp) {
-    //   $scope.schools = resp;
-    // });
-    $scope.schools = $scope.$storage.schools;
-
-    if (!$cookies.get('onboardingComplete')) {
-      $scope.isOnboarding = true;
-    }
-
-    $scope.endOnboarding = function() {
+    $scope.endOnboarding = function () {
       $scope.isOnboarding = false;
       $scope.currentStep = 0;
       $cookies.put('onboardingComplete', true);
     };
+
+    if (!$scope.user_id) {
+      $scope.isOnboarding = true;
+    } else {
+      $scope.getSchools();
+    }
   };
 
   var FaqModalController = function ($scope, $modalInstance, question) {
@@ -56,11 +69,11 @@ define(['app'], function(app) {
     $scope.question = faqs[question].question;
     $scope.answer = faqs[question].answer;
 
-    $scope.close = function(){
+    $scope.close = function () {
       $modalInstance.dismiss();
     };
   };
 
   app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question', FaqModalController]);
-  app.register.controller('SchoolController', ['$scope', '$moment', 'yg.services.api', '$cookies', '$localStorage', SchoolController]);
+  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies', '$localStorage', SchoolController]);
 });

@@ -2,10 +2,12 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var ReminderController = function ($scope, apiService) {
-    apiService.reminders.get().success(function(resp) {
-      console.log(resp);
-      $scope.reminderGroups = resp;
+  var ReminderController = function ($scope, $rootScope, $cookies, apiService) {
+
+    $rootScope.user_id = $cookies.get('yg-uid');
+
+    apiService.reminders.get($rootScope.user_id).then(function(resp) {
+      $scope.reminderGroups = resp.data;
       $scope.reminderGroups.forEach(function(el, i) {
         if (i > 0) {
           el.isCollapsed = true;
@@ -14,5 +16,5 @@ define(['app'], function(app) {
     });
   };
 
-  app.register.controller('ReminderController', ['$scope', 'yg.services.api', ReminderController]);
+  app.register.controller('ReminderController', ['$scope', '$rootScope', '$cookies', 'yg.services.api', ReminderController]);
 });

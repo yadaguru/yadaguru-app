@@ -1,73 +1,82 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
 
   'use strict';
 
-  app.directive('onboarding', function() {
+  app.directive('onboarding', function () {
     return {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
-      controller: ['$scope', '$moment', '$modal', function($scope, $moment, $modal) {
+      controller: [
+        '$scope', '$rootScope', '$moment', '$modal', 'yg.services.api', '$cookies',
+        function ($scope, $rootScope, $moment, $modal, YadaAPI, $cookies) {
 
-        var progressStep = 20;
+          var progressStep = 20;
 
-        $scope.obStep = 1;
-        $scope.obProgress = progressStep;
-        $scope.minDate = $moment().toDate();
-        $scope.initDate = $moment('20160201', 'YYYYMMDD').toDate();
+          $scope.obStep = 1;
+          $scope.obProgress = progressStep;
+          $scope.minDate = $moment().toDate();
+          $scope.initDate = $moment('20160201', 'YYYYMMDD').toDate();
 
-        $scope.advanceOb = function() {
-          if ($scope.obStep === 4) {
-            if (!$scope.submissionDate) {
+          $scope.advanceOb = function () {
+            if ($scope.obStep === 4) {
+              if (!$scope.submissionDate) {
+                return;
+              }
+              $scope.registerNewUser().then(function() {
+                $scope.endOnboarding();
+                $scope.$parent.showHints = true;
+              });
+            }
+
+            if ($scope.obStep === 3 && !$scope.schoolName) {
               return;
             }
-            $scope.endOnboarding();
-            $scope.addNewSchool($scope.schoolName, $scope.submissionDate);
-            $scope.$parent.showHints = true;
-          }
-
-          if ($scope.obStep === 3 && !$scope.schoolName) {
-            return;
-          }
-          $scope.obStep++;
-          $scope.obProgress += progressStep;
-        };
-
-        $scope.rewindOb = function() {
-          if ($scope.obStep === 1) {
-            return;
-          }
-          $scope.obStep--;
-          $scope.obProgress -= progressStep;
-        };
-
-        $scope.endOnboarding = function() {
-          $scope.$parent.endOnboarding();
-        };
-
-        $scope.faqModal = function(question) {
-          $modal.open({
-            templateUrl: 'dist/school/faqModal.html',
-            controller: 'FaqModalController',
-            resolve: {
-              question: function() {
-                return question;
-              }
-            }
-          });
-        };
-
-        $scope.addNewSchool = function(school, date) {
-          //TODO code to POST to API, for now just adding to parent scope & local storage
-          var newSchool = {
-            'name': school,
-            'dueDate': $moment(date).format('M/D/YYYY'),
-            'isActive': true,
+            $scope.obStep++;
+            $scope.obProgress += progressStep;
           };
 
-          $scope.$parent.$storage.schools.push(newSchool);
-        };
+          $scope.rewindOb = function () {
+            if ($scope.obStep === 1) {
+              return;
+            }
+            $scope.obStep--;
+            $scope.obProgress -= progressStep;
+          };
 
-      }]
+          $scope.endOnboarding = function () {
+            $scope.$parent.endOnboarding();
+          };
+
+          $scope.faqModal = function (question) {
+            $modal.open({
+              templateUrl: 'dist/school/faqModal.html',
+              controller: 'FaqModalController',
+              resolve: {
+                question: function () {
+                  return question;
+                }
+              }
+            });
+          };
+
+          $scope.registerNewUser = function () {
+            return $scope.addNewUser().then($scope.addNewSchool);
+          };
+
+          $scope.addNewUser = function () {
+            return YadaAPI.users.post();
+          };
+
+          $scope.addNewSchool = function (res) {
+            $rootScope.user_id = res.data[0].id;
+            $cookies.put('yg-uid', $rootScope.user_id);
+            return YadaAPI.schools.post({
+              name: $scope.schoolName,
+              due_date: $scope.submissionDate
+            }, $rootScope.user_id).then($scope.$parent.getSchools());
+          };
+
+        }]
     };
   });
 
