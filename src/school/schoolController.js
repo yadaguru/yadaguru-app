@@ -8,9 +8,9 @@ define(['app'], function (app) {
   app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies',
     function ($scope, $rootScope, $moment, $YadaAPI, $cookies) {
 
-      $scope.$parent.showAdd = true;
-      $rootScope.user_id = $cookies.get('yg-uid');
-
+      /**
+       * Gets all schools and adds them to the $scope.schools.
+       */
       $scope.getSchools = function () {
         $YadaAPI.schools.get($rootScope.user_id).then(function (resp) {
           $scope.schools = [];
@@ -25,23 +25,37 @@ define(['app'], function (app) {
         });
       };
 
+      /**
+       * Updates the active/inactive status of a school
+       *
+       * @param {number}   id         The school ID to update.
+       * @param {boolean}  is_active  The active status.
+       */
       $scope.updateActive = function (id, is_active) {
         $YadaAPI.schools.put(id, {
           is_active: is_active
         }, $rootScope.user_id);
       };
 
+      /**
+       * Ends the onboarding process and drops a cookie.
+       * TODO Move this logic to another controller.
+       */
       $scope.endOnboarding = function () {
         $scope.isOnboarding = false;
         $scope.currentStep = 0;
         $cookies.put('onboardingComplete', true);
       };
 
+      $scope.$parent.showAdd = true;
+      $rootScope.user_id = $cookies.get('yg-uid');
+
       if (!$scope.user_id) {
         $scope.isOnboarding = true;
       } else {
         $scope.getSchools();
       }
+
     }]);
 
   /**
@@ -52,7 +66,6 @@ define(['app'], function (app) {
   app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question',
     function ($scope, $modalInstance, question) {
 
-      //TODO - These should really be in the database
       var faqs = {
         'application-submission-date': {
           'question': 'What\'s an Application Submission Date?',
