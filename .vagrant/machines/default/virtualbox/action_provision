@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-1.5:d601da30-635f-4211-ac78-77a35ad18e6e
-=======
-1.5:01b57a83-a450-4a10-9710-8f6bef1a668a
->>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
