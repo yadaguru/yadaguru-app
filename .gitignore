@@ -2,11 +2,11 @@
 /vendor/*
 /css/*.min
 /node_modules/*
-/api-dev/node_modules/*
+/api-dev/node_modules/
 /.settings/*
 npm-debug.log
 /.sass-cache/*
 /.idea/*
 /public/css/*
 /dist/*
-/.vagrant/*
+/.vagrant/
