@@ -1,4 +1,4 @@
-<main class="row user-view">
+<main class="row user-view" ng-if="isUserMenu">
   <div class="sms-edit-menu">
     <div class="col-xs-12">
       <h2 ng-click="editLoginCode()">I want to change my login code</h2>
@@ -7,3 +7,4 @@
     </div>
   </div>
 </main>
+<div ui-view></div>

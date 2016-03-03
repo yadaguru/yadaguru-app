@@ -5,7 +5,7 @@ define(['app'], function (app) {
   /**
    * Controller for the user subview for updating the sponsor code.
    */
-  app.register.controller('UserController', ['$scope',
+  app.register.controller('SponsorUpdateController', ['$scope',
     function ($scope) {
 
 

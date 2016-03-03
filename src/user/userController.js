@@ -48,8 +48,9 @@ define(['app'], function (app) {
       };
 
       $scope.isSmsSetup = $cookies.get('yg-sms-set') || false;
+      $scope.isUserMenu = $state.current-name === 'user';
 
-      if ($state.current.name === 'user' && !$scope.isSmsSetup) {
+      if ($state.isUserMenu && !$scope.isSmsSetup) {
         $state.go('user.sms-add');
       }
 

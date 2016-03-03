@@ -1,0 +1,56 @@
+<main class="row user-codes-add-view">
+  <div class="col-xs-12">
+    <form name="accountCreateForm">
+      <div class="form-group">
+        <label for="sms-code">Enter the code we sent you here</label>
+        <input type="text"
+               class="form-control"
+               placeholder="code"
+               id="sms-code"
+               name="smsCode"
+               ng-model="$parent.smsCode"
+               required>
+      </div>
+      <div class="form-group">
+        <label for="personal-code">
+          Enter a six digit code that you want to use for your login. This should
+          be something easy to remember.
+        </label>
+        <input type="text"
+               class="form-control"
+               placeholder="personal code"
+               id="personal-code"
+               name="personalCode"
+               ng-model="$parent.personalCode"
+               ng-minlenth="6"
+               ng-maxlength="6"
+               ng-pattern="/\d{6}/"
+               required>
+      </div>
+      <div class="form-group">
+        <label for="sponsor-code">
+          Optional - If you have a sponser code, enter that here:
+        </label>
+        <input type="text"
+               class="form-control"
+               placeholder="sponsor code"
+               id="sponsor-code"
+               ng-model="$parent.sponsorCode"
+               name="sponsorCode">
+      </div>
+      <button type="submit"
+              class="btn btn-primary"
+              ng-class="{disabled: accountCreateForm.$invalid}"
+              ng-click="registerUser()">OK NEXT
+      </button>
+    </form>
+  </div>
+</main>
+
+<script type="text/ng-template" id="smsCompletionModal.html">
+  <div class="sms-completion-modal" ng-show="isCompletionModalVisible">
+    <p>GREAT!</p>
+    <p>You're all setup.</p>
+    <a ui-sref="school" role="button" class="btn btn-primary" ng-click="endInitialMobileSetup()">that was easy</a>
+  </div>
+</script>

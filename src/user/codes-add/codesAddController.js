@@ -5,7 +5,7 @@ define(['app'], function (app) {
   /**
    * Controller for user subview for adding confirm, login, and sponsor codes.
    */
-  app.register.controller('UserCodesAddController', ['$scope',
+  app.register.controller('CodesAddController', ['$scope',
     function ($scope) {
 
 

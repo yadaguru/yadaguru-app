@@ -31,3 +31,10 @@
     </div>
   </div>
 </main>
+
+<script type="text/ng-template" id="sendCodeModal.html">
+  <div class="modal-body">
+    <p>Check your device. We are sending you a code now<span ng-show="isSmsSetup"> to confirm it's you</span>.</p>
+    <button class="btn btn-primary" ng-click="ok()">I Got It</button>
+  </div>
+</script>
