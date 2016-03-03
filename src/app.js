@@ -41,6 +41,10 @@ define(['app'], function() {
           .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
           .state('reminder', route.resolve('/reminder', 'Reminder', 'reminder/', 'vm'))
           .state('user', route.resolve('/user', 'User', 'user/', 'vm'))
+          .state('user.sms-add', route.resolve('/sms-add', 'SmsAdd', 'user/sms-add/', 'vm'))
+          .state('user.codes-add', route.resolve('/codes-add', 'CodesAdd', 'user/codes-add/', 'vm'))
+          .state('user.login-update', route.resolve('/login-update', 'LoginUpdate', 'user/login-update/', 'vm'))
+          .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
 
           // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))

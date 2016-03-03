@@ -3,7 +3,7 @@ define(['app'], function (app) {
   'use strict';
 
   /**
-   * Controller for user/sms setup
+   * Controller for the user subview for adding an SMS number.
    */
   app.register.controller('UserController', ['$scope', '$cookies', '$state',
     function ($scope, $cookies, $state) {
@@ -46,19 +46,6 @@ define(['app'], function (app) {
         $scope.smsSetupStep = 2;
         $scope.showInitialSetup = true;
       };
-
-      $scope.isSmsSetup = $cookies.get('yg-sms-set') || false;
-
-      if ($state.current.name === 'user' && !$scope.isSmsSetup) {
-        $state.go('user.sms-add');
-      }
-
-      console.log($scope.isSmsSetup);
-      console.log($state.current);
-
-      $scope.smsSetupStep = 1;
-
-
 
     }]);
 

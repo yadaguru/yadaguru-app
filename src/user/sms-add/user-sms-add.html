@@ -1,0 +1,33 @@
+<main class="row user-sms-add-view">
+  <div class="col-xs-12">
+    <p>Enter your mobile number. We'll send you a code to use for the next step.</p>
+    <form name="smsForm">
+      <div class="form-group">
+        <label class="sr-only" for="mobile-number">Mobile Number</label>
+        <div class="input-group">
+          <input type="text"
+                 class="form-control"
+                 id="mobile-number"
+                 ng-model="$parent.mobileNumber"
+                 required
+                 name="mobileNumber"
+                 ui-mask-placeholder
+                 ui-mask="(999) 999-9999"
+                 ng-minlenth="13"
+                 ng-maxlength="13"/>
+          <div class="input-group-addon"
+               ng-class="{disabled: smsForm.$invalid}"
+               role="button"
+               ng-click="submitMobile()">OK NEXT</div>
+        </div>
+      </div>
+    </form>
+    <div class="disclaimer">
+      By clicking this button you agree to allow YadaGuru to send you periodic
+      reminders about the college application process to your mobile phone.
+      Depending on your text plan, this may incur cost. YadaGuru is not responsible
+      for these costs. Please see our Privacy Policy for more information about
+      how we use your mobile number.
+    </div>
+  </div>
+</main>
