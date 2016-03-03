@@ -5,7 +5,7 @@ define(['app'], function (app) {
   /**
    * Controller for user/sms setup
    */
-  app.register.controller('SmsController', ['$scope', '$cookies',
+  app.register.controller('UserController', ['$scope', '$cookies',
     function ($scope, $cookies) {
 
       /**

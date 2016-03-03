@@ -40,7 +40,7 @@ define(['app'], function() {
           // New routes for version 2
           .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
           .state('reminder', route.resolve('/reminder', 'Reminder', 'reminder/', 'vm'))
-          .state('user', route.resolve('/user', 'Sms', 'user/', 'vm'))
+          .state('user', route.resolve('/user', 'User', 'user/', 'vm'))
 
           // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
