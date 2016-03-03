@@ -73,7 +73,7 @@ define(['app'], function (app) {
             return YadaAPI.schools.post({
               name: $scope.schoolName,
               due_date: $scope.submissionDate
-            }, $rootScope.user_id).then($scope.$parent.getSchools());
+            }, $rootScope.user_id).then($scope.$parent.processSchools);
           };
 
         }]
