@@ -37,9 +37,12 @@ define(['app'], function() {
         var route = routeResolverProvider.route;
 
         $stateProvider // route.resolve(url, baseName, path, controllerAs, secure)
+          // New routes for version 2
           .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
           .state('reminder', route.resolve('/reminder', 'Reminder', 'reminder/', 'vm'))
-          .state('sms', route.resolve('/sms', 'Sms', 'sms/', 'vm'))
+          .state('user', route.resolve('/user', 'Sms', 'user/', 'vm'))
+
+          // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))

@@ -32,11 +32,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/api/schools', function(req, res) {
+router.post('/api/users/:user_id/schools', function(req, res) {
 
   var results = [];
 
-  var user_id = req.query.u;
+  var user_id = req.params.user_id;
   
   var data = {
     name: req.body.name,
@@ -72,11 +72,11 @@ router.post('/api/schools', function(req, res) {
 
 });
 
-router.get('/api/schools', function(req, res) {
+router.get('/api/users/:user_id/schools', function(req, res) {
 
   var results = [];
 
-  var user_id = req.query.u;
+  var user_id = req.params.user_id;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -104,11 +104,11 @@ router.get('/api/schools', function(req, res) {
 
 });
 
-router.put('/api/schools/:school_id', function(req, res) {
+router.put('/api/users/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
-  var user_id = req.query.u;
+  var user_id = req.params.user_id;
 
   var data = {
     name: req.body.name,
@@ -162,11 +162,11 @@ router.put('/api/schools/:school_id', function(req, res) {
 
 });
 
-router.delete('/api/schools/:school_id', function(req, res) {
+router.delete('/api/users/:user_id/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;
-  var user_id = req.query.u;
+  var user_id = req.params.user_id;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -195,10 +195,10 @@ router.delete('/api/schools/:school_id', function(req, res) {
   });
 });
 
-router.get('/api/reminders', function(req, res) {
+router.get('/api/users/:user_id/reminders', function(req, res) {
 
   var results = [];
-  var user_id = req.query.u
+  var user_id = req.params.user_id;
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -299,7 +299,7 @@ router.post('/api/users', function(req, res) {
 router.put('/api/users/:id', function(req, res) {
 
   var results = [];
-  var uuid = req.params.id;
+  var id = req.params.id;
 
   var data = {
     phone_number: req.body.phone_number,

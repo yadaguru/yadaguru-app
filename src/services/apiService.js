@@ -40,10 +40,6 @@ define(['app'], function(app) {
     
     yadaAPI.users = {};
 
-    yadaAPI.users.get = function() {
-      return $http.get(apiRoute + 'users/');
-    };
-
     yadaAPI.users.post = function() {
       return $http.post(apiRoute + 'users/', null);
     };
@@ -54,6 +50,12 @@ define(['app'], function(app) {
 
     yadaAPI.users.delete = function(id) {
       return $http.delete(apiRoute + 'users/' + id);
+    };
+
+    yadaAPI.sms = {};
+
+    yadaAPI.sms.confirmSmsNumber = function(data) {
+      return $http.post(apiRoute + 'sms/', data)
     };
 
     yadaAPI.schools = {};
