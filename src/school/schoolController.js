@@ -15,6 +15,11 @@ define(['app'], function (app) {
         $YadaAPI.schools.get($rootScope.user_id).then($scope.processSchools);
       };
 
+      /**
+       * Adds response data from a call to GET schools to $scope.schools.
+       *
+       * @param  {object}  resp  The response object.
+       */
       $scope.processSchools = function(resp) {
         resp.data.forEach(function (school) {
           $scope.schools.push({
