@@ -21,7 +21,8 @@ define(['app'], function (app) {
       $scope.showForgetConfirmation = function() {
         var modalInstance = $modal.open({
           templateUrl: 'forgetUser.html',
-          controller: 'UserModalController'
+          controller: 'UserModalController',
+          windowClass: 'forget-user-modal'
         });
 
         modalInstance.result.then(function() {

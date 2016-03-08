@@ -19,3 +19,46 @@
     }
   }
 }
+
+.modal-content {
+  background-color: $onboarding-bg-blue;
+  color: white;
+  width: 80%;
+  margin: 17vh auto;
+  height: 35vh;
+  font-size: 32px;
+  font-family: $marvel;
+  text-align: center;
+
+  .btn {
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: $active-blue;
+    font-weight: bold;
+    width: auto;
+    margin-top: 1em;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .btn.btn-danger {
+    background-color: $danger;
+  }
+}
+
+.modal-body {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.forget-user-modal .modal-content {
+  height: 60vh;
+}
