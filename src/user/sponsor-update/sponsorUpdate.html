@@ -1,104 +1,32 @@
-<main class="row user-view">
-  <div class="sms-setup" ng-show="showInitialSetup">
-    <div class="sms-setup-step-1" ng-show="smsSetupStep === 1">
-      <div class="col-xs-12">
-        <p>Enter your mobile number. We'll send you a code to use for the next step.</p>
-        <form name="smsForm">
-          <div class="form-group">
-            <label class="sr-only" for="mobile-number">Mobile Number</label>
-            <div class="input-group">
-              <input type="text"
-                     class="form-control"
-                     id="mobile-number"
-                     ng-model="$parent.mobileNumber"
-                     required
-                     name="mobileNumber"
-                     ui-mask-placeholder
-                     ui-mask="(999) 999-9999"
-                     ng-minlenth="13"
-                     ng-maxlength="13"/>
-              <div class="input-group-addon"
-                   ng-class="{disabled: smsForm.$invalid}"
-                   role="button"
-                   ng-click="submitMobile()">OK NEXT</div>
-            </div>
-          </div>
-        </form>
-          <div class="disclaimer">
-            By clicking this button you agree to allow YadaGuru to send you periodic
-            reminders about the college application process to your mobile phone.
-            Depending on your text plan, this may incur cost. YadaGuru is not responsible
-            for these costs. Please see our Privacy Policy for more information about
-            how we use your mobile number.
-          </div>
+<main class="row user-sponsor-update-view">
+  <div class="col-xs-12">
+    <form name="sponsorUpdateForm">
+      <div class="form-group">
+        <label for="sponsor-code">
+          If you have a sponsor code, enter that here:
+        </label>
+        <input type="text"
+               class="form-control"
+               placeholder="sponsor code"
+               id="sponsor-code"
+               ng-model="$parent.sponsorCode"
+               name="sponsorCode"
+               required>
       </div>
-    </div>
-    <div class="sms-setup-step-2" ng-show="smsSetupStep === 2">
-      <div class="send-code-modal">
-        <p>Check your device. We are sending you a code now<span ng-show="isSmsSetup"> to confirm it's you</span>.</p>
-        <button class="btn btn-primary" ng-click="confirmCode()">I Got It</button>
-      </div>
-    </div>
-    <div class="sms-setup-step-3" ng-show="smsSetupStep === 3">
-      <div class="col-xs-12">
-        <form name="accountCreateForm">
-          <div class="form-group">
-            <label for="sms-code">Enter the code we sent you here</label>
-            <input type="text"
-                   class="form-control"
-                   placeholder="code"
-                   id="sms-code"
-                   name="smsCode"
-                   ng-model="$parent.smsCode"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="personal-code">
-              Enter a six digit code that you want to use for your login. This should
-              be something easy to remember.
-            </label>
-            <input type="text"
-                   class="form-control"
-                   placeholder="personal code"
-                   id="personal-code"
-                   name="personalCode"
-                   ng-model="$parent.personalCode"
-                   ng-minlenth="6"
-                   ng-maxlength="6"
-                   ng-pattern="/\d{6}/"
-                   required >
-          </div>
-          <div class="form-group">
-            <label for="sponsor-code">
-              Optional - If you have a sponser code, enter that here:
-            </label>
-            <input type="text"
-                   class="form-control"
-                   placeholder="sponsor code"
-                   id="sponsor-code"
-                   ng-model="$parent.sponsorCode"
-                   name="sponsorCode" >
-          </div>
-          <button type="submit"
-                  class="btn btn-primary"
-                  ng-class="{disabled: accountCreateForm.$invalid}"
-                  ng-click="registerUser()">OK NEXT</button>
-        </form>
-      </div>
-      <div class="sms-completion-modal" ng-show="isCompletionModalVisible">
-        <p>GREAT!</p>
-        <p>You're all setup.</p>
-        <a ui-sref="school" role="button" class="btn btn-primary" ng-click="endInitialMobileSetup()">that was easy</a>
-      </div>
-    </div>
-  </div>
-  <div class="sms-edit" ng-hide="showInitialSetup">
-    <div class="sms-edit-menu">
-      <div class="col-xs-12">
-        <h2 ng-click="editLoginCode()">I want to change my login code</h2>
-        <h2>I want to add a sponsor code</h2>
-        <h2>Forget my mobile phone number</h2>
-      </div>
-    </div>
+      <button type="submit"
+              class="btn btn-primary"
+              ng-class="{disabled: sponsorUpdateForm.$invalid}"
+              ng-disabled="sponsorUpdateForm.$invalid"
+              ng-click="updateSponsorCode()">OK NEXT
+      </button>
+    </form>
+
   </div>
 </main>
+
+<script type="text/ng-template" id="sponsorUpdateCompletionModal.html">
+  <div class="modal-body">
+    <p>You Are Now Sponsored!</p>
+    <button class="btn btn-primary" ng-click="ok()">that was easy</button>
+  </div>
+</script>

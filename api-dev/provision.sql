@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS schools (
 
 CREATE TABLE IF NOT EXISTS reminders (
   id        SERIAL PRIMARY KEY             NOT NULL,
-  user_id   INT REFERENCES users (id) NULL,
+  user_id   INT                            NULL,
   timeframe TEXT                           NOT NULL,
   due_date  DATE                           NOT NULL,
   name      TEXT                           NOT NULL,

@@ -1,6 +1,6 @@
 <main class="row user-codes-add-view">
   <div class="col-xs-12">
-    <form name="accountCreateForm">
+    <form name="codesAddForm">
       <div class="form-group">
         <label for="sms-code">Enter the code we sent you here</label>
         <input type="text"
@@ -22,7 +22,7 @@
                id="personal-code"
                name="personalCode"
                ng-model="$parent.personalCode"
-               ng-minlenth="6"
+               ng-minlength="6"
                ng-maxlength="6"
                ng-pattern="/\d{6}/"
                required>
@@ -40,17 +40,18 @@
       </div>
       <button type="submit"
               class="btn btn-primary"
-              ng-class="{disabled: accountCreateForm.$invalid}"
-              ng-click="registerUser()">OK NEXT
+              ng-class="{disabled: codesAddForm.$invalid}"
+              ng-disabled="codesAddForm.$invalid"
+              ng-click="submitCodes()">OK NEXT
       </button>
     </form>
   </div>
 </main>
 
 <script type="text/ng-template" id="smsCompletionModal.html">
-  <div class="sms-completion-modal" ng-show="isCompletionModalVisible">
+  <div class="modal-body">
     <p>GREAT!</p>
     <p>You're all setup.</p>
-    <a ui-sref="school" role="button" class="btn btn-primary" ng-click="endInitialMobileSetup()">that was easy</a>
+    <button class="btn btn-primary" ng-click="ok()">that was easy</button>
   </div>
 </script>

@@ -13,10 +13,10 @@
                  name="mobileNumber"
                  ui-mask-placeholder
                  ui-mask="(999) 999-9999"
-                 ng-minlenth="13"
-                 ng-maxlength="13"/>
+                 ng-minlength="10" />
           <div class="input-group-addon"
                ng-class="{disabled: smsForm.$invalid}"
+               ng-disabled="smsForm.$invalid"
                role="button"
                ng-click="submitMobile()">OK NEXT</div>
         </div>
@@ -34,7 +34,7 @@
 
 <script type="text/ng-template" id="sendCodeModal.html">
   <div class="modal-body">
-    <p>Check your device. We are sending you a code now<span ng-show="isSmsSetup"> to confirm it's you</span>.</p>
+    <p>Check your device. We are sending you a code now.</p>
     <button class="btn btn-primary" ng-click="ok()">I Got It</button>
   </div>
 </script>

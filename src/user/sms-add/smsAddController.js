@@ -3,46 +3,26 @@ define(['app'], function (app) {
   'use strict';
 
   /**
-   * Controller for the user subview for adding an SMS number.
+   * Controller for sms-add user subview
    */
-  app.register.controller('SmsAddController', ['$scope', '$modal', '$state',
-    function ($scope, $modal, $state) {
+  app.register.controller('SmsAddController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
+    function ($scope, $cookies, $state, $modal, yadaApi) {
 
       /**
        * Updates user with phone number and advances sms setup.
        */
       $scope.submitMobile = function () {
+        console.log('submitMobile');
         //TODO POST to submit number to server
         console.log('mobileNumber: ', $scope.mobileNumber);
         var modalInstance = $modal.open({
           templateUrl: 'sendCodeModal.html',
-          controller: 'SendCodeModalController'
+          controller: 'UserModalController'
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function () {
           $state.go('user.codes-add');
-        })
+        });
       };
-
-
-      /**
-       * Displays confirmation code message.
-       */
-      $scope.confirmCode = function () {
-        $scope.smsSetupStep = 3;
-      };
-
-
-    }]);
-
-  /**
-   * Controller for the send code modal.
-   */
-  app.register.controller('SendCodeModalController', ['$scope', '$modalInstance',
-    function ($scope, $modalInstance) {
-
-      $scope.ok = function() {
-        $modalInstance.close();
-      }
 
     }]);
 

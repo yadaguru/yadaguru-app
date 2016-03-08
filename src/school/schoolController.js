@@ -50,7 +50,7 @@ define(['app'], function (app) {
       $scope.endOnboarding = function () {
         $scope.isOnboarding = false;
         $scope.currentStep = 0;
-        $cookies.put('onboardingComplete', true);
+        $cookies.put('yg-ob-complete', true);
       };
 
       $scope.schools = [];

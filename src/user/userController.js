@@ -5,63 +5,80 @@ define(['app'], function (app) {
   /**
    * Controller for user/sms setup
    */
-  app.register.controller('UserController', ['$scope', '$cookies', '$state',
-    function ($scope, $cookies, $state) {
+  app.register.controller('UserController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
+    function ($scope, $cookies, $state, $modal, yadaApi) {
 
       /**
-       * Updates user with phone number and advances sms setup.
+       * Checks whether state is the root user menu, and sets it in the scope.
        */
-      $scope.submitMobile = function () {
-        //TODO POST to submit number to server
-        console.log('mobileNumber: ', $scope.mobileNumber);
-        $scope.smsSetupStep = 2;
+      $scope.getUserMenuState = function() {
+        $scope.isUserMenu = $state.current.name === 'user';
       };
 
       /**
-       * Displays confirmation code message.
+       * Shows the "Forget Me" confirmation modal
        */
-      $scope.confirmCode = function () {
-        $scope.smsSetupStep = 3;
+      $scope.showForgetConfirmation = function() {
+        var modalInstance = $modal.open({
+          templateUrl: 'forgetUser.html',
+          controller: 'UserModalController'
+        });
+
+        modalInstance.result.then(function() {
+          $scope.forgetUser();
+        })
       };
 
       /**
-       * Updates the user with personal and sponsor code.
+       * Deletes current user and removes all YadaGuru cookies, then redirects to school view (which begins onboarding).
        */
-      $scope.updateUser = function () {
-        //TODO POST to create new user for number
-        console.log('smsCode: ', $scope.smsCode);
-        console.log('personalCode: ', $scope.personalCode);
-        console.log('sponsorCode: ', $scope.sponsorCode);
-        $scope.isCompletionModalVisible = true;
+      $scope.forgetUser = function() {
+        yadaApi.users.delete($cookies.get('yg-uid')).then(function() {
+          $cookies.remove('yg-uid');
+          $cookies.remove('yg-sms-set');
+          $cookies.remove('yg-ob-complete');
+          $state.go('school');
+        });
       };
 
       /**
-       * Sets a cookie, indicating initial mobile setup has been completed.
+       * User state change event listener
        */
-      $scope.endInitialMobileSetup = function () {
-        $cookies.put('initialSmsSetupComplete', true);
-      };
+      $scope.$on('$stateChangeSuccess', function() {
 
-      $scope.editLoginCode = function () {
-        $scope.smsSetupStep = 2;
-        $scope.showInitialSetup = true;
-      };
+        $scope.getUserMenuState();
+
+      });
+
+      $scope.isLoginUpdateFormVisible = false;
+      $scope.isUserMenu = false;
 
       $scope.isSmsSetup = $cookies.get('yg-sms-set') || false;
-      $scope.isUserMenu = $state.current-name === 'user';
+      $scope.getUserMenuState();
 
-      if ($state.isUserMenu && !$scope.isSmsSetup) {
+      if ($scope.isUserMenu && !$scope.isSmsSetup) {
         $state.go('user.sms-add');
       }
 
-      console.log($scope.isSmsSetup);
-      console.log($state.current);
-
-      $scope.smsSetupStep = 1;
 
 
 
     }]);
 
+  /**
+   * Controller for the user area modals.
+   */
+  app.register.controller('UserModalController', ['$scope', '$modalInstance',
+    function ($scope, $modalInstance) {
+
+      $scope.ok = function() {
+        $modalInstance.close();
+      };
+
+      $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+      }
+
+    }]);
 
 });

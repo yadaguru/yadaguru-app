@@ -1,10 +1,18 @@
 <main class="row user-view" ng-if="isUserMenu">
   <div class="sms-edit-menu">
     <div class="col-xs-12">
-      <h2 ng-click="editLoginCode()">I want to change my login code</h2>
-      <h2>I want to add a sponsor code</h2>
-      <h2>Forget my mobile phone number</h2>
+      <h2><a ui-sref="user.login-update">I want to change my login code</a></h2>
+      <h2><a ui-sref="user.sponsor-update">I want to add a sponsor code</a></h2>
+      <h2 ng-click="showForgetConfirmation()">Forget my mobile phone number</h2>
     </div>
   </div>
 </main>
 <div ui-view></div>
+
+<script type="text/ng-template" id="forgetUser.html">
+  <div class="modal-body">
+    <p>YadaGuru will erase all your data.  If you just want to stop text, turn off texting on the Reminders Page.  If you really want us to forget you, click the button. </p>
+    <button class="btn btn-primary" ng-click="cancel()">Nevermind</button>
+    <button class="btn btn-danger" ng-click="ok()">Forget Me</button>
+  </div>
+</script>
