@@ -12,13 +12,14 @@ define(['app'], function (app) {
        * Shows the update login code send code modal.
        */
       $scope.showLoginUpdateSendCodeModal = function() {
-        //TODO API call to send confirm code. On success, show modal
-        var modalInstance = $modal.open({
-          templateUrl: 'loginUpdateSendCodeModal.html',
-          controller: 'UserModalController'
-        });
-        modalInstance.result.then(function() {
-          $scope.isLoginUpdateFormVisible = true;
+        yadaApi.users.put($scope.userId, {}).then(function() {
+          var modalInstance = $modal.open({
+            templateUrl: 'loginUpdateSendCodeModal.html',
+            controller: 'UserModalController'
+          });
+          modalInstance.result.then(function() {
+            $scope.isLoginUpdateFormVisible = true;
+          });
         });
       };
 
@@ -26,17 +27,20 @@ define(['app'], function (app) {
        * Updates user login code.
        */
       $scope.updateLoginCode = function () {
-        //TODO POST to submit number to server
-        console.log('smsCode: ', $scope.smsCode);
-        console.log('personalCode: ', $scope.personalCode);
-        //TODO on success, show modal
-        var modalInstance = $modal.open({
-          templateUrl: 'loginUpdateCompletionModal.html',
-          controller: 'UserModalController'
+        yadaApi.users.put($scope.userId, {
+          confirm_code: $scope.confirmCode,
+          personal_code: $scope.personalCode
+        }).then(function() {
+          $scope.confirmCode = '';
+          $scope.personalCode = '';
+          var modalInstance = $modal.open({
+            templateUrl: 'loginUpdateCompletionModal.html',
+            controller: 'UserModalController'
+          });
+          modalInstance.result.then(function() {
+            $state.go('user');
+          })
         });
-        modalInstance.result.then(function() {
-          $state.go('user');
-        })
       };
 
       $scope.showLoginUpdateSendCodeModal();

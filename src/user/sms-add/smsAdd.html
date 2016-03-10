@@ -3,14 +3,14 @@
     <p>Enter your mobile number. We'll send you a code to use for the next step.</p>
     <form name="smsForm">
       <div class="form-group">
-        <label class="sr-only" for="mobile-number">Mobile Number</label>
+        <label class="sr-only" for="phone-number">phone Number</label>
         <div class="input-group">
           <input type="text"
                  class="form-control"
-                 id="mobile-number"
-                 ng-model="$parent.mobileNumber"
+                 id="phone-number"
+                 ng-model="phoneNumber"
                  required
-                 name="mobileNumber"
+                 name="phoneNumber"
                  ui-mask-placeholder
                  ui-mask="(999) 999-9999"
                  ng-minlength="10" />

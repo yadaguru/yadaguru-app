@@ -2,13 +2,13 @@
   <div class="col-xs-12">
     <form name="codesAddForm">
       <div class="form-group">
-        <label for="sms-code">Enter the code we sent you here</label>
+        <label for="confirm-code">Enter the code we sent you here</label>
         <input type="text"
                class="form-control"
                placeholder="code"
-               id="sms-code"
-               name="smsCode"
-               ng-model="$parent.smsCode"
+               id="confirm-code"
+               name="confirmCode"
+               ng-model="confirmCode"
                required>
       </div>
       <div class="form-group">
@@ -21,7 +21,7 @@
                placeholder="personal code"
                id="personal-code"
                name="personalCode"
-               ng-model="$parent.personalCode"
+               ng-model="personalCode"
                ng-minlength="6"
                ng-maxlength="6"
                ng-pattern="/\d{6}/"
@@ -35,7 +35,7 @@
                class="form-control"
                placeholder="sponsor code"
                id="sponsor-code"
-               ng-model="$parent.sponsorCode"
+               ng-model="sponsorCode"
                name="sponsorCode">
       </div>
       <button type="submit"
@@ -49,7 +49,7 @@
 </main>
 
 <script type="text/ng-template" id="smsCompletionModal.html">
-  <div class="modal-body sms-completion-modal">
+  <div class="modal-body confirm-completion-modal">
     <p>GREAT!</p>
     <p>You're all setup.</p>
     <button class="btn btn-primary" ng-click="ok()">that was easy</button>

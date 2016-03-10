@@ -301,10 +301,15 @@ router.put('/api/users/:id', function(req, res) {
   var results = [];
   var id = req.params.id;
 
+  if (Object.keys(req.body).length === 0 && JSON.stringify(req.body) === JSON.stringify({})) {
+    return res.json({});
+  }
+
   var data = {
     phone_number: req.body.phone_number,
     personal_code: req.body.personal_code,
-    sponsor_code: req.body.sponsor_code
+    sponsor_code: req.body.sponsor_code,
+    confirm_code: req.body.confirm_code
   };
 
   var updateString = 'UPDATE users SET';

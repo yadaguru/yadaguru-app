@@ -2,13 +2,13 @@
   <div class="col-xs-12">
     <form name="loginUpdateForm" ng-show="isLoginUpdateFormVisible">
       <div class="form-group">
-        <label for="sms-code">Enter the code we sent you here</label>
+        <label for="confirm-code">Enter the code we sent you here</label>
         <input type="text"
                class="form-control"
                placeholder="code"
-               id="sms-code"
-               name="smsCode"
-               ng-model="$parent.smsCode"
+               id="confirm-code"
+               name="confirmCode"
+               ng-model="confirmCode"
                required>
       </div>
       <div class="form-group">
@@ -21,7 +21,7 @@
                placeholder="personal code"
                id="personal-code"
                name="personalCode"
-               ng-model="$parent.personalCode"
+               ng-model="personalCode"
                ng-minlength="6"
                ng-maxlength="6"
                ng-pattern="/\d{6}/"

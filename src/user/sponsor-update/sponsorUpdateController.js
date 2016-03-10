@@ -6,23 +6,26 @@ define(['app'], function (app) {
    * Controller for the sponsor-update user subview
    */
   app.register.controller('SponsorUpdateController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
-    function ($scope, $cookies, $state, $modal, yadaAPI) {
+    function ($scope, $cookies, $state, $modal, yadaApi) {
 
       /**
        * Updates user sponsor code.
        */
       $scope.updateSponsorCode = function () {
-        //TODO POST to submit sponsor code to server
-        console.log('sponsorCode: ', $scope.sponsorCode);
-        //TODO on success, show modal
-        var modalInstance = $modal.open({
-          templateUrl: 'sponsorUpdateCompletionModal.html',
-          controller: 'UserModalController'
+        yadaApi.users.put($scope.userId, {
+          sponsor_code: $scope.sponsorCode
+        }).then(function() {
+          $scope.sponsorCode = '';
+          var modalInstance = $modal.open({
+            templateUrl: 'sponsorUpdateCompletionModal.html',
+            controller: 'UserModalController'
+          });
+          modalInstance.result.then(function() {
+            $state.go('user');
+          })
         });
-        modalInstance.result.then(function() {
-          $state.go('user');
-        })
       };
+
     }]);
 
 });

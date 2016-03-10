@@ -53,6 +53,7 @@ define(['app'], function (app) {
 
       $scope.isLoginUpdateFormVisible = false;
       $scope.isUserMenu = false;
+      $scope.userId = $cookies.get('yg-uid');
 
       $scope.isSmsSetup = $cookies.get('yg-sms-set') || false;
       $scope.getUserMenuState();

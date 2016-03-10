@@ -12,15 +12,17 @@ define(['app'], function (app) {
        * Updates user with phone number and advances sms setup.
        */
       $scope.submitMobile = function () {
-        console.log('submitMobile');
-        //TODO POST to submit number to server
-        console.log('mobileNumber: ', $scope.mobileNumber);
-        var modalInstance = $modal.open({
-          templateUrl: 'sendCodeModal.html',
-          controller: 'UserModalController'
-        });
-        modalInstance.result.then(function () {
-          $state.go('user.codes-add');
+        yadaApi.users.put($scope.userId, {
+          phone_number: $scope.phoneNumber
+        }).then(function() {
+          $scope.phoneNumber = '';
+          var modalInstance = $modal.open({
+            templateUrl: 'sendCodeModal.html',
+            controller: 'UserModalController'
+          });
+          modalInstance.result.then(function () {
+            $state.go('user.codes-add');
+          });
         });
       };
 
