@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/yadaguru/yadaguru-app.png?label=ready&title=Ready)](https://waffle.io/yadaguru/yadaguru-app)
 [![Build Status](https://travis-ci.org/yadaguru/yadaguru-app.svg?branch=master)](https://travis-ci.org/yadaguru/yadaguru-app)
 [![Build status](https://ci.appveyor.com/api/projects/status/ab8l04js8huip9ja?svg=true)](https://ci.appveyor.com/project/adobley/yadaguru-app)
 [![Coverage Status](https://coveralls.io/repos/yadaguru/yadaguru-app/badge.svg?branch=master&service=github)](https://coveralls.io/github/yadaguru/yadaguru-app?branch=master)
