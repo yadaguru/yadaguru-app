@@ -56,9 +56,9 @@ router.post('/api/users/:user_id/schools', function(req, res) {
     }
 
     client.query("INSERT INTO schools (name, due_date, is_active, user_id) VALUES ($1, $2, $3, $4)", [data.name, data.due_date, true, user_id]);
-    client.query("UPDATE reminders SET user_id = $1", user_id);
+    client.query("UPDATE reminders SET user_id = $1", [user_id]);
 
-    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", user_id);
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
 
     query.on('row', function(row) {
       results.push(row);
@@ -89,7 +89,8 @@ router.get('/api/users/:user_id/schools', function(req, res) {
       });
     }
 
-    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", user_id);
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
+    console.log('foobar');
 
     query.on('row', function(row) {
       results.push(row);
