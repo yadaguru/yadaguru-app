@@ -62,3 +62,19 @@
 .forget-user-modal .modal-content {
   height: 60vh;
 }
+
+.panel {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.panel-header {
+  border-color: $heading-border-blue;
+  background-color: $heading-bg-blue;
+  color: white;
+  font-family: $marvel;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 0.5em;
+  border-radius: 5px;
+}

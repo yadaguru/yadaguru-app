@@ -45,6 +45,7 @@ define(['app'], function() {
           .state('user.codes-add', route.resolve('/codes-add', 'CodesAdd', 'user/codes-add/', 'vm'))
           .state('user.login-update', route.resolve('/login-update', 'LoginUpdate', 'user/login-update/', 'vm'))
           .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
+          .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
 
           // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
