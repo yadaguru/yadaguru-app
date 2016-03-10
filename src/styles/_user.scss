@@ -1,8 +1,13 @@
-main.sms-view {
+main.user-view {
   label, p, .disclaimer {
     color: white;
-    font-size: 16px;
+    font-size: 1em;
     font-weight: normal;
+  }
+
+  form {
+    width: 85%;
+    margin: 0 auto;
   }
 
   .disclaimer {
@@ -13,22 +18,6 @@ main.sms-view {
   .form-group {
     margin-top: 25px;
     margin-bottom: 25px;
-  }
-
-  .send-code-modal, .sms-completion-modal {
-    position: fixed;
-    background-color: $onboarding-bg-blue;
-    width: 75%;
-    left: 12%;
-    border-radius: 5px;
-    padding: 25px;
-    margin: 100px auto;
-    color: white;
-
-    p {
-      font-size: 32px;
-      text-align: center;
-    }
   }
 
   .btn-primary, button {
@@ -46,10 +35,14 @@ main.sms-view {
 
   .sms-edit-menu {
     h2 {
-      font-size: 32px;
+      font-size: 2em;
       color: white;
       font-weight: normal;
       margin: 25px 40px 40px 25px;
+
+      a {
+        color: white;
+      }
     }
   }
 }
