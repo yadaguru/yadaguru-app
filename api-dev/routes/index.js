@@ -392,7 +392,7 @@ router.delete('/api/users/:id', function(req, res) {
   });
 });
 
-router.get('/api/content_items/:item_name', function(req, res) {
+router.get('/api/content-items/:item_name', function(req, res) {
 
   var results = [];
   var item_name = req.params.item_name;

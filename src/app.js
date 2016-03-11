@@ -46,10 +46,11 @@ define(['app'], function() {
           .state('user.login-update', route.resolve('/login-update', 'LoginUpdate', 'user/login-update/', 'vm'))
           .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
           .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
+          .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
+          .state('disclaimer', route.resolve('/disclaimer', 'Disclaimer', 'disclaimer/', 'vm'))
 
           // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
-          .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
           .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm', 'admin'))
           .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm', 'admin'))

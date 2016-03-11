@@ -63,12 +63,11 @@
   height: 60vh;
 }
 
-.panel {
-  padding-left: 1em;
-  padding-right: 1em;
+.panel.content-panel {
+  padding: 1em;
 }
 
-.panel-header {
+.content-panel-header {
   border-color: $heading-border-blue;
   background-color: $heading-bg-blue;
   color: white;

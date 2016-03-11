@@ -1,18 +1,26 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
+
   'use strict';
 
-  var FaqsController = function($scope, YadaAPI, $sce) {
+  /**
+   * Controller for the faqs view
+   */
+  app.register.controller('FaqsController', ['$scope', 'yg.services.api',
+    function ($scope, yadaApi) {
+      $scope.contact = 'Loading...';
+      $scope.faq = 'Loading...';
 
-    $scope.faqContent = '';
+      yadaApi.contentItems.get('contact').then(function(resp) {
+        $scope.contact = resp.data[0].content;
+      }, function() {
+        $scope.contact = 'Error loading contact info.';
+      });
 
-    $scope.getFaqs = function() {
-      YadaAPI.faqs.get().then(function(resp) {
-        $scope.faqContent = $sce.trustAsHtml(resp.data[0].content);
-      }, function(err) {console.log(err);});
-    };
+      yadaApi.contentItems.get('faqs').then(function(resp) {
+        $scope.faqs = resp.data[0].content;
+      }, function() {
+        $scope.faqs = 'Error loading FAQs.';
+      })
+    }]);
 
-    $scope.getFaqs();
-
-  };
-  app.register.controller('FaqsController', ['$scope', 'yg.services.api', '$sce', FaqsController]);
 });

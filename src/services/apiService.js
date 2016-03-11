@@ -132,6 +132,12 @@ define(['app'], function(app) {
       return $http.put(apiRoute + 'faqs/' + id, data);
     };
 
+    yadaAPI.contentItems = {};
+
+    yadaAPI.contentItems.get = function(itemName) {
+      return $http.get(apiRoute + 'content-items/' + itemName);
+    };
+
     yadaAPI.settings = {};
 
     yadaAPI.settings.get = function() {
