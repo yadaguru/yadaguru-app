@@ -298,7 +298,6 @@ router.post('/api/users', function(req, res) {
 });
 
 router.put('/api/users/:id', function(req, res) {
-
   var results = [];
   var id = req.params.id;
 
@@ -391,5 +390,38 @@ router.delete('/api/users/:id', function(req, res) {
     });
 
   });
+});
+
+router.get('/api/content_items/:item_name', function(req, res) {
+
+  var results = [];
+  var item_name = req.params.item_name;
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var query = client.query("SELECT * FROM content_items WHERE name = $1 LIMIT 1", [item_name]);
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+
+      done();
+      return res.json(results);
+
+    });
+
+  });
+
 });
 module.exports = router;

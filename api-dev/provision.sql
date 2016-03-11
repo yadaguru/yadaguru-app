@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS schools;
 DROP TABLE IF EXISTS reminders;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS content_items;
 
 CREATE TABLE IF NOT EXISTS users (
   id            SERIAL PRIMARY KEY  NOT NULL,
@@ -26,6 +27,12 @@ CREATE TABLE IF NOT EXISTS reminders (
   name      TEXT                           NOT NULL,
   message   TEXT                           NOT NULL,
   detail    TEXT                           NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS content_items (
+  id       SERIAL  PRIMARY KEY  NOT NULL,
+  name     TEXT                 NOT NULL,
+  content  TEXT                 NULL
 );
 
 INSERT INTO reminders (timeframe, due_date, name, message, detail) VALUES
@@ -227,3 +234,24 @@ INSERT INTO reminders (timeframe, due_date, name, message, detail) VALUES
    'NCDD',
    'National College Decision Day',
    '<p>May 1 is National College Decision Day. If you get accepted to multiple colleges including Temple you''ll need to decide in s wouldlwhich school you will enroll.&nbsp;Usually you must pay an enrollment or housing deposit to secure your space.&nbsp;</p><p>Consider -- Which school is your best fit academically and socially? Which school grants you the most affordable financial aid package?&nbsp;</p><p>Remember It is best to send a deposit to only ONE school. It''s generally considered unethical to send in deposits to multiple schools...not to mention awfully costly to you! Carefully consider your options and make the best choice for you. Ask for help from a knowledgable adult if you''re not sure.</p>');
+
+INSERT INTO content_items (name, content) VALUES
+  ('privacy', '<h2>Privacy Policy</h2>\n<p>Privacy policy goes here</h2>'),
+  ('faqs', '<h2>Faqs</h2>\n<p>FAQs go here</h2>'),
+  ('disclaimer', '<h2>Disclaimer</h2>\n<p>Disclaimer goes here</h2>'),
+  ('disclaimer', '<h2>Disclaimer</h2>\n<p>Disclaimer goes here</h2>'),
+  ('faq-app-submission-date', '<p><strong>Question Goes Here</strong></p>\n<p>Answer Goes Here</h2>'),
+  ('faq-app-find', '<p><strong>Question Goes Here</strong></p>\n<p>Answer Goes Here</h2>'),
+  ('faq-regular-admissions', '<p><strong>Question Goes Here</strong></p>\n<p>Answer Goes Here</h2>'),
+  ('faq-rolling-admissions', '<p><strong>Question Goes Here</strong></p>\n<p>Answer Goes Here</h2>'),
+  ('faq-early-action', '<p><strong>Question Goes Here</strong></p>\n<p>Answer Goes Here</h2>'),
+  ('help-school', '<p>Help text goes here.</p>'),
+  ('help-reminder', '<p>Help text goes here.</p>'),
+  ('help-sms-add', '<p>Help text goes here.</p>'),
+  ('help-codes-add', '<p>Help text goes here.</p>'),
+  ('help-user-menu', '<p>Help text goes here.</p>'),
+  ('help-login-edit', '<p>Help text goes here.</p>'),
+  ('help-calendar-menu', '<p>Help text goes here.</p>'),
+  ('help-privacy', '<p>Help text goes here.</p>'),
+  ('help-faqs', '<p>Help text goes here.</p>'),
+  ('help-disclaimer', '<p>Help text goes here.</p>')
