@@ -40,11 +40,11 @@
           <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="advanceOb()">OK NEXT</div>
         </div>
       </div>
-      <p class="info-text" ng-click="faqModal('application-submission-date')" role="button">What's an Application Submission Date?</p>
-      <p class="info-text" ng-click="faqModal('application-find')" role="button">Where do I find it?</p>
-      <p class="info-text" ng-click="faqModal('regular-admissions')" role="button">What's 'Regular Admissions?'</p>
-      <p class="info-text" ng-click="faqModal('rolling-admissions')" role="button">What About Rolling Admission?</p>
-      <p class="info-text" ng-click="faqModal('early-action')" role="button">Do you do Early Action/Decision?</p>
+      <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>
+      <p class="info-text" ng-click="faqModal('faq-app-find')" role="button">Where do I find it?</p>
+      <p class="info-text" ng-click="faqModal('faq-regular-admissions')" role="button">What's 'Regular Admissions?'</p>
+      <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
+      <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
     </div>
   </div>
   <div class="row ob-progress">
@@ -53,3 +53,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="faqModal.html">
+  <div class="modal-body onboarding-faq-modal">
+    <div ng-bind-html="content"></div>
+    <button class="btn btn-default" type="button" ng-click="close()">Got it.</button>
+  </div>
+</script>

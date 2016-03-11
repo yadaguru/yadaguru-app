@@ -70,34 +70,14 @@ define(['app'], function (app) {
    * TODO Move controller to a separate file
    * TODO Move faqs to their own service (or better yet, into the Database)
    */
-  app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question',
-    function ($scope, $modalInstance, question) {
+  app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question', 'yg.services.help',
+    function ($scope, $modalInstance, question, helpService) {
 
-      var faqs = {
-        'application-submission-date': {
-          'question': 'What\'s an Application Submission Date?',
-          'answer': 'Answer Goes Here.'
-        },
-        'application-find': {
-          'question': 'Where do I find the application?"',
-          'answer': 'Answer goes here.'
-        },
-        'regular-admissions': {
-          'question': 'What is \'Regular Admissions?\'',
-          'answer': 'Answer goes here'
-        },
-        'rolling-admissions': {
-          'question': 'What do I do about rolling admissions?',
-          'answer': 'Answer goes here.'
-        },
-        'early-action': {
-          'question': 'What do I do about early action?',
-          'answer': 'Answer goes here.'
-        }
-      };
-
-      $scope.question = faqs[question].question;
-      $scope.answer = faqs[question].answer;
+      var promise = helpService.getHelpMessage(question).then(function(resp) {
+        $scope.content = resp.data[0].content;
+      }, function() {
+        $scope.content = 'There was a problem loading this help text. Please try again.'
+      });
 
       $scope.close = function () {
         $modalInstance.dismiss();

@@ -1,7 +1,4 @@
-<div class="modal-body">
-  <p><strong>Q: {{ question }}</strong></p>
-  <p>A; {{ answer }}</p>
-</div>
+<div class="modal-body" ng-bind-html="content"></div>
 <div class="modal-footer">
   <button class="btn btn-default" type="button" ng-click="close()">Got it.</button>
 </div>

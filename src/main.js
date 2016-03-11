@@ -10,6 +10,7 @@ require(
     'services/authService',
     'services/identityService',
     'services/userService',
+    'services/helpService',
     'services/apiService',
     'services/utilsService',
     'services/notifierService',

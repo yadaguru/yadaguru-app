@@ -49,7 +49,7 @@ define(['app'], function (app) {
 
           $scope.faqModal = function (question) {
             $modal.open({
-              templateUrl: 'dist/school/faqModal.html',
+              templateUrl: 'faqModal.html',
               controller: 'FaqModalController',
               resolve: {
                 question: function () {
