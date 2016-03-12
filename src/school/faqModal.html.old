@@ -1,4 +1,0 @@
-<div class="modal-body" ng-bind-html="content"></div>
-<div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="close()">Got it.</button>
-</div>

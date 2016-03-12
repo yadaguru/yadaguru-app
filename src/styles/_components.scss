@@ -63,6 +63,12 @@
   height: 60vh;
 }
 
+.help-modal .modal-content {
+  min-height: 25vh;
+  height: auto;
+  margin: 8vh auto 0;
+}
+
 .panel.content-panel {
   padding: 1em;
 }
@@ -77,3 +83,4 @@
   padding: 0.5em;
   border-radius: 5px;
 }
+

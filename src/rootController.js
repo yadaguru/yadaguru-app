@@ -1,10 +1,21 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
+
   'use strict';
 
+  app.controller('RootController', ['$scope', 'yg.services.help',
+    function ($scope, helpService) {
 
-  var RootController = function () {
-  };
+      $scope.showHelp = function(view) {
+        helpService.getHelpMessage('help-' + view);
+      };
 
-  app.controller('RootController', RootController);
+      $scope.$on('$stateChangeSuccess', function(event, toState) {
+
+        $scope.currentState = toState.name;
+
+      })
+
+    }]);
+
 
 });

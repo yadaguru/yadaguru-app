@@ -7,8 +7,8 @@ define(['app'], function (app) {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
       controller: [
-        '$scope', '$rootScope', '$moment', '$modal', 'yg.services.api', '$cookies',
-        function ($scope, $rootScope, $moment, $modal, YadaAPI, $cookies) {
+        '$scope', '$rootScope', '$moment', 'yg.services.help', 'yg.services.api', '$cookies',
+        function ($scope, $rootScope, $moment, helpService, YadaAPI, $cookies) {
 
           var progressStep = 20;
 
@@ -48,15 +48,7 @@ define(['app'], function (app) {
           };
 
           $scope.faqModal = function (question) {
-            $modal.open({
-              templateUrl: 'faqModal.html',
-              controller: 'FaqModalController',
-              resolve: {
-                question: function () {
-                  return question;
-                }
-              }
-            });
+            helpService.getHelpMessage(question);
           };
 
           $scope.registerNewUser = function () {
