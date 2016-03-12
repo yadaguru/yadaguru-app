@@ -67,8 +67,6 @@ define(['app'], function (app) {
 
   /**
    * Controller for the FAQ modal.
-   * TODO Move controller to a separate file
-   * TODO Move faqs to their own service (or better yet, into the Database)
    */
   app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question', 'yg.services.help',
     function ($scope, $modalInstance, question, helpService) {

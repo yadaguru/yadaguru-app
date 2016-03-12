@@ -11,6 +11,7 @@ require(
     'services/identityService',
     'services/userService',
     'services/helpService',
+    'services/modalService',
     'services/apiService',
     'services/utilsService',
     'services/notifierService',
