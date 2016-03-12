@@ -271,6 +271,9 @@ router.get('/api/users/:user_id/reminders', function(req, res) {
 router.post('/api/users', function(req, res) {
 
   var results = [];
+  var data = {
+    phone_number: req.body.phone_number
+  };
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -283,7 +286,7 @@ router.post('/api/users', function(req, res) {
       });
     }
 
-    var query = client.query("INSERT INTO users DEFAULT VALUES RETURNING id");
+    var query = client.query("INSERT INTO users (phone_number) VALUES ($1) RETURNING id", [data.phone_number]);
 
     query.on('row', function(row) {
       results.push(row);

@@ -5,7 +5,7 @@ define(['app'], function(app) {
 
       var modalFactory = {};
 
-      modalFactory.showModal = function(content, button, template, modalClass) {
+      modalFactory.showModal = function(content, button, template, modalClass, cancelButton) {
 
         button = button || 'ok';
         template = template || 'dist/services/generalModal.html';
@@ -23,6 +23,13 @@ define(['app'], function(app) {
               $scope.ok = function() {
                 $modalInstance.close();
               };
+
+              if (cancelButton) {
+                $scope.cancel = function() {
+                  $modalInstance.dismiss('cancel');
+                };
+                $scope.cancelText = cancelButton;
+              }
 
             }],
           resolve: {

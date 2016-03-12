@@ -5,8 +5,8 @@ define(['app'], function (app) {
   /**
    * Controller for the school view.
    */
-  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies',
-    function ($scope, $rootScope, $moment, $YadaAPI, $cookies) {
+  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies', 'yg.services.modal',
+    function ($scope, $rootScope, $moment, $YadaAPI, $cookies, modalService) {
 
       /**
        * Gets all schools and adds them to the $scope.schools.
@@ -29,6 +29,12 @@ define(['app'], function (app) {
             isActive: school.is_active
           });
         })
+      };
+
+      $scope.showPhoneOptOutModal = function() {
+
+        console.log('pop message here');
+
       };
 
       /**
@@ -63,23 +69,6 @@ define(['app'], function (app) {
         $scope.getSchools();
       }
 
-    }]);
-
-  /**
-   * Controller for the FAQ modal.
-   */
-  app.register.controller('FaqModalController', ['$scope', '$modalInstance', 'question', 'yg.services.help',
-    function ($scope, $modalInstance, question, helpService) {
-
-      var promise = helpService.getHelpMessage(question).then(function(resp) {
-        $scope.content = resp.data[0].content;
-      }, function() {
-        $scope.content = 'There was a problem loading this help text. Please try again.'
-      });
-
-      $scope.close = function () {
-        $modalInstance.dismiss();
-      };
     }]);
 
 });

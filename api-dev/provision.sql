@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS content_items;
 
 CREATE TABLE IF NOT EXISTS users (
   id            SERIAL PRIMARY KEY  NOT NULL,
-  phone_number  CHAR(10)            NULL,
+  phone_number  CHAR(10)            NOT NULL,
   confirm_code  CHAR(6)             NULL,
   personal_code CHAR(6)             NULL,
   sponsor_code  TEXT                NULL

@@ -40,8 +40,8 @@ define(['app'], function(app) {
     
     yadaAPI.users = {};
 
-    yadaAPI.users.post = function() {
-      return $http.post(apiRoute + 'users/', null);
+    yadaAPI.users.post = function(data) {
+      return $http.post(apiRoute + 'users/', data);
     };
 
     yadaAPI.users.put = function(id, data) {

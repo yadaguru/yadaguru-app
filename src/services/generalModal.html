@@ -1,5 +1,6 @@
 <div class="modal-body">
   <div ng-bind-html="content"></div>
   <button class="btn btn-primary" ng-click="ok()">{{ buttonText }}</button>
+  <button class="btn btn-primary" ng-click="cancel()" ng-if="cancel">{{ cancelText }}</button>
 </div>
 

@@ -7,40 +7,69 @@ define(['app'], function (app) {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
       controller: [
-        '$scope', '$rootScope', '$moment', 'yg.services.help', 'yg.services.api', '$cookies',
-        function ($scope, $rootScope, $moment, helpService, YadaAPI, $cookies) {
+        '$scope', '$rootScope', '$moment', 'yg.services.help', 'yg.services.api', '$cookies', 'yg.services.modal',
+        function ($scope, $rootScope, $moment, helpService, yadaApi, $cookies, modalService) {
 
-          var progressStep = 20;
+          var progressStep = 14;
 
           $scope.obStep = 1;
           $scope.obProgress = progressStep;
           $scope.minDate = $moment().toDate();
           $scope.initDate = $moment('20160201', 'YYYYMMDD').toDate();
 
-          $scope.advanceOb = function () {
-            if ($scope.obStep === 4) {
-              if (!$scope.submissionDate) {
-                return;
-              }
-              $scope.registerNewUser().then(function() {
-                $scope.endOnboarding();
-                $scope.$parent.showHints = true;
-              });
-            }
-
-            if ($scope.obStep === 3 && !$scope.schoolName) {
+          $scope.advanceOb = function (force) {
+            if ($scope.obStep > 2 && !force) {
               return;
             }
+
             $scope.obStep++;
             $scope.obProgress += progressStep;
           };
 
-          $scope.rewindOb = function () {
-            if ($scope.obStep === 1) {
+          $scope.rewindOb = function (force) {
+            if (!force)  {
               return;
             }
             $scope.obStep--;
             $scope.obProgress -= progressStep;
+          };
+
+          $scope.submitMobile = function() {
+            var apiPromise = yadaApi.users.post({phone_number: $scope.phoneNumber});
+            var modalMessage = {
+              data: [{content: 'Check your device, we are sending you a code to get you setup.'}]
+            };
+            apiPromise.then(function(resp) {
+              $scope.userId = resp.data[0].id;
+              $cookies.put('yg-uid', $rootScope.userId);
+              var modalPromise = modalService.showModal(modalMessage, 'I GOT IT', null, 'confirm-modal', 'Resend It');
+              modalPromise.then(function() {
+                $scope.advanceOb(true);
+              })
+            });
+          };
+
+          $scope.submitCodes = function() {
+            var apiPromise = yadaApi.users.put($scope.userId, {
+              confirm_code: $scope.confirmCode,
+              personal_code: $scope.personalCode,
+              sponsor_code: $scope.sponsorCode
+            });
+            apiPromise.then(function() {
+              $scope.advanceOb(true);
+            })
+          };
+
+          $scope.submitSchool = function () {
+            var apiPromise = yadaApi.schools.post({
+              name: $scope.schoolName,
+              due_date: $scope.submissionDate
+            }, $scope.userId);
+            apiPromise.then(function(resp) {
+              $scope.endOnboarding();
+              $scope.$parent.showHints = true;
+              $scope.$parent.processSchools(resp);
+            });
           };
 
           $scope.endOnboarding = function () {
@@ -51,22 +80,6 @@ define(['app'], function (app) {
             helpService.getHelpMessage(question);
           };
 
-          $scope.registerNewUser = function () {
-            return $scope.addNewUser().then($scope.addNewSchool);
-          };
-
-          $scope.addNewUser = function () {
-            return YadaAPI.users.post();
-          };
-
-          $scope.addNewSchool = function (res) {
-            $rootScope.user_id = res.data[0].id;
-            $cookies.put('yg-uid', $rootScope.user_id);
-            return YadaAPI.schools.post({
-              name: $scope.schoolName,
-              due_date: $scope.submissionDate
-            }, $rootScope.user_id).then($scope.$parent.processSchools);
-          };
 
         }]
     };

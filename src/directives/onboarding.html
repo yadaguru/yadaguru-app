@@ -1,25 +1,102 @@
 <div ng-swipe-left="advanceOb()" ng-swipe-right="rewindOb()" class="container-fluid onboarding-container">
   <div class="row ob-main">
+
     <div ng-if="obStep === 1" class="ob1 col-xs-12">
       <p><i class="fa fa-flag"></i></p>
       <p>Hi, I'm YadaGuru and I'm here to get your college applications done.</p>
     </div>
+
     <div ng-if="obStep === 2" class="ob2 col-xs-12">
       <p><i class="fa fa-clock-o"></i></p>
       <p>I'll send you text reminders about all the things you need to do.</p>
     </div>
+
     <div ng-if="obStep === 3" class="ob3 col-xs-12">
+      <p>To get started, please enter your mobile number.</p>
+      <form name="smsForm">
+        <div class="form-group">
+          <label class="sr-only" for="phone-number">phone Number</label>
+          <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   id="phone-number"
+                   ng-model="$parent.phoneNumber"
+                   required
+                   name="phoneNumber"
+                   ui-mask-placeholder
+                   ui-mask="(999) 999-9999"
+                   ng-minlength="10" />
+            <div class="input-group-addon"
+                 ng-class="{disabled: smsForm.$invalid}"
+                 ng-disabled="smsForm.$invalid"
+                 role="button"
+                 ng-click="submitMobile()">OK NEXT</div>
+          </div>
+        </div>
+      </form>
+      <div class="disclaimer">
+        By clicking this button you agree to allow YadaGuru to send you periodic
+        reminders about the college application process to your mobile phone.
+        Depending on your text plan, this may incur cost. YadaGuru is not responsible
+        for these costs. Please see our Privacy Policy for more information about
+        how we use your mobile number.
+      </div>
+    </div>
+
+    <div ng-if="obStep === 4" class="ob4 col-xs-12">
+      <p>
+        Making it Yours: <br>
+        Let's set-up your login.
+      </p>
+      <form name="codesAddForm">
+        <div class="form-group">
+          <label for="confirm-code">Enter the code we sent you here</label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="code"
+                 id="confirm-code"
+                 name="confirmCode"
+                 ng-model="$parent.confirmCode"
+                 required>
+        </div>
+        <div class="form-group">
+          <label for="personal-code">
+            Enter a six digit code that you want to use for your login. This should
+            be something easy to remember.
+          </label>
+          <input type="text"
+                 class="form-control"
+                 placeholder="personal code"
+                 id="personal-code"
+                 name="personalCode"
+                 ng-model="$parent.personalCode"
+                 ng-minlength="6"
+                 ng-maxlength="6"
+                 ng-pattern="/\d{6}/"
+                 required>
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                ng-class="{disabled: codesAddForm.$invalid}"
+                ng-disabled="codesAddForm.$invalid"
+                ng-click="submitCodes()">OK NEXT
+        </button>
+      </form>
+    </div>
+
+    <div ng-if="obStep === 5" class="ob5 col-xs-12">
       <p>Let's set up your first school. What's the name of a school that you're thinking of applying to?</p>
       <div class="form-group">
         <label class="sr-only" for="school-name">School Name</label>
         <div class="input-group">
           <input type="text" class="form-control" id="school-name" ng-model="$parent.schoolName" placeholder="School Name" />
-          <div class="input-group-addon" ng-class="{disabled: !schoolName}" role="button" ng-click="advanceOb()">OK NEXT</div>
+          <div class="input-group-addon" ng-class="{disabled: !schoolName}" role="button" ng-click="advanceOb(true)">OK NEXT</div>
         </div>
       </div>
       <p class="info-text" ng-click="endOnboarding()" role="button">I don't want to do setup.  Just take me to the app.</p>
     </div>
-    <div ng-if="obStep === 4" class="ob4 col-xs-12">
+
+    <div ng-if="obStep === 6" class="ob6 col-xs-12">
       <p>Cool. Now, what is the Regular Admissions application submission date of tha school? </p>
       <div class="form-group">
         <label class="sr-only" for="school-name">Submission Date</label>
@@ -37,7 +114,7 @@
               init-date="initDate"
               placeholder="2/1/2016" />
           </div>
-          <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="advanceOb()">OK NEXT</div>
+          <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="submitSchool()">OK NEXT</div>
         </div>
       </div>
       <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>
@@ -49,14 +126,7 @@
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">
-      <progress-dots max="5" value="obStep" class="progress-dots"></progress-dots>
+      <progress-dots max="7" value="obStep" class="progress-dots"></progress-dots>
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="faqModal.html">
-  <div class="modal-body onboarding-faq-modal">
-    <div ng-bind-html="content"></div>
-    <button class="btn btn-default" type="button" ng-click="close()">Got it.</button>
-  </div>
-</script>
