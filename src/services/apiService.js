@@ -69,6 +69,9 @@ define(['app'], function(app) {
     };
 
     yadaAPI.schools.put = function(id, data, user_id) {
+      if (!id) {
+        return $http.put(apiRoute + 'users/' + user_id + '/schools/', data);
+      }
       return $http.put(apiRoute + 'users/' + user_id + '/schools/' + id + '/', data);
     };
 

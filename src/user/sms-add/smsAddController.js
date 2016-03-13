@@ -5,14 +5,14 @@ define(['app'], function (app) {
   /**
    * Controller for sms-add user subview
    */
-  app.register.controller('SmsAddController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
-    function ($scope, $cookies, $state, $modal, yadaApi) {
+  app.register.controller('SmsAddController', ['$scope', 'yg.services.user', '$state', '$modal', 'yg.services.api',
+    function ($scope, userService, $state, $modal, yadaApi) {
 
       /**
        * Updates user with phone number and advances sms setup.
        */
       $scope.submitMobile = function () {
-        yadaApi.users.put($scope.userId, {
+        yadaApi.users.put(userService.getCurrentUserId(), {
           phone_number: $scope.phoneNumber
         }).then(function() {
           $scope.phoneNumber = '';

@@ -5,8 +5,8 @@ define(['app'], function (app) {
   /**
    * Controller for user/sms setup
    */
-  app.register.controller('UserController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
-    function ($scope, $cookies, $state, $modal, yadaApi) {
+  app.register.controller('UserController', ['$scope', 'yg.services.user', '$state', '$modal', 'yg.services.api', '$cookies',
+    function ($scope, userService, $state, $modal, yadaApi, $cookies) {
 
       /**
        * Checks whether state is the root user menu, and sets it in the scope.
@@ -34,7 +34,7 @@ define(['app'], function (app) {
        * Deletes current user and removes all YadaGuru cookies, then redirects to school view (which begins onboarding).
        */
       $scope.forgetUser = function() {
-        yadaApi.users.delete($cookies.get('yg-uid')).then(function() {
+        yadaApi.users.delete(userService.getCurrentUserId()).then(function() {
           $cookies.remove('yg-uid');
           $cookies.remove('yg-sms-set');
           $cookies.remove('yg-ob-complete');
@@ -53,7 +53,7 @@ define(['app'], function (app) {
 
       $scope.isLoginUpdateFormVisible = false;
       $scope.isUserMenu = false;
-      $scope.userId = $cookies.get('yg-uid');
+      $scope.userId = userService.getCurrentUserId();
 
       $scope.isSmsSetup = $cookies.get('yg-sms-set') || false;
       $scope.getUserMenuState();

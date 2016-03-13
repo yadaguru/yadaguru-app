@@ -5,14 +5,14 @@ define(['app'], function (app) {
   /**
    * Controller for the school view.
    */
-  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies', 'yg.services.modal',
-    function ($scope, $rootScope, $moment, $YadaAPI, $cookies, modalService) {
+  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies', 'yg.services.modal', 'yg.services.user',
+    function ($scope, $rootScope, $moment, yadaApi, $cookies, modalService, userService) {
 
       /**
        * Gets all schools and adds them to the $scope.schools.
        */
       $scope.getSchools = function () {
-        $YadaAPI.schools.get($rootScope.user_id).then($scope.processSchools);
+        yadaApi.schools.get(userService.getCurrentUserId()).then($scope.processSchools);
       };
 
       /**
@@ -33,8 +33,35 @@ define(['app'], function (app) {
 
       $scope.showPhoneOptOutModal = function() {
 
-        console.log('pop message here');
+        var content = modalService.makeModalMessage(
+            '<p>Is it okay to send you text messages?</p>',
+            '<p><em>Note that you can turn off messages at any time.</em></p>'
+        );
 
+        var modalPromise = modalService.showModal(content, {
+          button: 'Yes',
+          cancel: 'No',
+          modalClass: 'optout-modal'
+        });
+
+        modalPromise.then(null, function() {
+          $scope.deactivateAllSchools();
+        })
+
+      };
+
+      /**
+       * Sets is_active to false for all schools
+       */
+      $scope.deactivateAllSchools = function() {
+        var apiPromise = yadaApi.schools.put(null, {
+          is_active: false
+        }, userService.getCurrentUserId());
+
+        apiPromise.then(function(resp) {
+          $scope.schools = [];
+          $scope.processSchools(resp);
+        });
       };
 
       /**
@@ -44,9 +71,9 @@ define(['app'], function (app) {
        * @param {boolean}  is_active  The active status.
        */
       $scope.updateActive = function (id, is_active) {
-        $YadaAPI.schools.put(id, {
+        yadaApi.schools.put(id, {
           is_active: is_active
-        }, $rootScope.user_id);
+        }, userService.getCurrentUserId());
       };
 
       /**
@@ -57,13 +84,13 @@ define(['app'], function (app) {
         $scope.isOnboarding = false;
         $scope.currentStep = 0;
         $cookies.put('yg-ob-complete', true);
+        $cookies.put('yg-sms-set', true);
       };
 
       $scope.schools = [];
       $scope.$parent.showAdd = true;
-      $rootScope.user_id = $cookies.get('yg-uid');
 
-      if (!$scope.user_id) {
+      if (!$cookies.get('yg-ob-complete')) {
         $scope.isOnboarding = true;
       } else {
         $scope.getSchools();

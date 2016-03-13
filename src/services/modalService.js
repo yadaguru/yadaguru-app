@@ -1,39 +1,61 @@
 define(['app'], function(app) {
 
+  /**
+   * A service for displaying modals in a consistent manner across the app.
+   */
   app.factory('yg.services.modal', ['$modal', '$q',
     function($modal, $q) {
 
       var modalFactory = {};
 
-      modalFactory.showModal = function(content, button, template, modalClass, cancelButton) {
+      /**
+       * Shows a modal, with specified content and options.
+       *
+       * @param   {promise}   content             A promise that contains the content, ideally the result of an $http request. To create custom content, use modalFactory.makeModalMessage.
+       * @param   {object}    options             An options object (see keys below)
+       * @param   {string}    options.button      The OK button text (default: 'ok')
+       * @param   {string}    options.cancel      The cancel button text (default: no cancel button)
+       * @param   {string}    options.template    The template used to display the modal (default: 'dist/services/generalModal.html')
+       * @param   {function}  options.controller  The controller to use (see source for default controller).
+       * @param   {array}     options.deps        The controller's dependencies (default, '$scope', '$modalInstance', contentItem).
+       *
+       * @returns {promise}   The promise object at $modalInstance.result;
+       */
+      modalFactory.showModal = function(content, options) {
 
-        button = button || 'ok';
-        template = template || 'dist/services/generalModal.html';
-        modalClass = modalClass || 'modal-general';
-        content = $q.resolve(content);
+        var defaultController = function($scope, $modalInstance, contentItem) {
+          $scope.content = contentItem.data[0].content;
+          $scope.buttonText = button;
+
+          $scope.ok = function() {
+            $modalInstance.close();
+          };
+
+          if (options.cancel) {
+            $scope.cancel = function() {
+              $modalInstance.dismiss('cancel');
+            };
+            $scope.cancelText = options.cancel;
+          }
+        };
+        var defaultDepsController = ['$scope', '$modalInstance', 'contentItem', defaultController];
+
+        var button = options.button || 'ok';
+        var template = options.template || 'dist/services/generalModal.html';
+        var modalClass = options.modalClass || 'modal-general';
+        var depsAndController;
+
+        if (options.controller && options.deps) {
+          depsAndController = options.deps.push(options.controller);
+        } else {
+          depsAndController = defaultDepsController;
+        }
 
         var modalInstance = $modal.open({
           templateUrl: template,
-          controller: ['$scope', '$modalInstance', 'content',
-            function($scope, $modalInstance, contentItem) {
-
-              $scope.content = contentItem.data[0].content;
-              $scope.buttonText = button;
-
-              $scope.ok = function() {
-                $modalInstance.close();
-              };
-
-              if (cancelButton) {
-                $scope.cancel = function() {
-                  $modalInstance.dismiss('cancel');
-                };
-                $scope.cancelText = cancelButton;
-              }
-
-            }],
+          controller: depsAndController,
           resolve: {
-            content: function() {
+            contentItem: function() {
               return content;
             }
           },
@@ -42,6 +64,24 @@ define(['app'], function(app) {
 
         return modalInstance.result;
 
+      };
+
+      /**
+       * Makes a new modal message wrapped in a promise.
+       *
+       * @param    {string...}  message  Text to of the message.
+       * @returns  {promise}    Promise to be passed into modalFactory.showModal().
+       */
+      modalFactory.makeModalMessage = function(message) {
+        var content = '';
+        if (arguments.length > 1) {
+          for (var i = 0; i < arguments.length; i++) {
+            content += arguments[i];
+          }
+        } else {
+          content = message;
+        }
+        return $q.resolve({data: [{content: content}]});
       };
 
       return modalFactory;

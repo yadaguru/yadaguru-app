@@ -26,8 +26,10 @@
 
   .info-text {
     font-family: $pt-sans;
-    font-size: 16px;
+    font-size: 1em;
     font-style: italic;
+    margin-top: 0.5em;
+    margin-bottom: 0;
   }
 
   .progress {
@@ -50,18 +52,16 @@
       top:-285px !important;
     }
   }
+
+  label {
+    text-align: left;
+    display: block;
+  }
 }
 
 .ob3, .ob4 {
   p {
     margin-top: 0;
-  }
-}
-
-.ob4 {
-  .info-text {
-    margin-top: 6px;
-    margin-bottom: 0;
   }
 }
 

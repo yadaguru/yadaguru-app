@@ -7,8 +7,8 @@ define(['app'], function (app) {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
       controller: [
-        '$scope', '$rootScope', '$moment', 'yg.services.help', 'yg.services.api', '$cookies', 'yg.services.modal',
-        function ($scope, $rootScope, $moment, helpService, yadaApi, $cookies, modalService) {
+        '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.user', 'yg.services.modal',
+        function ($scope, $moment, helpService, yadaApi, userService, modalService) {
 
           var progressStep = 14;
 
@@ -36,13 +36,16 @@ define(['app'], function (app) {
 
           $scope.submitMobile = function() {
             var apiPromise = yadaApi.users.post({phone_number: $scope.phoneNumber});
-            var modalMessage = {
-              data: [{content: 'Check your device, we are sending you a code to get you setup.'}]
-            };
+            var modalMessage = modalService.makeModalMessage(
+                'Check your device, we are sending you a code to get you setup.'
+            );
             apiPromise.then(function(resp) {
-              $scope.userId = resp.data[0].id;
-              $cookies.put('yg-uid', $rootScope.userId);
-              var modalPromise = modalService.showModal(modalMessage, 'I GOT IT', null, 'confirm-modal', 'Resend It');
+              userService.setCurrentUserId(resp.data[0].id);
+              var modalPromise = modalService.showModal(modalMessage, {
+                button: 'I GOT IT',
+                cancel: 'Resend It',
+                modalClass: 'confirm-modal'
+              });
               modalPromise.then(function() {
                 $scope.advanceOb(true);
               })
@@ -50,7 +53,7 @@ define(['app'], function (app) {
           };
 
           $scope.submitCodes = function() {
-            var apiPromise = yadaApi.users.put($scope.userId, {
+            var apiPromise = yadaApi.users.put(userService.getCurrentUserId(), {
               confirm_code: $scope.confirmCode,
               personal_code: $scope.personalCode,
               sponsor_code: $scope.sponsorCode
@@ -64,7 +67,7 @@ define(['app'], function (app) {
             var apiPromise = yadaApi.schools.post({
               name: $scope.schoolName,
               due_date: $scope.submissionDate
-            }, $scope.userId);
+            }, userService.getCurrentUserId());
             apiPromise.then(function(resp) {
               $scope.endOnboarding();
               $scope.$parent.showHints = true;

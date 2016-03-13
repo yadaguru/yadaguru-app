@@ -105,7 +105,67 @@ router.get('/api/users/:user_id/schools', function(req, res) {
 
 });
 
-router.put('/api/users/schools/:school_id', function(req, res) {
+router.put('/api/users/:user_id/schools/', function(req, res) {
+
+  var results = [];
+  var user_id = req.params.user_id;
+
+  var data = {
+    name: req.body.name,
+    due_date: req.body.due_date,
+    is_active: req.body.is_active
+  };
+
+  var updateString = 'UPDATE schools SET';
+  var updateValues = [];
+  var i = 1;
+
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      if (typeof(data[key]) !== 'undefined') {
+        console.log(i, data[key]);
+        updateString += ' ' + key + '=($' + i + '),';
+        updateValues.push(data[key]);
+        i++;
+      }
+    }
+  }
+
+  updateString = updateString.slice(0, -1);
+  updateString += ' WHERE user_id = ($' + (i) + ')';
+  updateValues.push(user_id);
+  console.log(updateString);
+  console.log(updateValues);
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    client.query(updateString, updateValues);
+
+    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+
+  });
+
+});
+
+router.put('/api/users/:user_id/schools/:school_id', function(req, res) {
 
   var results = [];
   var id = req.params.school_id;

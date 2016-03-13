@@ -25,7 +25,7 @@
   color: white;
   width: 80%;
   margin: 17vh auto;
-  height: 35vh;
+  min-height: 35vh;
   font-size: 32px;
   font-family: $marvel;
   text-align: center;
@@ -44,11 +44,24 @@
     flex-flow: row;
     justify-content: space-around;
     width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+
+    .btn {
+      height: 2em;
+      margin: 0;
+    }
   }
 
   .btn.btn-danger {
     background-color: $danger;
   }
+
+  .btn.btn-default {
+    background-color: $bg-gray;
+  }
+
+
 }
 
 .modal-body {

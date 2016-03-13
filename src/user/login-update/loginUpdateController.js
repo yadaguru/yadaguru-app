@@ -5,14 +5,14 @@ define(['app'], function (app) {
   /**
    * Controller for the login-update user subview
    */
-  app.register.controller('LoginUpdateController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
-    function ($scope, $cookies, $state, $modal, yadaApi) {
+  app.register.controller('LoginUpdateController', ['$scope', 'yg.services.user', '$state', '$modal', 'yg.services.api',
+    function ($scope, userService, $state, $modal, yadaApi) {
 
       /**
        * Shows the update login code send code modal.
        */
       $scope.showLoginUpdateSendCodeModal = function() {
-        yadaApi.users.put($scope.userId, {}).then(function() {
+        yadaApi.users.put(userService.getCurrentUserId(), {}).then(function() {
           var modalInstance = $modal.open({
             templateUrl: 'loginUpdateSendCodeModal.html',
             controller: 'UserModalController'
@@ -27,7 +27,7 @@ define(['app'], function (app) {
        * Updates user login code.
        */
       $scope.updateLoginCode = function () {
-        yadaApi.users.put($scope.userId, {
+        yadaApi.users.put(userService.getCurrentUserId(), {
           confirm_code: $scope.confirmCode,
           personal_code: $scope.personalCode
         }).then(function() {
