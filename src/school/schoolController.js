@@ -5,8 +5,9 @@ define(['app'], function (app) {
   /**
    * Controller for the school view.
    */
-  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies', 'yg.services.modal', 'yg.services.user',
-    function ($scope, $rootScope, $moment, yadaApi, $cookies, modalService, userService) {
+  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies',
+    'yg.services.modal', 'yg.services.user', '$state',
+    function ($scope, $rootScope, $moment, yadaApi, $cookies, modalService, userService, $state) {
 
       /**
        * Gets all schools and adds them to the $scope.schools.
@@ -62,6 +63,10 @@ define(['app'], function (app) {
           $scope.schools = [];
           $scope.processSchools(resp);
         });
+      };
+
+      $scope.viewReminders = function(id) {
+        $state.go('reminder', {schoolId: id});
       };
 
       /**

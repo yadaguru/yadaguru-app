@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS schools;
+DROP TABLE IF EXISTS base_reminders;
 DROP TABLE IF EXISTS reminders;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS content_items;
@@ -19,14 +20,28 @@ CREATE TABLE IF NOT EXISTS schools (
   is_active BOOLEAN                        NOT NULL DEFAULT TRUE
 );
 
+CREATE TABLE IF NOT EXISTS base_reminders (
+  id            SERIAL  PRIMARY KEY  NOT NULL,
+  timeframe     TEXT                 NOT NULL,
+  due_date      DATE                 NOT NULL,
+  name          TEXT                 NOT NULL,
+  message       TEXT                 NOT NULL,
+  detail        TEXT                 NOT NULL,
+  late_message  TEXT                 NULL,
+  late_detail   TEXT                 NULL
+);
+
 CREATE TABLE IF NOT EXISTS reminders (
-  id        SERIAL PRIMARY KEY             NOT NULL,
-  user_id   INT                            NULL,
-  timeframe TEXT                           NOT NULL,
-  due_date  DATE                           NOT NULL,
-  name      TEXT                           NOT NULL,
-  message   TEXT                           NOT NULL,
-  detail    TEXT                           NOT NULL
+  id            SERIAL  PRIMARY KEY              NOT NULL,
+  school_id     INT     REFERENCES schools (id)  NOT NULL,
+  user_id       INT     REFERENCES users (id)    NOT NULL,
+  timeframe     TEXT                             NOT NULL,
+  due_date      DATE                             NOT NULL,
+  name          TEXT                             NOT NULL,
+  message       TEXT                             NOT NULL,
+  detail        TEXT                             NOT NULL,
+  late_message  TEXT                             NULL,
+  late_detail   TEXT                             NULL
 );
 
 CREATE TABLE IF NOT EXISTS content_items (
@@ -35,7 +50,7 @@ CREATE TABLE IF NOT EXISTS content_items (
   content  TEXT                 NULL
 );
 
-INSERT INTO reminders (timeframe, due_date, name, message, detail) VALUES
+INSERT INTO base_reminders (timeframe, due_date, name, message, detail) VALUES
 
   ('To do Immediately',
    '2015-09-01',

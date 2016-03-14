@@ -30,6 +30,10 @@ define(['app'], function(app) {
       return $http.get(apiRoute + 'users/' + user_id + '/reminders/');
     };
 
+    yadaAPI.reminders.getForSchool = function(user_id, school_id) {
+      return $http.get(apiRoute + 'users/' + user_id + '/reminders/schools/' + school_id);
+    };
+
     yadaAPI.reminders.post = function(data, user_id) {
       return $http.post(apiRoute + 'users/' + user_id + '/reminders/', data);
     };

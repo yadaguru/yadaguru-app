@@ -5,8 +5,8 @@
     <div ng-repeat="school in schools">
       <div class="row panel school" ng-class="{active: school.isActive, first: $first}">
         <div class="col-xs-7">
-          <h2>{{ school.name }}</h2>
-          <h3>{{ school.dueDate }}</h3>
+          <h2 ng-click="viewReminders(school.id)">{{ school.name }}</h2>
+          <h3 ng-click="viewReminders(school.id)">{{ school.dueDate }}</h3>
         </div>
         <div class="col-xs-5">
           <div class="action-container">

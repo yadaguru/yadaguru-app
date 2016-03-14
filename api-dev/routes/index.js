@@ -34,8 +34,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/api/users/:user_id/schools', function(req, res) {
 
-  var results = [];
-
   var user_id = req.params.user_id;
   
   var data = {
@@ -55,21 +53,41 @@ router.post('/api/users/:user_id/schools', function(req, res) {
       });
     }
 
-    client.query("INSERT INTO schools (name, due_date, is_active, user_id) VALUES ($1, $2, $3, $4)", [data.name, data.due_date, true, user_id]);
-    client.query("UPDATE reminders SET user_id = $1", [user_id]);
+    var schoolInsertQuery = client.query("INSERT INTO schools (name, due_date, is_active, user_id) VALUES ($1, $2, $3, $4) RETURNING id", [data.name, data.due_date, true, user_id]);
+    var schoolId;
 
-    var query = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
-
-    query.on('row', function(row) {
-      results.push(row);
+    schoolInsertQuery.on('row', function(row) {
+      schoolId = row.id;
     });
 
-    query.on('end', function() {
-      done();
-      return res.json(results);
-    });
-  })
+    schoolInsertQuery.on('end', function() {
+      var baseReminders = [];
+      var baseReminderQuery = client.query("SELECT * FROM base_reminders");
 
+      baseReminderQuery.on('row', function(row) {
+        baseReminders.push(row);
+      });
+
+      baseReminderQuery.on('end', function() {
+        baseReminders.forEach(function(baseReminder) {
+          client.query("INSERT INTO reminders (school_id, user_id, timeframe, due_date, name, message, detail, late_message, late_detail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+          [schoolId, user_id, baseReminder.timeframe, baseReminder.due_date, baseReminder.name, baseReminder.message, baseReminder.detail, baseReminder.late_message, baseReminder.late_detail]);
+        });
+
+        var schoolResults = [];
+        var schoolQuery = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
+
+        schoolQuery.on('row', function(row) {
+          schoolResults.push(row);
+        });
+
+        schoolQuery.on('end', function() {
+          done();
+          return res.json(schoolResults);
+        });
+      });
+    });
+  });
 });
 
 router.get('/api/users/:user_id/schools', function(req, res) {
@@ -273,6 +291,79 @@ router.get('/api/users/:user_id/reminders', function(req, res) {
     }
 
     var query = client.query("SELECT * FROM reminders WHERE user_id = $1 ORDER BY due_date ASC", [user_id]);
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+
+      var groupedResults = [];
+
+      results.forEach(function(result) {
+
+        var groupIndex = groupedResults.findIndex(function(group) {
+
+          return group.timeframe === result.timeframe;
+
+        });
+
+        if (groupIndex < 0) {
+
+          var newGroup = {
+            timeframe: result.timeframe,
+            reminders: [{
+              id: result.id,
+              name: result.name,
+              message: result.message,
+              detail: result.detail
+            }]
+          };
+
+          groupedResults.push(newGroup);
+
+        } else {
+
+          var reminder = {
+            id: result.id,
+            name: result.name,
+            message: result.message,
+            detail: result.detail
+          };
+
+          groupedResults[groupIndex].reminders.push(reminder);
+
+        }
+
+      });
+
+      done();
+      return res.json(groupedResults);
+
+    });
+
+  });
+
+});
+
+router.get('/api/users/:user_id/reminders/schools/:school_id', function(req, res) {
+
+  var results = [];
+  var user_id = req.params.user_id;
+  var school_id = req.params.school_id;
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var query = client.query("SELECT * FROM reminders WHERE user_id = $1 AND school_id = $2 ORDER BY due_date ASC", [user_id, school_id]);
 
     query.on('row', function(row) {
       results.push(row);
