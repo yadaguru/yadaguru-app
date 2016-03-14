@@ -1,5 +1,5 @@
 <onboarding ng-if="isOnboarding"></onboarding>
-<main class="row school-view">
+<main class="row school-view" ng-if="currentState === 'school'">
   <div class="col-xs-12">
     <nav-links></nav-links>
     <div ng-repeat="school in schools">
@@ -38,3 +38,4 @@
                 tourtip-offset-vertical="-25"
                 tourtip-next-label="Got It" />
 </tour>
+<div ui-view></div>

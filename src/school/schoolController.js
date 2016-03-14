@@ -101,6 +101,14 @@ define(['app'], function (app) {
         $scope.getSchools();
       }
 
+      $scope.$on('$stateChangeSuccess', function(e, toState, toParams, fromState) {
+
+        if (fromState.name === 'school.new') {
+          $scope.schools = [];
+          $scope.getSchools();
+        }
+      })
+
     }]);
 
 });

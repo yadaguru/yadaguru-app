@@ -49,3 +49,26 @@ main.school-view {
   }
 
 }
+
+main.school-new-view {
+
+  form {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .form-group {
+    margin-bottom: 2em;
+  }
+
+  label {
+    font-size: 2em;
+    font-family: $marvel;
+    font-weight: normal;
+  }
+
+  .btn {
+    margin-bottom: 2em;
+  }
+
+}
