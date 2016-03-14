@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="jumbotron">
+    <form ng-hide="identityService.isAuthenticated()">
+      <div class="form-group">
+        <input type="text" placeholder="Username" ng-model="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" ng-model="password" class="form-control" ng-keyup="$event.keyCode == 13 ? signin() : null">
+      </div>
+      <button type="button" class="btn btn-primary" ng-click="signin()">
+        Sign In
+      </button>
+    </form>
+    <div ng-cloak ng-show="identityService.isAuthenticated()">
+      <div class="row">
+        Hello, {{identityService.currentUser.username}}!
+      </div>
+      <br />
+      <div class="row">
+        <a class="btn btn-danger" href="" ng-click="signout()">Sign Out</a>
+      </div>
+    </div>
+  </div>
+</div>

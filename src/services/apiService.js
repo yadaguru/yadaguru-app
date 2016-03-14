@@ -2,7 +2,7 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var apiService = function($http, constants) {
+  var apiService = function($http, constants, $q) {
 
     var yadaAPI = {};
 
@@ -11,11 +11,15 @@ define(['app'], function(app) {
     var apiRouteTerminator = constants.API_ROUTE_TERMINATOR;
 
     yadaAPI.login = function(data) {
-      return $http.post(apiRoute + 'users/login/', data);
+      //TODO make login functional - this just returns and empty promise :-(
+      return $q.resolve({});
+      //return $http.post(apiRoute + 'users/login/', data);
     };
 
     yadaAPI.logout = function(data) {
-      return $http.post(apiRoute + 'users/logout/', data);
+      //TODO make logout functional - this just returns and empty promise :-(
+      return $q.resolve({});
+      //return $http.post(apiRoute + 'users/logout/', data);
     };
 
     yadaAPI.currentUser = function() {
@@ -154,6 +158,6 @@ define(['app'], function(app) {
     return yadaAPI;
   };
 
-  app.factory('yg.services.api', ['$http', 'constants', apiService]);
+  app.factory('yg.services.api', ['$http', 'constants', '$q', apiService]);
 
 });

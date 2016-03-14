@@ -23,6 +23,8 @@ define(['app'], function(app) {
        */
       modalFactory.showModal = function(content, options) {
 
+        options = options || {};
+
         var defaultController = function($scope, $modalInstance, contentItem) {
           $scope.content = contentItem.data[0].content;
           $scope.buttonText = button;

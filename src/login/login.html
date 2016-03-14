@@ -1,24 +1,40 @@
-<div class="container">
-  <div class="jumbotron">
-    <form ng-hide="identityService.isAuthenticated()">
+<main class="row login-view">
+  <div class="onboarding-container">
+    <p>Welcome to YadaGuru. <br>Please Login </p>
+    <form name="loginForm">
       <div class="form-group">
-        <input type="text" placeholder="Username" ng-model="username" class="form-control">
+        <label for="login-phone-number">Enter your Phone Number.</label>
+        <input type="text"
+               class="form-control"
+               id="login-phone-number"
+               ng-model="$parent.phoneNumber"
+               required
+               name="phoneNumber"
+               ui-mask-placeholder
+               ui-mask="(999) 999-9999"
+               ng-minlength="10" />
       </div>
       <div class="form-group">
-        <input type="password" placeholder="Password" ng-model="password" class="form-control" ng-keyup="$event.keyCode == 13 ? signin() : null">
+        <label for="login-personal-code">
+          Enter your Personal Code.
+        </label>
+        <input type="text"
+               class="form-control"
+               placeholder="personal code"
+               id="login-personal-code"
+               name="personalCode"
+               ng-model="$parent.personalCode"
+               ng-minlength="6"
+               ng-maxlength="6"
+               ng-pattern="/\d{6}/"
+               required>
       </div>
-      <button type="button" class="btn btn-primary" ng-click="signin()">
-        Sign In
+      <button type="submit"
+              class="btn btn-primary"
+              ng-class="{disabled: loginForm.$invalid}"
+              ng-disabled="loginForm.$invalid"
+              ng-click="submitLogin()">LOGIN
       </button>
     </form>
-    <div ng-cloak ng-show="identityService.isAuthenticated()">
-      <div class="row">
-        Hello, {{identityService.currentUser.username}}!
-      </div>
-      <br />
-      <div class="row">
-        <a class="btn btn-danger" href="" ng-click="signout()">Sign Out</a>
-      </div>
-    </div>
   </div>
-</div>
+</main>

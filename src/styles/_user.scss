@@ -46,3 +46,20 @@ main.user-view {
     }
   }
 }
+
+main.login-view {
+  form {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  label {
+    font-size: 2em;
+    font-weight: normal;
+    font-family: $marvel;
+  }
+
+  .btn {
+    margin-top: 1em;
+  }
+}

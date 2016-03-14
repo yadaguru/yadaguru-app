@@ -20,6 +20,20 @@
   }
 }
 
+.btn-primary, button {
+  background-color: $onboarding-btn-blue;
+  border-color: $onboarding-btn-blue;
+  margin: 0 auto;
+  font-size: 22px;
+  display: block;
+
+  &.disabled {
+    background-color: #ddd;
+    border-color: #ddd;
+    color: white;
+  }
+}
+
 .modal-content {
   background-color: $onboarding-bg-blue;
   color: white;

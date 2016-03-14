@@ -48,10 +48,10 @@ define(['app'], function() {
           .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
           .state('disclaimer', route.resolve('/disclaimer', 'Disclaimer', 'disclaimer/', 'vm'))
+          .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
 
           // Old routes from version 1
           .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
-          .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
           .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm', 'admin'))
           .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm', 'admin'))
           .state('admin.categories', route.resolve('/categories', 'Categories', 'admin/categories/', 'vm', 'admin'))
