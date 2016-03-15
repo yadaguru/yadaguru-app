@@ -11,6 +11,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
 
 ##Local Development Installation
  * Be sure you have installed `node`, `npm`, and `vagrant`
+ * Be sure you have gulp installed globally `npm install -g gulp`
  * `cd` into the project root folder (if you are not already there)
  * Run `npm install` to install the front-end dependencies
  * Run `bower install` to install client-side libraries
