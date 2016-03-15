@@ -19,7 +19,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
  * Run `vagrant up` to bring up the API development server. On first up, this will provision the server and database.
  
 ##Accessing the API Development Server
- * The API Development Server can be accessed at `http://localhost:3000`. See the [API Documentation](https://github.com/yadaguru/yadaguru-app/wiki/API-Documentation)
+ * The API Development Server can be accessed at `http://localhost:3000`. See the [API Documentation](https://github.com/yadaguru/yadaguru-api/wiki/API-Documentation)
  page of the wiki
 
 ##Serving Locally
