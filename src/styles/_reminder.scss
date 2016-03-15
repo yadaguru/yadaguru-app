@@ -24,7 +24,7 @@ main.reminder-view {
       color: $heading-bg-blue;
       font-family: $pt-sans;
       font-size: 22px;
-      padding: 8px 10px;
+      padding: 3px 10px;
     }
   }
 
@@ -41,5 +41,34 @@ main.reminder-view {
 
   .reminder-message {
     font-weight: bold;
+  }
+
+  .school-header {
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 5px;
+    font-family: $pt-sans;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    color: $active-blue;
+    margin-bottom: 1em;
+
+    a {
+      color: $active-blue;
+    }
+  }
+  
+  .school-name {
+    margin: 0;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  
+  .school-date {
+    margin: 0;
+    font-size: 1.25em;
   }
 }

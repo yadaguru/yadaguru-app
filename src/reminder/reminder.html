@@ -3,6 +3,10 @@
     <nav-links></nav-links>
     <div class="row">
       <div class="col-xs-12">
+        <div class="school-header" ng-if="school">
+          <a ui-sref="school"><h1 class="school-name">{{ school }}</h1></a>
+          <p class="school-date">{{ date }}</p>
+        </div>
         <div ng-repeat="timeframe in reminderGroups" class="date-group">
           <h2 role="button" ng-click="timeframe.isCollapsed = !timeframe.isCollapsed">{{ timeframe.timeframe }}</h2>
           <div collapse="timeframe.isCollapsed">

@@ -5,8 +5,8 @@ define(['app'], function (app) {
   /**
    * Controller for the reminder view.
    */
-  app.register.controller('ReminderController', ['$scope', 'yg.services.user', 'yg.services.api', '$stateParams',
-    function ($scope, userService, apiService, $stateParams) {
+  app.register.controller('ReminderController', ['$scope', 'yg.services.user', 'yg.services.api', '$stateParams', '$moment',
+    function ($scope, userService, apiService, $stateParams, $moment) {
 
       /**
        * Gets all reminders then adds them to $scope.reminderGroups.
@@ -20,7 +20,16 @@ define(['app'], function (app) {
       };
 
       $scope.processReminders = function(resp) {
-        $scope.reminderGroups = resp.data;
+
+        // check if we are getting reminders for just one school.
+        if (typeof resp.data[0].school !== 'undefined') {
+          $scope.school = resp.data[0].school;
+          $scope.date = $moment.utc(resp.data[0].due_date).format('M/D/YYYY');
+          $scope.reminderGroups = resp.data[0].grouped_reminders;
+        } else {
+          $scope.reminderGroups = resp.data;
+        }
+
         $scope.reminderGroups.forEach(function (el, i) {
           if (i > 0) {
             el.isCollapsed = true;

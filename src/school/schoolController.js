@@ -26,7 +26,7 @@ define(['app'], function (app) {
           $scope.schools.push({
             id: school.id,
             name: school.name,
-            dueDate: moment.utc(school.due_date).format('M/D/YYYY'),
+            dueDate: $moment.utc(school.due_date).format('M/D/YYYY'),
             isActive: school.is_active
           });
         })

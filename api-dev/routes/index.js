@@ -372,46 +372,63 @@ router.get('/api/users/:user_id/reminders/schools/:school_id', function(req, res
     query.on('end', function() {
 
       var groupedResults = [];
+      var schoolQuery = client.query("SELECT name, due_date FROM schools WHERE id = $1", [school_id]);
+      var schoolName, schoolDate;
 
-      results.forEach(function(result) {
+      schoolQuery.on('row', function(row) {
+        schoolName = row.name;
+        schoolDate = row.due_date;
+      });
 
-        var groupIndex = groupedResults.findIndex(function(group) {
+      schoolQuery.on('end', function() {
 
-          return group.timeframe === result.timeframe;
-
+        groupedResults.push({
+          school: schoolName,
+          due_date: schoolDate,
+          grouped_reminders: []
         });
 
-        if (groupIndex < 0) {
+        results.forEach(function(result) {
 
-          var newGroup = {
-            timeframe: result.timeframe,
-            reminders: [{
+          var groupIndex = groupedResults[0].grouped_reminders.findIndex(function(group) {
+
+            return group.timeframe === result.timeframe;
+
+          });
+
+          if (groupIndex < 0) {
+
+            var newGroup = {
+              timeframe: result.timeframe,
+              reminders: [{
+                id: result.id,
+                name: result.name,
+                message: result.message,
+                detail: result.detail
+              }]
+            };
+
+            groupedResults[0].grouped_reminders.push(newGroup);
+
+          } else {
+
+            var reminder = {
               id: result.id,
               name: result.name,
               message: result.message,
               detail: result.detail
-            }]
-          };
+            };
 
-          groupedResults.push(newGroup);
+            groupedResults[0].grouped_reminders[groupIndex].reminders.push(reminder);
 
-        } else {
+          }
 
-          var reminder = {
-            id: result.id,
-            name: result.name,
-            message: result.message,
-            detail: result.detail
-          };
+        });
 
-          groupedResults[groupIndex].reminders.push(reminder);
-
-        }
-
+        done();
+        return res.json(groupedResults);
       });
 
-      done();
-      return res.json(groupedResults);
 
     });
 
