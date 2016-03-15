@@ -5,8 +5,8 @@ define(['app'], function (app) {
   /**
    * Controller for the login-update user subview
    */
-  app.register.controller('LoginUpdateController', ['$scope', 'yg.services.user', '$state', '$modal', 'yg.services.api',
-    function ($scope, userService, $state, $modal, yadaApi) {
+  app.register.controller('LoginUpdateController', ['$scope', 'yg.services.user', '$state', '$modal', 'yg.services.api', '$stateParams',
+    function ($scope, userService, $state, $modal, yadaApi, $stateParams) {
 
       /**
        * Shows the update login code send code modal.
@@ -38,11 +38,12 @@ define(['app'], function (app) {
             controller: 'UserModalController'
           });
           modalInstance.result.then(function() {
-            $state.go('user');
+            $state.go(next);
           })
         });
       };
 
+      var next = $stateParams.next || 'user';
       $scope.showLoginUpdateSendCodeModal();
 
     }]);

@@ -44,7 +44,7 @@ define(['app'], function() {
           .state('user', route.resolve('/user', 'User', 'user/', 'vm'))
           .state('user.sms-add', route.resolve('/sms-add', 'SmsAdd', 'user/sms-add/', 'vm'))
           .state('user.codes-add', route.resolve('/codes-add', 'CodesAdd', 'user/codes-add/', 'vm'))
-          .state('user.login-update', route.resolve('/login-update', 'LoginUpdate', 'user/login-update/', 'vm'))
+          .state('user.login-update', route.resolve('/login-update?next', 'LoginUpdate', 'user/login-update/', 'vm'))
           .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
           .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
