@@ -270,4 +270,4 @@ INSERT INTO content_items (name, content) VALUES
   ('help-calendar-menu', '<p>Help text goes here.</p>'),
   ('help-privacy', '<p>Help text goes here.</p>'),
   ('help-faqs', '<p>Help text goes here.</p>'),
-  ('help-disclaimer', '<p>Help text goes here.</p>')
+  ('help-disclaimer', '<p>Help text goes here.</p>');

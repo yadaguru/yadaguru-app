@@ -11,6 +11,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
 
 ##Local Development Installation
  * Be sure you have installed `node`, `npm`, and `vagrant`
+ * Be sure you have gulp installed globally `npm install -g gulp`
  * `cd` into the project root folder (if you are not already there)
  * Run `npm install` to install the front-end dependencies
  * Run `bower install` to install client-side libraries
@@ -19,7 +20,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
  * Run `vagrant up` to bring up the API development server. On first up, this will provision the server and database.
  
 ##Accessing the API Development Server
- * The API Development Server can be accessed at `http://localhost:3000`. See the [API Documentation](https://github.com/yadaguru/yadaguru-app/wiki/API-Documentation)
+ * The API Development Server can be accessed at `http://localhost:3000`. See the [API Documentation](https://github.com/yadaguru/yadaguru-api/wiki/API-Documentation)
  page of the wiki
 
 ##Serving Locally
