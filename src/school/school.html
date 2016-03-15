@@ -9,11 +9,6 @@
           <h3 ng-click="viewReminders(school.id)">{{ school.dueDate }}</h3>
         </div>
         <div class="col-xs-5">
-          <div class="action-container">
-            <i class="fa fa-calendar"></i>
-            <i class="fa fa-file-o"></i>
-            <i class="fa fa-trash-o"></i>
-          </div>
           <div class="switch-container" >
             <input bs-switch type="checkbox" ng-model="school.isActive" ng-change="updateActive(school.id, school.isActive)">
           </div>
