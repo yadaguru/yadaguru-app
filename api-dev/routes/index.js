@@ -545,8 +545,8 @@ router.delete('/api/users/:id', function(req, res) {
       });
     }
 
+    client.query("DELETE FROM reminders WHERE user_id=($1)", [id]);
     client.query("DELETE FROM schools WHERE user_id=($1)", [id]);
-    client.query("UPDATE reminders SET user_id = 0");
     client.query("DELETE FROM users WHERE id=($1)", [id]);
 
     var query = client.query("SELECT * FROM schools WHERE id = $1 ORDER BY id ASC", [id]);
