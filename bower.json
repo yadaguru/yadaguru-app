@@ -28,7 +28,15 @@
     "pdfmake": "~0.1.20",
     "textAngular": "~1.4.2",
     "toastr": "~2.1.1",
-    "requirejs": "~2.1.20"
+    "requirejs": "~2.1.20",
+    "angular-bootstrap-switch": "~0.4.1",
+    "angular-touch": "~1.4.8",
+    "angular-momentjs": "~0.2.2",
+    "angular-tour": "~0.2.5",
+    "jquery": "~2.1.4",
+    "angular-cookies": "~1.4.8",
+    "ngstorage": "~0.3.10",
+    "angular-ui-mask": "~1.6.6"
   },
   "overrides": {
     "bootstrap": {
