@@ -15,7 +15,7 @@ Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/co
  * `cd` into the project root folder (if you are not already there)
  * Run `npm install` to install the front-end dependencies
  * Run `bower install` to install client-side libraries
- * `cd` into `/api-dev`.
+ * `cd` into `api-dev`.
  * Run `npm install` to install the API development server dependencies.
  * Run `vagrant up` to bring up the API development server. On first up, this will provision the server and database.
  
