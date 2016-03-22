@@ -75,6 +75,7 @@ define(['app'], function (app) {
 
       $scope.schools = [];
       $scope.$parent.showAdd = true;
+      $scope.$parent.showPrint = false;
 
       if (!$cookies.get('yg-ob-complete')) {
         $scope.isOnboarding = true;

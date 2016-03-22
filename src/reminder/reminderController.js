@@ -5,8 +5,8 @@ define(['app'], function (app) {
   /**
    * Controller for the reminder view.
    */
-  app.register.controller('ReminderController', ['$scope', 'yg.services.user', 'yg.services.api', '$stateParams', '$moment',
-    function ($scope, userService, apiService, $stateParams, $moment) {
+  app.register.controller('ReminderController', ['$scope', 'yg.services.user', 'yg.services.api', '$stateParams', '$moment', 'yg.services.pdf',
+    function ($scope, userService, apiService, $stateParams, $moment, pdfService) {
 
       /**
        * Gets all reminders then adds them to $scope.reminderGroups.
@@ -37,8 +37,15 @@ define(['app'], function (app) {
         });
       };
 
+      $scope.$parent.saveAsPdf = function() {
+        console.log($scope.reminderGroups);
+        pdfService.saveAsPdf($scope.reminderGroups);
+      };
+
       var schoolId = $stateParams.schoolId || false;
       $scope.getReminders(schoolId);
+      $scope.$parent.showPrint = true;
+      $scope.$parent.showAdd = false;
 
     }]);
 

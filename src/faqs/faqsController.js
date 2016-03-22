@@ -20,7 +20,11 @@ define(['app'], function (app) {
         $scope.faqs = resp.data[0].content;
       }, function() {
         $scope.faqs = 'Error loading FAQs.';
-      })
+      });
+
+      $scope.$parent.showAdd = false;
+      $scope.$parent.showPrint = false;
+
     }]);
 
 });

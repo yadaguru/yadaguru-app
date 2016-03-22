@@ -9,6 +9,7 @@ require(
     'filters',
     'services/authService',
     'services/identityService',
+    'services/pdfService',
     'services/userService',
     'services/helpService',
     'services/modalService',

@@ -13,7 +13,11 @@ define(['app'], function (app) {
         $scope.content = resp.data[0].content;
       }, function() {
         $scope.content = 'Error loading privacy policy.';
-      })
+      });
+
+      $scope.$parent.showAdd = false;
+      $scope.$parent.showPrint = false;
+
     }]);
 
 });

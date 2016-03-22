@@ -21,6 +21,8 @@ define(['app'], function (app) {
 
       });
 
+      $scope.showPrint = false;
+
     }]);
 
 
