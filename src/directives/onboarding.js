@@ -52,11 +52,9 @@ define(['app'], function (app) {
             });
           };
 
-          $scope.submitCodes = function() {
+          $scope.submitCode = function() {
             var apiPromise = yadaApi.users.put(userService.getCurrentUserId(), {
-              confirm_code: $scope.confirmCode,
-              personal_code: $scope.personalCode,
-              sponsor_code: $scope.sponsorCode
+              confirm_code: $scope.confirmCode
             });
             apiPromise.then(function() {
               $scope.advanceOb(true);

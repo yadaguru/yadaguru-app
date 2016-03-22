@@ -46,41 +46,23 @@
 
     <div ng-if="obStep === 4" class="ob4 col-xs-12">
       <p>
-        Making it Yours: <br>
-        Let's set-up your login.
+        Enter the code we sent you here.
       </p>
       <form name="codesAddForm">
         <div class="form-group">
-          <label for="confirm-code">Enter the code we sent you here</label>
           <input type="text"
                  class="form-control"
-                 placeholder="code"
+                 placeholder="123456"
                  id="confirm-code"
                  name="confirmCode"
                  ng-model="$parent.confirmCode"
-                 required>
-        </div>
-        <div class="form-group">
-          <label for="personal-code">
-            Enter a six digit code that you want to use for your login. This should
-            be something easy to remember.
-          </label>
-          <input type="text"
-                 class="form-control"
-                 placeholder="personal code"
-                 id="personal-code"
-                 name="personalCode"
-                 ng-model="$parent.personalCode"
-                 ng-minlength="6"
-                 ng-maxlength="6"
-                 ng-pattern="/\d{6}/"
                  required>
         </div>
         <button type="submit"
                 class="btn btn-primary"
                 ng-class="{disabled: codesAddForm.$invalid}"
                 ng-disabled="codesAddForm.$invalid"
-                ng-click="submitCodes()">OK NEXT
+                ng-click="submitCode()">OK NEXT
         </button>
       </form>
     </div>
@@ -104,15 +86,15 @@
           <div class="input-group-addon" role="button" ng-click="datepickerOpen = !datepickerOpen"><i class="fa fa-calendar"></i></div>
           <div class="datepicker-position">
             <input
-              type="text"
-              class="form-control"
-              id="submission-date"
-              ng-model="$parent.submissionDate"
-              datepicker-popup="M/d/yyyy"
-              is-open="datepickerOpen"
-              min-date="minDate"
-              init-date="initDate"
-              placeholder="2/1/2016" />
+                type="text"
+                class="form-control"
+                id="submission-date"
+                ng-model="$parent.submissionDate"
+                datepicker-popup="M/d/yyyy"
+                is-open="datepickerOpen"
+                min-date="minDate"
+                init-date="initDate"
+                placeholder="2/1/2016" />
           </div>
           <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="submitSchool()">OK NEXT</div>
         </div>

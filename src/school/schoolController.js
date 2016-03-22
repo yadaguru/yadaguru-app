@@ -32,25 +32,6 @@ define(['app'], function (app) {
         })
       };
 
-      $scope.showPhoneOptOutModal = function() {
-
-        var content = modalService.makeModalMessage(
-            '<p>Is it okay to send you text messages?</p>',
-            '<p><em>Note that you can turn off messages at any time.</em></p>'
-        );
-
-        var modalPromise = modalService.showModal(content, {
-          button: 'Yes',
-          cancel: 'No',
-          modalClass: 'optout-modal'
-        });
-
-        modalPromise.then(null, function() {
-          $scope.deactivateAllSchools();
-        })
-
-      };
-
       /**
        * Sets is_active to false for all schools
        */
