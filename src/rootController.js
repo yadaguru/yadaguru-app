@@ -18,6 +18,7 @@ define(['app'], function (app) {
       $scope.$on('$stateChangeSuccess', function(event, toState) {
 
         $scope.currentState = toState.name;
+        $scope.isAdmin = $scope.currentState.substr(0, 5) === 'admin';
 
       });
 

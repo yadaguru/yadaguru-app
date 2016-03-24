@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 body {
   background-color: $bg-gray;
   font-family: $pt-sans;
@@ -6,6 +10,11 @@ body {
 
 main {
   padding-bottom: $footer-height;
+}
+
+.ui-viewer {
+  padding: 0;
+  clear: both;
 }
 
 .no-padding {
