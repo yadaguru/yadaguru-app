@@ -4,7 +4,7 @@ var outputRoot = 'dist/';
 module.exports = {
   root: appRoot,
   source: appRoot + '**/*.js',
-  html: appRoot + '**/*.html',
+  html: [appRoot + '**/*.html', 'index.html'],
   scss: appRoot + 'styles/**/*.scss',
   output: outputRoot,
   sourceMapRelativePath: '../' + appRoot
