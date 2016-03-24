@@ -14,6 +14,7 @@ define(['app'], function() {
         $compileProvider, $urlRouterProvider, $stateProvider) {
 
         $urlRouterProvider.when('', '/');
+        $urlRouterProvider.when('/', 'school');
         $urlRouterProvider.rule(function($injector, $location) {
           var path = $location.path();
           var hasTrailingSlash = path[path.length-1] ==='/';
