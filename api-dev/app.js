@@ -9,57 +9,23 @@ var Sequelize = require('sequelize');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// Setup database connection
 var connectionString = 'postgres://yadaguru_api_dev:abcd1234@localhost:5432/yadaguru_api_dev';
 var sequelizeOptions = {};
 var sequelize = new Sequelize(connectionString, sequelizeOptions);
 
-var BaseReminder = sequelize.define('baseReminder', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  message: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  detail: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  },
-  lateMessage: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  lateDetail: {
-    type: Sequelize.TEXT,
-    allowNull: true
-  }
-});
+// Import models
+var Category = sequelize.import('models/category');
+var Timeframe = sequelize.import('models/timeframe');
+var BaseReminder = sequelize.import('models/baseReminder');
 
-var Category = sequelize.define('category', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
-
-var Timeframe = sequelize.define('timeframe', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  formula: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
-
+// Define relations
 var BaseReminderTimeframe = sequelize.define('baseReminder_timeframe');
-
 Category.hasMany(BaseReminder);
 BaseReminder.belongsToMany(Timeframe, {through: BaseReminderTimeframe});
 Timeframe.belongsToMany(BaseReminder, {through: BaseReminderTimeframe});
 
+// Sync models with database
 Category.sync();
 Timeframe.sync();
 BaseReminder.sync();
