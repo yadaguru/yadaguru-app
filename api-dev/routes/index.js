@@ -21,17 +21,12 @@ if (!Array.prototype.findIndex) {
   };
 }
 
-
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://yadaguru_api_dev:abcd1234@localhost:5432/yadaguru_api_dev';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
+// POST schools
 router.post('/api/users/:user_id/schools', function(req, res) {
 
   var user_id = req.params.user_id;
@@ -61,35 +56,24 @@ router.post('/api/users/:user_id/schools', function(req, res) {
     });
 
     schoolInsertQuery.on('end', function() {
-      var baseReminders = [];
-      var baseReminderQuery = client.query("SELECT * FROM base_reminders");
 
-      baseReminderQuery.on('row', function(row) {
-        baseReminders.push(row);
+      client.query("UPDATE reminders SET school_id = $1, user_id = $2", [schoolId, user_id]);
+      var schoolResults = [];
+      var schoolQuery = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
+
+      schoolQuery.on('row', function(row) {
+        schoolResults.push(row);
       });
 
-      baseReminderQuery.on('end', function() {
-        baseReminders.forEach(function(baseReminder) {
-          client.query("INSERT INTO reminders (school_id, user_id, timeframe, due_date, name, message, detail, late_message, late_detail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
-          [schoolId, user_id, baseReminder.timeframe, baseReminder.due_date, baseReminder.name, baseReminder.message, baseReminder.detail, baseReminder.late_message, baseReminder.late_detail]);
-        });
-
-        var schoolResults = [];
-        var schoolQuery = client.query("SELECT * FROM schools WHERE user_id = $1 ORDER BY id ASC", [user_id]);
-
-        schoolQuery.on('row', function(row) {
-          schoolResults.push(row);
-        });
-
-        schoolQuery.on('end', function() {
-          done();
-          return res.json(schoolResults);
-        });
+      schoolQuery.on('end', function() {
+        done();
+        return res.json(schoolResults);
       });
     });
   });
 });
 
+// GET Schools
 router.get('/api/users/:user_id/schools', function(req, res) {
 
   var results = [];
@@ -123,6 +107,7 @@ router.get('/api/users/:user_id/schools', function(req, res) {
 
 });
 
+// PUT schools
 router.put('/api/users/:user_id/schools/', function(req, res) {
 
   var results = [];
@@ -183,6 +168,7 @@ router.put('/api/users/:user_id/schools/', function(req, res) {
 
 });
 
+// PUT school
 router.put('/api/users/:user_id/schools/:school_id', function(req, res) {
 
   var results = [];
@@ -241,6 +227,7 @@ router.put('/api/users/:user_id/schools/:school_id', function(req, res) {
 
 });
 
+// DELETE schools
 router.delete('/api/users/:user_id/schools/:school_id', function(req, res) {
 
   var results = [];
@@ -274,6 +261,7 @@ router.delete('/api/users/:user_id/schools/:school_id', function(req, res) {
   });
 });
 
+// GET Reminders
 router.get('/api/users/:user_id/reminders', function(req, res) {
 
   var results = [];
@@ -346,6 +334,7 @@ router.get('/api/users/:user_id/reminders', function(req, res) {
 
 });
 
+// GET Reminders for school
 router.get('/api/users/:user_id/reminders/schools/:school_id', function(req, res) {
 
   var results = [];
@@ -436,6 +425,7 @@ router.get('/api/users/:user_id/reminders/schools/:school_id', function(req, res
 
 });
 
+// POST user
 router.post('/api/users', function(req, res) {
 
   var results = [];
@@ -468,6 +458,7 @@ router.post('/api/users', function(req, res) {
 
 });
 
+// PUT user
 router.put('/api/users/:id', function(req, res) {
   var results = [];
   var id = req.params.id;
@@ -529,6 +520,7 @@ router.put('/api/users/:id', function(req, res) {
 
 });
 
+// DELETE user
 router.delete('/api/users/:id', function(req, res) {
 
   var results = [];
@@ -545,7 +537,7 @@ router.delete('/api/users/:id', function(req, res) {
       });
     }
 
-    client.query("DELETE FROM reminders WHERE user_id=($1)", [id]);
+    client.query("UPDATE reminders SET user_id = NULL school_id = NULL", []);
     client.query("DELETE FROM schools WHERE user_id=($1)", [id]);
     client.query("DELETE FROM users WHERE id=($1)", [id]);
 
@@ -563,6 +555,7 @@ router.delete('/api/users/:id', function(req, res) {
   });
 });
 
+// GET content-items
 router.get('/api/content-items/:item_name', function(req, res) {
 
   var results = [];
@@ -595,4 +588,338 @@ router.get('/api/content-items/:item_name', function(req, res) {
   });
 
 });
+
+// GET base_reminders
+router.get('/api/base_reminders', function(req, res) {
+
+  var results = [];
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var query = client.query("SELECT id, name, message, detail, late_message, late_detail, category_id AS category FROM base_reminders");
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+
+      var timeframesQuery = client.query("SELECT base_reminder_id, timeframe_id FROM base_reminders_timeframes", []);
+
+      timeframesQuery.on('row', function(timeframeRow) {
+        var reminderId = results.findIndex(function(el) {
+          return el.id === timeframeRow.base_reminder_id;
+        });
+        if (reminderId !== -1) {
+          if (!results[reminderId].hasOwnProperty('timeframes')) {
+            results[reminderId].timeframes = [];
+          }
+          results[reminderId].timeframes.push(timeframeRow.timeframe_id);
+        }
+      });
+
+      timeframesQuery.on('end', function() {
+        done();
+        return res.json(results);
+      });
+
+    });
+
+  });
+
+});
+
+// GET base_reminder
+router.get('/api/base_reminders/:base_reminder_id', function(req, res) {
+
+  var results = [];
+  var baseReminderId = req.params.base_reminder_id;
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var query = client.query("SELECT id, name, message, detail, late_message, late_detail, category_id AS category " +
+        "FROM base_reminders WHERE id = $1", [baseReminderId]);
+
+    query.on('row', function(row) {
+      results.push(row);
+    });
+
+    query.on('end', function() {
+
+      var timeframesQuery = client.query("SELECT base_reminder_id, timeframe_id FROM base_reminders_timeframes " +
+          "WHERE base_reminder_id = $1", [baseReminderId]);
+
+      timeframesQuery.on('row', function(timeframeRow) {
+        var reminderId = results.findIndex(function(el) {
+          return el.id === timeframeRow.base_reminder_id;
+        });
+        if (reminderId !== -1) {
+          if (!results[reminderId].hasOwnProperty('timeframes')) {
+            results[reminderId].timeframes = [];
+          }
+          results[reminderId].timeframes.push(timeframeRow.timeframe_id);
+        }
+      });
+
+      timeframesQuery.on('end', function() {
+        done();
+        return res.json(results);
+      });
+
+    });
+
+  });
+
+});
+
+// POST base_reminders
+router.post('/api/base_reminders', function(req, res) {
+
+  var data = {
+    name: req.body.name,
+    message: req.body.message,
+    detail: req.body.detail,
+    late_message: req.body.late_message,
+    late_detail: req.body.late_detail,
+    category: req.body.category,
+    timeframes: req.body.timeframes
+  };
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var query = client.query("INSERT INTO base_reminders (name, message, detail, late_message, late_detail, category_id) " +
+        "VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+        [data.name, data.message, data.detail, data.late_message, data.late_detail, data.category]);
+    var newBaseReminderId;
+
+    query.on('row', function(row) {
+      newBaseReminderId = row.id;
+    });
+
+    query.on('end', function() {
+
+      var results = [];
+
+      if (data.timeframes) {
+        data.timeframes.forEach(function(timeframe) {
+          client.query("INSERT INTO base_reminders_timeframes (base_reminder_id, timeframe_id) " +
+          "VALUES ($1, $2)", [newBaseReminderId, timeframe]);
+        });
+      }
+
+      var baseReminderQuery = client.query("SELECT id, name, message, detail, late_message, late_detail, category_id AS category " +
+          "FROM base_reminders", []);
+
+      baseReminderQuery.on('row', function(row) {
+        results.push(row);
+      });
+
+      baseReminderQuery.on('end', function() {
+
+        var timeframesQuery = client.query("SELECT base_reminder_id, timeframe_id FROM base_reminders_timeframes", []);
+
+        timeframesQuery.on('row', function(timeframeRow) {
+          var reminderId = results.findIndex(function(el) {
+            return el.id === timeframeRow.base_reminder_id;
+          });
+          if (reminderId !== -1) {
+            if (!results[reminderId].hasOwnProperty('timeframes')) {
+              results[reminderId].timeframes = [];
+            }
+            results[reminderId].timeframes.push(timeframeRow.timeframe_id);
+          }
+        });
+
+        timeframesQuery.on('end', function() {
+          done();
+          return res.json(results);
+        });
+
+      });
+
+    });
+  });
+});
+
+// PUT base reminder
+router.put('/api/base_reminders/:base_reminder_id', function(req, res) {
+
+  var results = [];
+  var id = req.params.base_reminder_id;
+
+  var data = {
+    name: req.body.name,
+    message: req.body.message,
+    detail: req.body.detail,
+    late_message: req.body.late_message,
+    late_detail: req.body.late_detail,
+    category: req.body.category,
+    timeframes: req.body.timeframes
+  };
+
+  var timeframes;
+
+  if (data.hasOwnProperty('timeframes')) {
+    timeframes = data.timeframes;
+    delete data.timeframes;
+  }
+
+  var updateString = 'UPDATE base_reminders SET';
+  var updateValues = [];
+  var i = 1;
+
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      if (typeof(data[key]) !== 'undefined') {
+        updateString += ' ' + key + '=($' + i + '),';
+        updateValues.push(data[key]);
+        i++;
+      }
+    }
+  }
+
+  updateString = updateString.slice(0, -1);
+  updateString += ' WHERE id=($' + i + ')';
+  updateValues.push(id);
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    var updateQuery = client.query(updateString, updateValues);
+
+    updateQuery.on('end', function() {
+
+      if (typeof timeframes !== 'undefined') {
+
+        client.query("DELETE FROM base_reminders_timeframes WHERE base_reminder_id = $1", [id]);
+        timeframes.forEach(function(timeframe) {
+          client.query("INSERT INTO base_reminders_timeframes (base_reminder_id, timeframe_id) " +
+              "VALUES ($1, $2)", [id, timeframe]);
+        });
+      }
+
+      var baseReminderQuery = client.query("SELECT id, name, message, detail, late_message, late_detail, category_id AS category " +
+          "FROM base_reminders", []);
+
+      baseReminderQuery.on('row', function(row) {
+        results.push(row);
+      });
+
+      baseReminderQuery.on('end', function() {
+
+        var timeframesQuery = client.query("SELECT base_reminder_id, timeframe_id FROM base_reminders_timeframes", []);
+
+        timeframesQuery.on('row', function(timeframeRow) {
+          var reminderId = results.findIndex(function(el) {
+            return el.id === timeframeRow.base_reminder_id;
+          });
+          if (reminderId !== -1) {
+            if (!results[reminderId].hasOwnProperty('timeframes')) {
+              results[reminderId].timeframes = [];
+            }
+            results[reminderId].timeframes.push(timeframeRow.timeframe_id);
+          }
+        });
+
+        timeframesQuery.on('end', function() {
+          done();
+          return res.json(results);
+        });
+
+      });
+
+    });
+
+  });
+
+});
+
+// DELETE base_reminder
+router.delete('/api/base_reminders/:base_reminder_id', function(req, res) {
+
+  var results = [];
+  var id = req.params.base_reminder_id;
+
+  pg.connect(connectionString, function(err, client, done) {
+
+    if (err) {
+      done();
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        data: err
+      });
+    }
+
+    client.query("DELETE FROM base_reminders_timeframes WHERE base_reminder_id = $1", [id]);
+    client.query("DELETE FROM base_reminders WHERE id=($1)", [id]);
+
+    var baseReminderQuery = client.query("SELECT id, name, message, detail, late_message, late_detail, category_id AS category " +
+        "FROM base_reminders", []);
+
+    baseReminderQuery.on('row', function(row) {
+      results.push(row);
+    });
+
+    baseReminderQuery.on('end', function() {
+
+      var timeframesQuery = client.query("SELECT base_reminder_id, timeframe_id FROM base_reminders_timeframes", []);
+
+      timeframesQuery.on('row', function(timeframeRow) {
+        var reminderId = results.findIndex(function(el) {
+          return el.id === timeframeRow.base_reminder_id;
+        });
+        if (reminderId !== -1) {
+          if (!results[reminderId].hasOwnProperty('timeframes')) {
+            results[reminderId].timeframes = [];
+          }
+          results[reminderId].timeframes.push(timeframeRow.timeframe_id);
+        }
+      });
+
+      timeframesQuery.on('end', function() {
+        done();
+        return res.json(results);
+      });
+
+    });
+
+  });
+});
+
 module.exports = router;
