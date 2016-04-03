@@ -4,9 +4,67 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Sequelize = require('sequelize');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var connectionString = 'postgres://yadaguru_api_dev:abcd1234@localhost:5432/yadaguru_api_dev';
+var sequelizeOptions = {};
+var sequelize = new Sequelize(connectionString, sequelizeOptions);
+
+var BaseReminder = sequelize.define('baseReminder', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  message: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  detail: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  lateMessage: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  lateDetail: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  }
+});
+
+var Category = sequelize.define('category', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+var Timeframe = sequelize.define('timeframe', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  formula: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+var BaseReminderTimeframe = sequelize.define('baseReminder_timeframe');
+
+Category.hasMany(BaseReminder);
+BaseReminder.belongsToMany(Timeframe, {through: BaseReminderTimeframe});
+Timeframe.belongsToMany(BaseReminder, {through: BaseReminderTimeframe});
+
+Category.sync();
+Timeframe.sync();
+BaseReminder.sync();
+BaseReminderTimeframe.sync();
+
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:9000');
@@ -17,10 +75,6 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
