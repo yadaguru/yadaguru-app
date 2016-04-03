@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-  return sequelize.define('baseReminder', {
+  var BaseReminder = sequelize.define('BaseReminder', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -21,6 +21,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        BaseReminder.belongsTo(models.Category, {
+          onDelete: 'CASCADE',
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      }
+    }
   });
+
+  return BaseReminder;
 
 };
