@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var models = require('./models/index.js');
 
-models.sequelize.sync({force: true});
+models.sequelize.sync({});
 
 // Helper function to configure CORS
 var allowCrossDomain = function(req, res, next) {
@@ -19,6 +19,7 @@ var allowCrossDomain = function(req, res, next) {
 
 // Import Routes
 var baseReminders = require('./routes/baseReminders');
+var categories = require('./routes/categories');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(allowCrossDomain);
 
 // define routes
 app.use('/api/base_reminders', baseReminders);
+app.use('/api/categories', categories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

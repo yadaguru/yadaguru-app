@@ -1,25 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/index.js');
-var BaseReminder = models.BaseReminder;
+var Category = models.Category;
 
 router.get('/', function(req, res, next) {
 
-  BaseReminder.findAll()
-      .then(function(baseReminders) {
+  Category.findAll()
+      .then(function(categories) {
         res.status(200);
-        res.send(baseReminders);
+        res.send(categories);
       });
 
 });
 
 router.get('/:id', function(req, res, next) {
 
-  BaseReminder.findAll({
+  Category.findAll({
     where: {id: req.params.id}
-  }).then(function(baseReminder) {
+  }).then(function(category) {
     res.status(200);
-    res.send(baseReminder);
+    res.send(category);
   }).catch(function(error) {
     res.status(500);
     res.send(error)
@@ -29,17 +29,12 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  BaseReminder.create({
-    name: req.body.name,
-    message: req.body.message,
-    detail: req.body.detail,
-    lateMessage: req.body.lateMessage,
-    lateDetail: req.body.lateDetail,
-    CategoryId: req.body.category
+  Category.create({
+    name: req.body.name
   }).then(function () {
-    BaseReminder.findAll().then(function (baseReminders) {
+    Category.findAll().then(function (categories) {
       res.status(200);
-      res.send(baseReminders);
+      res.send(categories);
     });
   }).catch(function(error) {
     if (error.name === "SequelizeValidationError") {
@@ -54,20 +49,14 @@ router.post('/', function(req, res, next) {
 
 router.put('/:id', function(req, res, next) {
 
-  console.log(req);
-  BaseReminder.update({
-    name: req.body.name,
-    message: req.body.message,
-    detail: req.body.detail,
-    lateMessage: req.body.lateMessage,
-    lateDetail: req.body.lateDetail,
-    CategoryId: req.body.category
+  Category.update({
+    name: req.body.name
   }, {
     where: {id: req.params.id},
     fields: Object.keys(req.body)
   }).then(function() {
-    BaseReminder.findAll().then(function(baseReminders) {
-      res.status(200).send(baseReminders);
+    Category.findAll().then(function(categories) {
+      res.status(200).send(categories);
     });
   }).catch(function(error) {
     if (error.name === "SequelizeValidationError") {
@@ -82,11 +71,11 @@ router.put('/:id', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
 
-  BaseReminder.destroy({
+  Category.destroy({
     where: {id: req.params.id}
   }).then(function() {
-    BaseReminder.findAll().then(function(baseReminders) {
-      res.status(200).send(baseReminders);
+    Category.findAll().then(function(categories) {
+      res.status(200).send(categories);
     })
   }).catch(function(error) {
     res.status(500).send(error);
