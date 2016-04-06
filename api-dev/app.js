@@ -20,6 +20,7 @@ var allowCrossDomain = function(req, res, next) {
 // Import Routes
 var baseReminders = require('./routes/baseReminders');
 var categories = require('./routes/categories');
+var timeframes = require('./routes/timeframes');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(allowCrossDomain);
 // define routes
 app.use('/api/base_reminders', baseReminders);
 app.use('/api/categories', categories);
+app.use('/api/timeframes', timeframes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -30,6 +30,9 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
           }
         });
+        BaseReminder.belongsToMany(models.Timeframe, {
+          through: 'BaseReminderTimeframe'
+        });
       }
     }
   });
