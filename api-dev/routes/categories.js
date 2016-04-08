@@ -1,87 +1,90 @@
 var express = require('express');
 var router = express.Router();
-var models = require('../models/index.js');
-var Category = models.Category;
+var category = require('../controllers/category');
 
+/**
+ * GET api/categories
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Category Name"
+ * }, {...}]
+ */
 router.get('/', function(req, res, next) {
 
-  Category.findAll()
-      .then(function(categories) {
-        res.status(200);
-        res.send(categories);
-      });
+  category.getAll(res);
 
 });
 
+/**
+ * GET api/categories/{id}
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Category Name"
+ * }]
+ */
 router.get('/:id', function(req, res, next) {
 
-  Category.findAll({
-    where: {id: req.params.id}
-  }).then(function(category) {
-    res.status(200);
-    res.send(category);
-  }).catch(function(error) {
-    res.status(500);
-    res.send(error)
-  });
+  category.getOne(req.params.id, res);
 
 });
 
+/**
+ * POST api/categories
+ *
+ * Request data:
+ * {
+ *   "name": "Category Name (required)"
+ * }
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Category Name"
+ * }, {...}]
+ */
 router.post('/', function(req, res, next) {
 
-  Category.create({
-    name: req.body.name
-  }).then(function () {
-    Category.findAll().then(function (categories) {
-      res.status(200);
-      res.send(categories);
-    });
-  }).catch(function(error) {
-    if (error.name === "SequelizeValidationError") {
-      res.status(400);
-    } else {
-      res.status(500);
-    }
-    res.send(error);
-  });
+  category.create(req.body, res);
 
 });
 
+/**
+ * PUT api/categories/{id}
+ *
+ * Request data:
+ * {
+ *   "name": "Category Name (required)"
+ * }
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Category Name"
+ * }, {...}]
+ */
 router.put('/:id', function(req, res, next) {
 
-  Category.update({
-    name: req.body.name
-  }, {
-    where: {id: req.params.id},
-    fields: Object.keys(req.body)
-  }).then(function() {
-    Category.findAll().then(function(categories) {
-      res.status(200).send(categories);
-    });
-  }).catch(function(error) {
-    if (error.name === "SequelizeValidationError") {
-      res.status(400);
-    } else {
-      res.status(500);
-    }
-    res.send(error);
-  });
+  category.update(req.params.id, req.body, res);
 
 });
 
+/**
+ * DELETE api/categories/{id}
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Category Name"
+ * }, {...}]
+ */
 router.delete('/:id', function(req, res, next) {
 
-  Category.destroy({
-    where: {id: req.params.id}
-  }).then(function() {
-    Category.findAll().then(function(categories) {
-      res.status(200).send(categories);
-    })
-  }).catch(function(error) {
-    res.status(500).send(error);
-  });
+  category.delete(req.params.id, res);
 
 });
-
 
 module.exports = router;
