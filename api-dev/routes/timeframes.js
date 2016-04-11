@@ -37,7 +37,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /**
- * POST api/timeframes/{id}
+ * POST api/timeframes/
  *
  * Request data:
  * {
