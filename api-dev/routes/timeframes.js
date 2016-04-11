@@ -1,89 +1,103 @@
 var express = require('express');
 var router = express.Router();
-var models = require('../models/index.js');
-var Timeframe = models.Timeframe;
+var timeframe = require('../controllers/timeframe');
 
+/**
+ * GET api/timeframes
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Timeframe Name"
+ *   "type": "'absolute', 'relative', or 'now'"
+ *   "formula": "a date string, a positive integer, or null"
+ * }, {...}]
+ */
 router.get('/', function(req, res, next) {
 
-  Timeframe.findAll()
-      .then(function(timeframes) {
-        res.status(200);
-        res.send(timeframes);
-      });
+  timeframe.getAll(res);
 
 });
 
+/**
+ * GET api/timeframes/{id}
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Timeframe Name"
+ *   "type": "'absolute', 'relative', or 'now'"
+ *   "formula": "a date string, a positive integer, or null"
+ * }]
+ */
 router.get('/:id', function(req, res, next) {
 
-  Timeframe.findAll({
-    where: {id: req.params.id}
-  }).then(function(category) {
-    res.status(200);
-    res.send(category);
-  }).catch(function(error) {
-    res.status(500);
-    res.send(error)
-  });
+  timeframe.getOne(req.params.id, res);
 
 });
 
+/**
+ * POST api/timeframes/{id}
+ *
+ * Request data:
+ * {
+ *   "name": "Timeframe Name (required)"
+ *   "type": "'absolute', 'relative', or 'now' (required)"
+ *   "formula": "a date string required for 'absolute' type, a positive integer required for 'relative' type, now required for 'now"
+ * }
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Timeframe Name"
+ *   "type": "'absolute', 'relative', or 'now'"
+ *   "formula": "a date string, a positive integer, or null"
+ * }, {...}]
+ */
 router.post('/', function(req, res, next) {
 
-  Timeframe.create({
-    name: req.body.name,
-    type: req.body.type,
-    formula: req.body.formula
-  }).then(function () {
-    Timeframe.findAll().then(function (timeframes) {
-      res.status(200);
-      res.send(timeframes);
-    });
-  }).catch(function(error) {
-    if (error.name === "SequelizeValidationError") {
-      res.status(400);
-    } else {
-      res.status(500);
-    }
-    res.send(error);
-  });
+  timeframe.create(req.body, res);
 
 });
 
+/**
+ * POST api/timeframes
+ *
+ * Request data:
+ * {
+ *   "name": "Timeframe Name (required)"
+ *   "type": "'absolute', 'relative', or 'now' (required)"
+ *   "formula": "a date string required for 'absolute' type, a positive integer required for 'relative' type, now required for 'now"
+ * }
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Timeframe Name"
+ *   "type": "'absolute', 'relative', or 'now'"
+ *   "formula": "a date string, a positive integer, or null"
+ * }, {...}]
+ */
 router.put('/:id', function(req, res, next) {
 
-  Timeframe.update({
-    name: req.body.name,
-    type: req.body.type,
-    formula: req.body.formula
-  }, {
-    where: {id: req.params.id},
-    fields: Object.keys(req.body)
-  }).then(function() {
-    Timeframe.findAll().then(function(timeframes) {
-      res.status(200).send(timeframes);
-    });
-  }).catch(function(error) {
-    if (error.name === "SequelizeValidationError") {
-      res.status(400);
-    } else {
-      res.status(500);
-    }
-    res.send(error);
-  });
+  timeframe.update(req.params.id, req.body, res);
 
 });
 
+/**
+ * DELETE api/timeframes/{id}
+ *
+ * Response:
+ * [{
+ *   "id": "1",
+ *   "name": "Timeframe Name"
+ *   "type": "'absolute', 'relative', or 'now'"
+ *   "formula": "a date string, a positive integer, or null"
+ * }, {...}]
+ */
 router.delete('/:id', function(req, res, next) {
 
-  Timeframe.destroy({
-    where: {id: req.params.id}
-  }).then(function() {
-    Timeframe.findAll().then(function(timeframes) {
-      res.status(200).send(timeframes);
-    })
-  }).catch(function(error) {
-    res.status(500).send(error);
-  });
+  timeframe.delete(req.params.id, res);
 
 });
 

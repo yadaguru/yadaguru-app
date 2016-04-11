@@ -34,11 +34,17 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       dateStringFormulaRequiredForAbsoluteType: function() {
+        if (typeof this.formula === 'undefined') {
+          throw new Error('formula is required and must be a valid ISO-8601 date string if type is absolute')
+        }
         if (this.type === 'absolute' && !validator.isISO8601(this.formula)) {
           throw new Error('formula must be a valid ISO-8601 date string if type is absolute');
         }
       },
       positiveIntegerFormulaRequiredForRelativeType: function() {
+        if (typeof this.formula === 'undefined') {
+          throw new Error('formula is required and must be a positive integer if type if relative')
+        }
         if (this.type === 'relative' && !validator.isInt(this.formula, {min: 0})) {
           throw new Error('formula must be a positive integer if type is relative') ;
         }
