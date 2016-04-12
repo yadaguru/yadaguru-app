@@ -2,7 +2,7 @@ module.exports = function(sequelize, DataTypes) {
 
   var User = sequelize.define('User', {
     phoneNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isNumeric: true,
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     confirmCode: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
       validate: {
         isNumeric: true,
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     confirmCodeExpires: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: true
     }
   }, {
     classMethods: {

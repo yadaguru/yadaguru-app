@@ -1,7 +1,8 @@
 var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
-var connectionString = 'postgres://yadaguru_api_dev:abcd1234@localhost:5432/yadaguru_api_dev';
+var config    = require('../config');
+var connectionString = config.connectionString;
 var sequelize = new Sequelize(connectionString);
 var db        = {};
 

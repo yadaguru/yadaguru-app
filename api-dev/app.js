@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var models = require('./models/index.js');
+var models = require('./models/');
+var jwt = require('jsonwebtoken');
+var config = require('./config');
 
 models.sequelize.sync({});
 
@@ -21,12 +23,15 @@ var allowCrossDomain = function(req, res, next) {
 var baseReminders = require('./routes/baseReminders');
 var categories = require('./routes/categories');
 var timeframes = require('./routes/timeframes');
+var users = require('./routes/users');
 
 var app = express();
+console.log(app.get('env'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('secret', config.secret);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,6 +46,7 @@ app.use(allowCrossDomain);
 app.use('/api/base_reminders', baseReminders);
 app.use('/api/categories', categories);
 app.use('/api/timeframes', timeframes);
+app.use('/api/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,6 +78,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-console.log('foo');
 
 module.exports = app;
