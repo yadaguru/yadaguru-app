@@ -3,7 +3,7 @@ var router = express.Router();
 var baseReminder = require('../controllers/baseReminder');
 
 /**
- * GET api/baseReminders
+ * GET api/base_reminders
  *
  * Response:
  * [{
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 });
 
 /**
- * GET api/baseReminders/{id}
+ * GET api/base_reminders/{id}
  *
  * Response:
  * [{
@@ -45,7 +45,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /**
- * POST api/baseReminders
+ * POST api/base_reminders
  *
  * Request data:
  * {
@@ -77,7 +77,7 @@ router.post('/', function(req, res, next) {
 });
 
 /**
- * PUT api/baseReminders/{id}
+ * PUT api/base_reminders/{id}
  *
  * Request data:
  * {
@@ -109,7 +109,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /**
- * DELETE api/baseReminders/{id}
+ * DELETE api/base_reminders/{id}
  *
  * Response:
  * [{
