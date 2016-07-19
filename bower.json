@@ -14,29 +14,29 @@
   "dependencies": {
     "angular": "1.4.3",
     "angular-animate": "1.4.3",
-    "angular-bootstrap": "~0.13.0",
-    "angular-file-saver": "~0.2.0",
-    "angular-resource": "~1.4.1",
+    "angular-bootstrap": "0.13.0",
+    "angular-file-saver": "0.2.0",
+    "angular-resource": "1.4.1",
     "angular-route": "1.4.3",
-    "angular-toastr": "~1.4.1",
-    "angular-ui-router": "~0.2.15",
-    "bootstrap": "~3.3.4",
+    "angular-toastr": "1.4.1",
+    "angular-ui-router": "0.2.15",
+    "bootstrap": "3.3.4",
     "file-saver": "*",
-    "font-awesome": "~4.3.0",
-    "jspdf": "~1.1.135",
-    "modernizr": "~2.8.3",
-    "pdfmake": "~0.1.20",
-    "textAngular": "~1.4.2",
-    "toastr": "~2.1.1",
-    "requirejs": "~2.1.20",
-    "angular-bootstrap-switch": "~0.4.1",
-    "angular-touch": "~1.4.8",
-    "angular-momentjs": "~0.2.2",
-    "angular-tour": "~0.2.5",
-    "jquery": "~2.1.4",
-    "angular-cookies": "~1.4.8",
-    "ngstorage": "~0.3.10",
-    "angular-ui-mask": "~1.6.6"
+    "font-awesome": "4.3.0",
+    "jspdf": "1.1.135",
+    "modernizr": "2.8.3",
+    "pdfmake": "0.1.20",
+    "textAngular": "1.4.2",
+    "toastr": "2.1.1",
+    "requirejs": "2.1.20",
+    "angular-bootstrap-switch": "0.4.1",
+    "angular-touch": "1.4.8",
+    "angular-momentjs": "0.2.2",
+    "angular-tour": "0.2.5",
+    "jquery": "2.1.4",
+    "angular-cookies": "1.4.8",
+    "ngstorage": "0.3.10",
+    "angular-ui-mask": "1.6.6"
   },
   "overrides": {
     "bootstrap": {
@@ -44,6 +44,6 @@
     }
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.5"
+    "angular-mocks": "1.4.5"
   }
 }

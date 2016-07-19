@@ -45,11 +45,8 @@ then
   echo "VM was already provisioned at: $(cat $PROVISIONED_ON)"
   echo "To run system updates manually login via 'vagrant ssh' and run 'apt-get update && apt-get upgrade'"
   echo ""
-<<<<<<< HEAD
   echo "Re-provisioning database..."
   cat /srv/api-dev/provision.sql | PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost $APP_DB_NAME
-=======
->>>>>>> 305d6ca... Adds a vagrant box provisioned with node-express-postgres for providing an API to use when developing the ront end
   print_db_usage
   exit
 fi
