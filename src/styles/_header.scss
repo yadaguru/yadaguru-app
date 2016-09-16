@@ -1,0 +1,31 @@
+header {
+
+  .panel {
+    margin-left: -12px;
+    margin-right: -12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    height: 90px;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: $francois-one;
+  }
+
+  img {
+    width: auto;
+    max-height: 70px;
+    display: block;
+    margin: 5px auto 0 auto;
+  }
+
+  i.fa {
+    font-size: 25px;
+    margin: 3px;
+  }
+
+  .row {
+    text-align: center;
+  }
+}

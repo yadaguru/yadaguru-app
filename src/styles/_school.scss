@@ -1,0 +1,74 @@
+main.school-view {
+  color: $bg-gray;
+
+  .school {
+    margin: 10px -5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &.active {
+      h2, h3, i.fa {
+        color: $active-blue;
+      }
+    }
+
+    h2, h3 {
+      font-family: $marvel;
+      margin: 0;
+    }
+
+    h2 {
+      font-weight: bold;
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    .action-container, .switch-container {
+      text-align: center;
+    }
+
+    .action-container {
+      i.fa {
+        font-size: 25px;
+        margin: 0 5px;
+      }
+    }
+
+    .switch-container {
+      margin-top: 10px;
+    }
+
+    .bootstrap-switch-handle-on {
+      background-color: $active-blue;
+      background-image: linear-gradient(to bottom, $active-blue, $active-blue-dark);
+    }
+
+  }
+
+}
+
+main.school-new-view {
+
+  form {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .form-group {
+    margin-bottom: 2em;
+  }
+
+  label {
+    font-size: 2em;
+    font-family: $marvel;
+    font-weight: normal;
+  }
+
+  .btn {
+    margin-bottom: 2em;
+  }
+
+}

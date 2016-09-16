@@ -9,7 +9,10 @@ require(
     'filters',
     'services/authService',
     'services/identityService',
+    'services/pdfService',
     'services/userService',
+    'services/helpService',
+    'services/modalService',
     'services/apiService',
     'services/utilsService',
     'services/notifierService',
@@ -17,6 +20,9 @@ require(
     'services/googleCalendarService',
     'services/iCalService',
     'services/routeResolverProvider',
+    'directives/navLinks',
+    'directives/onboarding',
+    'directives/progressDots',
     'rootController'
   ],
   function () {

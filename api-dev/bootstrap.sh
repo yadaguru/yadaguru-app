@@ -96,10 +96,6 @@ CREATE DATABASE $APP_DB_NAME WITH OWNER=$APP_DB_USER
 );
 EOF
 
-echo "Provisioning Data"
-sudo su - postgres
-cat /srv/api-dev/provision.sql | PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost $APP_DB_NAME
-
 # Tag the provision time:
 date > "$PROVISIONED_ON"
 

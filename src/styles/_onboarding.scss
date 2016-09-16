@@ -1,0 +1,107 @@
+.onboarding-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $onboarding-bg-blue;
+  z-index: 90;
+  text-align: center;
+  padding-top: 10vh;
+  color: white;
+
+  .ob-main {
+    height: 75vh;
+  }
+
+  .skip-to-login {
+    color: white;
+    font-size: 1.5em;
+    margin-top: 3em;
+  }
+
+  i.fa {
+    font-size: 50px;
+  }
+
+  p {
+    font-family: $marvel;
+    font-size: 36px;
+    margin: 50px 0;
+  }
+
+  .info-text {
+    font-family: $pt-sans;
+    font-size: 1em;
+    font-style: italic;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+
+  .progress {
+    margin: 0 auto;
+    width: 70%;
+  }
+
+  .progress-bar {
+    background: $progress-green;
+  }
+
+  .input-group {
+    i.fa {
+      font-size: 25px;
+    }
+  }
+
+  .datepicker-position {
+    .dropdown-menu {
+      top:-285px !important;
+    }
+  }
+
+  label {
+    text-align: left;
+    display: block;
+  }
+}
+
+.ob3, .ob4 {
+  p {
+    margin-top: 0;
+  }
+}
+
+.tour-tip {
+  border-radius: 5px;
+  background-color: $onboarding-bg-blue;
+  width: 270px;
+
+  p {
+    font-size: 32px;
+    color: white;
+  }
+
+  .tour-close-tip {
+    display: none;
+  }
+
+  .fa.fa-arrow-down, .fa.fa-arrow-up {
+    color: white;
+    font-size: 36px;
+  }
+
+  .top-controls {
+    margin-bottom: 10px;
+  }
+
+  .col-xs-4 {
+    padding: 0;
+    text-align: center;
+  }
+
+  .tour-content-wrapper .button {
+    border-radius: 5px;
+    background-color: $onboarding-btn-blue;
+    font-size: 18px;
+  }
+}

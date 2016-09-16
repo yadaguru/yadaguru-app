@@ -2,8 +2,10 @@ define(['app'], function() {
 
   'use strict';
 
-  var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngSanitize', 'ngAnimate',
-    'ui.router', 'ui.bootstrap', 'fileSaver', 'routeResolverServices', 'toastr', 'config']);
+  var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngTouch', 'ngSanitize', 'ngAnimate',
+    'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
+    'frapontillo.bootstrap-switch', 'angular-momentjs', 'angular-tour', 'ui.bootstrap.modal',
+    'ngCookies', 'ngStorage', 'ui.mask']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
       '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',
@@ -12,6 +14,8 @@ define(['app'], function() {
         $compileProvider, $urlRouterProvider, $stateProvider) {
 
         $urlRouterProvider.when('', '/');
+        $urlRouterProvider.when('/', 'school');
+        $urlRouterProvider.when('/admin', 'admin/reminders');
         $urlRouterProvider.rule(function($injector, $location) {
           var path = $location.path();
           var hasTrailingSlash = path[path.length-1] ==='/';
@@ -35,9 +39,19 @@ define(['app'], function() {
         var route = routeResolverProvider.route;
 
         $stateProvider // route.resolve(url, baseName, path, controllerAs, secure)
-          .state('home', route.resolve('/', 'Home', 'home/', 'vm'))
+          // New routes for version 2
+          .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
+          .state('school.new', route.resolve('/new', 'New', 'school/new/', 'vm'))
+          .state('reminder', route.resolve('/reminder/:schoolId', 'Reminder', 'reminder/', 'vm'))
+          .state('user', route.resolve('/user', 'User', 'user/', 'vm'))
+          .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
+          .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
           .state('faqs', route.resolve('/faqs', 'Faqs', 'faqs/', 'vm'))
+          .state('disclaimer', route.resolve('/disclaimer', 'Disclaimer', 'disclaimer/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
+
+          // Old routes from version 1
+          .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
           .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm', 'admin'))
           .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm', 'admin'))
           .state('admin.categories', route.resolve('/categories', 'Categories', 'admin/categories/', 'vm', 'admin'))

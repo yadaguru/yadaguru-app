@@ -1,0 +1,31 @@
+footer {
+  height: $footer-height;
+  width: 100%;
+  text-align: center;
+  background-color: $bg-gray;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  .footer-toolbar {
+    margin: 0 3px 5px 3px;
+
+    a {
+      color: black;
+    }
+  }
+
+  i.fa {
+    font-size: 35px;
+    margin: 5px;
+  }
+
+  a, .footer-links {
+    color: white;
+  }
+
+  a, .footer-link {
+    text-decoration: underline;
+  }
+}

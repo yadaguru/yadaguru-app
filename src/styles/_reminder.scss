@@ -1,0 +1,74 @@
+main.reminder-view {
+  .date-group h2, .reminder-group h3 {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin: 5px 0;
+  }
+
+  .date-group {
+    h2 {
+      border-color: $heading-border-blue;
+      background-color: $heading-bg-blue;
+      color: white;
+      font-family: $marvel;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  }
+
+  .reminder-group {
+    h3 {
+      border-color: white;
+      background-color: white;
+      color: $heading-bg-blue;
+      font-family: $pt-sans;
+      font-size: 22px;
+      padding: 3px 10px;
+    }
+  }
+
+  .reminder-info {
+    border: 1px solid white;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: $pt-sans;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-top: -8px;
+  }
+
+  .reminder-message {
+    font-weight: bold;
+  }
+
+  .school-header {
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 5px;
+    font-family: $pt-sans;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    color: $active-blue;
+    margin-bottom: 1em;
+
+    a {
+      color: $active-blue;
+    }
+  }
+  
+  .school-name {
+    margin: 0;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  
+  .school-date {
+    margin: 0;
+    font-size: 1.25em;
+  }
+}

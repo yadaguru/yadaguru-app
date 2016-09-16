@@ -2,7 +2,7 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var apiService = function($http, constants) {
+  var apiService = function($http, constants, $q) {
 
     var yadaAPI = {};
 
@@ -11,31 +11,80 @@ define(['app'], function(app) {
     var apiRouteTerminator = constants.API_ROUTE_TERMINATOR;
 
     yadaAPI.login = function(data) {
-      return $http.post(apiRoute + 'users/login/', data);
+      //TODO make login functional - this just returns and empty promise :-(
+      return $q.resolve({});
+      //return $http.post(apiRoute + 'users/login/', data);
     };
 
     yadaAPI.logout = function(data) {
-      return $http.post(apiRoute + 'users/logout/', data);
+      //TODO make logout functional - this just returns and empty promise :-(
+      return $q.resolve({});
+      //return $http.post(apiRoute + 'users/logout/', data);
     };
 
     yadaAPI.currentUser = function() {
       return $http.get(apiRoute + 'users/currentUser');
     };
 
-    yadaAPI.reminders.get = function() {
-      return $http.get(apiRoute + 'reminders' + apiRouteTerminator);
+    yadaAPI.reminders.get = function(user_id) {
+      return $http.get(apiRoute + 'users/' + user_id + '/reminders/');
     };
 
-    yadaAPI.reminders.post = function(data) {
-      return $http.post(apiRoute + 'reminders/', data);
+    yadaAPI.reminders.getForSchool = function(user_id, school_id) {
+      return $http.get(apiRoute + 'users/' + user_id + '/reminders/schools/' + school_id);
     };
 
-    yadaAPI.reminders.put = function(id, data) {
-      return $http.put(apiRoute + 'reminders/' + id, data);
+    yadaAPI.reminders.post = function(data, user_id) {
+      return $http.post(apiRoute + 'users/' + user_id + '/reminders/', data);
     };
 
-    yadaAPI.reminders.delete = function(id) {
-      return $http.delete(apiRoute + 'reminders/' + id);
+    yadaAPI.reminders.put = function(id, data, user_id) {
+      return $http.put(apiRoute + 'users/' + user_id + '/reminders/' + id + '/', data);
+    };
+
+    yadaAPI.reminders.delete = function(id, user_id) {
+      return $http.delete(apiRoute + 'users/' + user_id + '/reminders/' + id + '/');
+    };
+    
+    yadaAPI.users = {};
+
+    yadaAPI.users.post = function(data) {
+      return $http.post(apiRoute + 'users/', data);
+    };
+
+    yadaAPI.users.put = function(id, data) {
+      return $http.put(apiRoute + 'users/' + id, data);
+    };
+
+    yadaAPI.users.delete = function(id) {
+      return $http.delete(apiRoute + 'users/' + id);
+    };
+
+    yadaAPI.sms = {};
+
+    yadaAPI.sms.confirmSmsNumber = function(data) {
+      return $http.post(apiRoute + 'sms/', data)
+    };
+
+    yadaAPI.schools = {};
+
+    yadaAPI.schools.get = function(user_id) {
+      return $http.get(apiRoute + 'users/' + user_id + '/schools/');
+    };
+
+    yadaAPI.schools.post = function(data, user_id) {
+      return $http.post(apiRoute + 'users/' + user_id + '/schools/', data);
+    };
+
+    yadaAPI.schools.put = function(id, data, user_id) {
+      if (!id) {
+        return $http.put(apiRoute + 'users/' + user_id + '/schools/', data);
+      }
+      return $http.put(apiRoute + 'users/' + user_id + '/schools/' + id + '/', data);
+    };
+
+    yadaAPI.schools.delete = function(id, user_id) {
+      return $http.delete(apiRoute + 'users/' + user_id + '/schools/' + id + '/');
     };
 
     yadaAPI.categories = {};
@@ -94,6 +143,12 @@ define(['app'], function(app) {
       return $http.put(apiRoute + 'faqs/' + id, data);
     };
 
+    yadaAPI.contentItems = {};
+
+    yadaAPI.contentItems.get = function(itemName) {
+      return $http.get(apiRoute + 'content-items/' + itemName);
+    };
+
     yadaAPI.settings = {};
 
     yadaAPI.settings.get = function() {
@@ -107,6 +162,6 @@ define(['app'], function(app) {
     return yadaAPI;
   };
 
-  app.factory('yg.services.api', ['$http', 'constants', apiService]);
+  app.factory('yg.services.api', ['$http', 'constants', '$q', apiService]);
 
 });

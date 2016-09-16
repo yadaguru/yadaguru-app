@@ -1,35 +1,42 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
 
-  var LoginController = function($scope, $http, notifierService,
-    identityService, authService, $location, $state) {
+  /**
+   * Controller for login view
+   */
+  app.register.controller('LoginController', ['$scope', 'yg.services.api', '$state', 'yg.services.modal',
+    function($scope, yadaApi, $state, modalService) {
 
-    $scope.identityService = identityService;
+      // TODO refactor this with the correct data that needs to be passed to the login route
+      $scope.submitPhone = function() {
+        yadaApi.login({
+          phone_number: $scope.phoneNumber
+        }).then(function() {
+          var modalMessage = modalService.makeModalMessage(
+              'Check your device, we are sending you a code to confirm it\'s you.'
+          );
+          var modalPromise = modalService.showModal(modalMessage, {
+            button: 'I GOT IT',
+            cancel: 'Resend It',
+            modalClass: 'confirm-modal'
+          });
+          modalPromise.then(function() {
+            $scope.loginStep++;
+          });
+        })
+      };
 
-    identityService.getCurrentUser();
+      $scope.submitCode = function() {
+        var apiPromise = yadaApi.login({
+          confirm_code: $scope.confirmCode
+        });
+        apiPromise.then(function() {
+          $state.go('school');
+        })
+      };
 
-    $scope.signin = function() {
-      authService.authenticateUser($scope.username, $scope.password).then(function(success) {
-        if(success) {
-          notifierService.success('You have successfully signed in!');
-          $state.go('admin.reminders');
-        } else {
-          notifierService.error('You have failed to sign in.');
-        }
-      });
-    };
+      $scope.loginStep = 1;
 
-    $scope.signout = function() {
-      authService.logoutUser().then(function() {
-        $scope.username = "";
-        $scope.password = "";
-        notifierService.success('You have successfully signed out!');
-        $location.path('/');
-      });
-    };
-  };
+  }]);
 
-  app.register.controller('LoginController',
-    ['$scope', '$http', 'yg.services.notifier', 'yg.services.identity',
-      'yg.services.auth', '$location', '$state', LoginController]);
 
 });

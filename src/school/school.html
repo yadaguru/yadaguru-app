@@ -1,0 +1,36 @@
+<onboarding ng-if="isOnboarding"></onboarding>
+<main class="row school-view" ng-if="currentState === 'school'">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    <nav-links></nav-links>
+    <div ng-repeat="school in schools">
+      <div class="row panel school" ng-class="{active: school.isActive, first: $first}">
+        <div class="col-xs-7">
+          <h2 ng-click="viewReminders(school.id)">{{ school.name }}</h2>
+          <h3 ng-click="viewReminders(school.id)">{{ school.dueDate }}</h3>
+        </div>
+        <div class="col-xs-5">
+          <div class="switch-container" >
+            <input bs-switch type="checkbox" ng-model="school.isActive" ng-change="updateActive(school.id, school.isActive)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<tour step="currentStep">
+  <virtual-step tourtip="Click here to manage your text messages"
+                tourtip-element="#user-setup"
+                tourtip-placement="center"
+                tourtip-step="0"
+                tourtip-margin="100"
+                tourtip-offset-horizontal="0"
+                tourtip-offset-vertical="-230"
+                tourtip-next-label="Got It" />
+  <virtual-step tourtip="Click here to see your reminders"
+                tourtip-element=".first"
+                tourtip-placement="bottom"
+                tourtip-step="1"
+                tourtip-offset-vertical="-25"
+                tourtip-next-label="Got It" />
+</tour>
+<div ui-view></div>

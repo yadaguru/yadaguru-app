@@ -1,0 +1,113 @@
+.nav-links {
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  a {
+    color: white;
+  }
+}
+
+.progress-dots {
+  i.fa {
+    font-size: 10px;
+    color: grey;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &.active {
+      color: white;
+    }
+  }
+}
+
+.btn-primary, button {
+  background-color: $onboarding-btn-blue;
+  border-color: $onboarding-btn-blue;
+  margin: 0 auto;
+  font-size: 22px;
+  display: block;
+
+  &.disabled {
+    background-color: #ddd;
+    border-color: #ddd;
+    color: white;
+  }
+}
+
+.modal-content {
+  background-color: $onboarding-bg-blue;
+  color: white;
+  width: 80%;
+  margin: 17vh auto;
+  min-height: 35vh;
+  font-size: 32px;
+  font-family: $marvel;
+  text-align: center;
+
+  .btn {
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: $active-blue;
+    font-weight: bold;
+    width: auto;
+    margin-top: 1em;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+
+    .btn {
+      height: 2em;
+      margin: 0;
+    }
+  }
+
+  .btn.btn-danger {
+    background-color: $danger;
+  }
+
+  .btn.btn-default {
+    background-color: $bg-gray;
+  }
+
+
+}
+
+.modal-body {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.forget-user-modal .modal-content {
+  height: 60vh;
+}
+
+.help-modal .modal-content {
+  min-height: 25vh;
+  height: auto;
+  margin: 8vh auto 0;
+}
+
+.panel.content-panel {
+  padding: 1em;
+}
+
+.content-panel-header {
+  border-color: $heading-border-blue;
+  background-color: $heading-bg-blue;
+  color: white;
+  font-family: $marvel;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+

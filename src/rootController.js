@@ -1,10 +1,30 @@
-define(['app'], function(app) {
+define(['app'], function (app) {
+
   'use strict';
 
+  app.controller('RootController', ['$scope', 'yg.services.help', 'yg.services.api', 'yg.services.user', '$state',
+    function ($scope, helpService, yadaApi, userService, $state) {
 
-  var RootController = function () {
-  };
+      $scope.showHelp = function(view) {
+        helpService.getHelpMessage('help-' + view);
+      };
 
-  app.controller('RootController', RootController);
+      $scope.logout = function() {
+        yadaApi.logout({user_id: userService.getCurrentUserId()}).then(function() {
+          $state.go('login');
+        });
+      };
+
+      $scope.$on('$stateChangeSuccess', function(event, toState) {
+
+        $scope.currentState = toState.name;
+        $scope.isAdmin = $scope.currentState.substr(0, 5) === 'admin';
+
+      });
+
+      $scope.showPrint = false;
+
+    }]);
+
 
 });

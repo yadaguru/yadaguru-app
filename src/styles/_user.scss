@@ -1,0 +1,74 @@
+main.user-view {
+  label, p, .disclaimer {
+    color: white;
+    font-size: 1em;
+    font-weight: normal;
+  }
+
+  form {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  .disclaimer {
+    border: 1px solid white;
+    padding: 10px;
+  }
+
+  .form-group {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .btn-primary, button {
+    background-color: $onboarding-btn-blue;
+    border-color: $onboarding-btn-blue;
+    margin: 0 auto;
+    font-size: 22px;
+    display: block;
+
+    &.disabled {
+      background-color: #ddd;
+      border-color: #ddd;
+    }
+  }
+
+  .sms-edit-menu {
+    h2 {
+      font-size: 2em;
+      color: white;
+      font-weight: normal;
+      margin: 25px 40px 40px 25px;
+
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
+main.login-view {
+  form {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  label {
+    font-size: 2em;
+    font-weight: normal;
+    font-family: $marvel;
+  }
+
+  .btn {
+    margin-top: 1em;
+  }
+
+  .forgot-login-link {
+    a {
+      color: white;
+    }
+
+    margin-top: 1em;
+    font-size: 1em;
+  }
+}

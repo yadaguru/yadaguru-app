@@ -1,0 +1,32 @@
+<main class="row user-view user-sponsor-update-view">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    <form name="sponsorUpdateForm">
+      <div class="form-group">
+        <label for="sponsor-code">
+          If you have a sponsor code, enter that here:
+        </label>
+        <input type="text"
+               class="form-control"
+               placeholder="sponsor code"
+               id="sponsor-code"
+               ng-model="sponsorCode"
+               name="sponsorCode"
+               required>
+      </div>
+      <button type="submit"
+              class="btn btn-primary"
+              ng-class="{disabled: sponsorUpdateForm.$invalid}"
+              ng-disabled="sponsorUpdateForm.$invalid"
+              ng-click="updateSponsorCode()">OK NEXT
+      </button>
+    </form>
+
+  </div>
+</main>
+
+<script type="text/ng-template" id="sponsorUpdateCompletionModal.html">
+  <div class="modal-body sponsor-update-completion-modal">
+    <p>You Are Now Sponsored!</p>
+    <button class="btn btn-primary" ng-click="ok()">that was easy</button>
+  </div>
+</script>

@@ -10,7 +10,7 @@
   },
   "local": {
     "constants" : {
-      "HOSTNAME" : "http://localhost:8080",
+      "HOSTNAME" : "http://localhost:3000",
       "API_ROUTE" : "/api/",
       "API_ROUTE_TERMINATOR" : "/"
     }
