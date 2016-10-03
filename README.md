@@ -7,22 +7,20 @@
 #YadaGuru
 ##College Application Reminders
 
-Visit our [CodeForPhily project info page](https://codeforphilly.org/projects/college_application_app_for_philly_schools).
+Visit our [CodeForPhilly project info page](https://codeforphilly.org/projects/college_application_app_for_philly_schools).
 
 ##Local Development Installation
- * Be sure you have installed `node`, `npm`, and `vagrant`
+ * Be sure you have installed `node` and `npm`
  * Be sure you have gulp installed globally `npm install -g gulp` 
  * Be Sure you have bower installed globally `npm install -g bower`
  * `cd` into the project root folder (if you are not already there)
  * Run `npm install` to install the front-end dependencies
  * Run `bower install` to install client-side libraries.
- * `cd` into `api-dev`.
- * Run `npm install` to install the API development server dependencies.
- * Run `vagrant up` to bring up the API development server. On first up, this will provision the server and database.
  
-##Accessing the API Development Server
- * The API Development Server can be accessed at `http://localhost:3000`. See the [API Documentation](https://github.com/yadaguru/yadaguru-api/wiki/API-Documentation)
- page of the wiki
+##Accessing the API Server
+ * The API Server is located in a separate repo [here](https://github.com/yadaguru/yadaguru-api/). Clone this repo and follow the README there to set up the server.
+ * Once the server is setup, run `npm start` to start the server. The server can be accessed at `http://localhost:3005`
+ * See the [API Documentation](https://github.com/yadaguru/yadaguru-api/wiki/API-Documentation) for information on communicating with the API.
 
 ##Serving Locally
 Run `gulp watch` to serve the front end of the project with browsersync on `localhost:9000`. While gulp is running the browser and server will be reloaded on every file change related to their domain.
@@ -32,11 +30,7 @@ Run `gulp watch` to serve the front end of the project with browsersync on `loca
  * `gulp build` to build all styles, scripts and HTML files.
  * `gulp watch` to watch for changes and enable BrowserSync.
  
-##Reprovisioning the API Dev Server Database
- * Upon running `vagrant up` for the first time, the database will provision itself, by running the sql commands in `/api-dev/provision.sql`. 
- To re-provision the database, run `vagrant up --provision`.
- 
 ##Contributing
 
- * Please fork the repo, checkout the `development` and create a feature branch from there.
- * Please make all PR against the `development` branch. 
+ * Please fork the repo, checkout the `master` branch and create a feature branch from there.
+ * Please make all PR against the `master` branch. 
