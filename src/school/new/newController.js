@@ -7,9 +7,10 @@ define(['app'], function (app) {
     function($scope, yadaApi, $state, helpService, userService) {
 
       $scope.submitSchool = function() {
-        var apiPromise = yadaApi.schools.post({
+        var apiPromise = yadaApi.post('schools', {
           name: $scope.schoolName,
-          due_date: $scope.submissionDate
+          dueDate: $scope.submissionDate,
+          isActive: 'true'
         }, userService.getCurrentUserId());
 
         apiPromise.then(function() {

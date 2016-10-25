@@ -7,8 +7,9 @@ define(['app'], function (app) {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
       controller: [
-        '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.user', 'yg.services.modal',
-        function ($scope, $moment, helpService, yadaApi, userService, modalService) {
+        '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.user', 'yg.services.modal', 'yg.services.auth',
+        'yg.services.error',
+        function ($scope, $moment, helpService, yadaApi, userService, modalService, authService, errorService) {
 
           var progressStep = 14;
 
@@ -35,12 +36,12 @@ define(['app'], function (app) {
           };
 
           $scope.submitMobile = function() {
-            var apiPromise = yadaApi.users.post({phone_number: $scope.phoneNumber});
+            var apiPromise = yadaApi.users.post({phoneNumber: $scope.phoneNumber});
             var modalMessage = modalService.makeModalMessage(
                 'Check your device, we are sending you a code to get you setup.'
             );
             apiPromise.then(function(resp) {
-              userService.setCurrentUserId(resp.data[0].id);
+              userService.setCurrentUserId(resp.data.userId);
               var modalPromise = modalService.showModal(modalMessage, {
                 button: 'I GOT IT',
                 cancel: 'Resend It',
@@ -54,23 +55,26 @@ define(['app'], function (app) {
 
           $scope.submitCode = function() {
             var apiPromise = yadaApi.users.put(userService.getCurrentUserId(), {
-              confirm_code: $scope.confirmCode
+              confirmCode: $scope.confirmCode
             });
-            apiPromise.then(function() {
+            apiPromise.then(function(resp) {
+              authService.saveUserToken(resp.data.token);
               $scope.advanceOb(true);
             })
           };
 
           $scope.submitSchool = function () {
-            var apiPromise = yadaApi.schools.post({
+            yadaApi.post('schools', {
               name: $scope.schoolName,
-              due_date: $scope.submissionDate
-            }, userService.getCurrentUserId());
-            apiPromise.then(function(resp) {
-              $scope.endOnboarding();
-              $scope.$parent.showHints = true;
-              $scope.$parent.processSchools(resp);
-            });
+              dueDate: $scope.submissionDate,
+              isActive: 'true'
+            })
+              .then(function(resp) {
+                $scope.endOnboarding();
+                $scope.parent.showHints = true;
+                $scope.parent.processSchools(resp);
+              })
+              .catch(errorService.handleHttpError);
           };
 
           $scope.endOnboarding = function () {

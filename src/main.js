@@ -20,6 +20,7 @@ require(
     'services/googleCalendarService',
     'services/iCalService',
     'services/routeResolverProvider',
+    'services/errorService',
     'directives/navLinks',
     'directives/onboarding',
     'directives/progressDots',

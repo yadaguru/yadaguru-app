@@ -14,7 +14,7 @@
   "dependencies": {
     "angular": "1.4.3",
     "angular-animate": "1.4.3",
-    "angular-bootstrap": "0.13.0",
+    "angular-bootstrap": "0.12.0",
     "angular-file-saver": "0.2.0",
     "angular-resource": "1.4.1",
     "angular-route": "1.4.3",
@@ -36,7 +36,8 @@
     "jquery": "2.1.4",
     "angular-cookies": "1.4.8",
     "ngstorage": "0.3.10",
-    "angular-ui-mask": "1.6.6"
+    "angular-ui-mask": "1.6.6",
+    "angular-local-storage": "~0.5.2"
   },
   "overrides": {
     "bootstrap": {

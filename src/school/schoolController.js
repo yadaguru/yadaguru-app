@@ -5,15 +5,17 @@ define(['app'], function (app) {
   /**
    * Controller for the school view.
    */
-  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api', '$cookies',
-    'yg.services.modal', 'yg.services.user', '$state',
-    function ($scope, $rootScope, $moment, yadaApi, $cookies, modalService, userService, $state) {
+  app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api',
+    'yg.services.modal', 'yg.services.user', '$state', 'yg.services.error', 'localStorageService',
+    function ($scope, $rootScope, $moment, yadaApi, modalService, userService, $state, errorService, localStorage) {
 
       /**
        * Gets all schools and adds them to the $scope.schools.
        */
       $scope.getSchools = function () {
-        yadaApi.schools.get(userService.getCurrentUserId()).then($scope.processSchools);
+        yadaApi.getAll('schools')
+          .then($scope.processSchools)
+          .catch(errorService.handleHttpError)
       };
 
       /**
@@ -26,14 +28,15 @@ define(['app'], function (app) {
           $scope.schools.push({
             id: school.id,
             name: school.name,
-            dueDate: $moment.utc(school.due_date).format('M/D/YYYY'),
-            isActive: school.is_active
+            dueDate: $moment.utc(school.dueDate).format('M/D/YYYY'),
+            isActive: school.isActive
           });
         })
       };
 
       /**
        * Sets is_active to false for all schools
+       * // TODO there is currently no enpoint for this in the API. Refactor after API is updated
        */
       $scope.deactivateAllSchools = function() {
         var apiPromise = yadaApi.schools.put(null, {
@@ -54,30 +57,30 @@ define(['app'], function (app) {
        * Updates the active/inactive status of a school
        *
        * @param {number}   id         The school ID to update.
-       * @param {boolean}  is_active  The active status.
+       * @param {boolean}  isActive  The active status.
        */
-      $scope.updateActive = function (id, is_active) {
-        yadaApi.schools.put(id, {
-          is_active: is_active
-        }, userService.getCurrentUserId());
+      $scope.updateActive = function (id, isActive) {
+        yadaApi.put('schools', id, {
+          isActive: isActive.toString()
+        });
       };
 
       /**
-       * Ends the onboarding process and drops a cookie.
+       * Ends the onboarding process and updates localStorage.
        * TODO Move this logic to another controller.
        */
       $scope.endOnboarding = function () {
         $scope.isOnboarding = false;
         $scope.currentStep = 0;
-        $cookies.put('yg-ob-complete', true);
-        $cookies.put('yg-sms-set', true);
+        localStorage.set('ob_complete', true);
+        localStorage.set('sms_set', true);
       };
 
       $scope.schools = [];
       $scope.$parent.showAdd = true;
       $scope.$parent.showPrint = false;
 
-      if (!$cookies.get('yg-ob-complete')) {
+      if (localStorage.get('ob_complete')) {
         $scope.isOnboarding = true;
       } else {
         $scope.getSchools();

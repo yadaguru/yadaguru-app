@@ -9,7 +9,7 @@ define(['app'], function (app) {
       // TODO refactor this with the correct data that needs to be passed to the login route
       $scope.submitPhone = function() {
         yadaApi.login({
-          phone_number: $scope.phoneNumber
+          phoneNumber: $scope.phoneNumber
         }).then(function() {
           var modalMessage = modalService.makeModalMessage(
               'Check your device, we are sending you a code to confirm it\'s you.'
@@ -27,7 +27,7 @@ define(['app'], function (app) {
 
       $scope.submitCode = function() {
         var apiPromise = yadaApi.login({
-          confirm_code: $scope.confirmCode
+          confirmCode: $scope.confirmCode
         });
         apiPromise.then(function() {
           $state.go('school');

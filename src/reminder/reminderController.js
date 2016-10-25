@@ -13,24 +13,25 @@ define(['app'], function (app) {
        */
       $scope.getReminders = function(schoolId) {
         if (schoolId) {
-          apiService.reminders.getForSchool(userService.getCurrentUserId(), schoolId).then($scope.processReminders);
+          apiService.getAllForResource('reminders', 'school', schoolId).then($scope.processReminders);
         } else {
-          apiService.reminders.get(userService.getCurrentUserId()).then($scope.processReminders);
+          apiService.getAll('reminders').then($scope.processReminders);
         }
       };
 
       $scope.processReminders = function(resp) {
 
-        // check if we are getting reminders for just one school.
-        if (typeof resp.data[0].school !== 'undefined') {
-          $scope.school = resp.data[0].school;
-          $scope.date = $moment.utc(resp.data[0].due_date).format('M/D/YYYY');
-          $scope.reminderGroups = resp.data[0].grouped_reminders;
+        // Reminders for an individual school
+        if (typeof resp.data.schoolName !== 'undefined') {
+          $scope.school = resp.data.schoolName;
+          $scope.reminderGroups = resp.data.reminders;
         } else {
-          $scope.reminderGroups = resp.data;
+          $scope.school = false;
+          $scope.reminderGroups= resp.data;
         }
 
         $scope.reminderGroups.forEach(function (el, i) {
+          el.dueDate = getTimeframeHeading(el.dueDate);
           if (i > 0) {
             el.isCollapsed = true;
           }
@@ -40,6 +41,27 @@ define(['app'], function (app) {
       $scope.$parent.saveAsPdf = function() {
         console.log($scope.reminderGroups);
         pdfService.saveAsPdf($scope.reminderGroups);
+      };
+
+      function getTimeframeHeading(dateString) {
+        var dueDate = $moment.utc(dateString);
+        return dueDate.calendar($moment(), {
+          sameDay: '[By Today]',
+          nextDay: '[By Tomorrow]',
+          nextWeek: '[By] dddd',
+          sameElse: '[By] M/D/YYYY',
+          lastDay: '[ASAP]'
+        });
+      }
+
+      $scope.isInPast = function(dueDate) {
+        console.log($moment.utc(dueDate).format(), $moment().format());
+        return $moment.utc(dueDate).isBefore($moment(), 'day');
+      };
+
+      $scope.test = function() {
+        console.log('test');
+        return true;
       };
 
       var schoolId = $stateParams.schoolId || false;

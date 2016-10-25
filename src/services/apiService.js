@@ -2,18 +2,91 @@ define(['app'], function(app) {
 
   'use strict';
 
-  var apiService = function($http, constants, $q) {
+  var apiService = function($http, constants, $q, authService) {
 
     var yadaAPI = {};
+
 
     yadaAPI.reminders = {};
     var apiRoute = constants.HOSTNAME + constants.API_ROUTE;
     var apiRouteTerminator = constants.API_ROUTE_TERMINATOR;
 
+    var authHeaderConfig = {
+      headers: {
+        Authorization: function() {
+          return authService.getUserToken();
+        }
+      }
+    };
+
+    function _sendPrivateRequest(verb, route, data) {
+      var config = {
+      };
+
+      if (['post', 'put'].indexOf(verb) > -1) {
+        return $http[verb](route, data, config)
+      }
+      return $http[verb](route, config);
+    }
+
     yadaAPI.login = function(data) {
       //TODO make login functional - this just returns and empty promise :-(
       return $q.resolve({});
       //return $http.post(apiRoute + 'users/login/', data);
+    };
+
+    yadaAPI.getAll = function(resource, isAuthRoute) {
+      var route = apiRoute + resource + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.get(route, config);
+    };
+
+    yadaAPI.getAllForResource = function(primaryResource, secondaryResource, secondaryResourceId, isAuthRoute) {
+      var route = apiRoute + primaryResource + '/' + secondaryResource + '/' + secondaryResourceId + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.get(route, config);
+    };
+
+    yadaAPI.getOne = function(resource, resourceId, isAuthRoute) {
+      var route = apiRoute + resource + '/' + resourceId + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.get(route, config);
+    };
+
+    yadaAPI.post = function(resource, data, isAuthRoute) {
+      var route = apiRoute + resource + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.post(route, data, config);
+    };
+
+    yadaAPI.put = function(resource, resourceId, data, isAuthRoute) {
+      var route = apiRoute + resource + '/' + resourceId + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.put(route, data, config);
+    };
+
+    yadaAPI.delete = function(resource, resourceId, isAuthRoute) {
+      var route = apiRoute + resource + '/' + resourceId + '/';
+
+      isAuthRoute = typeof isAuthRoute === 'undefined' ? true : isAuthRoute;
+      var config = isAuthRoute ? authHeaderConfig : undefined;
+
+      return $http.delete(route, config);
     };
 
     yadaAPI.logout = function(data) {
@@ -69,22 +142,22 @@ define(['app'], function(app) {
     yadaAPI.schools = {};
 
     yadaAPI.schools.get = function(user_id) {
-      return $http.get(apiRoute + 'users/' + user_id + '/schools/');
+      return $http.get(apiRoute + 'schools/');
     };
 
     yadaAPI.schools.post = function(data, user_id) {
-      return $http.post(apiRoute + 'users/' + user_id + '/schools/', data);
+      return _sendPrivateRequest('post', 'schools/', data);
     };
 
     yadaAPI.schools.put = function(id, data, user_id) {
       if (!id) {
-        return $http.put(apiRoute + 'users/' + user_id + '/schools/', data);
+        return $http.put(apiRoute + 'schools/', data);
       }
-      return $http.put(apiRoute + 'users/' + user_id + '/schools/' + id + '/', data);
+      return $http.put(apiRoute + 'schools/' + id + '/', data);
     };
 
     yadaAPI.schools.delete = function(id, user_id) {
-      return $http.delete(apiRoute + 'users/' + user_id + '/schools/' + id + '/');
+      return $http.delete(apiRoute + 'schools/' + id + '/');
     };
 
     yadaAPI.categories = {};
@@ -162,6 +235,6 @@ define(['app'], function(app) {
     return yadaAPI;
   };
 
-  app.factory('yg.services.api', ['$http', 'constants', '$q', apiService]);
+  app.factory('yg.services.api', ['$http', 'constants', '$q', 'yg.services.auth', apiService]);
 
 });

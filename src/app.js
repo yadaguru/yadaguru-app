@@ -5,13 +5,13 @@ define(['app'], function() {
   var app = angular.module('yadaguru', ['ngResource', 'ngRoute', 'ngTouch', 'ngSanitize', 'ngAnimate',
     'ui.router', 'ui.bootstrap', 'ui.bootstrap.collapse', 'fileSaver', 'routeResolverServices', 'toastr', 'config',
     'frapontillo.bootstrap-switch', 'angular-momentjs', 'angular-tour', 'ui.bootstrap.modal',
-    'ngCookies', 'ngStorage', 'ui.mask']);
+    'ngCookies', 'ngStorage', 'ui.mask', 'LocalStorageModule']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
       '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',
-      '$urlRouterProvider', '$stateProvider', function($routeProvider, $locationProvider,
+      '$urlRouterProvider', '$stateProvider', 'localStorageServiceProvider', function($routeProvider, $locationProvider,
         routeResolverProvider, $controllerProvider, $filterProvider, $provide,
-        $compileProvider, $urlRouterProvider, $stateProvider) {
+        $compileProvider, $urlRouterProvider, $stateProvider, localStorage) {
 
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.when('/', 'school');
@@ -59,6 +59,8 @@ define(['app'], function() {
           .state('admin.test-messages', route.resolve('/test-messages', 'TestMessages', 'admin/test-messages/', 'vm', 'admin'))
           .state('admin.faqs', route.resolve('/faqs', 'Faqs', 'admin/faqs/', 'vm', 'admin'))
           .state('admin.settings', route.resolve('/settings', 'Settings', 'admin/settings/', 'vm', 'admin'));
+
+        localStorage.setPrefix('yg.');
     }]);
 
     app.run(['$rootScope', '$state', 'yg.services.identity', 'yg.services.notifier',
