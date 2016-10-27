@@ -11,6 +11,10 @@ define(['app'], function(app) {
       return localStorage.get('access_token');
     };
 
+    authFactory.isAuthorized = function() {
+      return Boolean(localStorage.get('access_token'));
+    };
+
     return authFactory;
   };
 

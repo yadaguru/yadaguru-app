@@ -71,8 +71,9 @@ define(['app'], function (app) {
             })
               .then(function(resp) {
                 $scope.endOnboarding();
-                $scope.parent.showHints = true;
-                $scope.parent.processSchools(resp);
+                $scope.$parent.getSchools().then(function() {
+                  $scope.parent.showHints = true;
+                });
               })
               .catch(errorService.handleHttpError);
           };

@@ -13,7 +13,7 @@ define(['app'], function (app) {
        * Gets all schools and adds them to the $scope.schools.
        */
       $scope.getSchools = function () {
-        yadaApi.getAll('schools')
+        return yadaApi.getAll('schools')
           .then($scope.processSchools)
           .catch(errorService.handleHttpError)
       };
@@ -80,7 +80,7 @@ define(['app'], function (app) {
       $scope.$parent.showAdd = true;
       $scope.$parent.showPrint = false;
 
-      if (localStorage.get('ob_complete')) {
+      if (!localStorage.get('ob_complete')) {
         $scope.isOnboarding = true;
       } else {
         $scope.getSchools();

@@ -63,31 +63,36 @@ define(['app'], function() {
         localStorage.setPrefix('yg.');
     }]);
 
-    app.run(['$rootScope', '$state', 'yg.services.identity', 'yg.services.notifier',
-      function($rootScope, $state, identityService, notifierService) {
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-          if (toState.data && toState.data.access) {
-            identityService.getCurrentUser().then(function() {
-              if (!identityService.isAuthorized(toState.data.access)) {
-                if (identityService.currentUser) {
-                  $state.go(fromState);
-                  notifierService.error('Not authorized to access route');
-                } else {
-                  $state.go('login');
-                }
-              }
-            });
+    app.run(['$rootScope', '$state', 'yg.services.auth', 'localStorageService',
+      function($rootScope, $state, authService, localStorage) {
+        $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+          // if on login, don't redirect, unless onboarding hasn't been completed
+          if (toState.name === 'login') {
+            if (!authService.isAuthorized() && !localStorage.get('ob_complete')) {
+              $state.go('school');
+            }
+            return;
           }
-        });
-        $rootScope.$on('$stateChangeError', function(evt, current, previous, rejection) {
-          console.log(evt);
-          if(rejection === 'unauthorized') {
+
+          // if in the process of onboarding and not on schoo, switch to school
+          if (!authService.isAuthorized() && $rootScope.isOnboarding) {
+            if (toState.name !== 'school') {
+              $state.go('school');
+            }
+            return;
+          }
+
+          // if not authorized and onboarding isn't completed, redirect to school and begin onboarding
+          if (!authService.isAuthorized() && !localStorage.get('ob_complete')) {
+            $state.go('school');
+          }
+
+          // if not authorized and onboarding completed, redirect to login
+          if (!authService.isAuthorized && localStorage.get('ob_complete')) {
             $state.go('login');
-            notifierService.error('Not authorized to access route');
           }
         });
     }]);
-
 
   return app;
 });
