@@ -5,15 +5,15 @@ define(['app'], function (app) {
   /**
    * Controller for the sponsor-update user subview
    */
-  app.register.controller('SponsorUpdateController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api',
-    function ($scope, $cookies, $state, $modal, yadaApi) {
+  app.register.controller('SponsorUpdateController', ['$scope', '$cookies', '$state', '$modal', 'yg.services.api', 'yg.services.error',
+    function ($scope, $cookies, $state, $modal, yadaApi, errorService) {
 
       /**
        * Updates user sponsor code.
        */
       $scope.updateSponsorCode = function () {
-        yadaApi.users.put($scope.userId, {
-          sponsor_code: $scope.sponsorCode
+        yadaApi.put('users', $scope.userId, {
+          sponsorCode: $scope.sponsorCode
         }).then(function() {
           $scope.sponsorCode = '';
           var modalInstance = $modal.open({
@@ -23,7 +23,7 @@ define(['app'], function (app) {
           modalInstance.result.then(function() {
             $state.go('user');
           })
-        });
+        }).catch(errorService.handleHttpError);
       };
 
     }]);

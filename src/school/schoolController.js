@@ -6,8 +6,8 @@ define(['app'], function (app) {
    * Controller for the school view.
    */
   app.register.controller('SchoolController', ['$scope', '$rootScope', '$moment', 'yg.services.api',
-    'yg.services.modal', 'yg.services.user', '$state', 'yg.services.error', 'localStorageService',
-    function ($scope, $rootScope, $moment, yadaApi, modalService, userService, $state, errorService, localStorage) {
+    'yg.services.modal', '$state', 'yg.services.error', 'localStorageService',
+    function ($scope, $rootScope, $moment, yadaApi, modalService, $state, errorService, localStorage) {
 
       /**
        * Gets all schools and adds them to the $scope.schools.

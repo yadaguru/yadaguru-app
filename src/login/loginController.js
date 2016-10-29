@@ -3,14 +3,18 @@ define(['app'], function (app) {
   /**
    * Controller for login view
    */
-  app.register.controller('LoginController', ['$scope', 'yg.services.api', '$state', 'yg.services.modal',
-    function($scope, yadaApi, $state, modalService) {
+  app.register.controller('LoginController', ['$scope', 'yg.services.api', '$state', 'yg.services.modal', 'yg.services.error', 'localStorageService', 'yg.services.auth',
+    function($scope, yadaApi, $state, modalService, errorService, localStorage, authService) {
 
-      // TODO refactor this with the correct data that needs to be passed to the login route
       $scope.submitPhone = function() {
-        yadaApi.login({
+        yadaApi.post('users', {
           phoneNumber: $scope.phoneNumber
-        }).then(function() {
+        }).then(function(resp) {
+          $scope.userId = resp.data.userId;
+          localStorage.set('uid', $scope.userId);
+          if (resp.data.hasOwnProperty('confirmCode')) {
+            console.log('#### CONFIRM CODE: ' + resp.data.confirmCode +' ####'); // for dev environments
+          }
           var modalMessage = modalService.makeModalMessage(
               'Check your device, we are sending you a code to confirm it\'s you.'
           );
@@ -22,16 +26,17 @@ define(['app'], function (app) {
           modalPromise.then(function() {
             $scope.loginStep++;
           });
-        })
+        }).catch(errorService.handleHttpError);
       };
 
       $scope.submitCode = function() {
-        var apiPromise = yadaApi.login({
+        var apiPromise = yadaApi.put('users', $scope.userId, {
           confirmCode: $scope.confirmCode
         });
-        apiPromise.then(function() {
+        apiPromise.then(function(resp) {
+          authService.saveUserToken(resp.data.token);
           $state.go('school');
-        })
+        }).catch(errorService.handleHttpError);
       };
 
       $scope.loginStep = 1;

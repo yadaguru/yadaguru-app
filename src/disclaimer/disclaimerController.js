@@ -9,7 +9,7 @@ define(['app'], function (app) {
     function ($scope, yadaApi) {
       $scope.content = 'Loading';
 
-      yadaApi.contentItems.get('disclaimer').then(function(resp) {
+      yadaApi.getOne('content_items', 'disclaimer').then(function(resp) {
         $scope.content = resp.data[0].content;
       }, function() {
         $scope.content = 'Error loading disclaimer.';

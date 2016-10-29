@@ -50,27 +50,14 @@ define(['app'], function() {
           .state('disclaimer', route.resolve('/disclaimer', 'Disclaimer', 'disclaimer/', 'vm'))
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
 
-          // Old routes from version 1
-          .state('home', route.resolve('/home', 'Home', 'home/', 'vm'))
-          .state('admin', route.resolve('/admin', 'Admin', 'admin/', 'vm', 'admin'))
-          .state('admin.reminders', route.resolve('/reminders', 'Reminders', 'admin/reminders/', 'vm', 'admin'))
-          .state('admin.categories', route.resolve('/categories', 'Categories', 'admin/categories/', 'vm', 'admin'))
-          .state('admin.test-dates', route.resolve('/test-dates', 'TestDates', 'admin/test-dates/', 'vm', 'admin'))
-          .state('admin.test-messages', route.resolve('/test-messages', 'TestMessages', 'admin/test-messages/', 'vm', 'admin'))
-          .state('admin.faqs', route.resolve('/faqs', 'Faqs', 'admin/faqs/', 'vm', 'admin'))
-          .state('admin.settings', route.resolve('/settings', 'Settings', 'admin/settings/', 'vm', 'admin'));
-
         localStorage.setPrefix('yg.');
     }]);
 
     app.run(['$rootScope', '$state', 'yg.services.auth', 'localStorageService',
       function($rootScope, $state, authService, localStorage) {
         $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-          // if on login, don't redirect, unless onboarding hasn't been completed
+          // if on login, don't redirect
           if (toState.name === 'login') {
-            if (!authService.isAuthorized() && !localStorage.get('ob_complete')) {
-              $state.go('school');
-            }
             return;
           }
 
@@ -91,6 +78,10 @@ define(['app'], function() {
           if (!authService.isAuthorized && localStorage.get('ob_complete')) {
             $state.go('login');
           }
+
+          // Save a reference to the current state name in the rootscope
+          $rootScope.currentState = $state.current.name;
+
         });
     }]);
 

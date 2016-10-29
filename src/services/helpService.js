@@ -7,7 +7,7 @@ define(['app'], function(app) {
 
       helpFactory.getHelpMessage = function(messageName) {
 
-        var contentItemResult = yadaApi.contentItems.get(messageName);
+        var contentItemResult = yadaApi.getOne('content_items', messageName, false);
         modalService.showModal(contentItemResult, {button: 'Got It', modalClass: 'help-modal'});
       };
 

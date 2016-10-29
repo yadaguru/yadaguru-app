@@ -7,9 +7,9 @@ define(['app'], function (app) {
       restrict: 'E',
       templateUrl: 'dist/directives/onboarding.html',
       controller: [
-        '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.user', 'yg.services.modal', 'yg.services.auth',
-        'yg.services.error',
-        function ($scope, $moment, helpService, yadaApi, userService, modalService, authService, errorService) {
+        '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.modal', 'localStorageService',
+        'yg.services.error', 'yg.services.auth',
+        function ($scope, $moment, helpService, yadaApi, modalService, localStorage, errorService, authService) {
 
           var progressStep = 14;
 
@@ -36,12 +36,16 @@ define(['app'], function (app) {
           };
 
           $scope.submitMobile = function() {
-            var apiPromise = yadaApi.users.post({phoneNumber: $scope.phoneNumber});
+            var apiPromise = yadaApi.post('users', {phoneNumber: $scope.phoneNumber});
             var modalMessage = modalService.makeModalMessage(
                 'Check your device, we are sending you a code to get you setup.'
             );
             apiPromise.then(function(resp) {
-              userService.setCurrentUserId(resp.data.userId);
+              localStorage.set('uid', resp.data.userId);
+              $scope.userId = resp.data.userId;
+              if (resp.data.hasOwnProperty('confirmCode')) {
+                console.log('#### CONFIRM CODE: ' + resp.data.confirmCode +' ####'); // for dev environments
+              }
               var modalPromise = modalService.showModal(modalMessage, {
                 button: 'I GOT IT',
                 cancel: 'Resend It',
@@ -50,17 +54,17 @@ define(['app'], function (app) {
               modalPromise.then(function() {
                 $scope.advanceOb(true);
               })
-            });
+            }).catch(errorService.handleHttpError);
           };
 
           $scope.submitCode = function() {
-            var apiPromise = yadaApi.users.put(userService.getCurrentUserId(), {
+            var apiPromise = yadaApi.put('users', $scope.userId, {
               confirmCode: $scope.confirmCode
             });
             apiPromise.then(function(resp) {
               authService.saveUserToken(resp.data.token);
               $scope.advanceOb(true);
-            })
+            }).catch(errorService.handleHttpError);
           };
 
           $scope.submitSchool = function () {
@@ -72,8 +76,8 @@ define(['app'], function (app) {
               .then(function(resp) {
                 $scope.endOnboarding();
                 $scope.$parent.getSchools().then(function() {
-                  $scope.parent.showHints = true;
-                });
+                  $scope.showHints = true;
+                }).catch(errorService.handleHttpError);
               })
               .catch(errorService.handleHttpError);
           };

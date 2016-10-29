@@ -5,17 +5,19 @@ define(['app'], function (app) {
   /**
    * Controller for the reminder view.
    */
-  app.register.controller('ReminderController', ['$scope', 'yg.services.user', 'yg.services.api', '$stateParams', '$moment', 'yg.services.pdf',
-    function ($scope, userService, apiService, $stateParams, $moment, pdfService) {
+  app.register.controller('ReminderController', ['$scope', 'yg.services.error', 'yg.services.api', '$stateParams', '$moment', 'yg.services.pdf',
+    function ($scope, errorService, apiService, $stateParams, $moment, pdfService) {
 
       /**
        * Gets all reminders then adds them to $scope.reminderGroups.
        */
       $scope.getReminders = function(schoolId) {
         if (schoolId) {
-          apiService.getAllForResource('reminders', 'school', schoolId).then($scope.processReminders);
+          apiService.getAllForResource('reminders', 'school', schoolId).then($scope.processReminders)
+            .catch(errorService.handleHttpError);
         } else {
-          apiService.getAll('reminders').then($scope.processReminders);
+          apiService.getAll('reminders').then($scope.processReminders)
+            .catch(errorService.handleHttpError);
         }
       };
 
@@ -57,11 +59,6 @@ define(['app'], function (app) {
       $scope.isInPast = function(dueDate) {
         console.log($moment.utc(dueDate).format(), $moment().format());
         return $moment.utc(dueDate).isBefore($moment(), 'day');
-      };
-
-      $scope.test = function() {
-        console.log('test');
-        return true;
       };
 
       var schoolId = $stateParams.schoolId || false;

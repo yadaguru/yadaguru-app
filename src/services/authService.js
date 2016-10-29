@@ -15,6 +15,10 @@ define(['app'], function(app) {
       return Boolean(localStorage.get('access_token'));
     };
 
+    authFactory.removeUserToken = function() {
+      localStorage.remove('access_token');
+    };
+
     return authFactory;
   };
 
