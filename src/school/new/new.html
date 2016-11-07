@@ -30,6 +30,10 @@
               ng-disabled="newSchoolForm.$invalid"
               ng-click="submitSchool()">OK NEXT
       </button>
+      <button type="cancel"
+              class="btn btn-primary btn-cancel"
+              onclick="window.history.go(-1); return false;">CANCEL
+      </button>
     </form>
     <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>
     <p class="info-text" ng-click="faqModal('faq-app-find')" role="button">Where do I find it?</p>
