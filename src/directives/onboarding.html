@@ -79,7 +79,7 @@
     </div>
 
     <div ng-if="obStep === 6" class="ob6 col-xs-12">
-      <p>Cool. Now, what is the Regular Admissions application submission date of tha school? </p>
+      <p>Cool. Now, what is the Regular Admissions application submission date of that school? </p>
       <div class="form-group">
         <label class="sr-only" for="school-name">Submission Date</label>
         <div class="input-group">
@@ -105,8 +105,18 @@
       <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
       <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
     </div>
-    <button type="button" class="btn btn-primary btn-onboarding-desktop" ng-click="advanceOb()">Next</button>
-    <button type="button" class="btn btn-primary btn-onboarding-desktop" ng-click="rewindOb()">Back</button>
+  </div>
+  <div class="row ob-nav">
+      <button
+      type="button"
+      class="btn btn-primary btn-onboarding-desktop"
+      ng-click="advanceOb()"
+      ng-if="obStep <= 2">Next</button>
+      <button
+      type="button"
+      class="btn btn-primary btn-onboarding-desktop"
+      ng-click="rewindOb(1)"
+      ng-if="obStep !== 1 && obStep !== 5">Back</button>
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">
