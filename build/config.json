@@ -22,6 +22,13 @@
       "API_ROUTE_TERMINATOR" : "/"
     }
   },
+  "qa": {
+    "constants" : {
+      "HOSTNAME" : "http://qa-api.yadaguru.com",
+      "API_ROUTE" : "/api/",
+      "API_ROUTE_TERMINATOR" : "/"
+    }
+  },
   "production": {
     "constants" : {
       "HOSTNAME" : "http://yadaguru.com",
