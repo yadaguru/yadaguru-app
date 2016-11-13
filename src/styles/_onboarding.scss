@@ -63,6 +63,18 @@
     text-align: left;
     display: block;
   }
+
+  .btn-onboarding-desktop {
+      display: none;
+
+      @media (min-width: 600px) {
+        display: inline-block;
+      }
+
+      &+.btn-onboarding-desktop {
+          margin-left: 1em;
+      }
+  }
 }
 
 .ob3, .ob4 {
