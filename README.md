@@ -10,25 +10,24 @@
 Visit our [CodeForPhilly project info page](https://codeforphilly.org/projects/college_application_app_for_philly_schools).
 
 ##Local Development Installation
- * Be sure you have installed `node` and `npm`
- * Be sure you have gulp installed globally `npm install -g gulp` 
- * Be Sure you have bower installed globally `npm install -g bower`
- * `cd` into the project root folder (if you are not already there)
- * Run `npm install` to install the front-end dependencies
- * Run `bower install` to install client-side libraries.
- 
-##Accessing the API Server
- * The API Server is located in a separate repo [here](https://github.com/yadaguru/yadaguru-api/). Clone this repo and follow the README there to set up the server.
- * Once the server is setup, run `npm start` to start the server. The server can be accessed at `http://localhost:3005`
- * See the [API Documentation](https://github.com/yadaguru/yadaguru-api/wiki/API-Documentation) for information on communicating with the API.
-
-##Serving Locally
-Run `gulp watch` to serve the front end of the project with browsersync on `localhost:9000`. While gulp is running the browser and server will be reloaded on every file change related to their domain.
+Please see [Yadaguru Dev Environment Setup](https://github.com/yadaguru/yadaguru-app/wiki/Yadaguru-Dev-Environment-Setup)
+for step by step instructions on getting the entire Yadaguru stack up-and-running on your machine.
 
 ##Gulp Commands
  * `gulp clean` to clear the dist directory.
  * `gulp build` to build all styles, scripts and HTML files.
  * `gulp watch` to watch for changes and enable BrowserSync.
+
+## Logging In
+To log into Yadaguru, create an account (locally) by entering your phone number. The confirmation code
+is logged to the console in development environments.
+
+##Resetting local data.
+Yadaguru stores some flags indicating that you have logged in, completed onboarding, etc. in local storage.
+You may want to reset these values and "start over" during the course of development. This can be done in the
+UI (click the speech bubble, then 'Forget my mobile phone number'). You can also drop into dev tools, and
+manually clear all of the `yg`-prefixed values. This option has the advantage of not deleting your data
+from the database.
  
 ##Contributing
 
