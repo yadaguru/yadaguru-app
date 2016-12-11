@@ -110,13 +110,13 @@
       <button
       type="button"
       class="btn btn-primary btn-onboarding-desktop"
-      ng-click="advanceOb()"
-      ng-if="obStep <= 2">Next</button>
+      ng-click="rewindOb(1)"
+      ng-if="obStep !== 1 && obStep !== 5">Back</button>
       <button
       type="button"
       class="btn btn-primary btn-onboarding-desktop"
-      ng-click="rewindOb(1)"
-      ng-if="obStep !== 1 && obStep !== 5">Back</button>
+      ng-click="advanceOb()"
+      ng-if="obStep <= 2">Next</button>
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">
