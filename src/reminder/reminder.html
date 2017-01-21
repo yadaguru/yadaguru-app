@@ -3,8 +3,8 @@
     <nav-links></nav-links>
     <div class="row">
       <div class="col-xs-12">
-        <div class="school-header">
-          <a ui-sref="school"><h1 class="school-name">{{ school || "All Schools" }}</h1></a>
+        <div class="reminder-list-header">
+          <a ui-sref="school"><h1 class="reminder-list-title">{{ school || "All Schools" }}</h1></a>
           <p class="school-date">{{ date || "" }}</p>
         </div>
         <div ng-repeat="timeframe in reminderGroups" class="date-group">

@@ -43,6 +43,7 @@ define(['app'], function() {
           .state('school', route.resolve('/school', 'School', 'school/', 'vm'))
           .state('school.new', route.resolve('/new', 'New', 'school/new/', 'vm'))
           .state('reminder', route.resolve('/reminder/:schoolId', 'Reminder', 'reminder/', 'vm'))
+          .state('reminder-single', route.resolve('/d/:datecode', 'ReminderSingle', 'reminder-single/', 'vm'))
           .state('user', route.resolve('/user', 'User', 'user/', 'vm'))
           .state('user.sponsor-update', route.resolve('/sponsor-update', 'SponsorUpdate', 'user/sponsor-update/', 'vm'))
           .state('privacy', route.resolve('/privacy', 'Privacy', 'privacy/', 'vm'))
