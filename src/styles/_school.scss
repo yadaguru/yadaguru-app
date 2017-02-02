@@ -46,6 +46,12 @@ main.school-view {
       background-image: linear-gradient(to bottom, $active-blue, $active-blue-dark);
     }
 
+    i.fa.school-trash {
+      font-size: 1.5em;
+      margin-top: 15px;
+      color: $bg-gray;
+    }
+
   }
 
 }

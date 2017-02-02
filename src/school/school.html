@@ -4,14 +4,17 @@
     <nav-links></nav-links>
     <div ng-repeat="school in schools">
       <div class="row panel school" ng-class="{active: school.isActive, first: $first}">
-        <div class="col-xs-7">
+        <div class="col-xs-6">
           <h2 ng-click="viewReminders(school.id)">{{ school.name }}</h2>
           <h3 ng-click="viewReminders(school.id)">{{ school.dueDate }}</h3>
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-4">
           <div class="switch-container" >
             <input bs-switch type="checkbox" ng-model="school.isActive" ng-change="updateActive(school.id, school.isActive)">
           </div>
+        </div>
+        <div class="col-xs-2">
+          <i class="fa fa-trash school-trash" ng-click="deleteSchool(school.id)"></i>
         </div>
       </div>
     </div>

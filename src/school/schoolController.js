@@ -24,14 +24,14 @@ define(['app'], function (app) {
        * @param  {object}  resp  The response object.
        */
       $scope.processSchools = function(resp) {
-        resp.data.forEach(function (school) {
-          $scope.schools.push({
+        $scope.schools = resp.data.map(function(school) {
+          return {
             id: school.id,
             name: school.name,
             dueDate: $moment.utc(school.dueDate).format('M/D/YYYY'),
             isActive: school.isActive
-          });
-        })
+          }
+        });
       };
 
       /**
@@ -64,6 +64,28 @@ define(['app'], function (app) {
           isActive: isActive.toString()
         });
       };
+
+      /**
+       * Deletes a school.
+       * 
+       * @param {number} id - The school ID to delete
+       */
+      $scope.deleteSchool = function(id) {
+        console.log('delete school id', id);
+        var deleteModal = modalService.makeModalMessage(
+          'Are you sure you want to trash this school?'
+        );
+        modalService.showModal(deleteModal, {
+          button: 'Yes',
+          cancel: 'No'
+        })
+         .then(function() {
+           yadaApi.delete('schools', id);
+         })
+         .then(function() {
+           $scope.getSchools();
+         });
+      }
 
       /**
        * Ends the onboarding process and updates localStorage.
