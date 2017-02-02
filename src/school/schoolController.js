@@ -46,7 +46,8 @@ define(['app'], function (app) {
         apiPromise.then(function(resp) {
           $scope.schools = [];
           $scope.processSchools(resp);
-        });
+        })
+          .catch(errorService.handleHttpError)
       };
 
       $scope.viewReminders = function(id) {
@@ -62,7 +63,8 @@ define(['app'], function (app) {
       $scope.updateActive = function (id, isActive) {
         yadaApi.put('schools', id, {
           isActive: isActive.toString()
-        });
+        })
+          .catch(errorService.handleHttpError)
       };
 
       /**
@@ -78,12 +80,13 @@ define(['app'], function (app) {
           button: 'Yes',
           cancel: 'No'
         })
-         .then(function() {
-           yadaApi.delete('schools', id);
-         })
-         .then(function() {
-           $scope.getSchools();
-         });
+          .then(function() {
+            yadaApi.delete('schools', id);
+          })
+          .then(function() {
+            $scope.getSchools();
+          })
+          .catch(errorService.handleHttpError);
       }
 
       /**
