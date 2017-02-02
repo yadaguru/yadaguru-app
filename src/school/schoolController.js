@@ -71,7 +71,6 @@ define(['app'], function (app) {
        * @param {number} id - The school ID to delete
        */
       $scope.deleteSchool = function(id) {
-        console.log('delete school id', id);
         var deleteModal = modalService.makeModalMessage(
           'Are you sure you want to trash this school?'
         );
