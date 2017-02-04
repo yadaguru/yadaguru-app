@@ -11,15 +11,18 @@ define(['app'], function(app) {
       /**
        * Shows a modal, with specified content and options.
        *
-       * @param   {promise}   content             A promise that contains the content, ideally the result of an $http request. To create custom content, use modalFactory.makeModalMessage.
-       * @param   {object}    options             An options object (see keys below)
-       * @param   {string}    options.button      The OK button text (default: 'ok')
-       * @param   {string}    options.cancel      The cancel button text (default: no cancel button)
-       * @param   {string}    options.template    The template used to display the modal (default: 'dist/services/generalModal.html')
-       * @param   {function}  options.controller  The controller to use (see source for default controller).
-       * @param   {array}     options.deps        The controller's dependencies (default, '$scope', '$modalInstance', contentItem).
-       *
-       * @returns {promise}   The promise object at $modalInstance.result;
+       * @param {promise} content - A promise that contains the content, ideally the result of an $http request. To create custom content, use modalFactory.makeModalMessage.
+       * @param {object} options - An options object (see keys below)
+       * @param {string} options.button - The OK button text (default: 'ok')
+       * @param {function} options.buttonCallback - Callback to run when clicking 'ok'. Passed the
+       *   $modalInstance.
+       * @param {string} options.cancel - The cancel button text (default: no cancel button)
+       * @param {function} options.cancelCallback - Callback to run when clicking 'cancel'. Pass the
+       *   #modalInstance.
+       * @param {string} options.template - The template used to display the modal (default: 'dist/services/generalModal.html')
+       * @param {function} options.controller - The controller to use (see source for default controller).
+       * @param {array} options.deps - The controller's dependencies (default, '$scope', '$modalInstance', contentItem).
+       * @returns {promise} - The promise object at $modalInstance.result;
        */
       modalFactory.showModal = function(content, options) {
 
@@ -30,12 +33,20 @@ define(['app'], function(app) {
           $scope.buttonText = button;
 
           $scope.ok = function() {
-            $modalInstance.close();
+            if (typeof options.buttonCallback === 'function') {
+              return options.buttonCallback($modalInstance);
+            }
+
+            return $modalInstance.close();
           };
 
           if (options.cancel) {
             $scope.cancel = function() {
-              $modalInstance.dismiss('cancel');
+              if (typeof options.cancelCallback === 'function') {
+                return options.cancelCallback($modalInstance);
+              }
+
+              return $modalInstance.dismiss('cancel');
             };
             $scope.cancelText = options.cancel;
           }

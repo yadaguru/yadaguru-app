@@ -8,7 +8,7 @@
           <input type="text"
                  class="form-control"
                  id="login-phone-number"
-                 ng-model="$parent.phoneNumber"
+                 ng-model="form.phoneNumber"
                  required
                  name="phoneNumber"
                  ui-mask-placeholder
@@ -36,7 +36,7 @@
                  placeholder="123456"
                  id="confirm-code"
                  name="confirmCode"
-                 ng-model="$parent.confirmCode"
+                 ng-model="form.confirmCode"
                  required>
         </div>
         <button type="submit"

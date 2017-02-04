@@ -18,8 +18,26 @@ define(['app'], function(app) {
           });
       }
 
+      function getConfirmCodeErrorHandler (okCallback, cancelCallback) {
+        return function handleConfirmCodeError(error) {
+          if (error.data.message === 'Login Failed: confirmCode is not valid or has expired') {
+            var modalMessage = modalService.makeModalMessage(
+              'Hmmm - looks like that\'s not the right code.'
+            );
+            return modalService.showModal(modalMessage, {
+              button: 'Let me try again',
+              buttonCallback: okCallback,
+              cancel: 'Resend it',
+              cancelCallback: cancelCallback
+            });
+          }
+          return handleHttpError(error);
+        }
+      }
+
       return {
-        handleHttpError: handleHttpError
+        handleHttpError: handleHttpError,
+        getConfirmCodeErrorHandler: getConfirmCodeErrorHandler
       }
     }]);
 
