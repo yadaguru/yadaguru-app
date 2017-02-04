@@ -61,10 +61,14 @@ define(['app'], function (app) {
             var apiPromise = yadaApi.put('users', $scope.userId, {
               confirmCode: $scope.confirmCode
             });
+            $scope.confirmCode = null;
             apiPromise.then(function(resp) {
               authService.saveUserToken(resp.data.token);
               $scope.advanceOb(true);
-            }).catch(errorService.handleHttpError);
+            }).catch(errorService.getConfirmCodeErrorHandler(
+              handleConfirmErrorButtonClick,
+              handleConfirmErrorCancelClick
+            ));
           };
 
           $scope.submitSchool = function () {
@@ -90,6 +94,15 @@ define(['app'], function (app) {
             helpService.getHelpMessage(question);
           };
 
+          function handleConfirmErrorButtonClick($modalInstance) {
+            $modalInstance.dismiss('cancel');
+          }
+
+          function handleConfirmErrorCancelClick($modalInstance) {
+            $modalInstance.dismiss('cancel');
+            $scope.obStep = 3;
+            $scope.submitMobile();
+          }
 
         }]
     };

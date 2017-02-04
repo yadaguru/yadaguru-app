@@ -6,9 +6,11 @@ define(['app'], function (app) {
   app.register.controller('LoginController', ['$scope', 'yg.services.api', '$state', 'yg.services.modal', 'yg.services.error', 'localStorageService', 'yg.services.auth',
     function($scope, yadaApi, $state, modalService, errorService, localStorage, authService) {
 
+      $scope.form = {};
+
       $scope.submitPhone = function() {
         yadaApi.post('users', {
-          phoneNumber: $scope.phoneNumber
+          phoneNumber: $scope.form.phoneNumber
         }).then(function(resp) {
           $scope.userId = resp.data.userId;
           localStorage.set('uid', $scope.userId);
@@ -31,15 +33,29 @@ define(['app'], function (app) {
 
       $scope.submitCode = function() {
         var apiPromise = yadaApi.put('users', $scope.userId, {
-          confirmCode: $scope.confirmCode
+          confirmCode: $scope.form.confirmCode
         });
+        $scope.form.confirmCode = null;
         apiPromise.then(function(resp) {
           authService.saveUserToken(resp.data.token);
           $state.go('school');
-        }).catch(errorService.handleHttpError);
+        }).catch(errorService.getConfirmCodeErrorHandler(
+          handleConfirmErrorButtonClick,
+          handleConfirmErrorCancelClick
+        ));
       };
 
       $scope.loginStep = 1;
+
+      function handleConfirmErrorButtonClick($modalInstance) {
+        $modalInstance.dismiss('cancel');
+      }
+
+      function handleConfirmErrorCancelClick($modalInstance) {
+        $modalInstance.dismiss('cancel');
+        $scope.loginStep = 1;
+        $scope.submitPhone();
+      }
 
   }]);
 
