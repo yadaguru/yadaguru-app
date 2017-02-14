@@ -81,7 +81,7 @@ define(['app'], function (app) {
           cancel: 'No'
         })
           .then(function() {
-            yadaApi.delete('schools', id);
+            return yadaApi.delete('schools', id);
           })
           .then(function() {
             $scope.getSchools();
