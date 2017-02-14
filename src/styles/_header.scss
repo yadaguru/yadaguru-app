@@ -28,4 +28,17 @@ header {
   .row {
     text-align: center;
   }
+
+  @media ($resizeL1) {
+    h1 {
+      $size: 26px;
+      font-size: $size;
+      line-height: $size + 10px;
+    }
+
+    // logo is too wide - force left so that logout near bottom has space to exist
+    .sponsor-logo {
+      margin-left: -15px;
+    }
+  }
 }
