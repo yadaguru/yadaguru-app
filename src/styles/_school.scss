@@ -1,4 +1,4 @@
-main.school-view {
+.school-view {
   color: $bg-gray;
 
   .school {
@@ -56,7 +56,7 @@ main.school-view {
 
 }
 
-main.school-new-view {
+.school-new-view {
 
   form {
     margin-left: 1em;
@@ -77,4 +77,19 @@ main.school-new-view {
     margin-bottom: 1em;
   }
 
+  @media ($resizeL1) {
+    .form-group {
+      margin-bottom: 0px;
+    }
+    label {
+      font-size: 1.5em;
+    }
+    .btn {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    .info-text {
+      font-size: 1.1em;
+    }
+  }
 }

@@ -34,10 +34,10 @@
     margin: 50px 0;
   }
 
-  @media (max-height: 600px) {
+  @media ($resizeL2) {
     padding-top: 1vh;
     p {
-      margin: 10px 0;
+      margin: 5px 0;
     }
   }
 
