@@ -35,12 +35,14 @@
 }
 
 .modal-content {
+  $modalSize: 32px;
+
   background-color: $onboarding-bg-blue;
   color: white;
   width: 80%;
   margin: 17vh auto;
   min-height: 35vh;
-  font-size: 32px;
+  font-size: $modalSize;
   font-family: $marvel;
   text-align: center;
 
@@ -75,7 +77,16 @@
     background-color: $bg-gray;
   }
 
-
+  @media ($resizeL2) {
+    p {
+      font-size: $modalSize - 5px;
+    }
+  }
+  @media ($resizeL1) {
+    p {
+      font-size: $modalSize - 10px;
+    }
+  }
 }
 
 .modal-body {
