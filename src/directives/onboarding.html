@@ -4,7 +4,9 @@
     <div ng-if="obStep === 1" class="ob1 col-xs-12">
       <p><i class="fa fa-flag"></i></p>
       <p>Hi, I'm YadaGuru and I'm here to get your college applications done.</p>
-      <a ui-sref="login" ng-click="endOnboarding()"><p class="skip-to-login">Already setup? Tap here to login.</p></a>
+      <button type="button" class="btn btn-primary login-btn"
+        ui-sref="login" ng-click="endOnboarding()">Login</button>
+      <p class="intro-divider">or</p>
     </div>
 
     <div ng-if="obStep === 2" class="ob2 col-xs-12">
@@ -116,7 +118,7 @@
       type="button"
       class="btn btn-primary btn-onboarding-desktop"
       ng-click="advanceOb()"
-      ng-if="obStep <= 2">Next</button>
+      ng-if="obStep <= 2">{{ obStep == 1 ? "Create an Account" : "Next" }}</button>
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">
