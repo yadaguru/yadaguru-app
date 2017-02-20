@@ -76,15 +76,11 @@
   }
 
   .btn-onboarding-desktop {
-      display: none;
+    display: inline-block;
 
-      @media (min-width: 600px) {
-        display: inline-block;
-      }
-
-      &+.btn-onboarding-desktop {
-          margin-left: 1em;
-      }
+    &+.btn-onboarding-desktop {
+      margin-left: 1em;
+    }
   }
 }
 
