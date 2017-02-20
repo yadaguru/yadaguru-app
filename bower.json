@@ -48,7 +48,7 @@
     "angular-mocks": "1.4.5"
   },
   "resolutions": {
-    "angular": "~1.4.6",
-    "jquery": ">= 1.9.1"
+    "angular": "1.4.3",
+    "jquery": "2.1.4"
   }
 }
