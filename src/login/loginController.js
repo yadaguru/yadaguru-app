@@ -45,6 +45,13 @@ define(['app'], function (app) {
         ));
       };
 
+      $scope.beginOnboarding = function() {
+        localStorage.remove('uid');
+        localStorage.remove('sms_set');
+        localStorage.remove('ob_complete');
+        $state.go('school');
+      }
+
       $scope.loginStep = 1;
 
       function handleConfirmErrorButtonClick($modalInstance) {

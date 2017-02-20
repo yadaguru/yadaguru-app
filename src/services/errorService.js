@@ -2,8 +2,14 @@ define(['app'], function(app) {
 
   app.factory('yg.services.error', [
     'yg.services.modal',
-    function(modalService) {
+    '$state',
+    function(modalService, $state) {
       function handleHttpError(error) {
+        if (error.status === 401) {
+          $state.go('login');
+          return;
+        }
+
         var modalMessage = modalService.makeModalMessage(
           'OUR BAD!<br>Something went wrong. Could you just click here to refresh ' +
           'the app?'
