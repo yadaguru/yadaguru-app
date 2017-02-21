@@ -95,7 +95,6 @@ define(['app'], function (app) {
        */
       $scope.endOnboarding = function () {
         $scope.isOnboarding = false;
-        $scope.currentStep = 0;
         localStorage.set('ob_complete', true);
         localStorage.set('sms_set', true);
       };

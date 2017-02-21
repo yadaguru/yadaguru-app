@@ -94,37 +94,23 @@
   }
 }
 
-.tour-tip {
-  border-radius: 5px;
-  background-color: $onboarding-bg-blue;
-  width: 270px;
-
+.ob7 {
   p {
-    font-size: 32px;
-    color: white;
+    font-size: 28px;
   }
 
-  .tour-close-tip {
-    display: none;
-  }
-
-  .fa.fa-arrow-down, .fa.fa-arrow-up {
-    color: white;
-    font-size: 36px;
-  }
-
-  .top-controls {
-    margin-bottom: 10px;
-  }
-
-  .col-xs-4 {
+  ul {
+    list-style: none;
     padding: 0;
-    text-align: center;
+    line-height: 3;
+    width: 300px;
+    text-align: left;
+    margin: 0 auto;
   }
 
-  .tour-content-wrapper .button {
-    border-radius: 5px;
-    background-color: $onboarding-btn-blue;
-    font-size: 18px;
+  i.fa {
+    font-size: 32px;
+    margin-right: 15px;
+    width: 28px;
   }
 }

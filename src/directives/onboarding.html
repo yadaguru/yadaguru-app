@@ -105,22 +105,53 @@
       <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
       <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
     </div>
+    <div ng-if="obStep === 7" class="ob7 col-xs-12">
+      <p>
+        Yay!<br>
+        Your first school is setup.<br>
+        Reminder text messages will start coming soon. To see the plan, tap the school name.
+      </p>
+      <p>
+        A few directions:
+      </p>
+      <ul class="onboarding-icon-help">
+        <li>
+          <i class="fa fa-clock-o"></i>
+          Tap the clock to see all the school plans
+        </li>
+        <li>
+          <i class="fa fa-plus"></i>
+          Tap the plus sign to add more schools
+        </li>
+        <li>
+          <i class="fa fa-comment-o"></i>
+          Tap the bubble to see other options
+        </li>
+      </ul>
+      <button
+        type="button"
+        class="btn btn-primary btn-onboarding-desktop"
+        ng-click="endOnboarding()"
+      >
+        Got It
+      </button>
+    </div>
   </div>
   <div class="row ob-nav">
       <button
       type="button"
       class="btn btn-primary btn-onboarding-desktop"
       ng-click="rewindOb(1)"
-      ng-if="obStep !== 1 && obStep !== 5">Back</button>
+      ng-if="isBackButtonVisible()">Back</button>
       <button
       type="button"
       class="btn btn-primary btn-onboarding-desktop"
       ng-click="advanceOb()"
-      ng-if="obStep <= 2">Next</button>
+      ng-if="isNextButtonVisible()">Next</button>
   </div>
   <div class="row ob-progress">
     <div class="col-xs-12">
-      <progress-dots max="7" value="obStep" class="progress-dots"></progress-dots>
+      <progress-dots max="8" value="obStep" class="progress-dots"></progress-dots>
     </div>
   </div>
 </div>
