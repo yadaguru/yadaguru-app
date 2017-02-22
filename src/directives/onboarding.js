@@ -11,12 +11,7 @@ define(['app'], function (app) {
         'yg.services.error', 'yg.services.auth',
         function ($scope, $moment, helpService, yadaApi, modalService, localStorage, errorService, authService) {
 
-          var progressStep = 14;
-          var showNextButtonOnSteps = [2, 3, 4, 5, 6];
-          var showBackButtonOnSteps = [2, 3, 4, 6];
-
           $scope.obStep = 1;
-          $scope.obProgress = progressStep;
           $scope.minDate = $moment().toDate();
           $scope.initDate = $moment('20160201', 'YYYYMMDD').toDate();
 
@@ -28,21 +23,12 @@ define(['app'], function (app) {
             return showBackButtonOnSteps.indexOf($scope.obStep) > -1;
           }
 
-          $scope.advanceOb = function (force) {
-            if ($scope.obStep > 2 && !force) {
-              return;
-            }
-
+          $scope.advanceOb = function () {
             $scope.obStep++;
-            $scope.obProgress += progressStep;
           };
 
-          $scope.rewindOb = function (force) {
-            if (!force)  {
-              return;
-            }
+          $scope.rewindOb = function () {
             $scope.obStep--;
-            $scope.obProgress -= progressStep;
           };
 
           $scope.submitMobile = function() {
