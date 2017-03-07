@@ -57,10 +57,7 @@ main.login-view {
     font-size: 2em;
     font-weight: normal;
     font-family: $marvel;
-  }
-
-  .btn {
-    margin-top: 1em;
+    text-align: center;
   }
 
   .forgot-login-link {
@@ -70,5 +67,9 @@ main.login-view {
 
     margin-top: 1em;
     font-size: 1em;
+  }
+
+  .login-step-2 {
+    justify-content: center;
   }
 }

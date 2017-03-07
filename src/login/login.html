@@ -1,53 +1,55 @@
 <main class="row login-view">
   <div class="onboarding-container">
-    <div class="login-step-1" ng-show="loginStep === 1">
-      <p>Welcome to YadaGuru. <br>Please Login </p>
-      <form name="loginForm">
-        <div class="form-group">
-          <label for="login-phone-number">Enter your Phone Number.</label>
-          <input type="text"
-                 class="form-control"
-                 id="login-phone-number"
-                 ng-model="form.phoneNumber"
-                 required
-                 name="phoneNumber"
-                 ui-mask-placeholder
-                 ui-mask="(999) 999-9999"
-                 ng-minlength="10" />
-        </div>
-        <button type="submit"
-                class="btn btn-primary"
-                ng-class="{disabled: loginForm.$invalid}"
-                ng-disabled="loginForm.$invalid"
-                ng-click="submitPhone()">LOGIN
+    <div class="row ob-main">
+      <div class="login-step-1 ob" ng-show="loginStep === 1">
+        <p>Welcome to YadaGuru. <br>Please Login </p>
+        <form name="loginForm">
+          <div class="form-group">
+            <label for="login-phone-number">Enter your Phone Number.</label>
+            <input type="text"
+                  class="form-control"
+                  id="login-phone-number"
+                  ng-model="form.phoneNumber"
+                  required
+                  name="phoneNumber"
+                  ui-mask-placeholder
+                  ui-mask="(999) 999-9999"
+                  ng-minlength="10" />
+          </div>
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-class="{disabled: loginForm.$invalid}"
+                  ng-disabled="loginForm.$invalid"
+                  ng-click="submitPhone()">LOGIN
+          </button>
+        </form>
+        <p>or</p>
+        <button class="btn btn-primary" ng-click="beginOnboarding()">
+          Create an Account
         </button>
-      </form>
-      <p>or</p>
-      <button class="btn btn-primary" ng-click="beginOnboarding()">
-        Create an Account
-      </button>
-    </div>
-    <div class="login-step-2" ng-show="loginStep === 2">
-      <p>
-        Enter the code we sent you here.
-      </p>
-      <form name="codesAddForm">
-        <div class="form-group">
-          <input type="text"
-                 class="form-control"
-                 placeholder="123456"
-                 id="confirm-code"
-                 name="confirmCode"
-                 ng-model="form.confirmCode"
-                 required>
-        </div>
-        <button type="submit"
-                class="btn btn-primary"
-                ng-class="{disabled: codesAddForm.$invalid}"
-                ng-disabled="codesAddForm.$invalid"
-                ng-click="submitCode()">OK NEXT
-        </button>
-      </form>
+      </div>
+      <div class="login-step-2 ob" ng-show="loginStep === 2">
+        <p>
+          Enter the code we sent you here.
+        </p>
+        <form name="codesAddForm">
+          <div class="form-group">
+            <input type="text"
+                  class="form-control"
+                  placeholder="123456"
+                  id="confirm-code"
+                  name="confirmCode"
+                  ng-model="form.confirmCode"
+                  required>
+          </div>
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-class="{disabled: codesAddForm.$invalid}"
+                  ng-disabled="codesAddForm.$invalid"
+                  ng-click="submitCode()">OK NEXT
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </main>

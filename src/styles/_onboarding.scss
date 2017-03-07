@@ -31,7 +31,10 @@
     padding: 20px;
     justify-content: space-around;
     overflow: auto;
-    // outline: 1px solid red;
+
+    @media (max-height: 500px) { 
+      justify-content: flex-start;
+    }
   }
 
   .btn {
