@@ -1,26 +1,34 @@
-<div ng-swipe-left="advanceOb()" ng-swipe-right="rewindOb()" class="container-fluid onboarding-container">
+<div class="container-fluid onboarding-container">
   <div class="row ob-main">
 
-    <div ng-if="obStep === 1" class="ob1 col-xs-12">
+    <div ng-if="obStep === 1" class="ob ob1 col-xs-12">
       <p><i class="fa fa-flag"></i></p>
       <p>Hi, I'm YadaGuru and I'm here to get your college applications done.</p>
-      <button type="button" class="btn btn-primary login-btn"
-        ui-sref="login" ng-click="endOnboarding()">Login</button>
+      <button type="button" class="btn btn-primary btn-onboarding-desktop"
+        ng-click="advanceOb()">Create an Account</button>
       <p class="intro-divider">or</p>
+      <button type="button" class="btn btn-primary login-btn btn-onboarding-desktop"
+        ui-sref="login" ng-click="endOnboarding()">Login</button>
     </div>
 
-    <div ng-if="obStep === 2" class="ob2 col-xs-12">
+    <div ng-if="obStep === 2" class="ob ob2 col-xs-12">
       <p><i class="fa fa-clock-o"></i></p>
       <p>I'll send you text reminders about all the things you need to do.</p>
+      <div class="btn-container">
+        <button type="button" class="btn btn-primary btn-onboarding-desktop"
+          ng-click="rewindOb()">Back</button>
+        <button type="button" class="btn btn-primary btn-onboarding-desktop"
+          ng-click="advanceOb()">Next</button>
+      </div>
     </div>
 
-    <div ng-if="obStep === 3" class="ob3 col-xs-12">
+    <div ng-if="obStep === 3" class="ob ob3 col-xs-12">
       <p>To get started, please enter your mobile number.</p>
       <form name="smsForm">
         <div class="form-group">
           <label class="sr-only" for="phone-number">phone Number</label>
           <div class="input-group">
-            <input type="text"
+            <input type="tel"
                    class="form-control"
                    id="phone-number"
                    ng-model="$parent.phoneNumber"
@@ -44,9 +52,11 @@
         for these costs. Please see our Privacy Policy for more information about
         how we use your mobile number.
       </div>
+      <button type="button" class="btn btn-primary btn-onboarding-desktop"
+        ng-click="rewindOb()">Back</button>
     </div>
 
-    <div ng-if="obStep === 4" class="ob4 col-xs-12">
+    <div ng-if="obStep === 4" class="ob ob4 col-xs-12">
       <p>
         Enter the code we sent you here.
       </p>
@@ -69,7 +79,7 @@
       </form>
     </div>
 
-    <div ng-if="obStep === 5" class="ob5 col-xs-12">
+    <div ng-if="obStep === 5" class="ob ob5 col-xs-12">
       <p>Let's set up your first school. What's the name of a school that you're thinking of applying to?</p>
       <div class="form-group">
         <label class="sr-only" for="school-name">School Name</label>
@@ -80,7 +90,7 @@
       </div>
     </div>
 
-    <div ng-if="obStep === 6" class="ob6 col-xs-12">
+    <div ng-if="obStep === 6" class="ob ob6 col-xs-12">
       <p>Cool. Now, what is the Regular Admissions application submission date of that school? </p>
       <div class="form-group">
         <label class="sr-only" for="school-name">Submission Date</label>
@@ -107,22 +117,39 @@
       <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
       <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
     </div>
-  </div>
-  <div class="row ob-nav">
+
+    <div ng-if="obStep === 7" class="ob ob7 col-xs-12">
+      <h2>
+        Yay!
+      </h2>
+      <p>
+        Your first school is setup.<br>
+        Reminder text messages will start coming soon. To see the plan, tap the school name.
+      </p>
+      <p>
+        A few directions:
+      </p>
+      <ul class="onboarding-icon-help">
+        <li>
+          <i class="fa fa-clock-o"></i>
+          Tap the clock to see all the school plans
+        </li>
+        <li>
+          <i class="fa fa-plus"></i>
+          Tap the plus sign to add more schools
+        </li>
+        <li>
+          <i class="fa fa-comment-o"></i>
+          Tap the bubble to see other options
+        </li>
+      </ul>
       <button
-      type="button"
-      class="btn btn-primary btn-onboarding-desktop"
-      ng-click="rewindOb(1)"
-      ng-if="obStep !== 1 && obStep !== 5">Back</button>
-      <button
-      type="button"
-      class="btn btn-primary btn-onboarding-desktop"
-      ng-click="advanceOb()"
-      ng-if="obStep <= 2">{{ obStep == 1 ? "Create an Account" : "Next" }}</button>
-  </div>
-  <div class="row ob-progress">
-    <div class="col-xs-12">
-      <progress-dots max="7" value="obStep" class="progress-dots"></progress-dots>
+        type="button"
+        class="btn btn-primary btn-onboarding-desktop"
+        ng-click="endOnboarding()"
+      >
+        Got It
+      </button>
     </div>
   </div>
 </div>

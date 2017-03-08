@@ -116,34 +116,4 @@
 
   <script src="/vendor/requirejs/require.js" data-main="/dist/main.js"></script>
 
-  <script id="tour/tour.tpl.html" type="text/ng-template">
-    <div class="tour-tip">
-      <div class="tour-content-wrapper">
-        <div ng-if="ttPlacement === 'bottom'" class="row top-controls">
-          <div class="col-xs-6">
-            <i class="fa fa-arrow-up"></i>
-          </div>
-          <div class="col-xs-6">
-            <a ng-click="proceed()" ng-bind="ttNextLabel" class="small button tour-next-tip"></a>
-            <a ng-click="closeTour()" class="tour-close-tip">×</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <p ng-bind="ttContent"></p>
-          </div>
-        </div>
-        <div ng-if="ttPlacement === 'center'" class="row bottom-controls">
-          <div class="col-xs-4 col-xs-offset-4">
-            <i class="fa fa-arrow-down"></i>
-          </div>
-          <div class="col-xs-4">
-            <a ng-click="proceed()" ng-bind="ttNextLabel" class="small button tour-next-tip"></a>
-            <a ng-click="closeTour()" class="tour-close-tip">×</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
-
 </html>

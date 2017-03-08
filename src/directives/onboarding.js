@@ -11,28 +11,24 @@ define(['app'], function (app) {
         'yg.services.error', 'yg.services.auth',
         function ($scope, $moment, helpService, yadaApi, modalService, localStorage, errorService, authService) {
 
-          var progressStep = 14;
-
           $scope.obStep = 1;
-          $scope.obProgress = progressStep;
           $scope.minDate = $moment().toDate();
           $scope.initDate = $moment('20160201', 'YYYYMMDD').toDate();
 
-          $scope.advanceOb = function (force) {
-            if ($scope.obStep > 2 && !force) {
-              return;
-            }
+          $scope.isNextButtonVisible = function() {
+            return showNextButtonOnSteps.indexOf($scope.obStep) > -1;
+          }
 
+          $scope.isBackButtonVisible = function() {
+            return showBackButtonOnSteps.indexOf($scope.obStep) > -1;
+          }
+
+          $scope.advanceOb = function () {
             $scope.obStep++;
-            $scope.obProgress += progressStep;
           };
 
-          $scope.rewindOb = function (force) {
-            if (!force)  {
-              return;
-            }
+          $scope.rewindOb = function () {
             $scope.obStep--;
-            $scope.obProgress -= progressStep;
           };
 
           $scope.submitMobile = function() {
@@ -78,16 +74,15 @@ define(['app'], function (app) {
               isActive: 'true'
             })
               .then(function(resp) {
-                $scope.endOnboarding();
-                $scope.$parent.getSchools().then(function() {
-                  $scope.showHints = true;
-                }).catch(errorService.handleHttpError);
+                $scope.advanceOb(true);
               })
               .catch(errorService.handleHttpError);
           };
 
           $scope.endOnboarding = function () {
-            $scope.$parent.endOnboarding();
+            $scope.$parent.getSchools().then(function() {
+              $scope.$parent.endOnboarding();
+            }).catch(errorService.handleHttpError);
           };
 
           $scope.faqModal = function (question) {
