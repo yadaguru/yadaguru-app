@@ -1,44 +1,50 @@
 <main class="row school-new-view">
   <div class="onboarding-container">
-    <form name="newSchoolForm">
-      <div class="form-group">
-        <label for="school-name">Enter the School's Name</label>
-        <input type="text" class="form-control" id="school-name" ng-model="schoolName" placeholder="School Name" required/>
-      </div>
-      <div class="form-group">
-        <label for="school-name">Enter the School's Application Submission Date</label>
-        <div class="input-group">
-          <div class="input-group-addon" role="button" ng-click="datepickerOpen = !datepickerOpen"><i class="fa fa-calendar"></i></div>
-          <div class="datepicker-position">
-            <input
-                type="text"
-                class="form-control"
-                id="submission-date"
-                ng-model="submissionDate"
-                datepicker-popup="M/d/yyyy"
-                is-open="datepickerOpen"
-                min-date="minDate"
-                init-date="initDate"
-                required
-                placeholder="2/1/2016" />
+    <div class="row ob-main">
+      <div class="ob">
+        <form name="newSchoolForm">
+          <div class="form-group">
+            <label for="school-name">Enter the School's Name</label>
+            <input type="text" class="form-control" id="school-name" ng-model="schoolName" placeholder="School Name" required/>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="school-name">Enter the School's Application Submission Date</label>
+            <div class="input-group">
+              <div class="input-group-addon" role="button" ng-click="datepickerOpen = !datepickerOpen"><i class="fa fa-calendar"></i></div>
+              <div class="datepicker-position">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="submission-date"
+                    ng-model="submissionDate"
+                    datepicker-popup="M/d/yyyy"
+                    is-open="datepickerOpen"
+                    min-date="minDate"
+                    init-date="initDate"
+                    required
+                    placeholder="2/1/2016" />
+              </div>
+            </div>
+          </div>
+          <div class="btn-container">
+            <button type="cancel"
+                    class="btn btn-primary btn-cancel"
+                    onclick="window.history.go(-1); return false;">CANCEL
+            </button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-class="{disabled: newSchoolForm.$invalid}"
+                    ng-disabled="newSchoolForm.$invalid"
+                    ng-click="submitSchool()">OK NEXT
+            </button>
+          </div>
+        </form>
+        <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>
+        <p class="info-text" ng-click="faqModal('faq-app-find')" role="button">Where do I find it?</p>
+        <p class="info-text" ng-click="faqModal('faq-regular-admissions')" role="button">What's 'Regular Admissions?'</p>
+        <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
+        <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
       </div>
-      <button type="submit"
-              class="btn btn-primary"
-              ng-class="{disabled: newSchoolForm.$invalid}"
-              ng-disabled="newSchoolForm.$invalid"
-              ng-click="submitSchool()">OK NEXT
-      </button>
-      <button type="cancel"
-              class="btn btn-primary btn-cancel"
-              onclick="window.history.go(-1); return false;">CANCEL
-      </button>
-    </form>
-    <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>
-    <p class="info-text" ng-click="faqModal('faq-app-find')" role="button">Where do I find it?</p>
-    <p class="info-text" ng-click="faqModal('faq-regular-admissions')" role="button">What's 'Regular Admissions?'</p>
-    <p class="info-text" ng-click="faqModal('faq-rolling-admissions')" role="button">What About Rolling Admission?</p>
-    <p class="info-text" ng-click="faqModal('faq-early-action')" role="button">Do you do Early Action/Decision?</p>
+    </div>
   </div>
 </main>

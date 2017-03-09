@@ -61,6 +61,7 @@
   form {
     margin-left: 1em;
     margin-right: 1em;
+    margin-bottom: 2em;
   }
 
   .form-group {
@@ -68,28 +69,13 @@
   }
 
   label {
-    font-size: 2em;
+    font-size: 1.25em;
     font-family: $marvel;
     font-weight: normal;
+    text-align: center;
   }
 
   .btn {
     margin-bottom: 1em;
-  }
-
-  @media ($resizeL1) {
-    .form-group {
-      margin-bottom: 0px;
-    }
-    label {
-      font-size: 1.5em;
-    }
-    .btn {
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
-    .info-text {
-      font-size: 1.1em;
-    }
   }
 }
