@@ -17,6 +17,7 @@ require(
     'services/iCalService',
     'services/routeResolverProvider',
     'services/errorService',
+    'services/loggerService',
     'directives/navLinks',
     'directives/onboarding',
     'directives/progressDots',

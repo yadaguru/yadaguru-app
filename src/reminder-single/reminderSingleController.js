@@ -22,7 +22,6 @@ define(['app'], function (app) {
       };
 
       $scope.$parent.saveAsPdf = function() {
-        console.log($scope.reminderGroups);
         pdfService.saveAsPdf($scope.reminderGroups);
       };
 
