@@ -41,7 +41,6 @@ define(['app'], function (app) {
       };
 
       $scope.$parent.saveAsPdf = function() {
-        console.log($scope.reminderGroups);
         pdfService.saveAsPdf($scope.reminderGroups);
       };
 
@@ -57,7 +56,6 @@ define(['app'], function (app) {
       }
 
       $scope.isInPast = function(dueDate) {
-        console.log($moment.utc(dueDate).format(), $moment().format());
         return $moment.utc(dueDate).isBefore($moment(), 'day');
       };
 

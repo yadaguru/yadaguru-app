@@ -3,7 +3,8 @@ define(['app'], function(app) {
   app.factory('yg.services.error', [
     'yg.services.modal',
     '$state',
-    function(modalService, $state) {
+    '$log',
+    function(modalService, $state, $log) {
       function handleHttpError(error) {
         if (error.status === 401) {
           $state.go('login');
@@ -18,8 +19,7 @@ define(['app'], function(app) {
           button: 'click here (sorry about that)'
         })
           .then(function() {
-            // TODO replace this with JSNLog
-            console.log(error);
+            $log.error(error);
             location.reload();
           });
       }

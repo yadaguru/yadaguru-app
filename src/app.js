@@ -8,10 +8,10 @@ define(['app'], function() {
     'ngCookies', 'ngStorage', 'ui.mask', 'LocalStorageModule']);
 
     app.config(['$routeProvider', '$locationProvider', 'routeResolverProvider',
-      '$controllerProvider', '$filterProvider', '$provide', '$compileProvider',
+      '$controllerProvider', '$filterProvider', '$provide', '$compileProvider', 'constants',
       '$urlRouterProvider', '$stateProvider', 'localStorageServiceProvider', function($routeProvider, $locationProvider,
-        routeResolverProvider, $controllerProvider, $filterProvider, $provide,
-        $compileProvider, $urlRouterProvider, $stateProvider, localStorage) {
+        routeResolverProvider, $controllerProvider, $filterProvider, $provide, 
+        $compileProvider, constants, $urlRouterProvider, $stateProvider, localStorage) {
 
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.when('/', 'school');
@@ -52,6 +52,11 @@ define(['app'], function() {
           .state('login', route.resolve('/login', 'Login', 'login/', 'vm'))
 
         localStorage.setPrefix('yg.');
+
+        // Logging config
+        JL.setOptions({
+          defaultAjaxUrl: constants.HOSTNAME + '/jsnlog.logger'
+        });
     }]);
 
     app.run(['$rootScope', '$state', 'yg.services.auth', 'localStorageService',
