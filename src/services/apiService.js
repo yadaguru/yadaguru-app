@@ -70,6 +70,13 @@ define(['app'], function(app) {
       return $http.delete(route, config);
     };
 
+    yadaAPI.greetUser = function() {
+      var route = apiRoute + 'users/greet/';
+      var config = authHeaderConfig;
+
+      return $http.post(route, {}, config);
+    }
+
     return yadaAPI;
   };
 
