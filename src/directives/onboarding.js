@@ -80,9 +80,14 @@ define(['app'], function (app) {
           };
 
           $scope.endOnboarding = function () {
-            $scope.$parent.getSchools().then(function() {
-              $scope.$parent.endOnboarding();
-            }).catch(errorService.handleHttpError);
+            yadaApi.greetUser()
+              .then(function() {
+                return $scope.$parent.getSchools();
+              })
+              .then(function() {
+                $scope.$parent.endOnboarding();
+              })
+              .catch(errorService.handleHttpError);
           };
 
           $scope.faqModal = function (question) {
