@@ -62,7 +62,7 @@ define(['app'], function (app) {
       var schoolId = $stateParams.schoolId || false;
       $scope.getReminders(schoolId);
       $scope.$parent.showPrint = true;
-      $scope.$parent.showAdd = false;
+      $scope.$parent.showAdd = true;
 
     }]);
 
