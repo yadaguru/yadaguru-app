@@ -106,9 +106,17 @@
                 is-open="datepickerOpen"
                 min-date="minDate"
                 init-date="initDate"
-                placeholder="2/1/2016" />
+                placeholder="mm/dd/yyyy" />
           </div>
-          <div class="input-group-addon" ng-class="{disabled: !submissionDate}" role="button" ng-click="submitSchool()">OK NEXT</div>
+          <div 
+            class="input-group-addon" 
+            ng-class="{disabled: !validateSubmissionDate()}" 
+            ng-disabled="!validateSubmissionDate()"
+            role="button" 
+            ng-click="submitSchool()"
+          >
+            OK NEXT
+          </div>
         </div>
       </div>
       <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>

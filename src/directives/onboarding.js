@@ -23,6 +23,26 @@ define(['app'], function (app) {
             return showBackButtonOnSteps.indexOf($scope.obStep) > -1;
           }
 
+          $scope.validateSubmissionDate = function() {
+            // invalid if empty
+            if (!$scope.submissionDate) {
+              return false;
+            }
+
+            // invalid if not a valid date
+            if (!$moment($scope.submissionDate).isValid()) {
+              return false;
+            }
+
+            // invalid if before today
+            if ($moment($scope.submissionDate).isBefore(moment(), 'day')) {
+              return false;
+            }
+
+            // otherwise, valid
+            return true;
+          }
+
           $scope.advanceOb = function () {
             $scope.obStep++;
           };
