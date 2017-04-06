@@ -3,10 +3,12 @@
 define([], function() {
 
   var routeResolver = function() {
+    var $http;
 
-    this.$get = function() {
+    this.$get = ['$http', function(_$http_) {
+      $http = $_http_;
       return this;
-    };
+    }];
 
     this.routeConfig = (function() {
       var viewsDirectory = '/',
@@ -35,6 +37,7 @@ define([], function() {
     this.route = (function(routeConfig) {
 
       var resolve = function(url, baseName, path, controllerAs, secure) {
+          console.log('HTTP', $http)
           if (!path) {
             path = '';
           }

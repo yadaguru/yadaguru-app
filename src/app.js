@@ -24,6 +24,7 @@ define(['app'], function() {
             return newPath;
           }
         });
+
         routeResolverProvider
           .routeConfig
           .setBaseDirectories('dist/', 'dist/');

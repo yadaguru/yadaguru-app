@@ -9,5 +9,6 @@ npm-debug.log
 /.idea/*
 /public/css/*
 /dist/*
+/src/assets/*
 /.vagrant/
 .vscode/
