@@ -28,7 +28,7 @@ define(['app'], function (app) {
       var dateCode = $stateParams.datecode;
       $scope.reminderDateHeading = $moment.utc(dateCode, 'YYYYMMDD').format('[Reminders for] M/D/YYYY');
       $scope.$parent.showPrint = true;
-      $scope.$parent.showAdd = false;
+      $scope.$parent.showAdd = true;
       $scope.getReminders(dateCode);
     }]);
 });
