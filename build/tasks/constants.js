@@ -13,5 +13,5 @@ gulp.task('constants', function() {
     constants: envConfig,
     stream: true
   })
-  .pipe(gulp.dest(paths.output));
+  .pipe(gulp.dest(paths.dest.output));
 });

@@ -2,10 +2,10 @@ define(['app'], function (app) {
 
   'use strict';
 
-  app.directive('onboarding', function () {
+  app.directive('ygOnboarding', function () {
     return {
       restrict: 'E',
-      templateUrl: 'dist/directives/onboarding.html',
+      templateUrl: 'directives/onboarding.html',
       controller: [
         '$scope', '$moment', 'yg.services.help', 'yg.services.api', 'yg.services.modal', 'localStorageService',
         'yg.services.error', 'yg.services.auth',
@@ -99,13 +99,13 @@ define(['app'], function (app) {
               .catch(errorService.handleHttpError);
           };
 
-          $scope.endOnboarding = function () {
+          $scope.completeOnboarding = function () {
             yadaApi.greetUser()
               .then(function() {
-                return $scope.$parent.getSchools();
+                return $scope.getSchools();
               })
               .then(function() {
-                $scope.$parent.endOnboarding();
+                $scope.endOnboarding();
               })
               .catch(errorService.handleHttpError);
           };

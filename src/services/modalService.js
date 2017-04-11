@@ -19,7 +19,7 @@ define(['app'], function(app) {
        * @param {string} options.cancel - The cancel button text (default: no cancel button)
        * @param {function} options.cancelCallback - Callback to run when clicking 'cancel'. Pass the
        *   #modalInstance.
-       * @param {string} options.template - The template used to display the modal (default: 'dist/services/generalModal.html')
+       * @param {string} options.template - The template used to display the modal (default: 'services/generalModal.html')
        * @param {function} options.controller - The controller to use (see source for default controller).
        * @param {array} options.deps - The controller's dependencies (default, '$scope', '$modalInstance', contentItem).
        * @returns {promise} - The promise object at $modalInstance.result;
@@ -54,7 +54,7 @@ define(['app'], function(app) {
         var defaultDepsController = ['$scope', '$modalInstance', 'contentItem', defaultController];
 
         var button = options.button || 'ok';
-        var template = options.template || 'dist/services/generalModal.html';
+        var template = options.template || 'services/generalModal.html';
         var modalClass = options.modalClass || 'modal-general';
         var depsAndController;
 
