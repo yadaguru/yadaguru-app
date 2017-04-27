@@ -3,12 +3,10 @@
 define([], function() {
 
   var routeResolver = function() {
-    var $http;
 
-    this.$get = ['$http', function(_$http_) {
-      $http = $_http_;
+    this.$get = function() {
       return this;
-    }];
+    };
 
     this.routeConfig = (function() {
       var viewsDirectory = '/',
@@ -58,13 +56,14 @@ define([], function() {
             load: ['$q', '$rootScope', '$http', function($q, $rootScope, $http) {
               // Load rev manifest file, memoizing the results to reduce requests
               var manifestPromise;
-              if (this.manifest) {
-                manifestPromise = $q.resolve(this.manifest)
+              if (window.ygManifest) {
+                manifestPromise = $q.resolve(window.ygManifest)
               } else {
                 manifestPromise = $http.get('rev-manifest.json?' + new Date().getTime())
                   .then(function(res) {
+                    window.ygManifest = res.data;
                     return res.data;
-                  });
+                  }.bind(this));
               }
 
               return manifestPromise.then(function(manifest) {
