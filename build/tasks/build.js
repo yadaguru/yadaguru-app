@@ -3,6 +3,8 @@ var gulp         = require('gulp'),
     changed      = require('gulp-changed'),
     revAll       = require('gulp-rev-all'),
     concat       = require('gulp-concat'),
+    uglify       = require('gulp-uglify'),
+    gulpif       = require('gulp-if'),
     debug        = require('gulp-debug'),
     runSequence  = require('run-sequence'),
     sass         = require('gulp-sass'),
@@ -72,8 +74,31 @@ gulp.task('build-css', function () {
 
 /**
  * Copies and revisions all js, html, and built asset files to the dist/ folder
+ * Also uglifies JS files
  */
 gulp.task('build-system', ['constants'], function() {
+  return gulp.src([paths.src.js, paths.src.html, paths.src.assets])
+    .pipe(gulpif(/^.*\.js$/, uglify()))
+    .pipe(revAll.revision({
+      dontRenameFile: [
+      /^.*html$/,
+      ],
+      dontUpdateReference: [
+      /^.*html$/,
+      ],
+      dontSearchFile: [
+        /^.*vendor.js$/
+      ]
+    }))
+    .pipe(gulp.dest(paths.dest.output))
+    .pipe(revAll.manifestFile())
+    .pipe(gulp.dest(paths.dest.output))
+});
+
+/**
+ * Same as build-system, but does not run the uglify step
+ */
+gulp.task('build-system-dev', ['constants'], function() {
   return gulp.src([paths.src.js, paths.src.html, paths.src.assets])
     .pipe(revAll.revision({
       dontRenameFile: [
@@ -92,7 +117,7 @@ gulp.task('build-system', ['constants'], function() {
 });
 
 /**
- * Runs clean, then builds all assets, and revisions and copies all files to
+ * Runs clean, then builds all assets, uglifies JS, and revisions and copies all files to
  * dist/
  */
 gulp.task('build', function(callback) {
@@ -110,3 +135,23 @@ gulp.task('build', function(callback) {
     callback
   );
 });
+
+/**
+ * Runs clean, then builds all assets, and revisions and copies all files to dist/
+ */
+gulp.task('build-dev', function(callback) {
+  return runSequence(
+    'clean',
+    [
+      'build-requirejs', 
+      'build-vendor-js', 
+      'build-vendor-css', 
+      'build-vendor-fonts',
+      'build-images',
+      'build-css'
+    ],
+    'build-system-dev',
+    callback
+  );
+});
+
