@@ -2,10 +2,10 @@ define(['app'], function(app) {
 
   'use strict';
 
-  app.directive('navLinks', function() {
+  app.directive('ygNavLinks', function() {
     return {
       restrict: 'E',
-      templateUrl: 'dist/directives/navLinks.html'
+      templateUrl: 'directives/navLinks.html'
     };
   });
 

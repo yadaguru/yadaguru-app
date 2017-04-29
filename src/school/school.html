@@ -1,7 +1,7 @@
-<onboarding ng-if="isOnboarding"></onboarding>
+<yg-onboarding ng-if="isOnboarding"></yg-onboarding>
 <main class="row school-view">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-    <nav-links></nav-links>
+    <yg-nav-links></yg-nav-links>
     <div ng-repeat="school in schools">
       <div class="row panel school" ng-class="{active: school.isActive, first: $first}">
         <div class="col-xs-6">

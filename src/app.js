@@ -24,9 +24,10 @@ define(['app'], function() {
             return newPath;
           }
         });
+
         routeResolverProvider
           .routeConfig
-          .setBaseDirectories('dist/', 'dist/');
+          .setBaseDirectories('', '');
 
         app.register = {
           controller: $controllerProvider.register,

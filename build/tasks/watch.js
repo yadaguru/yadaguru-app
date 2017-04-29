@@ -6,8 +6,16 @@ function reportChange(event){
   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 }
 
-gulp.task('watch', ['serve'], function() {
-  gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
-  gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
-  gulp.watch(paths.scss, ['build-css', browserSync.reload]).on('change', reportChange);
+/**
+ * Watches for changes to hs, html, and scss files, and runs dev builds when there are changes
+ */
+gulp.task('watch', [], function() {
+  gulp.watch([
+    paths.src.js, 
+    paths.src.html, 
+    paths.src.scss, 
+    '!' + paths.src.assets // We don't want to watch changes to the assets folder, as these are
+                           // deleted & created as part of the build process
+    ], 
+    ['build-dev', browserSync.reload]).on('change', reportChange);
 });

@@ -53,9 +53,26 @@ define([], function() {
             };
           }
           routeDef.resolve = {
-            load: ['$q', '$rootScope', function($q, $rootScope) {
-              var dependencies = [routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js'];
-              return resolveDependencies($q, $rootScope, dependencies);
+            load: ['$q', '$rootScope', '$http', function($q, $rootScope, $http) {
+              // Load rev manifest file, memoizing the results to reduce requests
+              var manifestPromise;
+              if (window.ygManifest) {
+                manifestPromise = $q.resolve(window.ygManifest)
+              } else {
+                manifestPromise = $http.get('rev-manifest.json?' + new Date().getTime())
+                  .then(function(res) {
+                    window.ygManifest = res.data;
+                    return res.data;
+                  }.bind(this));
+              }
+
+              return manifestPromise.then(function(manifest) {
+                var controllerFile = routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js';
+                // Look up filename in the rev manifest file
+                var versionedFile = manifest[controllerFile];
+                var dependencies = [versionedFile];
+                return resolveDependencies($q, $rootScope, dependencies);
+              });
             }]
           };
 

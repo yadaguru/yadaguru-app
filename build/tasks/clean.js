@@ -3,8 +3,15 @@ var gulp       = require('gulp'),
     del        = require('del'),
     vinylPaths = require('vinyl-paths');
 
-// Deleted all files in the output paths
+/**
+ * Deletes the dist directory, and all built assets in src/
+ */
 gulp.task('clean', function() {
-  return gulp.src([paths.output])
-    .pipe(vinylPaths(del));
+  return del([
+    paths.dest.js + '/*',
+    paths.dest.css + '/*',
+    paths.dest.images + '/*',
+    paths.dest.fonts + '/*',
+    paths.dest.output
+  ]);
 });
