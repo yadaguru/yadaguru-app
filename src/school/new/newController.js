@@ -28,6 +28,12 @@ define(['app'], function (app) {
         helpService.getHelpMessage(question);
       };
 
+      $scope.openDatepicker = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.datepickerOpen = !$scope.datepickerOpen;
+      }
+
       $scope.minDate = $moment().toDate();
 
       $scope.validateForm = function() {

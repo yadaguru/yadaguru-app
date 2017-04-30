@@ -37,11 +37,13 @@
                    ui-mask-placeholder
                    ui-mask="(999) 999-9999"
                    ng-minlength="10" />
-            <div class="input-group-addon"
-                 ng-class="{disabled: smsForm.$invalid}"
-                 ng-disabled="smsForm.$invalid"
-                 role="button"
-                 ng-click="submitMobile()">OK NEXT</div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary"
+                  type="button"
+                  ng-class="{disabled: smsForm.$invalid}"
+                  ng-disabled="smsForm.$invalid"
+                  ng-click="submitMobile()">OK NEXT</button>
+            </span>
           </div>
         </div>
       </form>
@@ -85,7 +87,12 @@
         <label class="sr-only" for="school-name">School Name</label>
         <div class="input-group">
           <input type="text" class="form-control" id="school-name" ng-model="$parent.schoolName" placeholder="School Name" />
-          <div class="input-group-addon" ng-class="{disabled: !schoolName}" role="button" ng-click="advanceOb(true)">OK NEXT</div>
+          <span class="input-group-btn">
+            <button class="btn btn-primary"
+                type="button"
+                ng-class="{disabled: !schoolName}"
+                ng-click="advanceOb(true)">OK NEXT</button>
+          </span>
         </div>
       </div>
     </div>
@@ -95,7 +102,14 @@
       <div class="form-group">
         <label class="sr-only" for="school-name">Submission Date</label>
         <div class="input-group">
-          <div class="input-group-addon" role="button" ng-click="datepickerOpen = !datepickerOpen"><i class="fa fa-calendar"></i></div>
+          <span class="input-group-btn">
+            <button class="btn btn-primary"
+                type="button"
+                ng-click="openDatepicker($event)"
+            >
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
           <div class="datepicker-position">
             <input
                 type="text"
@@ -108,15 +122,16 @@
                 init-date="initDate"
                 placeholder="mm/dd/yyyy" />
           </div>
-          <div 
-            class="input-group-addon" 
-            ng-class="{disabled: !validateSubmissionDate()}" 
-            ng-disabled="!validateSubmissionDate()"
-            role="button" 
-            ng-click="submitSchool()"
-          >
-            OK NEXT
-          </div>
+          <span class="input-group-btn">
+            <button class="btn btn-primary"
+                type="button"
+                ng-class="{disabled: !validateSubmissionDate()}"
+                ng-disabled="!validateSubmissionDate()"
+                ng-click="submitSchool()"
+            >
+              OK NEXT
+            </button>
+          </span>
         </div>
       </div>
       <p class="info-text" ng-click="faqModal('faq-app-submission-date')" role="button">What's an Application Submission Date?</p>

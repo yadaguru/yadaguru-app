@@ -87,6 +87,12 @@ define(['app'], function (app) {
             ));
           };
 
+          $scope.openDatepicker = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.datepickerOpen = !$scope.datepickerOpen;
+          }
+
           $scope.submitSchool = function () {
             yadaApi.post('schools', {
               name: $scope.schoolName,
