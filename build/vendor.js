@@ -49,6 +49,11 @@ module.exports = {
     'font-awesome/fonts/fontawesome-webfont.woff',
     'font-awesome/fonts/fontawesome-webfont.woff2',
     'font-awesome/fonts/FontAwesome.otf',
+    'bootstrap/fonts/glyphicons-halflings-regular.eot',
+    'bootstrap/fonts/glyphicons-halflings-regular.svg',
+    'bootstrap/fonts/glyphicons-halflings-regular.ttf',
+    'bootstrap/fonts/glyphicons-halflings-regular.woff',
+    'bootstrap/fonts/glyphicons-halflings-regular.woff2',
   ].map(function(path) {
     return vendorRoot + path;
   }),
