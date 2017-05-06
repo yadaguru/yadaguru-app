@@ -38,7 +38,7 @@
   },
   "production": {
     "constants" : {
-      "HOSTNAME" : "http://yadaguru.com",
+      "HOSTNAME" : "http://api.yadaguru.com",
       "API_ROUTE" : "/api/",
       "API_ROUTE_TERMINATOR" : "/"
     }

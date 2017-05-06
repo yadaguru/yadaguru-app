@@ -1,6 +1,6 @@
 {
   "name": "yadaguru",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "dependencies": {
     "bower": {
       "version": "1.8.0",
