@@ -1,6 +1,6 @@
 {
   "name": "yadaguru",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
@@ -8,9 +8,12 @@
   },
   "main": "index.html",
   "scripts": {
-    "test": "mocha-phantomjs ./test/browser/index.html"
+    "build:prod": "gulp build && gulp constants --db production",
+    "build:qa": "gulp build && gulp constants --db qa",
+    "build:qam": "gulp build && gulp constants --db qam",
+    "start": "gulp build-dev && gulp watch"
   },
-  "author": "",
+  "author": "yadaguru@gmail.com",
   "license": "GPL-2.0",
   "dependencies": {
     "bower": "^1.7.7",

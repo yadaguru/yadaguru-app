@@ -12,6 +12,6 @@ gulp.task('clean', function() {
     paths.dest.css + '/*',
     paths.dest.images + '/*',
     paths.dest.fonts + '/*',
-    paths.dest.output
+    paths.dest.output + '/*'
   ]);
 });
