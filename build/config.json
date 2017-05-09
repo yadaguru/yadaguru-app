@@ -17,25 +17,10 @@
   },
   "staging": {
     "constants" : {
-      "HOSTNAME" : "http://staging.yadaguru.com",
+      "HOSTNAME" : "http://staging-api.yadaguru.com",
       "API_ROUTE" : "/api/",
       "API_ROUTE_TERMINATOR" : "/"
-    }
-  },
-  "qa": {
-    "constants" : {
-      "HOSTNAME" : "http://qa-api.yadaguru.com",
-      "API_ROUTE" : "/api/",
-      "API_ROUTE_TERMINATOR" : "/"
-    }
-  },
-  "qam": {
-    "constants" : {
-      "HOSTNAME" : "http://qam-api.yadaguru.com",
-      "API_ROUTE" : "/api/",
-      "API_ROUTE_TERMINATOR" : "/"
-    }
-  },
+    },
   "production": {
     "constants" : {
       "HOSTNAME" : "http://api.yadaguru.com",
