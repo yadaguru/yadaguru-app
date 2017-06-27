@@ -101,7 +101,6 @@ define(['app'], function (app) {
 
       $scope.schools = [];
       $scope.$parent.showAdd = true;
-      $scope.$parent.showPrint = false;
 
       if (!localStorage.get('ob_complete')) {
         $scope.isOnboarding = true;
