@@ -9,8 +9,7 @@
   "main": "index.html",
   "scripts": {
     "build:prod": "gulp build && gulp constants --db production",
-    "build:qa": "gulp build && gulp constants --db qa",
-    "build:qam": "gulp build && gulp constants --db qam",
+    "build:staging": "gulp build && gulp constants --db staging",
     "start": "gulp build-dev && gulp watch"
   },
   "author": "yadaguru@gmail.com",

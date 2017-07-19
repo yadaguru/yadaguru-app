@@ -16,7 +16,6 @@ define(['app'], function (app) {
       });
 
       $scope.$parent.showAdd = false;
-      $scope.$parent.showPrint = false;
 
     }]);
 

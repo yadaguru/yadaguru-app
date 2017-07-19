@@ -56,7 +56,6 @@ define(['app'], function (app) {
       $scope.isUserMenu = false;
       $scope.userId = localStorage.get('uid');
       $scope.$parent.showAdd = false;
-      $scope.$parent.showPrint = false;
       $scope.getUserMenuState();
 
     }]);
